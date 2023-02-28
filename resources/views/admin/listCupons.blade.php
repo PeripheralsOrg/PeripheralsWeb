@@ -8,15 +8,21 @@
     <main class="container-cupons">
         <h1>Cupons de Desconto</h1>
 
+        <!-- Barra_de_busca -->
+        <div id="divBusca">
+            <input type="text" id="txtBusca" placeholder="Buscar..." />
+            <a id="search-icon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+        </div>
+
         <!-- FILTROS -->
-            <section class="container-filters">
-                <button id="btn-new-produto">
-                    <div class="icon-container">
-                        <i class="fa-regular fa-plus"></i>
-                    </div>
-                    Novo Cupom
-                </button>
-            </section>
+        <section class="container-filters">
+            <button id="btn-new-produto">
+                <div class="icon-container">
+                    <i class="fa-regular fa-plus"></i>
+                </div>
+                Novo Cupom
+            </button>
+        </section>
 
         <!--Começo_da_tabela_de_pedidos-->
         <table class="table">
@@ -25,9 +31,9 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
+                    <th>Cupom</th>
                     <th>Categoria</th>
-                    <th>Quantidade</th>
-                    <th>Valor</th>
+                    <th>Válido</th>
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>

@@ -43,6 +43,7 @@ h4,
 p,
 button,
 a,
+span,
 li {
     font-family: var(--worksans);
     font-size: 1.25rem;
@@ -153,12 +154,17 @@ input[type="submit"] {
 
 /* ICONES */
 
-.fa-trash{
+#box-options{
+    display: flex;
+    justify-content: space-around !important;
+}
+
+#box-options .fa-trash{
     color: var(--vermelho);
     cursor: pointer;
 }
 
-.fa-pen-to-square{
+#box-options .fa-pen-to-square{
     color: #25b808;
     cursor: pointer;
 }

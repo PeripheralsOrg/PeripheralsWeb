@@ -9,18 +9,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 85%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.global-wrapper .container-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     margin-top: 5rem;
 }
 
 header {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     padding: 2rem;
     background-color: var(--cinza-fundo);
     text-decoration: none;
-    width: 20%;
+    width: 15%;
     gap: 6rem;
 }
 
