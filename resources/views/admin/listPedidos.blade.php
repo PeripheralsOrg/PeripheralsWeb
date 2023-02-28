@@ -1,13 +1,12 @@
 @extends('layouts.admin')
-@section('css', 'admin/listProdutos')
-@section('title')@parent Lista de Produtos @stop
-
+@section('css', 'admin/listPedidos')
+@section('title')@parent Lista de Cupons @stop
 
 @section('content')
+    <main class="container-pedidos">
 
-    <!-- Titulo -->
-    <main class="container-produtos">
-        <h1>Produtos</h1>
+        <h1>Lista de Pedidos</h1>
+
 
         <!-- Barra_de_busca -->
         <div id="divBusca">
@@ -23,14 +22,17 @@
                 Novo Produto
             </button>
 
-            <div class="box-status box-filter">
-                <label for="select-status">Status</label>
-                <select id="select-status" name="select-status">
-                    <option>Todos</option>
-                    <option value="1">Disponivel</option>
-                    <option value="0">Indisponivel</option>
-                </select>
-            </div>
+            <section class="box-input-date">
+                <div class="box-ordem box-filter">
+                    <label for="select-ordem">De:</label>
+                    <input type="date" name="date" id="input-date">
+                </div>
+
+                <div class="box-ordem box-filter">
+                    <label for="select-ordem">Até:</label>
+                    <input type="date" name="date" id="input-date">
+                </div>
+            </section>
 
             <div class="box-faixa-preco box-filter">
                 <label for="select-faixa-preco">Categorias</label>
@@ -60,42 +62,29 @@
         <table class="table">
             <!-- Header_da_tabela -->
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Categoria</th>
-                    <th>Quantidade</th>
-                    <th>Valor</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <!-- Corpo_da_tabela -->
-            <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Mouse Razer</td>
-                    <td>Mouse</td>
-                    <td>50</td>
-                    <td>R$100,00</td>
-                    <td>Disponivel</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Produto</th>
+            <th>Data</th> 
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <!-- Corpo_da_tabela -->
+        <tbody>
+        <tr>
+        <!-- Conteúdo_da_tabela -->
+            <td>1</td>
+            <td>Stich</td>
+            <td>Mouse</td>
+            <td>23/02/2023</td> 
+            <td>1</td>
+            <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+        </tr>
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>
-
-        </section>
-
     </main>
-
 @endsection

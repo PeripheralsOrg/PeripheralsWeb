@@ -38,7 +38,7 @@
 
 .marcador .row .content .contador .box span {
     font-size: 16px;
-    font-family: 'Work Sans', sans-serif;
+    font-family: var(--worksans);
     color: #fff;
     display: block;
     background: var(--vermelho);

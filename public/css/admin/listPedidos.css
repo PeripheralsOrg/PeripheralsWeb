@@ -2,11 +2,12 @@
 
 /* Titulos */
 
-.container-produtos {
+.container-pedidos {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5rem;
+    width: 60%;
 }
 
 /* Container Tabela e Filtro */
@@ -25,8 +26,8 @@
     align-items: flex-end;
 }
 
-.container-filters select{
-    border:  1px solid #000 !important;
+.container-filters select {
+    border: 1px solid #000 !important;
 }
 
 .box-filter {
@@ -34,6 +35,11 @@
     flex-direction: column;
     gap: .5rem;
     align-items: center;
+}
+
+.box-input-date{
+    display: flex;
+    gap: 1rem;
 }
 
 #btn-new-produto {
@@ -52,7 +58,7 @@
     color: var(--branco);
 }
 
-#btn-clean-filters{
+#btn-clean-filters {
     background-color: var(--vermelho);
 }
 
@@ -92,13 +98,4 @@
     border-radius: var(--border-radius);
     min-width: 10rem;
     border: 1px solid #000;
-}
-
-.container-produtos table{
-    width: 120%;
-}
-
-#box-options{
-    display: flex;
-    justify-content: space-between;
 }
