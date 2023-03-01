@@ -26,17 +26,17 @@
 h1 {
     font-family: var(--quicksand);
     font-weight: 400;
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
 }
 
 h2 {
     font-family: var(--quicksand);
-    font-size: 1.9rem;
+    /* font-size: 1.9rem; */
 }
 
 h3 {
     font-family: var(--worksans);
-    font-size: 1.75rem;
+    /* font-size: 1.75rem; */
 }
 
 h4,
@@ -46,7 +46,7 @@ a,
 span,
 li {
     font-family: var(--worksans);
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -57,13 +57,13 @@ select,
 option,
 label {
     font-family: var(--worksans);
-    font-size: 1rem;
+    /* font-size: 1rem; */
     outline: none;
 }
 
 h6 {
     font-family: var(--worksans);
-    font-size: 0.75rem;
+    /* font-size: 0.75rem; */
 }
 
 th {
@@ -98,10 +98,11 @@ input[type="submit"] {
 #divBusca {
     display: flex;
     margin: 0;
+    width: 100%;
 }
 
 #divBusca input {
-    width: 60rem;
+    width: 100%;
     padding: 1rem;
     border-radius: var(--border-radius);
     border: 1px solid #000;

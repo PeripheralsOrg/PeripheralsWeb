@@ -49,11 +49,11 @@
                 </select>
             </div>
 
-            <div class="container-clean-filters box-filter">
+            {{-- <div class="container-clean-filters box-filter">
                 <button id="btn-clean-filters">
                     Limpar Filtros
                 </button>
-            </div>
+            </div> --}}
         </section>
 
         <!--Começo_da_tabela_de_pedidos-->

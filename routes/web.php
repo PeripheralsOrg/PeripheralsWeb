@@ -22,5 +22,5 @@ Route::get('login/adm', function () {
 });
 
 Route::get('/layout', function () {
-    return view('admin.listPedidos');
+    return view('admin.listMenus');
 });

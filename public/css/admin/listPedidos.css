@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5rem;
-    width: 60%;
+    width: 60vw;
 }
 
 /* Container Tabela e Filtro */
@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-.box-input-date{
+.box-input-date {
     display: flex;
     gap: 1rem;
 }
@@ -98,4 +98,14 @@
     border-radius: var(--border-radius);
     min-width: 10rem;
     border: 1px solid #000;
+}
+
+@media (min-width: 1400px) {
+    .container-filters {
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        width: 100%;
+        align-items: flex-end;
+    }
 }

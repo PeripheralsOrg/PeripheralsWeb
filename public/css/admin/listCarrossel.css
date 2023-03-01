@@ -9,9 +9,12 @@
 
 .box-carrossel{
     display: block;
-    width: 1200px;
-    height: 600px;
+    width: 60vw;
     background-color: #e7e7e7;
+}
+
+.box-carrossel img{
+    width: 100%;
 }
 
 .info-carrossel{
@@ -24,12 +27,12 @@
 .info-carrossel .box-info{
     display: flex;
     gap: 1rem;
-    width: 50rem;
+    width: 40vw;
 }
 
 .info-img{
-    width: 400px;
-    height: 200px;
+    width: 300px;
+    height: 100%;
     background-color: #e7e7e7;
 }
 

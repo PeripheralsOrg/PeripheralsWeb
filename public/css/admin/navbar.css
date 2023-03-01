@@ -147,3 +147,25 @@ header #logout-session:hover {
         gap: 6rem;
     }
 }
+
+
+@media (max-width: 1300px) {
+    .global-wrapper .container-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        margin-top: 5rem;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding: 2rem;
+        background-color: var(--cinza-fundo);
+        text-decoration: none;
+        width: 20%;
+        gap: 6rem;
+    }
+}

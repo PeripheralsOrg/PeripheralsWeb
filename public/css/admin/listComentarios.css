@@ -2,7 +2,7 @@
 
 /* Titulos */
 
-.container-produtos {
+.container-comentarios {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,8 +26,8 @@
     align-items: flex-end;
 }
 
-.container-filters select{
-    border:  1px solid #000 !important;
+.container-filters select {
+    border: 1px solid #000 !important;
 }
 
 .box-filter {
@@ -35,6 +35,11 @@
     flex-direction: column;
     gap: .5rem;
     align-items: center;
+}
+
+.box-input-date {
+    display: flex;
+    gap: 1rem;
 }
 
 #btn-new-produto {
@@ -50,10 +55,10 @@
     background-color: var(--vermelho);
     padding: 1rem;
     cursor: pointer;
-    color: var(--branco);
+    color: #FFF;
 }
 
-#btn-clean-filters{
+#btn-clean-filters {
     background-color: var(--vermelho);
 }
 
@@ -66,7 +71,7 @@
 
 .container-clean-filters #btn-clean-filters {
     background-color: var(--vermelho);
-    color: #fff;
+    color: var(--branco);
     border: 1px solid var(--vermelho);
     padding: 1rem;
     border-radius: var(--border-radius);
@@ -93,13 +98,4 @@
     border-radius: var(--border-radius);
     min-width: 10rem;
     border: 1px solid #000;
-}
-
-.container-produtos table{
-    width: 120%;
-}
-
-#box-options{
-    display: flex;
-    justify-content: space-between;
 }

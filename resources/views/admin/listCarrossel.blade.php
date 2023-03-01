@@ -6,7 +6,9 @@
     <main class="container-carrossel">
         <h1>Carrossel</h1>
 
-        <section class="box-carrossel"></section>
+        <section class="box-carrossel">
+            <img src="{{asset('images/banner.jpeg')}}" alt="">
+        </section>
 
         <section class="info-carrossel">
             <div class="box-info">
