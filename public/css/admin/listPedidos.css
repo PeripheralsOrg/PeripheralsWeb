@@ -1,0 +1,111 @@
+@import '../import.css';
+
+/* Titulos */
+
+.container-pedidos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    width: 60vw;
+}
+
+/* Container Tabela e Filtro */
+
+.container-tabela-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container-filters {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.container-filters select {
+    border: 1px solid #000 !important;
+}
+
+.box-filter {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.box-input-date {
+    display: flex;
+    gap: 1rem;
+}
+
+#btn-new-produto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-new-produto .icon-container {
+    background-color: var(--vermelho);
+    padding: 1rem;
+    cursor: pointer;
+    color: var(--branco);
+}
+
+#btn-clean-filters {
+    background-color: var(--vermelho);
+}
+
+.container-clean-filters {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.container-clean-filters #btn-clean-filters {
+    background-color: var(--vermelho);
+    color: #fff;
+    border: 1px solid var(--vermelho);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    min-width: 10rem;
+}
+
+.container-clean-filters #btn-clean-filters:hover {
+    background-color: transparent;
+    color: var(--cor-fundo);
+    transition: ease .3s all;
+}
+
+.box-filter {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.box-filter select,
+.box-filter input[type="date"],
+.box-filter button {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    min-width: 10rem;
+    border: 1px solid #000;
+}
+
+@media (min-width: 1400px) {
+    .container-filters {
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        width: 100%;
+        align-items: flex-end;
+    }
+}

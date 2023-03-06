@@ -1,0 +1,64 @@
+@import '../import.css';
+
+.container-carrossel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+}
+
+.box-carrossel{
+    display: block;
+    width: 60vw;
+    background-color: #e7e7e7;
+}
+
+.box-carrossel img{
+    width: 100%;
+}
+
+.info-carrossel{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 2rem;
+}
+
+.info-carrossel .box-info{
+    display: flex;
+    gap: 1rem;
+    width: 40vw;
+}
+
+.info-img{
+    width: 300px;
+    height: 100%;
+    background-color: #e7e7e7;
+}
+
+.info-items{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.info-items span{
+    font-family: var(--worksans);
+    font-weight: bolder;
+}
+
+#btn-new-produto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-new-produto .icon-container {
+    background-color: var(--vermelho);
+    padding: 1rem;
+    cursor: pointer;
+    color: var(--branco);
+}

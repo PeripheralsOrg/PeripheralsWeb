@@ -1,0 +1,35 @@
+@import '../import.css';
+
+/* Titulos */
+
+.container-menus {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5rem;
+    width: 60vw;
+}
+
+.container-menus h1{
+    align-self: center;
+}
+
+.container-cupons .container-filters {
+    align-self: flex-start;
+}
+
+#btn-new-produto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-new-produto .icon-container {
+    background-color: var(--vermelho);
+    padding: 1rem;
+    cursor: pointer;
+    color: var(--branco);
+}
