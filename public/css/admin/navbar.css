@@ -34,14 +34,14 @@ header {
 }
 
 /* link_cabeçalho */
-header #nav-links ul {
+header #navLinks ul {
     color: var(--branco);
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-header #nav-links ul a {
+header #navLinks ul a {
     color: var(--branco);
     font-weight: 500;
 }
@@ -107,20 +107,20 @@ header .dropdown-link:hover .dropdown-content {
     display: flex;
 }
 
-header #nav-links li a:hover {
+header #navLinks li a:hover {
     /* text-decoration: underline; */
     transition: var(--navbar-transition);
     color: var(--vermelho);
 }
 
-header #user-session:hover {
+header #userSession:hover {
     background-color: var(--vermelho);
     color: var(--branco);
     border: 0.5px solid var(--vermelho);
     transition: var(--navbar-transition);
 }
 
-header #logout-session:hover {
+header #logoutSession:hover {
     background-color: var(--vermelho);
     color: var(--branco);
     border: 1px solid var(--vermelho);

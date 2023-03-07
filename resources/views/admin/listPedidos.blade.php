@@ -11,33 +11,33 @@
         <!-- Barra_de_busca -->
         <div id="divBusca">
             <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="search-icon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
 
         <section class="container-filters">
 
             <section class="box-input-date">
                 <div class="box-ordem box-filter">
-                    <label for="select-ordem">De:</label>
-                    <input type="date" name="date" id="input-date">
+                    <label for="inputDateFrom">De:</label>
+                    <input type="date" name="date" id="inputDateFrom">
                 </div>
 
                 <div class="box-ordem box-filter">
-                    <label for="select-ordem">Até:</label>
-                    <input type="date" name="date" id="input-date">
+                    <label for="inputDateTo">Até:</label>
+                    <input type="date" name="date" id="inputDateTo">
                 </div>
             </section>
 
             <div class="box-faixa-preco box-filter">
-                <label for="select-faixa-preco">Categorias</label>
-                <select id="boselectx-categoria" name="select-faixa-preco">
+                <label for="boxSelectCategoria">Categorias</label>
+                <select id="boxSelectCategoria" name="select-faixa-preco">
                     <option>Todos</option>
                 </select>
             </div>
 
             <div class="box-ordem box-filter">
-                <label for="select-ordem">Ordenar Por</label>
-                <select id="select-ordem" name="select-ordem">
+                <label for="selectOrdem">Ordenar Por</label>
+                <select id="selectOrdem" name="select-ordem">
                     <option>Todos</option>
                     <option value="1">Maior Preço</option>
                     <option value="2">Menor Preço</option>
@@ -45,7 +45,7 @@
             </div>
 
             {{-- <div class="container-clean-filters box-filter">
-                <button id="btn-clean-filters">
+                <button id="btnCleanFilters">
                     Limpar Filtros
                 </button> --}}
             </div>

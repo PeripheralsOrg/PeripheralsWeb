@@ -26,7 +26,7 @@
                     id="logo">
 
                 <!-- Barra_de_menu_lateral -->
-                <nav id="nav-links">
+                <nav id="navLinks">
                     <ul>
                         <li><a href="">Pedidos</a></li>
                         <li><a href="">Produtos</a></li>
@@ -47,10 +47,10 @@
                 <!-- Fim_Barra_de_menu_lateral -->
 
                 <!-- ADM_logado -->
-                <button class="button-nav" id="user-session">Cargo: <br> abc@adm.com</button>
+                <button class="button-nav" id="userSession">Cargo: <br> abc@adm.com</button>
 
                 <!-- Encerrar_sessão -->
-                <button class="button-nav" id="logout-session">Logout</button>
+                <button class="button-nav" id="logoutSession">Logout</button>
 
             </header>
             <!-- Fim_da_sessão_header -->

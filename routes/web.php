@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home.index');
+    return view('client.index');
 });
 
 Route::get('login/adm', function () {
@@ -22,5 +22,5 @@ Route::get('login/adm', function () {
 });
 
 Route::get('/layout', function () {
-    return view('admin.listMenus');
+    return view('admin.listProdutos');
 });

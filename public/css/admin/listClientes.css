@@ -12,32 +12,32 @@
 
 /* Marcador_de_clientes*/
 
-.marcador{
+.container-marcador{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 100%;
 }
 
-.marcador .row .content .contador {
+.container-marcador .row .content .contador {
     display: flex;
     padding: 1rem 0;
     gap: 1.5rem;
     justify-content: center;
 }
 
-.marcador .row .content .contador .box {
+.container-marcador .row .content .contador .box {
     text-align: center;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
     padding-top: 1rem;
 }
 
-.marcador .row .content .contador .box h3 {
+.container-marcador .row .content .contador .box h3 {
     font-size: 3rem;
     color: #333;
 }
 
-.marcador .row .content .contador .box span {
+.container-marcador .row .content .contador .box span {
     font-size: 16px;
     font-family: var(--worksans);
     color: #fff;

@@ -12,12 +12,12 @@
         <!-- Barra_de_busca -->
         <div id="divBusca">
             <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="search-icon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
 
         <!--PROMOÇÃO DIARIA-->
 
-        <section class="marcador" id="marcador">
+        <section class="container-marcador" id="marcador">
             <div class="row">
                 <div class="content">
                     <div class="contador">

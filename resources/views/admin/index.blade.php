@@ -7,20 +7,20 @@
     <!-- Sessão_formulário_ADM -->
     <form action="" method="POST">
         {{-- <h1>Entrar</h1> --}}
-        <div id="form-inputs">
-            <input type="text" name="user" id="input-user" placeholder="Digite o Usuário">
+        <div class="form-inputs">
+            <input type="text" name="user" id="inputUser" placeholder="Digite o Usuário">
 
-            <input type="password" name="senha" id="input-senha" placeholder="Digite a Senha">
+            <input type="password" name="senha" id="inputSenha" placeholder="Digite a Senha">
         </div>
 
-        <div id="form-acoes">
-            <div id="form-check">
-                <input type="checkbox" name="check-conect" id="checkbox-conect">
-                <label for="checkbox-conect" class="form-checkbox">Manter Conectado</label>
+        <div class="form-acoes">
+            <div class="form_check">
+                <input type="checkbox" name="checkConnect" id="checkBoxConnect">
+                <label for="checkBoxConnect" class="form-checkbox">Manter Conectado</label>
             </div>
 
             <!-- Recuperação_de_senha -->
-            <div id="form-link">
+            <div class="form-link">
                 <a href="">Esqueceu a Senha?</a>
             </div>
         </div>

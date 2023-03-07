@@ -23,16 +23,16 @@ form {
 }
 
 /* link_de_forms */
-#form-acoes {
+.form-acoes {
     width: 100%;
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: -.8rem;
 }
 
-#form-link {
+.form-link {
     text-align: right;
     width: 50%;
 }
@@ -45,7 +45,7 @@ form a {
 }
 
 /* form_check */
-#form-check {
+.form-check {
     text-align: left;
     width: 50%;
 }
@@ -57,7 +57,7 @@ form a {
 }
 
 /* inputs */
-#form-inputs {
+.form-inputs {
     display: flex;
     flex-direction: column;
     gap: 1rem;
