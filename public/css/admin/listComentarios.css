@@ -42,7 +42,7 @@
     gap: 1rem;
 }
 
-#btn-new-produto {
+#btnNewProduto {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -51,14 +51,14 @@
     cursor: pointer;
 }
 
-#btn-new-produto .icon-container {
+#btnNewProduto .icon-container {
     background-color: var(--vermelho);
     padding: 1rem;
     cursor: pointer;
     color: #FFF;
 }
 
-#btn-clean-filters {
+#btnCleanFilters {
     background-color: var(--vermelho);
 }
 
@@ -69,7 +69,7 @@
     align-items: center;
 }
 
-.container-clean-filters #btn-clean-filters {
+.container-clean-filters #btnCleanFilters {
     background-color: var(--vermelho);
     color: var(--branco);
     border: 1px solid var(--vermelho);
@@ -78,7 +78,7 @@
     min-width: 10rem;
 }
 
-.container-clean-filters #btn-clean-filters:hover {
+.container-clean-filters #btnCleanFilters:hover {
     background-color: transparent;
     color: var(--cor-fundo);
     transition: ease .3s all;

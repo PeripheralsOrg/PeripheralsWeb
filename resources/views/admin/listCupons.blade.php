@@ -11,12 +11,12 @@
         <!-- Barra_de_busca -->
         <div id="divBusca">
             <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="search-icon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
 
         <!-- FILTROS -->
         <section class="container-filters">
-            <button id="btn-new-produto">
+            <button id="btnNewProduto">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>

@@ -18,7 +18,7 @@
     align-self: flex-start;
 }
 
-#btn-new-produto {
+#btnNewProduto {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -27,7 +27,7 @@
     cursor: pointer;
 }
 
-#btn-new-produto .icon-container {
+#btnNewProduto .icon-container {
     background-color: var(--vermelho);
     padding: 1rem;
     cursor: pointer;

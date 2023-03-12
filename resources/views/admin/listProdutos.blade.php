@@ -12,11 +12,11 @@
         <!-- Barra_de_busca -->
         <div id="divBusca">
             <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="search-icon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
 
         <section class="container-filters">
-            <button id="btn-new-produto">
+            <button id="btnNewProduto">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -24,8 +24,8 @@
             </button>
 
             <div class="box-status box-filter">
-                <label for="select-status">Status</label>
-                <select id="select-status" name="select-status">
+                <label for="selectStatus">Status</label>
+                <select id="selectStatus" name="select-status">
                     <option>Todos</option>
                     <option value="1">Disponivel</option>
                     <option value="0">Indisponivel</option>
@@ -33,15 +33,15 @@
             </div>
 
             <div class="box-faixa-preco box-filter">
-                <label for="select-faixa-preco">Categorias</label>
-                <select id="boselectx-categoria" name="select-faixa-preco">
+                <label for="boxSelectCategoria">Categorias</label>
+                <select id="boxSelectCategoria" name="select-faixa-preco">
                     <option>Todos</option>
                 </select>
             </div>
 
             <div class="box-ordem box-filter">
-                <label for="select-ordem">Ordenar Por</label>
-                <select id="select-ordem" name="select-ordem">
+                <label for="selectOrdem">Ordenar Por</label>
+                <select id="selectOrdem" name="select-ordem">
                     <option>Todos</option>
                     <option value="1">Maior Preço</option>
                     <option value="2">Menor Preço</option>
@@ -50,7 +50,7 @@
             </div>
 
             {{-- <div class="container-clean-filters box-filter">
-                <button id="btn-clean-filters">
+                <button id="btnCleanFilters">
                     Limpar Filtros
                 </button>
             </div> --}}

@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <button id="btn-new-produto">
+            <button id="btnNewProduto">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
