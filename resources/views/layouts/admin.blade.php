@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css') }}/@yield('css').css">
+    <script defer src="{{ asset('js') }}/@yield('js').js"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/navbar.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <title>
@@ -21,7 +22,7 @@
     <main class="global-wrapper">
 
         @if (!Request::is('login/*'))
-            <header>
+            <header id="getMenu">
                 <img class="img-logo" src="{{ asset('images/logo-branco.png') }}" alt="Peripherals - Logo Branca"
                     id="logo">
 
@@ -63,9 +64,8 @@
             </section>
         @endif
 
-        asda
-
     </main>
 </body>
+<script src="{{ asset('js/admin/admin.js') }}"></script>
 
 </html>

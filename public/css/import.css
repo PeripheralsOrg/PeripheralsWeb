@@ -92,6 +92,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+main{
+    width: 60vw;
+}
+
 
 /* Barra_de_busca */
 

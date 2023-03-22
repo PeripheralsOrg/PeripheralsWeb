@@ -22,5 +22,9 @@ Route::get('login/adm', function () {
 });
 
 Route::get('/layout', function () {
-    return view('admin.listProdutos');
+    return view('admin.list.listProdutos');
+});
+
+Route::get('/insert', function () {
+    return view('admin.forms.InsertProduto');
 });
