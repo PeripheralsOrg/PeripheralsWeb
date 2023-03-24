@@ -1,6 +1,6 @@
 @import '../import.css';
 
-.content-product {
+.content-adm {
     box-shadow: 0 0 15px 0 #999;
 }
 
@@ -100,17 +100,17 @@ form {
     gap: 1rem;
 }
 
-.options label{
+.options label {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
 }
 
-label textarea{
+label textarea {
     width: 100%;
 }
 
-.container-error{
+.container-error {
     display: flex;
     padding: 1rem;
     gap: .5rem;
@@ -121,7 +121,9 @@ label textarea{
 }
 
 @media (min-width: 1300px) {
-    .content-product, .container-error {
+
+    .content-adm,
+    .container-error {
         width: 40vw;
     }
 }

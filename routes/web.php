@@ -28,3 +28,7 @@ Route::get('/layout', function () {
 Route::get('/insert', function () {
     return view('admin.forms.InsertProduto');
 });
+
+Route::get('/adm', function () {
+    return view('admin.forms.InsertAdm');
+});
