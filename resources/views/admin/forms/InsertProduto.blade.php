@@ -114,9 +114,6 @@
                 </div>
                 {{-- Informações para mouse --}}
                 <div class="box-inputs options" id="boxMouse">
-                    <label class="label-field">Frequência
-                        <input type="text" data-js="text" class="input-field" placeholder="Frequência">
-                    </label>
                     <label class="label-field">DPI
                         <input type="text" data-js="text" class="input-field" placeholder="DPI">
                     </label>
