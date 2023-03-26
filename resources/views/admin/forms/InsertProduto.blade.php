@@ -118,7 +118,7 @@
                         <input type="text" data-js="text" class="input-field" placeholder="DPI">
                     </label>
                 </div>
-                <label class="label-field">Informações Adicionais
+                <label class="label-field" id="labelTextarea">Informações Adicionais
                     <textarea type="text" data-js="text" class="input-field textarea-field" placeholder="Descrição"></textarea>
                 </label>
             </div>

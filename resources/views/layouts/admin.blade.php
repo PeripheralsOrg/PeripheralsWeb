@@ -49,13 +49,15 @@
                 <!-- Fim_Barra_de_menu_lateral -->
 
                 <!-- ADM_logado -->
-                <button class="button-nav" id="userSession">Cargo: <br> abc@adm.com</button>
+                <button class="button-nav" id="userSession">Sysadmin: <br> abc@adm.com</button>
 
                 <!-- Encerrar_sessão -->
                 <button class="button-nav" id="logoutSession">Logout</button>
 
             </header>
             <!-- Fim_da_sessão_header -->
+            <div class="fix"></div>
+
             <section class="container-content">
                 @yield('content')
             </section>

@@ -104,10 +104,18 @@ form {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 label textarea{
     width: 100%;
+}
+
+#labelTextarea{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .container-error{
