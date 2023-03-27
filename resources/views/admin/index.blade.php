@@ -4,13 +4,25 @@
 
 
 @section('content')
+
+@if ($errors->all())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <!-- Sessão_formulário_ADM -->
-    <form action="" method="POST">
+    <form action="/api/login/adm" method="POST">
+        @csrf
         {{-- <h1>Entrar</h1> --}}
         <div class="form-inputs">
-            <input type="text" name="user" id="inputUser" placeholder="Digite o Usuário">
+            <input type="text" required name="nome" id="inputUser" placeholder="Digite o Usuário">
 
-            <input type="password" name="senha" id="inputSenha" placeholder="Digite a Senha">
+            <input type="password" required name="senha" id="inputSenha" placeholder="Digite a Senha">
         </div>
 
         <div class="form-acoes">
@@ -28,6 +40,5 @@
 
         <!-- Confirmar_dados_de_formulário -->
         <input type="submit" value="Logar">
-
     </form>
 @endsection
