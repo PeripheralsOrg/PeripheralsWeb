@@ -17,13 +17,21 @@ class LoginController extends Controller
     {
         //Validation
         $validator = $request->validate([
-            'nome' => ['required', 'max:255'],
-            'senha' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/']
+            'name' => ['required', 'max:255'],
+            'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/']
         ]);
 
 
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
-        $user = AdmUsers::all()->where('nome', $request->input('nome'))->toArray();
+        $user = AdmUsers::all()->where('name', $request->input('name'))
+        ->where('password', Hash::make($request->input('password')))->toArray();
+
+        if(empty($user)){
+            // return back(302, ['errors' => 'asdsad'])->with('errors', 'asdasd');
+            return redirect('/session')->withErrors(['errors' => 'asdadad']);
+        }
+
+        exit();
 
         if (Auth::check()) {
             if ($request->session()->has('user')) {
@@ -33,21 +41,16 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $request->session()->put('user', $user);
 
-            return back()->withErrors(['login' => 'O usuário já está logado!']);
+            return back()->with('error', 'O usuário já está logado');
         }
 
-        $request->merge([
-            'senha' => Hash::make($request->input('senha'))
-        ]);
-
         if (Auth::guard('adm_users')->attempt($validator, $rememberMe)) {
-            $request->session()->regenerate();
-            $request->session()->put('user', $user);
             // return redirect()->intended('/');
             return dd('2');
         }
 
-        return back()->withErrors(['login' => 'Ocorreu um erro ao se logar!']);
+        return back()->with('error', 'Ocorreu um erro ao se logar, por favor, contate o administrador!');
+
     }
 
     public function logout(Request $request)
