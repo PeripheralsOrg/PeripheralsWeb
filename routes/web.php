@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\AdmUsers;
+use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +34,14 @@ Route::get('/insert', function () {
 
 Route::get('/adm', function () {
     return view('admin.forms.InsertAdm');
+});
+
+
+Route::get('/factory', function () {
+    AdmUsers::factory()->create();
+    User::factory()->create();
+});
+
+Route::get('/session', function () {
+    return session()->all();
 });

@@ -72,7 +72,6 @@ return [
 
         'adm_users' => [
             'driver' => 'eloquent',
-            'table' => 'adm_users',
             'model' => App\Models\AdmUsers::class,
         ],
     ],
