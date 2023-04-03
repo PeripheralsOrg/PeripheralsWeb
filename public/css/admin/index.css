@@ -102,6 +102,17 @@ input[type="password"] {
 
 }
 
+.password-container{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-container i{
+    position: absolute;
+    right: 0;
+}
+
 /* animações */
 form a:hover {
     text-decoration: none;

@@ -57,4 +57,52 @@ class AdmUsersController extends Controller
         $erro = 'Usuários não encontrados!';
         return view('admin.list.listUserAdm')->with('erro', $erro);
     }
+
+    public function getUpdate($id)
+    {
+        $getAdm = AdmUsers::all()->where('id', $id)->toArray();
+        if ($getAdm) {
+            return view('admin.forms.UpdateAdm')->with('getAdm', $getAdm);
+        }
+        return redirect('falha-listAdm')->withErrors('Não foi possível atualizar o usuário!'); 
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = $request->validate([
+            'name' => ['required', 'max:255'],
+            'password' => [
+                'required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/',
+                'same:senhaConfirm'
+            ],
+            'email' => ['required'],
+            'poder' => ['required'],
+            'status' => ['required']
+        ]);
+
+
+        $getAdm = AdmUsers::all()->where('id', $id)->toArray();
+        $searchEmail = AdmUsers::all()->where('email', $getAdm[1]['email'])->toArray();
+
+        if (empty($getAdm)) {
+            return redirect('falha-listAdm');
+        }
+
+        if(count($searchEmail) > 1 && $getAdm[1]['email'] !== $request->input('email')){
+            return back()->withErrors('Esse email já está em uso!');
+        }
+
+        $request->merge([
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        $values = $request->except('_token', '_method', 'senhaConfirm');
+        $updateAdm = (AdmUsers::all()->where('id', $id)->toQuery())->update($values);
+
+        if($updateAdm){
+            return redirect()->route('page-listAdm');
+        }
+
+        return back()->withErrors('Ocorreu um erro ao atualizar o usuário!');
+    }
 }

@@ -24,10 +24,14 @@
             <input type="email" name="email" data-js="email" required class="input-field" placeholder="Email">
 
             <label class="label-field">Senha</label>
-            <input type="password" name="password" data-js="text" class="input-field" placeholder="Senha">
+            <span class="password-container">
+                <input type="password" required data-js="text" name="password" id="inputSenha" placeholder="Digite a Senha">
+                <i id="openEye" onclick="functionEye()" class="fa-solid fa-eye"></i>
+                <i id="closeEye" onclick="functionEye()" class="fa-solid fa-eye-slash"></i>
+            </span>
 
             <label class="label-field">Confirme a senha</label>
-            <input type="password" name="senhaConfirm" data-js="text" class="input-field" placeholder="Senha">
+            <input type="password" required name="senhaConfirm" data-js="text" class="input-field" placeholder="Senha">
 
             <label class="label-field">Poder</label>
             <select class="select-field" name="poder">
