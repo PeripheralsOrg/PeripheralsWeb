@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('css', 'admin/index')
+@section('js', 'admin/index')
 @section('title')@parent Login Admin @stop
 
 
@@ -21,7 +22,11 @@
         <div class="form-inputs">
             <input type="text" required name="name" id="inputUser" placeholder="Digite o Usuário">
 
-            <input type="password" required name="password" id="inputSenha" placeholder="Digite a Senha">
+            <span class="password-container">
+                <input type="password" required name="password" id="inputSenha" placeholder="Digite a Senha">
+                <i id="openEye" onclick="functionEye()" class="fa-solid fa-eye"></i>
+                <i id="closeEye" onclick="functionEye()" class="fa-solid fa-eye-slash"></i>
+            </span>
         </div>
 
         <div class="form-acoes">

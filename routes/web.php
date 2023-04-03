@@ -26,12 +26,14 @@ Route::prefix('adm')->group(function(){
         Route::post('login', 'login')->name('auth-entrar')->middleware(RedirectIfNotAuthenticated::class);
     });
 
-    Route::prefix('user')->controller(AdmUsersController::class)->group(function () {
+    Route::prefix('user')->controller(AdmUsersController::class)->middleware(RedirectIfAuthenticated::class)->group(function () {
         Route::get('lista', 'all')->name('page-listAdm');
         Route::get('falha', 'fallback')->name('falha-listAdm');
+        Route::get('get/{id}', 'getUpdate')->name('get-userAdm');
         Route::view('inserir', 'admin.forms.InsertAdm')->name('page-inserirAdm');
-        Route::post('register', 'register')->name('post-userAdm')->middleware(RedirectIfAuthenticated::class);
-        Route::delete('delete/{id}', 'delete')->name('delete-userAdm')->middleware(RedirectIfAuthenticated::class);
+        Route::post('register', 'register')->name('post-userAdm');
+        Route::delete('delete/{id}', 'delete')->name('delete-userAdm');
+        Route::patch('update/{id}', 'update')->name('update-userAdm');
     });
 
     Route::prefix('produto')->controller(LoginController::class)->group(function () {

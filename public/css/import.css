@@ -162,6 +162,12 @@ main{
 #box-options{
     display: flex;
     justify-content: space-around !important;
+    gap: 1rem;
+}
+
+#box-options button{
+    background-color: transparent;
+    border: none;
 }
 
 #box-options .fa-trash{

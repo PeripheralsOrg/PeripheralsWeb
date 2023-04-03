@@ -60,9 +60,12 @@
                                         </a>
                                 </form>
 
-                                {{-- <a href="{{ route('delete-userAdm', $item['id']) }}">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a> --}}
+                                <form action="{{ route('get-userAdm', $item['id']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

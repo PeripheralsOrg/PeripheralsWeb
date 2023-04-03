@@ -110,6 +110,22 @@ label textarea {
     width: 100%;
 }
 
+.password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-container input{
+    width: 100%;
+    padding: 1rem;
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+}
+
 .container-error {
     display: flex;
     padding: 1rem;
