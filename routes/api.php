@@ -20,4 +20,3 @@ use App\Http\Controllers\LoginController;
 // });
 
 //Login
-Route::post('login/adm', [LoginController::class, 'login']);
