@@ -16,7 +16,7 @@
 
         <!-- FILTROS -->
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-inserirAdm') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -40,23 +40,35 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Stich</td>
-                    <td>Stich@gmail.com</td>
-                    <td>9</td>
-                    <td>25/02/2023</td>
-                    <td>Ativo</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
+                @if (isset($users))
+
+                    @foreach ($users as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{ $item['id'] }}</td>
+                            <td>{{ $item['name'] }}</td>
+                            <td>{{ $item['email'] }}</td>
+                            <td>{{ $item['poder'] }}</td>
+                            <td>{{ (new DateTime($item['created_at']))->format('d/m/Y H:i:s') }}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo' }}</td>
+                            <td id="box-options">
+                                <form action="{{ route('delete-userAdm', $item['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                </form>
+
+                                {{-- <a href="{{ route('delete-userAdm', $item['id']) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a> --}}
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td colspan="10">{{ $erro }}</td>
+                @endif
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->

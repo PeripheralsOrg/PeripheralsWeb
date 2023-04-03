@@ -22,7 +22,7 @@
 <body>
     <main class="global-wrapper">
 
-        @if (!Request::is('login/*'))
+        @if (!Request::is('adm/auth/*'))
             <header id="getMenu">
                 <img class="img-logo" src="{{ asset('images/logo-branco.png') }}" alt="Peripherals - Logo Branca"
                     id="logo">
@@ -30,11 +30,12 @@
                 <!-- Barra_de_menu_lateral -->
                 <nav id="navLinks">
                     <ul>
+                        <li><a href="{{route('page-relatorios')}}">Relatórios</a></li>
                         <li><a href="">Pedidos</a></li>
-                        <li><a href="">Produtos</a></li>
+                        <li><a href="{{route('page-inserirProduto')}}">Produtos</a></li>
                         <li><a href="">Clientes</a></li>
                         <li><a href="">Feedback</a></li>
-                        <li><a href="">Administração</a></li>
+                        <li><a href="{{route('page-listAdm')}}">Administração</a></li>
                         <div class="dropdown-link">
                             <button class="btn-config">Configurações▾</button>
                             <!-- <i class="fa-solid fa-angle-down"></i> -->

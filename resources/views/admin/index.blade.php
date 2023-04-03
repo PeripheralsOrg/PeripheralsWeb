@@ -5,18 +5,17 @@
 
 @section('content')
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <!-- Sessão_formulário_ADM -->
-    <form action="/api/login/adm" method="POST">
+    <form action="{{ route('auth-entrar') }}" method="POST">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @csrf
         {{-- <h1>Entrar</h1> --}}
         <div class="form-inputs">

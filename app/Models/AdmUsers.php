@@ -15,6 +15,19 @@ class AdmUsers extends \Illuminate\Foundation\Auth\User
 
     protected $table = 'adm_users';
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'poder',
+        'status'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
     public function getAuthPassword()
     {
         return $this->password;

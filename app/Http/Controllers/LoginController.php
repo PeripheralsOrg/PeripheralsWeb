@@ -23,33 +23,30 @@ class LoginController extends Controller
 
 
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
-        $user = AdmUsers::all()->where('name', $request->input('name'))
-        ->where('password', Hash::make($request->input('password')))->toArray();
+        $user = AdmUsers::all()->where('name', $request->input('name'))->toArray();
 
         if(empty($user)){
-            // return back(302, ['errors' => 'asdsad'])->with('errors', 'asdasd');
-            return redirect('/session')->withErrors(['errors' => 'asdadad']);
+            return back()->withErrors(['Usuário não encontrado']);
         }
-
-        exit();
 
         if (Auth::check()) {
             if ($request->session()->has('user')) {
-                return redirect('/');
+                return to_route('page-relatorios');
             }
 
             $request->session()->regenerate();
             $request->session()->put('user', $user);
 
-            return back()->with('error', 'O usuário já está logado');
+            return to_route('page-relatorios');
         }
 
         if (Auth::guard('adm_users')->attempt($validator, $rememberMe)) {
-            // return redirect()->intended('/');
-            return dd('2');
+            $request->session()->regenerate();
+            $request->session()->put('user', $user);
+            return to_route('page-relatorios');
         }
 
-        return back()->with('error', 'Ocorreu um erro ao se logar, por favor, contate o administrador!');
+        return back()->withErrors('Ocorreu um erro ao se logar, por favor, contate o administrador!');
 
     }
 
@@ -57,7 +54,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         $request->session()->flush();
-        return redirect('/pag/register');
+        // return redirect('/pag/register');
     }
 
 }
