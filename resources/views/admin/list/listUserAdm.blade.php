@@ -7,7 +7,15 @@
     <!-- Titulo -->
     <main class="container-users">
         <h1>Usuários Administrativos</h1>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- Barra_de_busca -->
         <div id="divBusca">
             <input type="text" id="txtBusca" placeholder="Buscar..." />

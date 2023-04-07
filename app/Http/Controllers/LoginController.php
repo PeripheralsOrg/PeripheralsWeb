@@ -21,10 +21,8 @@ class LoginController extends Controller
             'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/']
         ]);
 
-
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
         $user = AdmUsers::all()->where('name', $request->input('name'))->toArray();
-
         if(empty($user)){
             return back()->withErrors(['Usuário não encontrado']);
         }
@@ -54,7 +52,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         $request->session()->flush();
-        // return redirect('/pag/register');
+        return redirect('/adm/auth/entrar')->withErrors('Sessão encerrada com sucesso');
     }
 
 }

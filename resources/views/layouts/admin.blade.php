@@ -31,18 +31,18 @@
                 <nav id="navLinks">
                     <ul>
                         <li><a href="{{route('page-relatorios')}}">Relatórios</a></li>
-                        <li><a href="">Pedidos</a></li>
-                        <li><a href="{{route('page-inserirProduto')}}">Produtos</a></li>
-                        <li><a href="">Clientes</a></li>
-                        <li><a href="">Feedback</a></li>
+                        <li><a href="{{route('page-listPedidos')}}">Pedidos</a></li>
+                        <li><a href="{{route('page-listProdutos')}}">Produtos</a></li>
+                        <li><a href="{{route('page-listClientes')}}">Clientes</a></li>
+                        <li><a href="{{route('page-listComentarios')}}">Feedback</a></li>
                         <li><a href="{{route('page-listAdm')}}">Administração</a></li>
                         <div class="dropdown-link">
                             <button class="btn-config">Configurações▾</button>
                             <!-- <i class="fa-solid fa-angle-down"></i> -->
                             <li class="dropdown-content">
-                                <a href="">Menus</a>
-                                <a href="">Carrossel</a>
-                                <a href="">Cupons</a>
+                                <a href="{{route('page-listMenus')}}">Menus</a>
+                                <a href="{{route('page-listCarrossel')}}">Carrossel</a>
+                                <a href="{{route('page-listCupons')}}">Cupons</a>
                             </li>
                         </div>
                     </ul>
@@ -53,7 +53,7 @@
                 <button class="button-nav" id="userSession">Sysadmin: <br> abc@adm.com</button>
 
                 <!-- Encerrar_sessão -->
-                <button class="button-nav" id="logoutSession">Logout</button>
+                <button class="button-nav" id="logoutSession" onclick="window.location.href=`http://127.0.0.1:8000/adm/auth/logout`">Logout</button>
 
             </header>
             <!-- Fim_da_sessão_header -->

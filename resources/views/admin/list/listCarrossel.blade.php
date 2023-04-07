@@ -6,8 +6,17 @@
     <main class="container-carrossel">
         <h1>Carrossel</h1>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <section class="box-carrossel">
-            <img src="{{asset('images/banner.jpeg')}}" alt="">
+            <img src="{{ asset('images/banner.jpeg') }}" alt="">
         </section>
 
         <section class="info-carrossel">
