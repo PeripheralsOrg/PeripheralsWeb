@@ -7,6 +7,15 @@
 
         <h1>Lista de Pedidos</h1>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- Barra_de_busca -->
         <div id="divBusca">
@@ -55,26 +64,26 @@
         <table class="table">
             <!-- Header_da_tabela -->
             <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Produto</th>
-            <th>Data</th> 
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <!-- Corpo_da_tabela -->
-        <tbody>
-        <tr>
-        <!-- Conteúdo_da_tabela -->
-            <td>1</td>
-            <td>Stich</td>
-            <td>Mouse</td>
-            <td>23/02/2023</td> 
-            <td>1</td>
-            <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-        </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Produto</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <!-- Corpo_da_tabela -->
+            <tbody>
+                <tr>
+                    <!-- Conteúdo_da_tabela -->
+                    <td>1</td>
+                    <td>Stich</td>
+                    <td>Mouse</td>
+                    <td>23/02/2023</td>
+                    <td>1</td>
+                    <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                </tr>
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->

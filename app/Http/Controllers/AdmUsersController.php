@@ -38,7 +38,7 @@ class AdmUsersController extends Controller
         if (!$userC) {
             return back()->withErrors(['Ocorreu um erro ao criar o usuário!']);
         }
-
+        
         return redirect()->route('page-listAdm');
     }
 
