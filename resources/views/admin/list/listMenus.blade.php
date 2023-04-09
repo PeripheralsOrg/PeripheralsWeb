@@ -23,10 +23,10 @@
             <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div> --}}
 
-        <!-- FILTROS -->
+        <!-- FILTROS -->    
         {{-- MENU --}}
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{route('page-inserirMenu')}}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
