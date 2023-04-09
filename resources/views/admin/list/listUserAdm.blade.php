@@ -65,7 +65,6 @@
                                     @method('DELETE')
                                     <button type="submit">
                                         <i class="fa-solid fa-trash"></i>
-                                        </a>
                                 </form>
 
                                 <form action="{{ route('get-userAdm', $item['id']) }}" method="GET">

@@ -43,9 +43,13 @@ Route::prefix('adm')->group(function(){
     });
 
     Route::prefix('banners')->controller(BannerController::class)->middleware('guest:8,9')->group(function () {
-        Route::view('lista', 'admin.list.listCarrossel')->name('page-listCarrossel');
+        Route::get('lista', 'all')->name('page-listCarrossel');
         Route::view('inserir', 'admin.forms.InsertBanner')->name('page-inserirBanner');
         Route::post('register', 'register')->name('post-banner');
+        Route::get('falha', 'fallback')->name('falha-listBanner');
+        Route::get('get/{id}', 'getUpdate')->name('get-banner')->middleware('guest:9');
+        Route::delete('delete/{id}', 'delete')->name('delete-banner')->middleware('guest:9');
+        Route::patch('update/{id}', 'update')->name('update-banner')->middleware('guest:9');
     });
 
     Route::prefix('clientes')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {

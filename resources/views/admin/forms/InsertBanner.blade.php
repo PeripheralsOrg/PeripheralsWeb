@@ -37,12 +37,12 @@
             </select>
 
             <label class="label-field">Banner</label>
-            <input type="file" name="link_img" accept="image/*" data-js="image" required 
+            <input type="file" name="link_carrossel" accept="image/*" data-js="image" required 
             class="input-field" placeholder="Banner">
 
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>
-                <button type="button" onclick="window.location.href=`{{ route('page-listAdm') }}`"
+                <button type="button" onclick="window.location.href=`{{ route('page-listCarrossel') }}`"
                     class="btn-cancel">Cancelar</button>
             </div>
         </form>
