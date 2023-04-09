@@ -97,7 +97,6 @@
                     </div>
                 </form>
             @endforeach
-        @else
         @endif
     </main>
 

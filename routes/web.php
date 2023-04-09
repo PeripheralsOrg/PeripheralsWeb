@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubmenuController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
@@ -64,9 +66,27 @@ Route::prefix('adm')->group(function(){
         Route::view('lista', 'admin.list.listCupons')->name('page-listCupons');
     });
 
-    Route::prefix('menus')->controller(LoginController::class)->middleware('guest:9')->group(function () {
-        Route::view('lista', 'admin.list.listMenus')->name('page-listMenus');
-        Route::view('inserir', 'admin.forms.InsertMenu')->name('page-inserirMenu');
+    Route::prefix('menus')->controller(MenuController::class)->middleware('guest:9')->group(function () {
+        Route::get('lista', 'all')->name('page-listMenus');
+        Route::get('falha', 'fallback')->name('falha-listMenus');
+
+        Route::prefix('menu')->controller(MenuController::class)->middleware('guest:9')->group(function (){
+            Route::view('inserir', 'admin.forms.InsertMenu')->name('page-inserirMenu');
+            Route::post('register', 'register')->name('post-menu');
+            Route::get('get/{id}', 'getUpdate')->name('get-menu');
+            Route::delete('delete/{id}', 'delete')->name('delete-menu');
+            Route::patch('update/{id}', 'update')->name('update-menu');
+
+        });
+
+        Route::prefix('submenu')->controller(SubmenuController::class)->middleware('guest:9')->group(function () {
+            Route::view('inserir', 'admin.forms.InsertSubmenu')->name('page-inserirSubmenu');
+            Route::post('register', 'register')->name('post-submenu');
+            Route::get('get/{id}', 'getUpdate')->name('get-submenu');
+            Route::delete('delete/{id}', 'delete')->name('delete-submenu');
+            Route::patch('update/{id}', 'update')->name('update-submenu');
+        });
+
     });
 
     Route::prefix('pedidos')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {

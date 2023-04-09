@@ -20,7 +20,7 @@
 
     <main class="content-menu">
 
-        <form action="{{ route('post-userAdm') }}" method="POST">
+        <form action="{{ route('post-menu') }}" method="POST">
             @csrf
             <h2 class="title">Inserir menu</h2>
 
@@ -38,7 +38,7 @@
 
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>
-                <button type="button" onclick="window.location.href=`{{ route('page-listAdm') }}`"
+                <button type="button" onclick="window.location.href=`{{ route('page-listMenus') }}`"
                     class="btn-cancel">Cancelar</button>
             </div>
         </form>

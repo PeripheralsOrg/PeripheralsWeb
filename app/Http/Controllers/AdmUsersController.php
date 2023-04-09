@@ -14,7 +14,7 @@ class AdmUsersController extends Controller
         if($users){
            return view('admin.list.listUserAdm')->with('users', $users); 
         }
-        return redirect('falha-listAdm'); 
+        return redirect()->route('falha-listAdm'); 
     }
 
     public function register(Request $request, AdmUsers $user)
