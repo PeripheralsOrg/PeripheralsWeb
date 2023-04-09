@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
+use App\Http\Controllers\BannerController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
@@ -41,8 +42,10 @@ Route::prefix('adm')->group(function(){
         Route::view('inserir', 'admin.forms.InsertProduto')->name('page-inserirProduto');
     });
 
-    Route::prefix('banners')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
+    Route::prefix('banners')->controller(BannerController::class)->middleware('guest:8,9')->group(function () {
         Route::view('lista', 'admin.list.listCarrossel')->name('page-listCarrossel');
+        Route::view('inserir', 'admin.forms.InsertBanner')->name('page-inserirBanner');
+        Route::post('register', 'register')->name('post-banner');
     });
 
     Route::prefix('clientes')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
@@ -59,6 +62,7 @@ Route::prefix('adm')->group(function(){
 
     Route::prefix('menus')->controller(LoginController::class)->middleware('guest:9')->group(function () {
         Route::view('lista', 'admin.list.listMenus')->name('page-listMenus');
+        Route::view('inserir', 'admin.forms.InsertMenu')->name('page-inserirMenu');
     });
 
     Route::prefix('pedidos')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {

@@ -6,11 +6,19 @@
 
 @section('content')
 
-{{-- Exibição de erros --}}
+    {{-- Exibição de erros --}}
+    @if ($errors->any())
+
         <div class="container-error">
             <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
-            <p id="txt-error">Erro tal</p>
+            @foreach ($errors->all() as $error)
+                <p id="txt-error">
+                    {{ $error }}
+                </p>
+            @endforeach
         </div>
+    @endif
+
     <main class="content-product">
 
         <form action="#">
@@ -127,7 +135,8 @@
             <input type="file" accept="image/*" id="imageInput" class="input-field">
 
             <label for="img_principal">Outras Imagens </label>
-            <input type="file" name="link_img[]" accept="image/*" multiple onchange="newInput(this)" id="inputImgMultiple">
+            <input type="file" name="link_img[]" accept="image/*" multiple onchange="newInput(this)"
+                id="inputImgMultiple">
             <button style="width: 50%; padding: 1rem !important;" type="button" onclick="removeAllImages()"
                 id="btnRemoveFile">
                 Remover todas as imagens</button>

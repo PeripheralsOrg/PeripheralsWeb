@@ -7,13 +7,20 @@
 @section('content')
 
     {{-- Exibição de erros --}}
-    <div class="container-error">
-        <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
-        <p id="txt-error">Erro tal</p>
-    </div>
+    @if ($errors->any())
+        <div class="container-error">
+            <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
+            @foreach ($errors->all() as $error)
+                <p id="txt-error">
+                    {{ $error }}
+                </p>
+            @endforeach
+        </div>
+    @endif
+
     <main class="content-adm">
 
-        <form action="{{route('post-userAdm')}}" method="POST">
+        <form action="{{ route('post-userAdm') }}" method="POST">
             @csrf
             <h2 class="title">Inclusão de usuário administrador</h2>
 
@@ -49,7 +56,8 @@
 
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>
-                <button type="button" onclick="window.location.href=`{{route('page-listAdm')}}`" class="btn-cancel">Cancelar</button>
+                <button type="button" onclick="window.location.href=`{{ route('page-listAdm') }}`"
+                    class="btn-cancel">Cancelar</button>
             </div>
         </form>
     </main>
