@@ -23,10 +23,10 @@
             <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div> --}}
 
-        <!-- FILTROS -->    
+        <!-- FILTROS -->
         {{-- MENU --}}
         <section class="container-filters">
-            <button id="btnNewProduto" onclick="window.location.href=`{{route('page-inserirMenu')}}`">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-inserirMenu') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -48,21 +48,34 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Stich</td>
-                    <td>#</td>
-                    <td>Ativo</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
+                @if (isset($menus))
+                    @foreach ($menus as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{ $item['id'] }}</td>
+                            <td>{{ $item['titulo'] }}</td>
+                            <td>{{ $item['link_menu'] }}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo' }}</td>
+                            <td id="box-options">
+                                <form action="{{ route('delete-menu', $item['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash"></i>
+                                </form>
+
+                                <form action="{{ route('get-menu', $item['id']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td colspan="10">{{ $erro }}</td>
+                @endif
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
@@ -70,7 +83,7 @@
 
         {{-- SUBMENU --}}
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-getSubmenu') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -85,7 +98,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nome do Submenu</th>
-                    <th>Submenu</th>
+                    <th>Menu</th>
                     <th>Link do Submenu</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -93,23 +106,39 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Stich</td>
-                    <td>Alibaba</td>
-                    <td>teclado</td>
-                    <td>Ativo</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
+                @if (isset($submenus))
+                    @foreach ($submenus as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{ $item['id'] }}</td>
+                            <td>{{ $item['titulo_submenu'] }}</td>
+                            <td>{{ $item['id_menu'] }}</td>
+                            <td>{{ $item['link_submenu'] }}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo' }}</td>
+                            <td id="box-options">
+                                <form action="{{ route('delete-submenu', $item['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash"></i>
+                                </form>
 
+                                <form action="{{ route('get-Updatesubmenu', $item['id']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                @if (isset($erroSubmenu))
+                    <td colspan="10">{{ $erroSubmenu }}</td>
+                @endif
+                @if (isset($erro))
+                    <td colspan="10">{{ $erro }}</td>
+                @endif
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>
