@@ -16,6 +16,7 @@ class AdmSubmenu extends \Illuminate\Foundation\Auth\User
     protected $table = 'adm_submenu';
 
     protected $fillable = [
+        'id_menu',
         'titulo_submenu',
         'link_submenu',
         'status'

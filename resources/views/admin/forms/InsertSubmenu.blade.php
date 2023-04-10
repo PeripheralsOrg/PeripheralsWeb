@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertMenu')
 @section('js', 'admin/InsertMenu')
-@section('title')@parent Inserir Menu @stop
+@section('title')@parent Inserir Submenu @stop
 
 
 @section('content')
@@ -20,15 +20,24 @@
 
     <main class="content-menu">
 
-        <form action="{{ route('post-userAdm') }}" method="POST">
+        <form action="{{ route('post-submenu') }}" method="POST">
             @csrf
             <h2 class="title">Inserir Submenu</h2>
 
             <label class="label-field">Titulo</label>
-            <input type="text" name="titulo" data-js="text" required class="input-field" placeholder="Titulo">
+            <input type="text" name="titulo_submenu" data-js="text" required class="input-field" placeholder="Titulo">
 
             <label class="label-field">URL</label>
-            <input type="text" name="link_menu" data-js="text" required class="input-field" placeholder="Link">
+            <input type="text" name="link_submenu" data-js="text" required class="input-field" placeholder="Link">
+
+            @if (isset($getMenus))
+                <label class="label-field">Menus</label>
+                <select class="select-field" name="id_menu">
+                    @foreach ($getMenus as $item)
+                        <option value="{{ $item['id'] }}">{{ $item['titulo'] }}</option>
+                    @endforeach
+                </select>
+            @endif
 
             <label class="label-field">Status</label>
             <select class="select-field" name="status">

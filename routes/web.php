@@ -80,9 +80,9 @@ Route::prefix('adm')->group(function(){
         });
 
         Route::prefix('submenu')->controller(SubmenuController::class)->middleware('guest:9')->group(function () {
-            Route::view('inserir', 'admin.forms.InsertSubmenu')->name('page-inserirSubmenu');
+            Route::get('inserir', 'getSubmenu')->name('page-getSubmenu');
             Route::post('register', 'register')->name('post-submenu');
-            Route::get('get/{id}', 'getUpdate')->name('get-submenu');
+            Route::get('get/{id}', 'getUpdate')->name('get-Updatesubmenu');
             Route::delete('delete/{id}', 'delete')->name('delete-submenu');
             Route::patch('update/{id}', 'update')->name('update-submenu');
         });

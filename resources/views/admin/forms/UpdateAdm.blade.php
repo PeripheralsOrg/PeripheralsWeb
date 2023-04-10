@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertAdm')
 @section('js', 'admin/InsertAdm')
-@section('title')@parent Inserir Administrador @stop
+@section('title')@parent Atualizar Administrador @stop
 
 
 @section('content')
@@ -27,7 +27,7 @@
                     @endif
                     @csrf
                     @method('PATCH')
-                    <h2 class="title">Inclusão de usuário administrador</h2>
+                    <h2 class="title">Atualizar administrador</h2>
 
                     <label class="label-field">Nome</label>
                     <input type="text" name="name" data-js="text" value="{{ $item['name'] }}" required
@@ -91,7 +91,7 @@
                     </select>
 
                     <div class="box-buttons">
-                        <button type="submit" class="btn-submit">Cadastrar</button>
+                        <button type="submit" class="btn-submit">Atualizar</button>
                         <button type="button" onclick="window.location.href=`{{ route('page-listAdm') }}`"
                             class="btn-cancel">Cancelar</button>
                     </div>

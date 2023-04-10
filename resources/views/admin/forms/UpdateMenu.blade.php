@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertMenu')
 @section('js', 'admin/InsertMenu')
-@section('title')@parent Inserir Menu @stop
+@section('title')@parent Atualizar Menu @stop
 
 
 @section('content')
@@ -47,7 +47,7 @@
                     </select>
 
                     <div class="box-buttons">
-                        <button type="submit" class="btn-submit">Cadastrar</button>
+                        <button type="submit" class="btn-submit">Atualizar</button>
                         <button type="button" onclick="window.location.href=`{{ route('page-listMenus') }}`"
                             class="btn-cancel">Cancelar</button>
                     </div>

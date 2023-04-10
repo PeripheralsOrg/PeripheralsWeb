@@ -83,7 +83,7 @@
 
         {{-- SUBMENU --}}
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-getSubmenu') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -123,7 +123,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                 </form>
 
-                                <form action="{{ route('get-submenu', $item['id']) }}" method="GET">
+                                <form action="{{ route('get-Updatesubmenu', $item['id']) }}" method="GET">
                                     @csrf
                                     <button type="submit">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -135,10 +135,10 @@
                 @endif
                 @if (isset($erroSubmenu))
                     <td colspan="10">{{ $erroSubmenu }}</td>
-                @else:
+                @endif
+                @if (isset($erro))
                     <td colspan="10">{{ $erro }}</td>
                 @endif
-
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>

@@ -14,13 +14,13 @@ class MenuController extends Controller
         $menus = AdmMenu::all()->where('status', 1)->toArray();
         $submenus = AdmSubmenu::all()->where('status', 1)->toArray();
 
-        if (!empty($menus)) {
+        if (!empty($menus) && empty($submenus)) {
             $erroSubmenu = 'Submenus não encontrados';
             return view('admin.list.listMenus')->with([
                 'menus' => $menus,
                 'erroSubmenu' => $erroSubmenu
             ]);
-        } else if ($menus && $submenus) {
+        } else if (!empty($menus) && !empty($submenus)) {
             return view('admin.list.listMenus')->with([
                 'menus' => $menus,
                 'submenus' => $submenus
@@ -77,7 +77,7 @@ class MenuController extends Controller
         if ($getMenu) {
             return view('admin.forms.UpdateMenu')->with('getMenu', $getMenu);
         }
-        return redirect('falha-listMenus')->withErrors('Não foi possível atualizar o menu!');
+        return back()->withErrors('Não é possivel inserir novos submenus no momento!');
     }
 
     public function update(Request $request, $id)
