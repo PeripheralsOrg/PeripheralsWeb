@@ -25,7 +25,7 @@
 
         <!-- FILTROS -->
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-inserirCupom') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -40,8 +40,8 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>Cupom</th>
-                    <th>Categoria</th>
+                    <th>Codigo</th>
+                    <th>Porcentagem</th>
                     <th>Válido</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -49,24 +49,38 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Mouse Razer</td>
-                    <td>Mouse</td>
-                    <td>50</td>
-                    <td>R$100,00</td>
-                    <td>Disponivel</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
 
+                @if (!empty($cupons))
+                    @foreach ($cupons as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['nome']}}</td>
+                            <td>{{$item['codigo']}}</td>
+                            <td>{{$item['porcentagem']}}</td>
+                            <td>{{ (new DateTime($item['data_expiracao']))->format('d/m/Y H:i:s') }}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo' }}</td>
+                            <td id="box-options">
+                                <form action="{{ route('delete-cupom', $item['id']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash"></i>
+                                </form>
+
+                                <form action="{{ route('get-cupom', $item['id']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td colspan="10">Nenhum cupom encontrado</td>
+
+                @endif
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CupomController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -62,8 +63,14 @@ Route::prefix('adm')->group(function(){
         Route::view('lista', 'admin.list.listComentarios')->name('page-listComentarios');
     });
 
-    Route::prefix('cupons')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
-        Route::view('lista', 'admin.list.listCupons')->name('page-listCupons');
+    Route::prefix('cupons')->controller(CupomController::class)->middleware('guest:8,9')->group(function () {
+        Route::get('lista', 'all')->name('page-listCupons');
+        Route::view('inserir', 'admin.forms.insertCupom')->name('page-inserirCupom');
+        Route::get('falha', 'fallback')->name('falha-listCupons');
+        Route::post('register', 'register')->name('post-cupom');
+        Route::get('get/{id}', 'getUpdate')->name('get-cupom');
+        Route::delete('delete/{id}', 'delete')->name('delete-cupom');
+        Route::patch('update/{id}', 'update')->name('update-cupom');
     });
 
     Route::prefix('menus')->controller(MenuController::class)->middleware('guest:9')->group(function () {
@@ -102,6 +109,10 @@ Route::prefix('adm')->group(function(){
 
 Route::get('/', function () {
     return view('client.index');
+});
+
+Route::get('/novo', function () {
+    return view('admin.forms.InsertProduto');
 });
 
 Route::get('/factory', function () {
