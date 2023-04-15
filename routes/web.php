@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CupomController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -62,7 +63,7 @@ Route::prefix('adm')->group(function(){
         Route::view('lista', 'admin.list.listComentarios')->name('page-listComentarios');
     });
 
-    Route::prefix('cupons')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
+    Route::prefix('cupons')->controller(CupomController::class)->middleware('guest:8,9')->group(function () {
         Route::view('lista', 'admin.list.listCupons')->name('page-listCupons');
         Route::view('inserir', 'admin.forms.insertCupom')->name('page-inserirCupom');
         Route::get('falha', 'fallback')->name('falha-listCupons');

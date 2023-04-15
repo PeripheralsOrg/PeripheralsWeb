@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertCupom')
-@section('js', 'admin/InsertAdm')
 @section('title')@parent Inserir Cupom @stop
 
 
@@ -25,18 +24,21 @@
             <h2 class="title">Inserir Cupom</h2>
 
             <label class="label-field">Nome</label>
-            <input type="text" name="name" data-js="text" required class="input-field" placeholder="Nome">
+            <input type="text" name="nome" data-js="text" required class="input-field" placeholder="Nome">
 
             <label class="label-field">Código</label>
             <input type="text" name="codigo" data-js="text" required class="input-field" placeholder="Código">
 
             <div class="row-input">
-                <label class="label-field">Data de Expiração</label>
-                <input type="date" name="data_expiracao" data-js="text" required class="input-field"
-                    placeholder="Expiração">
+                <label class="label-field">Data de Expiração
+                    <input type="date" name="data_expiracao" data-js="text" required class="input-field"
+                        placeholder="Expiração">
+                </label>
 
-                <label class="label-field">Porcentagem</label>
-                <input type="text" name="porcentagem" data-js="decimal" required class="input-field" placeholder="Porcentagem de Desconto">
+                <label class="label-field">Porcentagem
+                    <input type="text" name="porcentagem" data-js="number" required class="input-field"
+                        placeholder="Porcentagem de Desconto">
+                </label>
             </div>
 
             <label class="label-field">Status</label>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome', 120)->charset('utf8');
             $table->string('codigo', 30)->charset('utf8');
             $table->dateTime('data_expiracao');
-            $table->decimal('porcentagem', 10, 2)->charset('utf8');
+            $table->decimal('porcentagem', 10, 2);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

@@ -27,6 +27,8 @@ class CupomController extends Controller
             'status' => ['required'],
         ]);
 
+        exit();
+
         $cupomC = $cupom->create($validator);
 
         if ($cupomC) {
