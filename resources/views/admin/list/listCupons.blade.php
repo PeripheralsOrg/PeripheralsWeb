@@ -40,8 +40,8 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>Cupom</th>
-                    <th>Categoria</th>
+                    <th>Codigo</th>
+                    <th>Porcentagem</th>
                     <th>Válido</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -54,12 +54,12 @@
                     @foreach ($cupons as $item)
                         <tr>
                             <!-- Conteúdo_da_tabela -->
-                            <td>1</td>
-                            <td>Mouse Razer</td>
-                            <td>Mouse</td>
-                            <td>50</td>
-                            <td>R$100,00</td>
-                            <td>Disponivel</td>
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['nome']}}</td>
+                            <td>{{$item['codigo']}}</td>
+                            <td>{{$item['porcentagem']}}</td>
+                            <td>{{ (new DateTime($item['data_expiracao']))->format('d/m/Y H:i:s') }}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo' }}</td>
                             <td id="box-options">
                                 <form action="{{ route('delete-cupom', $item['id']) }}" method="POST">
                                     @csrf

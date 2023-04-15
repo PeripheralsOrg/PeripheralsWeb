@@ -19,38 +19,56 @@
     @endif
 
     <main class="content-cupom">
+        @if (isset($getCupom))
+            @foreach ($getCupom as $item)
+                <form action="{{ route('update-cupom', $item['id']) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <h2 class="title">Atualizar Cupom</h2>
 
-        <form action="{{ route('post-cupom') }}" method="POST">
-            @csrf
-            <h2 class="title">Inserir Cupom</h2>
+                    <label class="label-field">Nome</label>
+                    <input type="text" name="nome" data-js="text" value="{{$item['nome']}}" required class="input-field" placeholder="Nome">
 
-            <label class="label-field">Nome</label>
-            <input type="text" name="name" data-js="text" required class="input-field" placeholder="Nome">
+                    <label class="label-field">Código</label>
+                    <input type="text" name="codigo" data-js="text" value="{{$item['codigo']}}" required class="input-field" placeholder="Código">
 
-            <label class="label-field">Código</label>
-            <input type="text" name="codigo" data-js="text" required class="input-field" placeholder="Código">
+                    <div class="row-input">
+                        <label class="label-field">Data de Expiração
+                            <input type="date" name="data_expiracao" 
+                            value="{{$item['data_expiracao']}}" data-js="text" required class="input-field"
+                            placeholder="Expiração">
+                        </label>
 
-            <div class="row-input">
-                <label class="label-field">Data de Expiração</label>
-                <input type="date" name="data_expiracao" data-js="text" required class="input-field"
-                    placeholder="Expiração">
+                        <label class="label-field">Porcentagem
+                            <input type="text" name="porcentagem" 
+                            value="{{$item['porcentagem']}}" data-js="money" required class="input-field"
+                            placeholder="Porcentagem de Desconto">
+                        </label>
+                    </div>
 
-                <label class="label-field">Porcentagem</label>
-                <input type="text" name="porcentagem" data-js="decimal" required class="input-field" placeholder="Porcentagem de Desconto">
-            </div>
+                    <label class="label-field">Status</label>
+                    <select class="select-field" name="status">
+                        @if ($item['status'] == 1)
+                            <option selected value="1">1 - Ativo</option>
+                            <option value="0">0 - Inativo</option>
+                        @endif
 
-            <label class="label-field">Status</label>
-            <select class="select-field" name="status">
-                <option value="1">1 - Ativo</option>
-                <option value="0">0 - Inativo</option>
-            </select>
+                        @if ($item['status'] == 0)
+                            <option value="1">1 - Ativo</option>
+                            <option selected value="0">0 - Inativo</option>
+                        @endif
+                    </select>
 
-            <div class="box-buttons">
-                <button type="submit" class="btn-submit">Cadastrar</button>
-                <button type="button" onclick="window.location.href=`{{ route('page-listCupons') }}`"
-                    class="btn-cancel">Cancelar</button>
-            </div>
-        </form>
+                    <div class="box-buttons">
+                        <button type="submit" class="btn-submit">Atualizar</button>
+                        <button type="button" onclick="window.location.href=`{{ route('page-listCupons') }}`"
+                            class="btn-cancel">Cancelar</button>
+                    </div>
+                </form>
+            @endforeach
+
+        @endif
+
     </main>
 
 @endsection

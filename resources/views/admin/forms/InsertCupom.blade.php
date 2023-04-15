@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertCupom')
+@section('js', 'admin/InsertCupom')
 @section('title')@parent Inserir Cupom @stop
 
 
@@ -36,7 +37,7 @@
                 </label>
 
                 <label class="label-field">Porcentagem
-                    <input type="text" name="porcentagem" data-js="number" required class="input-field"
+                    <input type="text" name="porcentagem" data-js="money" required class="input-field"
                         placeholder="Porcentagem de Desconto">
                 </label>
             </div>

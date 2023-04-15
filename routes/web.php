@@ -64,7 +64,7 @@ Route::prefix('adm')->group(function(){
     });
 
     Route::prefix('cupons')->controller(CupomController::class)->middleware('guest:8,9')->group(function () {
-        Route::view('lista', 'admin.list.listCupons')->name('page-listCupons');
+        Route::get('lista', 'all')->name('page-listCupons');
         Route::view('inserir', 'admin.forms.insertCupom')->name('page-inserirCupom');
         Route::get('falha', 'fallback')->name('falha-listCupons');
         Route::post('register', 'register')->name('post-cupom');
@@ -109,6 +109,10 @@ Route::prefix('adm')->group(function(){
 
 Route::get('/', function () {
     return view('client.index');
+});
+
+Route::get('/novo', function () {
+    return view('admin.forms.InsertProduto');
 });
 
 Route::get('/factory', function () {

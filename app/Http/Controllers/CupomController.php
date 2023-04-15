@@ -17,6 +17,7 @@ class CupomController extends Controller
         return redirect('falha-listCupons');
     }
 
+    // TODO: #23 Criar coluna para linkar categoria
     public function register(Request $request, Cupom $cupom)
     {
         $validator = $request->validate([
@@ -26,10 +27,12 @@ class CupomController extends Controller
             'porcentagem' => ['required'],
             'status' => ['required'],
         ]);
+        $request->merge([
+            'porcentagem' => floatval($request->input('porcentagem'))
+        ]);
 
-        exit();
-
-        $cupomC = $cupom->create($validator);
+        $create = $request->except(['_token']);
+        $cupomC = $cupom->create($create);
 
         if ($cupomC) {
             return redirect()->route('page-listCupons')->withErrors('Cupom criado com sucesso!');
@@ -47,6 +50,7 @@ class CupomController extends Controller
     public function delete($id)
     {
         $deleteAll = Cupom::findOrFail($id);
+        $deleteAll->delete();
         if ($deleteAll) {
             return redirect()->route('page-listCupons')->withErrors('Cupom deletado com sucesso');
         }
@@ -62,7 +66,7 @@ class CupomController extends Controller
         return redirect('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
     }
 
-    public function update(Request $request, $id, Cupom $cupom)
+    public function update(Request $request, $id)
     {
         $validator = $request->validate([
             'nome' => ['required'],
@@ -72,7 +76,13 @@ class CupomController extends Controller
             'status' => ['required'],
         ]);
 
-        $updateCupom = (Cupom::all()->where('id', $id)->toQuery())->update($validator);
+        $request->merge([
+            'porcentagem' => floatval($request->input('porcentagem'))
+        ]);
+
+        $create = $request->except(['_token', '_method']);
+
+        $updateCupom = (Cupom::all()->where('id', $id)->toQuery())->update($create);
 
         if ($updateCupom) {
             return redirect()->route('page-listCupons')->withErrors('Cupom atualizado com sucesso!');
