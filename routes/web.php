@@ -64,6 +64,12 @@ Route::prefix('adm')->group(function(){
 
     Route::prefix('cupons')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
         Route::view('lista', 'admin.list.listCupons')->name('page-listCupons');
+        Route::view('inserir', 'admin.forms.insertCupom')->name('page-inserirCupom');
+        Route::get('falha', 'fallback')->name('falha-listCupons');
+        Route::post('register', 'register')->name('post-cupom');
+        Route::get('get/{id}', 'getUpdate')->name('get-cupom');
+        Route::delete('delete/{id}', 'delete')->name('delete-cupom');
+        Route::patch('update/{id}', 'update')->name('update-cupom');
     });
 
     Route::prefix('menus')->controller(MenuController::class)->middleware('guest:9')->group(function () {

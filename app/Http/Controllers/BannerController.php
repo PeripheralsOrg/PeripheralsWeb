@@ -89,7 +89,7 @@ class BannerController extends Controller
         if ($getBanner) {
             return view('admin.forms.UpdateBanner')->with('getBanner', $getBanner);
         }
-        return redirect('falha-listBanner')->withErrors('Não foi possível atualizar o usuário!');
+        return redirect('falha-listBanner')->withErrors('Não foi possível atualizar o Banner!');
     }
 
     public function update(Request $request, $id, BannerController $banner)
