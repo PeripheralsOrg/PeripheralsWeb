@@ -9,6 +9,7 @@ use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CupomController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
@@ -43,7 +44,7 @@ Route::prefix('adm')->group(function(){
         Route::patch('update/{id}', 'update')->name('update-userAdm')->middleware('guest:9');
     });
 
-    Route::prefix('produto')->controller(LoginController::class)->middleware('guest:6,8,9')->group(function () {
+    Route::prefix('produto')->controller(ProdutoController::class)->middleware('guest:6,8,9')->group(function () {
         Route::view('lista', 'admin.list.listProdutos')->name('page-listProdutos');
         Route::view('inserir', 'admin.forms.InsertProduto')->name('page-inserirProduto');
         Route::get('falha', 'fallback')->name('falha-listProdutos');
