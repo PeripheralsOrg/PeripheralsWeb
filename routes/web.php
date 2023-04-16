@@ -23,6 +23,9 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// TODO: #26 Criar página de configurações (categorias, frete, etc)
+
 Route::prefix('adm')->group(function(){
     Route::prefix('auth')->controller(LoginController::class)->group(function () {
         Route::view('entrar', 'admin.index')->name('page-login');
@@ -43,6 +46,11 @@ Route::prefix('adm')->group(function(){
     Route::prefix('produto')->controller(LoginController::class)->middleware('guest:6,8,9')->group(function () {
         Route::view('lista', 'admin.list.listProdutos')->name('page-listProdutos');
         Route::view('inserir', 'admin.forms.InsertProduto')->name('page-inserirProduto');
+        Route::get('falha', 'fallback')->name('falha-listProdutos');
+        Route::post('register', 'register')->name('post-produto');
+        Route::get('get/{id}', 'getUpdate')->name('get-produto');
+        Route::delete('delete/{id}', 'delete')->name('delete-produto');
+        Route::patch('update/{id}', 'update')->name('update-produto');
     });
 
     Route::prefix('banners')->controller(BannerController::class)->middleware('guest:8,9')->group(function () {
