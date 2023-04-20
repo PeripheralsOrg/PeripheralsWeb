@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cupom;
 use Illuminate\Http\Request;
 
-// TODO: Testar cupom
 class CupomController extends Controller
 {
     public function all()

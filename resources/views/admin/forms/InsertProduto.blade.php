@@ -144,7 +144,7 @@
 
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>
-                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="button" class="btn-cancel" onclick="window.location.href=`{{ route('page-listProdutos') }}`">Cancelar</button>
             </div>
         </form>
     </main>

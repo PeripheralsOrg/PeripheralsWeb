@@ -24,19 +24,16 @@ class RedirectIfAuthenticated
         }
 
         foreach ($roles as $role) {
-            if ($request->session()->get('user.1.poder') == $role) {
+            if (array_values($request->session()->get('user'))['0']['poder'] == $role) {
 
                 if (Auth::guard('adm_users')->check()) {
                     return $next($request);
-                }else{
+                } else {
                     return redirect('adm/auth/entrar')->withErrors('É necessário fazer login para continuar!');
-
-                } 
+                }
             }
         }
 
         return back()->withErrors('Você não possui autorização para acessar essa a URL: ' .  $request->url());
-
-
     }
 }

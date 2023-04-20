@@ -26,7 +26,7 @@
         </div>
 
         <section class="container-filters">
-            <button id="btnNewProduto">
+            <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-inserirProduto') }}`">
                 <div class="icon-container">
                     <i class="fa-regular fa-plus"></i>
                 </div>
@@ -66,6 +66,8 @@
             </div> --}}
         </section>
 
+        <h1>Inserir, deletar e atualizar produto ainda não funcionam!</h1>
+
         <!--Começo_da_tabela_de_pedidos-->
         <table class="table">
             <!-- Header_da_tabela -->
@@ -74,7 +76,7 @@
                     <th>#</th>
                     <th>Nome</th>
                     <th>Categoria</th>
-                    <th>Quantidade</th>
+                    <th>Marca</th>
                     <th>Valor</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -82,23 +84,29 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Mouse Razer</td>
-                    <td>Mouse</td>
-                    <td>50</td>
-                    <td>R$100,00</td>
-                    <td>Disponivel</td>
-                    <td id="box-options">
-                        <a href="#">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </td>
-                </tr>
+                @if (!empty($produtos))
+                    @foreach ($produtos as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['nome']}}</td>
+                            <td>{{$item['id_categoria']}}</td>
+                            <td>{{$item['marca']}}</td>
+                            <td>{{$item['preco']}}</td>
+                            <td>{{$item['status']}}</td>
+                            <td id="box-options">
+                                <a href="#">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @else
+                        <td colspan="10">Nenhum Produto encontrado!</td>
+                @endif
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
