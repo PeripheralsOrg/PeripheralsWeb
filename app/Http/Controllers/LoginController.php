@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
         $user = AdmUsers::all()->where('name', $request->input('name'))->toArray();
-        if(empty($user)){
+        if (empty($user)) {
             return back()->withErrors(['Usuário não encontrado']);
         }
 
@@ -45,7 +45,6 @@ class LoginController extends Controller
         }
 
         return back()->withErrors('Ocorreu um erro ao se logar, por favor, contate o administrador!');
-
     }
 
     public function logout(Request $request)
@@ -54,5 +53,4 @@ class LoginController extends Controller
         $request->session()->flush();
         return redirect('/adm/auth/entrar')->withErrors('Sessão encerrada com sucesso');
     }
-
 }
