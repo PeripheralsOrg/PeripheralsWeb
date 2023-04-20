@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CupomController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
@@ -26,8 +27,9 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 */
 
 // TODO: #26 Criar página de configurações (categorias, frete, etc)
+// TODO: #27 Fazer uma página inicial com acesso para todos os poderes
 
-Route::prefix('adm')->group(function(){
+Route::prefix('adm')->group(function () {
     Route::prefix('auth')->controller(LoginController::class)->group(function () {
         Route::view('entrar', 'admin.index')->name('page-login');
         Route::get('logout', 'logout')->name('auth-sair')->middleware('guest:6,7,8,9');
@@ -45,7 +47,7 @@ Route::prefix('adm')->group(function(){
     });
 
     Route::prefix('produto')->controller(ProdutoController::class)->middleware('guest:6,8,9')->group(function () {
-        Route::view('lista', 'admin.list.listProdutos')->name('page-listProdutos');
+        Route::get('lista', 'all')->name('page-listProdutos');
         Route::view('inserir', 'admin.forms.InsertProduto')->name('page-inserirProduto');
         Route::get('falha', 'fallback')->name('falha-listProdutos');
         Route::post('register', 'register')->name('post-produto');
@@ -113,6 +115,7 @@ Route::prefix('adm')->group(function(){
         Route::view('/', 'admin.list.listRelatorios')->name('page-relatorios');
     });
 
+    Route::get('config', [ConfigController::class, 'getData'])->name('page-config');
 });
 
 

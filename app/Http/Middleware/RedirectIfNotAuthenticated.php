@@ -20,12 +20,11 @@ class RedirectIfNotAuthenticated
         // $guards = empty($guards) ? [null] : $guards;
 
         // foreach ($guards as $guard) {
-            if (!Auth::guard('adm_users')->check()) {
-                return $next($request);
-            }
+        if (!Auth::guard('adm_users')->check()) {
+            return $next($request);
+        }
         // }
 
         return redirect('adm/relatorios');
-
     }
 }
