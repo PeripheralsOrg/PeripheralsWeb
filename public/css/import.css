@@ -92,6 +92,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+main{
+    width: 60vw;
+}
+
 
 /* Barra_de_busca */
 
@@ -158,6 +162,12 @@ input[type="submit"] {
 #box-options{
     display: flex;
     justify-content: space-around !important;
+    gap: 1rem;
+}
+
+#box-options button{
+    background-color: transparent;
+    border: none;
 }
 
 #box-options .fa-trash{

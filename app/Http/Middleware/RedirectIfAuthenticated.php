@@ -15,16 +15,28 @@ class RedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
-    {
-        $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+    public function handle(Request $request, Closure $next, string ...$roles): Response
+    {
+        $roles = empty($roles) ? [null] : $roles;
+        if (empty($roles)) {
+            return redirect('adm/auth/entrar')->withErrors('É necessário fazer login para continuar!');
+        }
+
+        foreach ($roles as $role) {
+            if ($request->session()->get('user.1.poder') == $role) {
+
+                if (Auth::guard('adm_users')->check()) {
+                    return $next($request);
+                }else{
+                    return redirect('adm/auth/entrar')->withErrors('É necessário fazer login para continuar!');
+
+                } 
             }
         }
 
-        return $next($request);
+        return back()->withErrors('Você não possui autorização para acessar essa a URL: ' .  $request->url());
+
+
     }
 }

@@ -1,16 +1,32 @@
 @extends('layouts.admin')
 @section('css', 'admin/index')
+@section('js', 'admin/index')
 @section('title')@parent Login Admin @stop
 
 
 @section('content')
+
     <!-- Sessão_formulário_ADM -->
-    <form action="" method="POST">
+    <form action="{{ route('auth-entrar') }}" method="POST">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @csrf
         {{-- <h1>Entrar</h1> --}}
         <div class="form-inputs">
-            <input type="text" name="user" id="inputUser" placeholder="Digite o Usuário">
+            <input type="text" required name="name" id="inputUser" placeholder="Digite o Usuário">
 
-            <input type="password" name="senha" id="inputSenha" placeholder="Digite a Senha">
+            <span class="password-container">
+                <input type="password" required name="password" id="inputSenha" placeholder="Digite a Senha">
+                <i id="openEye" onclick="functionEye()" class="fa-solid fa-eye"></i>
+                <i id="closeEye" onclick="functionEye()" class="fa-solid fa-eye-slash"></i>
+            </span>
         </div>
 
         <div class="form-acoes">
@@ -28,6 +44,5 @@
 
         <!-- Confirmar_dados_de_formulário -->
         <input type="submit" value="Logar">
-
     </form>
 @endsection

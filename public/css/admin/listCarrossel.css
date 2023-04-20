@@ -62,3 +62,24 @@
     cursor: pointer;
     color: var(--branco);
 }
+
+.box-options{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.box-options .fa-trash {
+    color: var(--vermelho);
+    cursor: pointer;
+}
+
+.box-options .fa-pen-to-square {
+    color: #25b808;
+    cursor: pointer;
+}
+
+.box-options button {
+    background-color: transparent;
+    border: none;
+}
