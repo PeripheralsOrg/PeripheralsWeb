@@ -13,6 +13,13 @@ class DetalhesProduto extends Model
 
     protected $table = 'users_detalhes_produto';
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_detalhes';
+
     protected $fillable = [
         'fonte_energia',
         'codigo',

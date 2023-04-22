@@ -23,7 +23,7 @@ class BannerController extends Controller
         if ($banners) {
             return view('admin.list.listCarrossel')->with('banners', $banners);
         }
-        return redirect('falha-listBanner');
+        return redirect()->route('falha-listBanner');
     }
 
     public function register(Request $request, AdmBanner $banner){

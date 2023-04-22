@@ -12,6 +12,13 @@ class Produto extends Model
 
     protected $table = 'users_produtos';
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_produtos';
+
     protected $fillable = [
         'nome',
         'marca',
