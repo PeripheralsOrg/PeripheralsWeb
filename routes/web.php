@@ -28,6 +28,7 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 // TODO: #26 Criar página de configurações (categorias, frete, etc)
 // TODO: #27 Fazer uma página inicial com acesso para todos os poderes
+// TODO: #37 Checar todos os tratamentos de erro
 
 Route::prefix('adm')->group(function () {
     Route::prefix('auth')->controller(LoginController::class)->group(function () {
@@ -43,7 +44,7 @@ Route::prefix('adm')->group(function () {
         Route::post('register', 'register')->name('post-userAdm');
         Route::get('get/{id}', 'getUpdate')->name('get-userAdm')->middleware('guest:9');
         Route::delete('delete/{id}', 'delete')->name('delete-userAdm')->middleware('guest:9');
-        Route::patch('update/{id}', 'update')->name('update-userAdm')->middleware('guest:9');
+        Route::patch('update/{id}', 'update')->name('update-userAdm')->middleware('guest:6,8,9');
     });
 
     Route::prefix('produto')->controller(ProdutoController::class)->middleware('guest:6,8,9')->group(function () {

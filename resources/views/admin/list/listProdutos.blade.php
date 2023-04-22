@@ -66,8 +66,6 @@
             </div> --}}
         </section>
 
-        <h1>Inserir, deletar e atualizar produto ainda não funcionam!</h1>
-
         <!--Começo_da_tabela_de_pedidos-->
         <table class="table">
             <!-- Header_da_tabela -->
@@ -88,19 +86,26 @@
                     @foreach ($produtos as $item)
                         <tr>
                             <!-- Conteúdo_da_tabela -->
-                            <td>{{$item['id']}}</td>
+                            <td>{{$item['id_produtos']}}</td>
                             <td>{{$item['nome']}}</td>
                             <td>{{$item['id_categoria']}}</td>
                             <td>{{$item['marca']}}</td>
                             <td>{{$item['preco']}}</td>
-                            <td>{{$item['status']}}</td>
+                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo'}}</td>
                             <td id="box-options">
-                                <a href="#">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
+                                <form action="{{ route('delete-produto', $item['id_produtos']) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <i class="fa-solid fa-trash"></i>
+                                </form>
+
+                                <form action="{{ route('get-produto', $item['id_produtos']) }}" method="GET">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

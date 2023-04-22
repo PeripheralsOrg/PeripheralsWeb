@@ -15,6 +15,7 @@ class ProdutoImagens extends Model
     protected $fillable = [
         'nome_img',
         'link_img',
+        'id_produto'
     ];
 
     public function produto(): HasOne

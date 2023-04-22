@@ -13,7 +13,15 @@ class ProdutoInventario extends Model
 
     protected $table = 'users_produto_inventario';
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_inventario';
+
     protected $fillable = [
+        'id_inventario',
         'quantidade',
         'status'
     ];
