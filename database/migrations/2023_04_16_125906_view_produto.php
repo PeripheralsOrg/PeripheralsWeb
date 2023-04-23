@@ -15,6 +15,7 @@ return new class extends Migration
         DB::statement(
             'CREATE VIEW `view_produto` AS
                 SELECT 
+                    users_produtos.id_produtos,
                     users_produtos.nome,
                     users_produtos.marca,
                     users_produtos.modelo,
@@ -22,6 +23,7 @@ return new class extends Migration
                     users_produtos.status,
                     users_produtos.is_promocao,
                     users_produtos.descricao,
+                    users_produtos.created_at,
                     users_produto_categoria.categoria,
                     users_produto_inventario.quantidade,
                     users_produto_inventario.status AS inventario_status,
@@ -42,17 +44,23 @@ return new class extends Migration
                     users_detalhes_produto.garantia,
                     users_detalhes_produto.info_adicional,
                     users_detalhes_produto.status 
-                    AS detalhes_status
+                    AS detalhes_status,
+                    users_produto_imgs.nome_img,
+                    users_produto_imgs.link_img
 
                 FROM users_produtos
-                INNER JOIN users_produto_categoria
+                LEFT JOIN users_produto_categoria
                 ON users_produtos.id_categoria = users_produto_categoria.id_categoria
 
-                INNER JOIN users_produto_inventario
+                LEFT JOIN users_produto_inventario
                 ON users_produtos.id_inventario = users_produto_inventario.id_inventario
 
-                INNER JOIN users_detalhes_produto
-                ON users_produtos.id_detalhes = users_detalhes_produto.id_detalhes'
+                LEFT JOIN users_detalhes_produto
+                ON users_produtos.id_detalhes = users_detalhes_produto.id_detalhes
+                
+                LEFT JOIN users_produto_imgs
+                ON users_produto_imgs.id_produtos = users_produtos.id_produtos'
+                
         );
     }
 

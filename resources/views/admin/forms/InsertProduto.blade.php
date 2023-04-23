@@ -42,8 +42,8 @@
 
             <label class="label-field">Status</label>
             <select class="select-field" name="status">
-                <option value="1">Disponível</option>
-                <option value="0">Indisponível</option>
+                <option selected value="1">1 - Ativo</option>
+                <option value="0">0 - Inativo</option>
             </select>
 
             <label class="label-field">Marca</label>

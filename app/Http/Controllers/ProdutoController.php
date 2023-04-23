@@ -9,16 +9,17 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\ProdutoImagensController;
 use App\Http\Controllers\DetalhesProdutoController;
 use App\Models\DetalhesProduto;
+use App\Models\ProdutoImagens;
 use App\Models\ProdutoInventario;
+use App\Models\ProdutoView;
 use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
     public function all()
     {
-        $produtos = Produto::all()->where('status', 1)->toArray();
-        // $produtos = DB::select('SELECT * FROM view_produto WHERE status = 1');
-
+        // $produtos = Produto::all()->where('status', 1)->toArray();
+        $produtos = ProdutoView::all()->where('status', 1)->toArray();
         if ($produtos) {
             return view('admin.list.listProdutos')->with('produtos', $produtos);
         }
@@ -177,5 +178,20 @@ class ProdutoController extends Controller
                 return $file->storeAs('public/storage', $imageName);
             }
         }
+    }
+
+
+
+    public function getUpdate($id){
+        $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();
+        $imgs = ProdutoImagens::all()->where('id_produto', $id)->toArray();
+        if ($produto && $imgs) {
+            return view('admin.forms.UpdateProduto')->with('produto', $produto)->with('imgs', $imgs);
+        }
+        return redirect()->back()->withErrors('Não foi possível encontrar o produto!');
+    }
+
+    public function update(Request $request){
+        dd($request->all());
     }
 }
