@@ -23,8 +23,8 @@
 
         @if (!empty($produto))
             @foreach ($produto as $item)
-                <form action="{{ route('update-produto', $item['id_produtos']) }}" method="POST"
-                    enctype="multipart/form-data" id="formUpdateProduto">
+                <form action="{{ route('update-produto', $item['id_produtos']) }}" method="POST" enctype="multipart/form-data"
+                    id="formUpdateProduto">
                     @csrf
                     @method('PATCH')
                     <h2 class="title">Atualização de Produto</h2>
@@ -63,9 +63,7 @@
                     </select>
 
                     <label class="label-field">Descrição do Produto</label>
-                    <textarea type="text" data-js="text" name="descricao" class="input-field textarea-field" placeholder="Descrição">
-                        {{ $item['descricao'] }}
-                    </textarea>
+                    <textarea type="text" data-js="text" name="descricao" class="input-field textarea-field" placeholder="Descrição">{{ $item['descricao'] }}</textarea>
 
                     {{-- FORMULARIO DE INFORMAÇÕES ADICIONAIS --}}
                     <div class="container-more-info">
@@ -108,8 +106,15 @@
 
                             <label class="label-field">É Promoção?</label>
                             <select class="select-field" name="is_promocao">
-                                <option value="0">Não</option>
-                                <option value="1">Sim</option>
+                                @if ($item['is_promocao'] == 1)
+                                    <option value="0">Não</option>
+                                    <option selected value="1">Sim</option>
+                                @endif
+
+                                @if ($item['is_promocao'] == 0)
+                                    <option selected value="0">Não</option>
+                                    <option value="1">Sim</option>
+                                @endif
                             </select>
 
                             {{-- TODO: Input não permite espaços --}}
@@ -179,9 +184,7 @@
                         @endif
                         <label class="label-field" id="labelTextarea">Informações Adicionais
                             <textarea type="text" name="info_adicional" data-js="text" class="input-field textarea-field"
-                                placeholder="Descrição">
-                                {{ $item['info_adicional'] }}
-                            </textarea>
+                                placeholder="Descrição">{{ $item['info_adicional'] }}</textarea>
                         </label>
                     </div>
             @endforeach
@@ -194,8 +197,8 @@
                         <div class="row-img">
                             <img src="{{ asset(str_replace('public/', '', $img['link_img'])) }}"
                                 alt="{{ $img['nome_img'] }}">
-                            <button type="button" id="deleteImg" 
-                            onclick="deletarImg('{{$img['id_produto_imgs']}}', '{{ str_replace('public/storage/', '', $img['link_img']) }}')">
+                            <button type="button" id="deleteImg"
+                                onclick="deletarImg('{{ $img['id_produto_imgs'] }}', '{{ str_replace('public/storage/', '', $img['link_img']) }}')">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <p id="msgImg"></p>
@@ -203,21 +206,21 @@
                     </div>
                 @endforeach
                 <label class="label-field">Imagem Principal</label>
-                    <input type="file" accept="image/*" name="imagem_principal" id="imageInput" class="input-field">
+                <input type="file" accept="image/*" name="imagem_principal" id="imageInput" class="input-field">
 
-                    <label for="img_principal">Outras Imagens </label>
-                    <input type="file" name="link_img[]" accept="image/*" multiple onchange="newInput(this)"
-                        id="inputImgMultiple">
-                    <button style="width: 50%; padding: 1rem !important;" type="button" onclick="removeAllImages()"
-                        id="btnRemoveFile">
-                        Remover todas as imagens</button>
-                    <ul id="dpFiles"></ul>
+                <label for="img_principal">Outras Imagens </label>
+                <input type="file" name="link_img[]" accept="image/*" multiple onchange="newInput(this)"
+                    id="inputImgMultiple">
+                <button style="width: 50%; padding: 1rem !important;" type="button" onclick="removeAllImages()"
+                    id="btnRemoveFile">
+                    Remover todas as imagens</button>
+                <ul id="dpFiles"></ul>
 
-                    <div class="box-buttons">
-                        <button type="submit" class="btn-submit">Atualizar</button>
-                        <button type="button" class="btn-cancel"
-                            onclick="window.location.href=`{{ route('page-listProdutos') }}`">Cancelar</button>
-                    </div>
+                <div class="box-buttons">
+                    <button type="submit" class="btn-submit">Atualizar</button>
+                    <button type="button" class="btn-cancel"
+                        onclick="window.location.href=`{{ route('page-listProdutos') }}`">Cancelar</button>
+                </div>
 
             @endif
 

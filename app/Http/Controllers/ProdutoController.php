@@ -12,7 +12,7 @@ use App\Models\DetalhesProduto;
 use App\Models\ProdutoImagens;
 use App\Models\ProdutoInventario;
 use App\Models\ProdutoView;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
@@ -191,7 +191,91 @@ class ProdutoController extends Controller
         return redirect()->back()->withErrors('Não foi possível encontrar o produto!');
     }
 
-    public function update(Request $request){
-        dd($request->all());
+    public function update(Request $request, $id){
+        $validate = $request->validate([
+            'codigo' => ['required'],
+            'nome' => ['required'],
+            'preco' => ['required'],
+            'modelo' => ['required'],
+            'quantidade' => ['required'],
+            'descricao' => ['required'],
+            'fonte_energia' => ['required'],
+            'tamanho' => ['required'],
+            'cor' => ['required'],
+            'peso' => ['required'],
+            'garantia' => ['required'],
+            'is_promocao' => ['required'],
+            'status' => ['required'],
+        ]);
+        $deleteImages = (new ProdutoImagensController())->deleteImage($request->input('delete_image')[0]);
+
+        $imagemPrincipal = $request->file('imagem_principal') == false ? null : $request->file('imagem_principal');
+        $produtoModel = (new Produto())->all()->where('id_produtos', $id)->toQuery();
+
+        $detalhesProduto = (new DetalhesProdutoController())->updateDetalhes(
+            $request->except(
+                'nome',
+                'preco',
+                'quantidade',
+                'marca',
+                'categoria',
+                'descricao',
+                'is_promocao',
+                'modelo',
+                '_token',
+                '_method',
+                'delete_image',
+                'imagem_principal',
+                'link_img'
+            ), $produtoModel->getModel()->getAttribute('id_detalhes')
+        );
+
+        $inventarioProduto = (new ProdutoinventarioController())->updateInventario($request->input('quantidade'), 
+        $request->input('status'), $produtoModel->getModel()->getAttribute('id_inventario'));
+
+        $produtoC = $produtoModel->update([
+            'nome' => $request->input('nome'),
+            'preco' => str_replace(',', '.', $request->input('preco')),
+            'modelo' => $request->input('modelo'),
+            'descricao' => $request->input('descricao'),
+            'status' => $request->input('status'),
+            'is_promocao' => $request->input('is_promocao')
+        ]);
+
+        if (!$produtoC) {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar o produto!');
+        }
+
+        if (!$inventarioProduto) {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar o inventário do produto!');
+        }
+
+        if (!empty($imagemPrincipal)) {
+            $pathImageP = $this->storeImages($imagemPrincipal, $request->input('nome'));
+            if (!$pathImageP) {
+                return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
+            }
+            $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $id);
+        }
+
+        $pathNames = [];
+        if (is_countable($request->file('link_img'))) {
+            for ($i = 0; $i < count($request->file('link_img')); $i++) {
+                $imagemStore = $request->file('link_img')[$i];
+                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('nome'), true, $i);
+                if (!$pathNames[$i]) {
+                    return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
+                }
+            }
+        }
+        if (!empty($pathNames)) {
+            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $id);
+        }
+
+
+        if ($produtoC && $inventarioProduto && $detalhesProduto) {
+            return redirect()->route('page-listProdutos');
+        }
+        return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do produto!');
     }
 }

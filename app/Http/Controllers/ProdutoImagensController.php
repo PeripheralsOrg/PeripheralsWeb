@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProdutoImagens;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoImagensController extends Controller
 {
@@ -37,6 +38,17 @@ class ProdutoImagensController extends Controller
             }
 
             return $imagemC;
+        }
+    }
+
+    public function deleteImage($imagesDelete){
+        if (!empty($imagesDelete)) {
+            $arrayDeleteImgs = str_split(str_replace(',', '', $imagesDelete), 2);
+            for ($i = 0; $i < count($arrayDeleteImgs); $i++) {
+                $imgGet = ProdutoImagens::all()->where('id_produto_imgs', $arrayDeleteImgs[$i])->toQuery();
+                $deleteImage = Storage::delete($imgGet->getModel()->getAttributes()['link_img']);
+                $imgGet->delete();
+            }
         }
     }
 }
