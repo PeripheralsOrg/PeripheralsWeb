@@ -1,0 +1,40 @@
+@import '../import.css';
+
+html, body{
+    width: 100%;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    height: var(--height-navbar);
+    width: 100%;
+    background-color: var(--cinza-fundo);
+    color: var(--branco);
+    border-bottom: 1px solid var(--branco);
+}
+
+header .box-logo img{
+    width: 100px;
+}
+
+header .box-icons button{
+    background-color: transparent;
+    padding: .6rem;
+    border: none;
+}
+
+header .box-icons button img{
+    width: 30px;
+}
+
+header nav ul{
+    display: flex;
+    gap: 1rem;
+}
+
+header nav ul li a{
+    color: var(--branco);
+}

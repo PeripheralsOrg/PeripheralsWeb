@@ -19,6 +19,7 @@
     --worksans: 'Work Sans', sans-serif;
     --adm-button-nav: 1.25rem;
     --navbar-transition: ease .5s;
+    --height-navbar: 6rem;
 }
 
 /* Estilo de fontes nos titulos e textos */

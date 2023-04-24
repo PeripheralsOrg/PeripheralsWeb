@@ -38,16 +38,6 @@
             <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
         </section>
 
-        <!-- Carrossel -->
-        {{-- <div class="embla">
-            <div class="embla__container">
-                <div class="embla__slide">Slide 1</div>
-                <div class="embla__slide">Slide 2</div>
-                <div class="embla__slide">Slide 3</div>
-            </div>
-        </div> --}}
-
-
         @if (isset($banners))
             @foreach ($banners as $item)
                 <section class="info-carrossel">
