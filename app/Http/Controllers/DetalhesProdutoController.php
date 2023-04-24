@@ -37,4 +37,17 @@ class DetalhesProdutoController extends Controller
         return $detalhesC;
 
     }
+
+    public function updateDetalhes($detalhes, $id)
+    {
+        $modelDetalhes = (new DetalhesProduto())->all()->where('id_detalhes', $id)->toQuery();
+
+        $detalhesC = $modelDetalhes->update($detalhes);
+
+        if (!$detalhesC) {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do produto!');
+        }
+
+        return $detalhesC;
+    }
 }

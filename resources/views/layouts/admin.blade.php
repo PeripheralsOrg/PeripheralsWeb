@@ -6,11 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Scripts e Stylesheet nativos --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css') }}/@yield('css').css">
     <script defer src="{{ asset('js') }}/@yield('js').js"></script>
     <script src="{{asset('js/valida-forms.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/navbar.css') }}">
+
+    {{-- Font Aweasome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
+    {{-- Carrossel --}}
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    
     <title>
         @section('title')
             Peripherals -

@@ -81,6 +81,7 @@
                 </tr>
             </thead>
             <!-- Corpo_da_tabela -->
+            {{-- TODO: #39 Exibir a data de criação do produto --}}
             <tbody>
                 @if (!empty($produtos))
                     @foreach ($produtos as $item)
@@ -88,7 +89,7 @@
                             <!-- Conteúdo_da_tabela -->
                             <td>{{$item['id_produtos']}}</td>
                             <td>{{$item['nome']}}</td>
-                            <td>{{$item['id_categoria']}}</td>
+                            <td>{{$item['categoria']}}</td>
                             <td>{{$item['marca']}}</td>
                             <td>{{$item['preco']}}</td>
                             <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo'}}</td>
@@ -98,6 +99,7 @@
                                     @method('DELETE')
                                     <button type="submit">
                                         <i class="fa-solid fa-trash"></i>
+                                    </button>
                                 </form>
 
                                 <form action="{{ route('get-produto', $item['id_produtos']) }}" method="GET">

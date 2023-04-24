@@ -20,4 +20,20 @@ class ProdutoinventarioController extends Controller
 
         return $inventarioC;
     }
+
+
+    public function updateInventario($quantidade, $status, $id)
+    {
+        $inventario = (new ProdutoInventario())->all()->where('id_inventario', $id)->toQuery();
+        $inventarioC = $inventario->update([
+            'quantidade' => $quantidade,
+            'status' => $status
+        ]);
+
+        if (!$inventarioC) {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do produto!');
+        }
+
+        return $inventarioC;
+    }
 }
