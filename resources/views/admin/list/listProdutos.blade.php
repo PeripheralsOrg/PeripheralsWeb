@@ -20,10 +20,10 @@
         @endif
 
         <!-- Barra_de_busca -->
-        <div id="divBusca">
-            <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-        </div>
+        <form id="divBusca" action="{{route('search-produto')}}" method="GET">
+            <input type="text" id="txtBusca" name="search" placeholder="Buscar..." />
+            <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
 
         <section class="container-filters">
             <button id="btnNewProduto" onclick="window.location.href=`{{ route('page-inserirProduto') }}`">
@@ -59,11 +59,11 @@
                 </select>
             </div>
 
-            {{-- <div class="container-clean-filters box-filter">
-                <button id="btnCleanFilters">
+            <div class="container-clean-filters box-filter">
+                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listProdutos') }}`">
                     Limpar Filtros
                 </button>
-            </div> --}}
+            </div>
         </section>
 
         <!--Começo_da_tabela_de_pedidos-->
@@ -92,7 +92,7 @@
                             <td>{{$item['categoria']}}</td>
                             <td>{{$item['marca']}}</td>
                             <td>{{$item['preco']}}</td>
-                            <td>{{ $item['status'] = 1 ? 'Ativo' : 'Inativo'}}</td>
+                            <td>{{ $item['status'] === 1 ? 'Ativo' : 'Inativo'}}</td>
                             <td id="box-options">
                                 <form action="{{ route('delete-produto', $item['id_produtos']) }}" method="POST">
                                     @csrf

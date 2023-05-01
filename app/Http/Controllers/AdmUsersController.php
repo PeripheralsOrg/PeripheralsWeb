@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\AdmUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class AdmUsersController extends Controller
 {
@@ -15,6 +16,22 @@ class AdmUsersController extends Controller
            return view('admin.list.listUserAdm')->with('users', $users); 
         }
         return redirect()->route('falha-listAdm'); 
+    }
+
+    public function search(Request $request)
+    {
+        if (empty($request->input('search'))) {
+            return redirect()->route('page-listAdm')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+
+        $search = $request->input('search');
+        $users = json_decode(json_encode(DB::table('adm_users')->where('name', 'LIKE', '%' . $search . '%')
+            ->Orwhere('email', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+
+        if ($users) {
+            return view('admin.list.listUserAdm')->with('users', $users);
+        }
+        return redirect()->route('falha-listAdm');
     }
 
     public function register(Request $request, AdmUsers $user)

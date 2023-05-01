@@ -42,6 +42,7 @@ Route::prefix('adm')->group(function () {
         Route::get('falha', 'fallback')->name('falha-listAdm');
         Route::view('inserir', 'admin.forms.InsertAdm')->name('page-inserirAdm');
         Route::post('register', 'register')->name('post-userAdm');
+        Route::get('pesquisar', 'search')->name('search-adm');
         Route::get('get/{id}', 'getUpdate')->name('get-userAdm')->middleware('guest:9');
         Route::delete('delete/{id}', 'delete')->name('delete-userAdm')->middleware('guest:9');
         Route::patch('update/{id}', 'update')->name('update-userAdm')->middleware('guest:6,8,9');
@@ -53,6 +54,7 @@ Route::prefix('adm')->group(function () {
         Route::get('falha', 'fallback')->name('falha-listProdutos');
         Route::post('register', 'register')->name('post-produto');
         Route::get('get/{id}', 'getUpdate')->name('get-produto');
+        Route::get('pesquisar', 'search')->name('search-produto');
         Route::delete('delete/{id}', 'delete')->name('delete-produto');
         Route::patch('update/{id}', 'update')->name('update-produto');
     });
@@ -80,6 +82,7 @@ Route::prefix('adm')->group(function () {
         Route::view('inserir', 'admin.forms.insertCupom')->name('page-inserirCupom');
         Route::get('falha', 'fallback')->name('falha-listCupons');
         Route::post('register', 'register')->name('post-cupom');
+        Route::get('pesquisar', 'search')->name('search-cupom');
         Route::get('get/{id}', 'getUpdate')->name('get-cupom');
         Route::delete('delete/{id}', 'delete')->name('delete-cupom');
         Route::patch('update/{id}', 'update')->name('update-cupom');

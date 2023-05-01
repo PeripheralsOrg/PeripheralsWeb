@@ -12,6 +12,8 @@ use App\Models\DetalhesProduto;
 use App\Models\ProdutoImagens;
 use App\Models\ProdutoInventario;
 use App\Models\ProdutoView;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
@@ -30,6 +32,24 @@ class ProdutoController extends Controller
     {
         $erro = 'Produtos não encontrados!';
         return view('admin.list.listProdutos')->with('erro', $erro);
+    }
+
+    public function search(Request $request){
+        if(empty($request->input('search'))){
+            return redirect()->route('page-listProdutos')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+        
+        $search = $request->input('search');
+        $produtos = json_decode(json_encode(DB::table('view_produto')->where('nome', 'LIKE', '%' . $search . '%')
+        ->Orwhere('marca', 'LIKE', '%'.$search . '%')
+        ->Orwhere('modelo', 'LIKE', '%' . $search . '%')
+        ->Orwhere('categoria', 'LIKE', '%' . $search . '%')
+        ->Orwhere('codigo', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+
+        if ($produtos) {
+            return view('admin.list.listProdutos')->with('produtos', $produtos);
+        }
+        return redirect()->route('falha-listProdutos');
     }
 
     public function delete($id)
@@ -180,12 +200,14 @@ class ProdutoController extends Controller
         }
     }
 
-
-
     public function getUpdate($id){
         $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();
         $imgs = ProdutoImagens::all()->where('id_produto', $id)->toArray();
-        if ($produto && $imgs) {
+        if ($produto) {
+            if($imgs){
+                return view('admin.forms.UpdateProduto')->with('produto', $produto);
+            }
+
             return view('admin.forms.UpdateProduto')->with('produto', $produto)->with('imgs', $imgs);
         }
         return redirect()->back()->withErrors('Não foi possível encontrar o produto!');

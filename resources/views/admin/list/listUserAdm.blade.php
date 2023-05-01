@@ -17,10 +17,10 @@
             </div>
         @endif
         <!-- Barra_de_busca -->
-        <div id="divBusca">
-            <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-        </div>
+        <form id="divBusca" action="{{ route('search-adm') }}" method="GET">
+            <input type="text" id="txtBusca" name="search" placeholder="Buscar..." />
+            <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
 
         <!-- FILTROS -->
         <section class="container-filters">
@@ -30,6 +30,12 @@
                 </div>
                 Novo Usuário
             </button>
+
+            <div class="container-clean-filters box-filter">
+                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listAdm') }}`">
+                    Limpar Filtros
+                </button>
+            </div>
         </section>
 
         <!--Começo_da_tabela_de_pedidos-->

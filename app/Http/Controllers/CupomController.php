@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cupom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CupomController extends Controller
 {
@@ -13,7 +14,23 @@ class CupomController extends Controller
         if ($cupons) {
             return view('admin.list.listCupons')->with('cupons', $cupons);
         }
-        return redirect('falha-listCupons');
+        return redirect()->route('falha-listCupons');
+    }
+
+    public function search(Request $request)
+    {
+        if (empty($request->input('search'))) {
+            return redirect()->route('page-listCupons')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+
+        $search = $request->input('search');
+        $cupons = json_decode(json_encode(DB::table('users_cupom')->where('nome', 'LIKE', '%' . $search . '%')
+            ->Orwhere('codigo', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+
+        if ($cupons) {
+            return view('admin.list.listCupons')->with('cupons', $cupons);
+        }
+        return redirect()->route('falha-listCupons');
     }
 
     // TODO: #23 Criar coluna para linkar categoria
