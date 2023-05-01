@@ -26,7 +26,7 @@ class MenuController extends Controller
                 'submenus' => $submenus
             ]);
         }else{
-            return redirect('falha-listMenus');
+            return redirect()->route('falha-listMenus');
         }
     }
 

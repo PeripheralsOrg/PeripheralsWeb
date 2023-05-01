@@ -216,14 +216,12 @@
                     Remover todas as imagens</button>
                 <ul id="dpFiles"></ul>
 
-                <div class="box-buttons">
-                    <button type="submit" class="btn-submit">Atualizar</button>
-                    <button type="button" class="btn-cancel"
-                        onclick="window.location.href=`{{ route('page-listProdutos') }}`">Cancelar</button>
-                </div>
-
             @endif
-
+            <div class="box-buttons">
+                <button type="submit" class="btn-submit">Atualizar</button>
+                <button type="button" class="btn-cancel"
+                    onclick="window.location.href=`{{ route('page-listProdutos') }}`">Cancelar</button>
+            </div>
             </form>
         @endif
     </main>

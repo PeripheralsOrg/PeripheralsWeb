@@ -32,7 +32,7 @@
 
         @if (!Request::is('adm/auth/*'))
             <header id="getMenu">
-                <img class="img-logo" src="{{ asset('images/logo-branco.png') }}" alt="Peripherals - Logo Branca"
+                <img class="img-logo" src="{{ asset('images/logo-nome.jpeg') }}" alt="Peripherals - Logo Branca"
                     id="logo">
 
                 <!-- Barra_de_menu_lateral -->

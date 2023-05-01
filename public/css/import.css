@@ -113,13 +113,58 @@ main{
     border: 1px solid #000;
 }
 
-#divBusca a {
+#divBusca button {
     color: #000;
     padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: -3rem;
+    background-color: transparent;
+    border: transparent;
+}
+
+
+/* Filtros de Pesquisa */
+
+.container-tabela-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container-filters {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+}
+
+#btnCleanFilters {
+    background-color: var(--vermelho);
+}
+
+.containerCleanFilters {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.container-clean-filters #btnCleanFilters {
+    background-color: var(--vermelho);
+    color: #fff;
+    border: 1px solid var(--vermelho);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    min-width: 10rem;
+}
+
+.container-clean-filters #btnCleanFilters:hover {
+    background-color: transparent;
+    color: var(--cor-fundo);
+    transition: ease .3s all;
 }
 
 /* Customização_da_tabela */
