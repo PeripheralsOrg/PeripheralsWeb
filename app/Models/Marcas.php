@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Categoria extends Model
+class Marcas extends Model
 {
     use HasFactory;
 
-    protected $table = 'users_produto_categoria';
+    protected $table = 'adm_marcas';
 
-    protected $primaryKey = 'id_categoria';
+    protected $primaryKey = 'id_marca';
 
     protected $fillable = [
-        'categoria',
+        'nome',
+        'descricao_atividades',
+        'status',
     ];
 
     public function produto(): BelongsTo

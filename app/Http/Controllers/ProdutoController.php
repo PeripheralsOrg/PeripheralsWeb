@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
+
+    public const MAXIMUM_SIZE = 5000000;
+
     public function all()
     {
         // $produtos = Produto::all()->where('status', 1)->toArray();
@@ -133,7 +136,7 @@ class ProdutoController extends Controller
             'id_detalhes' => intval($detalhesProduto),
             'id_inventario' => intval($inventarioProduto),
             'id_categoria' => $request->input('categoria')
-        ])->id;
+        ])->id_produtos;
 
         if (!$produtoC) {
             return redirect()->back()->withErrors('Ocorreu um erro ao inserir o produto!');
@@ -173,17 +176,16 @@ class ProdutoController extends Controller
     {
         // TODO: #35 Criar campo principal na tabela de imagens de produtos
         //TODO: #36 Modificar a variável de nomeação
-        //TODO: Criar nova constante de tamanho de imagem
         if (!$array) {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
                 if (!$file->isValid()) {
                     return back()->withErrors('O arquivo de imagem não é válido');
                 }
-                if ($file->getSize() > BannerController::MAXIMUM_SIZE) {
+                if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
                 $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '.webp';
-                return $file->storeAs('public/storage', $imageName);
+                return $file->storeAs('files/produtos-images', $imageName, 's3');
             }
         } else {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
@@ -191,14 +193,16 @@ class ProdutoController extends Controller
                     return back()->withErrors('O arquivo de imagem não é válido');
                 }
 
-                if ($file->getSize() > BannerController::MAXIMUM_SIZE) {
+                if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
                 $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '-' . $number . '.webp';
-                return $file->storeAs('public/storage', $imageName);
+                return $file->storeAs('files/produtos-images', $imageName, 's3');
             }
         }
     }
+
+    // TODO: #42 Corrigir problemas com a Amazon AWS
 
     public function getUpdate($id){
         $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();

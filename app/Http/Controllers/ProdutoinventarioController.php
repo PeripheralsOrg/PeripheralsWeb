@@ -12,7 +12,7 @@ class ProdutoinventarioController extends Controller
         $inventarioC = $inventario->create([
             'quantidade' => $quantidade,
             'status' => $status
-        ])->id;
+        ])->id_inventario;
 
         if(!$inventarioC){
             return redirect()->back()->withErrors('Ocorreu um erro ao adicionar as informações do produto!');

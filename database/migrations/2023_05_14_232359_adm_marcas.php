@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_cupom', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 120)->charset('utf8');
-            $table->string('codigo', 30)->charset('utf8');
-            $table->foreignId('id_categoria');
-            $table->dateTime('data_expiracao');
-            $table->decimal('porcentagem', 10, 2);
+        Schema::create('adm_marcas', function (Blueprint $table) {
+            $table->id('id_marca');
+            $table->string('nome', 360)->charset('utf8');
+            $table->mediumText('descricao_atividades', 120)->charset('utf8');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
@@ -28,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_cupom');
+        Schema::dropIfExists('adm_marcas');
+        
     }
 };

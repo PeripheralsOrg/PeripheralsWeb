@@ -45,13 +45,13 @@ class BannerController extends Controller
             }
 
             $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '.webp';
-            //TODO #17 Criar um campo peso na tabela adm_carrossel
             //TODO #18 Converter a imagem em WEBP
             $pathImage = $image->storeAs('public/storage', $imageName);
 
             $bannerC = $banner->create([
                 'nome_banner' => $request->nome_banner,
                 'link_route' => $request->link_route,
+                'peso' => $image->getSize(),
                 'status' => $request->status,
                 'link_carrossel' => $pathImage
 
@@ -118,6 +118,7 @@ class BannerController extends Controller
             $bannerValues = [
                 'nome_banner' => $request->nome_banner,
                 'link_route' => $request->link_route,
+                'peso' => $image->getSize(),
                 'status' => $request->status,
                 'link_carrossel' => $pathImage
             ];

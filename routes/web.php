@@ -26,7 +26,6 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 |
 */
 
-// TODO: #26 Criar página de configurações (categorias, frete, etc)
 // TODO: #27 Fazer uma página inicial com acesso para todos os poderes
 // TODO: #37 Checar todos os tratamentos de erro
 
@@ -119,7 +118,24 @@ Route::prefix('adm')->group(function () {
         Route::view('/', 'admin.list.listRelatorios')->name('page-relatorios');
     });
 
-    Route::get('config', [ConfigController::class, 'getData'])->name('page-config');
+    Route::prefix('config')->controller(ConfigController::class)->middleware('guest:8,9')->group(function () {
+        Route::get('/', 'all')->name('page-listConfig');
+        Route::get('falha', 'fallback')->name('falha-listConfig');
+
+        //! Categoria
+        Route::view('inserir/categoria', 'admin.forms.InsertCategoria')->name('page-inserirCategoria');
+        Route::post('register/categoria', 'registerCategoria')->name('post-categoria');
+        Route::delete('delete/categoria/{id}', 'deleteCategoria')->name('delete-categoria');
+        Route::get('get/categoria/{id}', 'getUpdateCategoria')->name('get-categoria');
+        Route::patch('update/categoria/{id}', 'updateCategoria')->name('update-categoria');
+
+        //! Marcas
+        Route::view('inserir/marca', 'admin.forms.InsertMarca')->name('page-inserirMarca');
+        Route::post('register/marca', 'registerMarca')->name('post-marca');
+        Route::delete('delete/marca/{id}', 'deleteMarca')->name('delete-marca');
+        Route::get('get/marca/{id}', 'getUpdateMarca')->name('get-marca');
+        Route::patch('update/marca/{id}', 'updateMarca')->name('update-marca');
+    });
 });
 
 

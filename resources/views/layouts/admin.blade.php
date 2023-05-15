@@ -51,7 +51,7 @@
                                 <a href="{{route('page-listMenus')}}">Menus</a>
                                 <a href="{{route('page-listCarrossel')}}">Carrossel</a>
                                 <a href="{{route('page-listCupons')}}">Cupons</a>
-                                <a href="{{route('page-config')}}">Configurações</a>
+                                <a href="{{route('page-listConfig')}}">Configurações</a>
                             </li>
                         </div>
                     </ul>

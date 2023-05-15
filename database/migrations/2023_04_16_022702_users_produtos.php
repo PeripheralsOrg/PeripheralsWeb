@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // TODO: #43 Rerun as migrations e atualizar o ControllerProduto
     public function up(): void
     {
         Schema::create('users_produtos', function (Blueprint $table) {
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->foreignId('id_inventario');
             $table->foreignId('id_detalhes');
             $table->foreignId('id_categoria');
+            $table->foreignId('id_marca');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
