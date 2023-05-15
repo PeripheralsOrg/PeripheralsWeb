@@ -30,6 +30,7 @@ class Produto extends Model
         'id_inventario',
         'id_detalhes',
         'id_categoria',
+        'id_marca',
     ];
 
     public function inventario(): HasOne
@@ -45,5 +46,10 @@ class Produto extends Model
     public function categoria(): HasOne
     {
         return $this->hasOne(Categoria::class);
+    }
+
+    public function marcas(): HasOne
+    {
+        return $this->hasOne(Marcas::class);
     }
 }

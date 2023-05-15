@@ -39,6 +39,7 @@ class CupomController extends Controller
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
+            'categoria' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],

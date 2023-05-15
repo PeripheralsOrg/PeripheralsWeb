@@ -28,8 +28,8 @@ class DetalhesProdutoController extends Controller
             'garantia' => $detalhes['garantia'],
             'info_adicional' => $detalhes['info_adicional'],
             'status' => $detalhes['status']
-        ])->id;
-
+        ])->id_detalhes;
+        
         if(!$detalhesC){
             return redirect()->back()->withErrors('Ocorreu um erro ao adicionar as informações do produto!');
         }

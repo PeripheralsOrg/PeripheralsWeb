@@ -102,7 +102,6 @@
                         <option value="1">Sim</option>
                     </select>
 
-                    {{-- TODO: Input não permite espaços --}}
                     <label class="label-field" id="inputGarantia">Garantia
                         <input type="text" data-js="text" name="garantia" class="input-field"
                             placeholder="Garantia">
