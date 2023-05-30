@@ -13,7 +13,6 @@ footer{
     align-items: center;
     background-color: var(--cinza-fundo);
     color: var(--branco) !important;
-    position: fixed;
     bottom: 0;
 }
 
