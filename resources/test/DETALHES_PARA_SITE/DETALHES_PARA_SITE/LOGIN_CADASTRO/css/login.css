@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ecf0f1;
+}
+.content {
+    background-color: #fff;
+    width: 1000px;
+    height: 80%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    background-color: #C83C3C;
+    width: 40%;
+    height: 100%;
+    left: 0;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.title-primary {
+    color: #fff;
+}
+
+.title-second {
+    margin-top: 30px;
+    padding: 25px;
+}
+
+
+.description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.description-primary {
+    color: #fff;
+}
+
+.btn {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 9px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #C83C3C;
+}
+
+.btn-second {
+    background-color: #C83C3C;
+    border: 1px solid #C83C3C;
+    transition: background-color .5s;
+}
+
+.btn-second:hover {
+    background-color: #fff;
+    border: 1px solid #C83C3C;
+    color: #C83C3C;
+}
+
+.first-content {
+    display: flex;
+}
+
+.first-content .second-column {
+    z-index: 11;
+}
+
+.first-column {
+    text-align: center;
+    width: 40%;
+    z-index: 10;
+}
+
+.second-column {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.link-social-media:not(:first-child){
+    margin-left: 10px;
+}
+
+.link-social-media .item-social-media1 {
+    transition: background-color .5s;
+}
+
+.link-social-media:hover .item-social-media1{
+    background-color: #1DA1F2;
+    color: #fff;
+    border-color: #1DA1F2;
+}
+
+
+
+.link-social-media .item-social-media2 {
+    transition: background-color .5s;
+}
+
+.link-social-media:hover .item-social-media2{
+    background-color: #DB4437;
+    color: #fff;
+    border-color: #DB4437;
+}
+
+
+
+.link-social-media .item-social-media3{
+    transition: background-color .5s;
+}
+
+.link-social-media:hover .item-social-media3{
+    background-color: #0e76a8;
+    color: #fff;
+    border-color: #0e76a8;
+}
+
+
+.list-social-media {
+    display: flex;
+    list-style-type: none;
+}
+
+.item-social-media1 {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #000000;
+}
+
+.item-social-media2 {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #000000;
+}
+
+.item-social-media3 {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #000000;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+
+.form input {
+    height: 45px;
+    width: 100%;
+    padding: 0px 30px;
+    border: 1px solid;
+    background-color: #ffffff;
+}
+
+.label-input {
+    background-color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    margin: 8px;
+}
+
+.checks input[type=checkbox]{
+    width: 10px;
+    margin-left: 8px;
+    margin-top: -16px;
+    margin-right: 5px;
+}
+
+.condicoes{
+    font-size: 9px;
+    display: flex;
+    margin-top: 1px;
+}
+
+
+.forgotten-password{
+    font-size: 9px;
+    display: flex;
+    margin-left: 237px;
+    margin-top: -29px;
+}
+
+.ou{
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.icon-modify {
+    padding: 0 5px;
+}
+
+.far{
+    position: fixed;
+}
+
+.fas{
+    position: fixed;
+}
+
+.icon-eye{
+    padding: 0px 285px;
+}
+
+
+
+

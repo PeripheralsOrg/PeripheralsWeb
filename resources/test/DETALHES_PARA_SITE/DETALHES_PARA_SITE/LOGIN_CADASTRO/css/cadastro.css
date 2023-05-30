@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ecf0f1;
+}
+.content {
+    background-color: #fff;
+    width: 1000px;
+    height: 80%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    background-color: #C83C3C;
+    width: 40%;
+    height: 100%;
+    left: 60%;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.title-primary {
+    color: #fff;
+}
+
+.title-second {
+    margin-top: 30px;
+    padding: 25px;
+}
+
+
+.description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.description-primary {
+    color: #fff;
+}
+
+.btn {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 9px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #C83C3C;
+}
+
+.btn-second {
+    border: 1px solid #C83C3C;
+    transition: background-color .5s;
+}
+
+.btn-second:hover {
+    background-color: #fff;
+    border: 1px solid #C83C3C;
+    color: #C83C3C;
+}
+
+.first-content {
+    display: flex;
+}
+
+.first-content .second-column {
+    z-index: 11;
+}
+
+.first-column {
+    text-align: center;
+    width: 40%;
+    z-index: 10;
+}
+
+.second-column {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.w50{
+    width: 50%;
+    float: left;
+    padding-right: 15px;
+}
+
+form .input-group{
+    margin-bottom: 15px;
+}
+
+form .input-group input{
+    width: 94%;
+    height: 47px;
+    outline: none;
+    border: 1px solid;
+    padding: 15px;
+    font-size: 15px;
+}
+
+form .input-group button{
+    width: 80%;
+    height: 45px;
+    margin-left: 29px;
+    background: #C83C3C;
+    outline: none;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.checks{
+    position: absolute;
+    margin-top: 52px;
+    width: 560px;
+    margin-left: -8px;
+}
+
+input[type=checkbox]{
+    width: 10px;
+    margin-left: 8px;
+    margin-top: -2px;
+    margin-right: 5px;
+}
+
+.condicoes{
+    font-size: 9px;
+    display: flex;
+    margin-top: 1px;
+    width: 32%;
+}
+
+
+
+
