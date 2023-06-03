@@ -143,6 +143,15 @@ Route::get('/', function () {
     return view('client.index');
 });
 
+Route::get('/login', function () {
+    return view('client.login');
+})->name('client-login');
+
+// TODO: #47 Adicionar middleware
+Route::get('/favoritos', function () {
+    return view('client.favoritos');
+})->name('client-favoritos');
+
 Route::get('/novo', function () {
     return view('admin.forms.InsertProduto');
 });

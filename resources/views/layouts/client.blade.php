@@ -46,12 +46,17 @@
         </nav>
 
         <div class="box-icons">
-            <button><img src="{{ asset('images/icons/lupa.png') }}" alt="Ícone de Pesquisa"></button>
-            <button><img src="{{ asset('images/icons/avatar.png') }}" alt="Ícone de Usuário"></button>
-            <button><img src="{{ asset('images/icons/heart.png') }}" alt="Ícone de Favoritos"></button>
+            <a href=""><img src="{{ asset('images/icons/lupa.png') }}" alt="Ícone de Pesquisa"></a>
+            <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons/avatar.png') }}" alt="Ícone de Usuário"></a>
+            <a href="{{ route('client-favoritos') }}"><img src="{{ asset('images/icons/heart.png') }}" alt="Ícone de Favoritos"></a>
+            <a href=""><img src="{{ asset('images/icons/shopping-bag.png') }}" alt="Ícone do Carrinho de Compras"></a>
+
+            {{-- <button><img src="{{ asset('images/icons/lupa.png') }}" alt="Ícone de Pesquisa"></button>
+            <button onclick="window.location.href=`{{ route('client-login') }}"><img src="{{ asset('images/icons/avatar.png') }}" alt="Ícone de Usuário"></button>
+            <button onclick="window.location.href=`{{ route('client-favoritos') }}"><img src="{{ asset('images/icons/heart.png') }}" alt="Ícone de Favoritos"></button>
             <button>
                 <img src="{{ asset('images/icons/shopping-bag.png') }}" alt="Ícone do Carrinho de Compras">
-            </button>
+            </button> --}}
         </div>
     </header>
 
