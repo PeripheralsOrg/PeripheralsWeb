@@ -15,6 +15,8 @@ use App\Models\ProdutoView;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Categoria;
+use App\Models\Marcas;
 
 class ProdutoController extends Controller
 {
@@ -59,11 +61,11 @@ class ProdutoController extends Controller
     {
         $produto = Produto::all()->where('id_produtos', $id)->toArray();
 
-        $deleteDetalhes = (DetalhesProduto::all()->where('id_detalhes', $produto[$id - 1]['id_detalhes'])->toQuery())->update([
+        $deleteDetalhes = (DetalhesProduto::all()->where('id_detalhes', $produto[$id]['id_detalhes'])->toQuery())->update([
             'status' => 0
         ]);
 
-        $deleteInventario = (ProdutoInventario::all()->where('id_inventario', $produto[$id - 1]['id_inventario'])->toQuery())->update([
+        $deleteInventario = (ProdutoInventario::all()->where('id_inventario', $produto[$id]['id_inventario'])->toQuery())->update([
             'status' => 0
         ]);
 
@@ -73,7 +75,8 @@ class ProdutoController extends Controller
             ]);
 
             if (!$deleteProduto) {
-                return redirect()->back()->withErrors('Ocorreu um erro ao deletar o produto!');
+                return redirect()->back()->withErrors('
+                2706Ocorreu um erro ao deletar o produto!');
             }
 
             return redirect()->back()->withErrors('Produto deletado com sucesso!');
@@ -202,17 +205,49 @@ class ProdutoController extends Controller
         }
     }
 
+    public function getInsert(){
+        $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->where('status', 1)->toArray();
+
+        if (!$categorias && !$marcas) {
+            return redirect()->route('falha-listConfig');
+        }
+
+        return view('admin.forms.InsertProduto')->with([
+            'categorias' => $categorias,
+            'marcas' => $marcas
+        ]);
+        
+    }
+
+
     // TODO: #42 Corrigir problemas com a Amazon AWS
 
     public function getUpdate($id){
         $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();
         $imgs = ProdutoImagens::all()->where('id_produto', $id)->toArray();
+        $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->where('status', 1)->toArray();
+
+        if (!$categorias && !$marcas) {
+            return redirect()->route('falha-listConfig');
+        }
+
         if ($produto) {
             if($imgs){
-                return view('admin.forms.UpdateProduto')->with('produto', $produto);
+                return view('admin.forms.UpdateProduto')->with([
+                    'categorias' => $categorias,
+                    'marcas' => $marcas,
+                    'produto' => $produto,
+                    'imgs' => $imgs
+                ]);
             }
 
-            return view('admin.forms.UpdateProduto')->with('produto', $produto)->with('imgs', $imgs);
+            return view('admin.forms.UpdateProduto')->with([
+                'categorias' => $categorias,
+                'marcas' => $marcas,
+                'produto' => $produto
+            ]);
         }
         return redirect()->back()->withErrors('Não foi possível encontrar o produto!');
     }

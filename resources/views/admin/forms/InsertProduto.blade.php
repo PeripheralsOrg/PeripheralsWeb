@@ -46,18 +46,22 @@
                 <option value="0">0 - Inativo</option>
             </select>
 
-            <label class="label-field">Marca</label>
-            <select class="select-field" name="marca">
-                <option value="#">Selecione</option>
-                <option value="Redragon">Redragon</option>
-            </select>
+            @if (!empty($categorias) || !empty($marcas))
+                <label class="label-field">Marca</label>
+                <select class="select-field" name="marca">
+                    @foreach ($marcas as $item)
+                        <option>{{$item['nome']}}</option>
+                    @endforeach
+                </select>
 
-            <label class="label-field">Categoria</label>
-            <select class="select-field" name="categoria" id="selectCategoria">
-                <option value="#">Selecione</option>
-                <option value="1">Monitor</option>
-                <option value="2">Mouse</option>
-            </select>
+                <label class="label-field">Categoria</label>
+                <select class="select-field" name="categoria" id="selectCategoria">
+                    @foreach ($categorias as $item)
+                        <option value="{{$item['id_categoria']}}">{{$item['categoria']}}</option>
+                    @endforeach
+                </select>
+            @endif
+
 
             <label class="label-field">Descrição do Produto</label>
             <textarea type="text" data-js="text" name="descricao" class="input-field textarea-field" placeholder="Descrição"></textarea>
