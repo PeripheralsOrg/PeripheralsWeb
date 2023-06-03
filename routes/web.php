@@ -49,7 +49,7 @@ Route::prefix('adm')->group(function () {
 
     Route::prefix('produto')->controller(ProdutoController::class)->middleware('guest:6,8,9')->group(function () {
         Route::get('lista', 'all')->name('page-listProdutos');
-        Route::view('inserir', 'admin.forms.InsertProduto')->name('page-inserirProduto');
+        Route::get('inserir', 'getInsert')->name('page-inserirProduto');
         Route::get('falha', 'fallback')->name('falha-listProdutos');
         Route::post('register', 'register')->name('post-produto');
         Route::get('get/{id}', 'getUpdate')->name('get-produto');

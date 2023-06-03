@@ -49,6 +49,15 @@
                     <input type="text" data-js="number" value="{{ $item['quantidade'] }}" name="quantidade"
                         class="input-field" placeholder="Qtd 0.">
 
+                    @if (!empty($categorias))
+                        <label class="label-field">Categoria</label>
+                        <select class="select-field" name="categoria" id="selectCategoria">
+                            @foreach ($categorias as $itemC)
+                                <option value="{{ $itemC['id_categoria'] }}">{{ $itemC['categoria'] }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+
                     <label class="label-field">Status</label>
                     <select class="select-field" name="status">
                         @if ($item['status'] == 1)
@@ -95,8 +104,8 @@
 
                             <div class="box-row">
                                 <label class="label-field">Material
-                                    <input type="text" data-js="text" value="{{ $item['material'] }}" name="material"
-                                        class="input-field" placeholder="Material">
+                                    <input type="text" data-js="text" value="{{ $item['material'] }}"
+                                        name="material" class="input-field" placeholder="Material">
                                 </label>
                                 <label class="label-field">Peso
                                     <input type="text" data-js="text" value="{{ $item['peso'] }}" name="peso"
