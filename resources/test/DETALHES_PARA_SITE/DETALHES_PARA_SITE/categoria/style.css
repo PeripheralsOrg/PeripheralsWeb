@@ -1,0 +1,137 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+*{
+    margin:0; 
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    outline: none; 
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+#product1{
+    text-align: center;
+  }
+  
+  #product1 .pro-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  #product1 .pro{
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid #00000069;
+    box-shadow: 20px 20px 30px rgba( 0, 0, 0, 0.02);
+    margin: 15px 0;
+    transition: 0.2s ease;
+    position: relative;
+  }
+  
+  
+  #product1 .pro:hover{
+    box-shadow: 20px 20px 30px rgba( 0, 0, 0, 0.06);
+  }
+  
+  #product1 .pro img{
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+  #product1 .pro .des{
+    text-align: start;
+    padding: 10px 0;
+  }
+  
+  #product1 .pro .des span{
+    color: #606063;
+    font-size: 12px;
+  }
+  
+  #product1 .pro .des h5{
+    padding-top: 7px;
+    color: #1a1a1a;
+    font-size: 14px;
+  }    
+  
+  #product1 .pro .des i{
+    font-size: 12px;
+    color: rgb(243, 181, 25);
+  }
+  
+  #product1 .pro .des h4{
+    padding-top: 7px;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 700;
+  }  
+  
+  #product1 .pro .fa-shopping-bag{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #000000;
+    font-weight: 600;
+    color: #ffffff;
+    border: 1px solid #000000;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    font-size: 15px;
+  }  
+
+  #product1 .pro .fa-heart{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #000000;
+    font-weight: 600;
+    color: #ffffff;
+    border: 1px solid #000000;
+    position: absolute;
+    bottom: 20px;
+    right: 60px;
+    transition: 0.2s ease;
+    font-size: 15px;
+  }  
+    
+  #product1 .pro .fa-heart:hover{
+    color: #C83C3C;
+
+  }
+
+  .section-p1{
+    padding: 40px 120px;
+  }
+
+  .titulo{
+    text-align: initial;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .subtitulo{
+    text-align: initial;
+    font-size: 12px;
+  }
+
+  .link{
+    display: flex;
+    justify-content: end;
+    margin-top: -19px;
+    width: 90px;
+    margin-left: 58rem;
+    font-size: 12px;
+    color: #000000;
+  }
+
+  .link:hover{
+    text-decoration: underline;
+    color: #C83C3C;
+    text-decoration-color: #C83C3C;
+  }

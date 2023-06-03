@@ -1,91 +1,125 @@
-@extends('layouts.client')
-@section('css', 'home/homepage')
-@section('title')@parent Homepage @stop
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>home</title>
+</head>
+<body>
+    
+    <header>
 
-@section('content')
 
-    <!-- carousel starts  -->
+        <a href="#" class="logo"><img src="img/logo_preta_sem_fundo.png" alt=""></a>
 
-    <section class="home" id="home">
+        <nav class="navbar">
+            <a href="#início">início</a>
+            <a href="#ofertas">ofertas</a>
+            <a href="#produtos">produtos</a>
+            <a href="#contato">contato</a>
+        </nav>
 
-
-
-    </section>
-
-    <!-- carousel ends -->
-
-    <!-- services starts -->
-
-    <section class="service">
-        <div class="container-services">
-
-            <ul class="service-list">
-
-                <li class="service-item">
-                    <div class="service-item-icon">
-                        <img src="{{asset('images/service-icon-1.svg')}}" alt="Service icon">
-
-                    </div>
-
-                    <div class="service-content">
-                        <p class="service-item-title">Entrega Gratuita</p>
-
-                        <p class="service-item-text">Em pedidos acima de $900</p>
-                    </div>
-                </li>
-
-                <li class="service-item">
-                    <div class="service-item-icon">
-                        <img src="{{asset('images/service-icon-2.svg')}}" alt="Service icon">
-                    </div>
-
-                    <div class="service-content">
-                        <p class="service-item-title">Aceitamos Devoluções</p>
-
-                        <p class="service-item-text">Política de Devolução de 30 Dias</p>
-                    </div>
-                </li>
-
-                <li class="service-item">
-                    <div class="service-item-icon">
-                        <img src="{{asset('images/service-icon-3.svg')}}" alt="Service icon">
-                    </div>
-
-                    <div class="service-content">
-                        <p class="service-item-title">Segurança de Pagamento</p>
-
-                        <p class="service-item-text">100% Segurança Garantida</p>
-                    </div>
-                </li>
-
-                <li class="service-item">
-                    <div class="service-item-icon">
-                        <img src="{{asset('images/service-icon-4.svg')}}" alt="Service icon">
-                    </div>
-
-                    <div class="service-content">
-                        <p class="service-item-title">Suportes</p>
-
-                        <p class="service-item-text">24/7 Suporte</p>
-                    </div>
-                </li>
-
-            </ul>
-
+        
+        <div class="icons">
+            <div class="busca">
+              <a href="#" class="fa fa-search" id="icones"></a>
+              <input class="input" type="text" placeholder="Procurar"></input>
+            </div>
+            <a href="#" class="fas fa-user"></a>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-shopping-bag"></a>
+            
         </div>
-    </section>
 
-    <!-- services end -->
 
-    <!-- cards start -->
+        
+    </header>
+    
+<!-- carousel starts  -->
 
-    <section id="product1" class="section-p1">
+<section class="home" id="home">
 
-        <h2 class="titulo">Lançamentos</h2>
+    
+    
+</section>
+
+<!-- carousel ends -->
+
+<!-- services starts -->
+
+<section class="service">
+    <div class="container-services">
+
+      <ul class="service-list">
+
+        <li class="service-item">
+          <div class="service-item-icon">
+            <img src="img/service-icon-1.svg" alt="Service icon">
+          </div>
+
+          <div class="service-content">
+            <p class="service-item-title">Entrega Gratuita</p>
+
+            <p class="service-item-text">Em pedidos acima de $900</p>
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-item-icon">
+            <img src="img/service-icon-2.svg" alt="Service icon">
+          </div>
+
+          <div class="service-content">
+            <p class="service-item-title">Aceitamos Devoluções</p>
+
+            <p class="service-item-text">Política de Devolução de 30 Dias</p>
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-item-icon">
+            <img src="img/service-icon-3.svg" alt="Service icon">
+          </div>
+
+          <div class="service-content">
+            <p class="service-item-title">Segurança de Pagamento</p>
+
+            <p class="service-item-text">100% Segurança Garantida</p>
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-item-icon">
+            <img src="img/service-icon-4.svg" alt="Service icon">
+          </div>
+
+          <div class="service-content">
+            <p class="service-item-title">Suportes</p>
+
+            <p class="service-item-text">24/7 Suporte</p>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </section>
+
+<!-- services end -->
+
+<!-- cards start -->
+
+<section id="product1" class="section-p1">
+           
+    <h2 class="titulo">Lançamentos</h2>
         <div class="pro-container">
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
-                
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -106,7 +140,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -127,7 +161,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -148,9 +182,9 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
-                <div class="des">   
+                <div class="des">
                     <span>MULTILASER</span>
                     <h5>Mouse Gamer</h5>
                     <div class="star">
@@ -168,50 +202,50 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
 
-    <!-- cards end -->
+<!-- cards end -->
 
-    <!-- advertising start -->
+<!-- advertising start -->
 
-    <div>
-        <h2 class="title">Confira</h2>
+<div>
+    <h2 class="title">Confira</h2>
+</div>
+
+<section class="banner-container">
+   
+    <div class="banner">
+      
+     <img src="img/JFC172_01.jpg" alt="">
+        <div class="content">
+            <span>Novo Headset</span>
+            <h3>Gamer</h3>
+            <a href="#" class="btn">Confira</a>
+        </div>
+    </div>
+    <div class="banner">
+    <img src="img/JFC172_01.jpg" alt="">
+        <div class="content">
+            <span>Novo Teclado</span>
+            <h3>Gamer</h3>
+            <a href="#" class="btn">Confira</a>
+        </div>
     </div>
 
-    <section class="banner-container">
+</section>
 
-        <div class="banner">
-
-            <img src="{{asset('images/JFC172_01.jpg')}}" alt="">
-            <div class="content">
-                <span>Novo Headset</span>
-                <h3>Gamer</h3>
-                <a href="#" class="btn">Confira</a>
-            </div>
-        </div>
-        <div class="banner">
-            <img src="{{asset('images/JFC172_01.jpg')}}" alt="">
-            <div class="content">
-                <span>Novo Teclado</span>
-                <h3>Gamer</h3>
-                <a href="#" class="btn">Confira</a>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- advertising end -->
+<!-- advertising end -->
 
 
 
-    <!-- cards start -->
+<!-- cards start -->
 
-    <section id="product1" class="section-p1">
-
-        <h2 class="titulo">Lançamentos</h2>
+<section id="product1" class="section-p1">
+           
+    <h2 class="titulo">Lançamentos</h2>
         <div class="pro-container">
             <div class="pro item">
-            <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -232,7 +266,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -253,7 +287,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -274,7 +308,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -294,48 +328,48 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
 
-    <!-- cards end -->
+<!-- cards end -->
 
 
-    <!-- ad starts -->
+<!-- ad starts -->
 
-    <div>
-        <h2 class="title">Imperdivel</h2>
-    </div>
+<div>
+    <h2 class="title">Imperdivel</h2>
+</div>
 
-    <div class="ad-container">
+<div class="ad-container">
 
-        <div class="ad">
-            <div class="monitor">
-                <img src="{{asset('images/quartz 02.webp')}}" alt="">
-            </div>
-            <div class="content">
-                <span>corra</span>
-                <h3>50% 0ff</h3>
-                <p>oferta imperdivel</p>
-                <a href="#" class="btn-ad">visualizar oferta</a>
-            </div>
-            <div class="women">
-                <img src="{{asset('images/women.png')}}" alt="">
-            </div>
+    <div class="ad">
+        <div class="monitor">
+            <img src="img/quartz 02.webp" alt="">
         </div>
-
+        <div class="content">
+            <span>corra</span>
+            <h3>50% 0ff</h3>
+            <p>oferta imperdivel</p>
+            <a href="#" class="btn-ad">visualizar oferta</a>
+        </div>
+        <div class="women">
+            <img src="img/women.png" alt="">
+        </div>
     </div>
 
-    <!-- ad end -->
+</div>
+
+<!-- ad end -->
 
 
 
-    <!-- cards start -->
+<!-- cards start -->
 
-    <section id="product1" class="section-p1">
-
-        <h2 class="titulo">Lançamentos</h2>
+<section id="product1" class="section-p1">
+           
+    <h2 class="titulo">Lançamentos</h2>
         <div class="pro-container">
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -356,7 +390,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -377,7 +411,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -398,7 +432,7 @@
             </div>
 
             <div class="pro item">
-                <img src="{{asset('images/mou_4.jpg')}}" alt="">
+                <img src="img/mou_4.jpg" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -418,50 +452,127 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
 
-    <!-- cards end -->
+<!-- cards end -->
 
-    <!-- categories start -->
+<!-- categories start -->
 
-    <div class="categories-container">
+<div class="categories-container">
 
-        <h2 class="heading">Categorias</h2>
+    <h2 class="heading">Categorias</h2>
 
-        <div class="categorie-container">
+    <div class="categorie-container">
 
-            <a href="#" class="effects">
-                <div class="box">
-                    <img src="{{asset('images/3474360.png')}}" alt="">
-                    <h2 class="itens">Monitor</h2>
-                </div>
-            </a>
+        <a href="#" class="effects">
+            <div class="box">
+                <img src="img/3474360.png" alt="">
+                <h2 class="itens">Monitor</h2>
+            </div>
+        </a>
 
-            <a href="#" class="effects">
-                <div class="box">
-                    <img src="{{asset('images/3355050.png')}}" alt="">
-                    <h2 class="itens">Mouse</h2>
-                </div>
-            </a>
+        <a href="#" class="effects">
+            <div class="box">
+                <img src="img/3355050.png" alt="">
+                <h2 class="itens">Mouse</h2>
+            </div>
+        </a>
 
-            <a href="#" class="effects">
-                <div class="box">
-                    <img src="{{asset('images/transferir.png')}}" alt="">
-                    <h2 class="itens">Headset</h2>
-                </div>
-            </a>
+        <a href="#" class="effects">
+            <div class="box">
+                <img src="img/transferir.png" alt="">
+                <h2 class="itens">Headset</h2>
+            </div>
+        </a>
 
-            <a href="#" class="effects">
-                <div class="box">
-                    <img src="img/114683.png" alt="">
-                    <img src="{{asset('images/114683.png')}}" alt="">
-                    <h2 class="itens">Teclado</h2>
-                </div>
-            </a>
-        </div>
-
+        <a href="#" class="effects">
+            <div class="box">
+                <img src="img/114683.png" alt="">
+                <h2 class="itens">Teclado</h2>
+            </div>
+        </a>
     </div>
 
-    <!-- categories end -->
+</div>
 
-@endsection
+<!-- categories end -->
+
+<!-- sessão footer -->
+<section class="rodape">
+
+    <footer class="footer">
+  
+      <div class="container">
+  
+        <div class="row">
+  
+          <div class="col-lg-3 col-md-6 col-sm-6 logo">
+            <div class="footer-about">
+              <div class="footer-logo">
+                <a href="#"><img src="img/logo_preta_sem_fundo.png" alt=""></a>
+              </div>
+              <p class="s">Metodos de pagamentos, que aceitamos.</p>
+              <a class="cartoes"><img src="img/card_img.png" alt=""></a>
+            </div>
+          </div>
+  
+          <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+            <div class="footer-widget">
+              <h6>Submenu</h6>
+              <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Termos</a></li>
+              </ul>
+            </div>
+          </div>
+  
+            <div class="col-lg-2 col-md-3 col-sm-6">
+              <div class="footer-widget">
+                <h6>Fale Conosco</h6>
+                <ul>
+                  <li><a href="#">Contate-nos</a></li>
+                  <li><a href="#">feedback</a></li>
+                  <li><a href="#">Dúvidas</a></li>
+                  <li><a href="#">Localização</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 ablu">
+              <div class="footer-widget">
+                <h6>Redes Sociais</h6>
+                <div class="footer-newletter">
+                      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+        </div>
+              <div class="footer-copyright-text">
+  
+                <p class="s">Copyright &copy; 2022 All right reserved | This model is made by JRM</p>
+  
+              </div>
+      </div>
+  
+    </footer>
+  
+  </section>
+  <!-- fim da sessão footer -->
+    
+  <!-- abrir caixa de pesquisa -->
+
+    <script>
+        const icones = document.querySelector('#icones');
+        const busca = document.querySelector('.busca');
+        icones.onclick = function(){
+        busca.classList.toggle('active')
+        }
+    </script>
+
+</body>
+</html>
