@@ -147,6 +147,11 @@ Route::get('/login', function () {
     return view('client.login');
 })->name('client-login');
 
+Route::get('/cadastro', function () {
+    return view('client.cadastro');
+})->name('client-cadastro');
+
+
 // TODO: #47 Adicionar middleware
 Route::get('/favoritos', function () {
     return view('client.favoritos');

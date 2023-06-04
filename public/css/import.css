@@ -13,13 +13,17 @@
     --cinza-fundo: #222222;
     --vermelho: #C83C3C;
     --branco: #FFFF;
-    --preto: #0000;
+    --cinza-claro: #ecf0f1;
+    --preto: #000;
     --border-radius: 10px;
     --quicksand: 'Quicksand', sans-serif;
     --worksans: 'Work Sans', sans-serif;
     --adm-button-nav: 1.25rem;
     --navbar-transition: ease .5s;
     --height-navbar: 6rem;
+    --cor-twitter: #1DA1F2;
+    --cor-google: #DB4437;
+    --cor-linkedin: #0e76a8;
 }
 
 /* Estilo de fontes nos titulos e textos */
@@ -47,7 +51,6 @@ a,
 span,
 li {
     font-family: var(--worksans);
-    font-size: 1rem;
     font-weight: 500;
 }
 
