@@ -14,13 +14,10 @@
                 <h2 class="title title-second">Faça seu cadastro!</h2>
 
                 <!-- forms start -->
-                <form action="#">
+                <form action="{{route('client-confirmarCadastro')}}">
 
-                    <div class="input-group w50">
+                    <div class="input-group w50 container-row">
                         <input type="text" id="name" placeholder="Digite seu nome" required>
-                    </div>
-
-                    <div class="input-group w50">
                         <input type="text" id="lastname" placeholder="Digite seu sobrenome" required>
                     </div>
 
@@ -32,18 +29,14 @@
                         <input type="text" id="cpf" placeholder="Digite seu CPF" required>
                     </div>
 
-                    <div class="input-group w50">
+                    <div class="input-group w50 container-row">
                         <input type="tel" id="cel" placeholder="Digite seu número" required>
-                    </div>
-
-                    <div class="input-group w50">
                         <input type="text" id="cep" placeholder="Digite seu CEP" required>
                     </div>
 
                     <div class="input-group">
                         <button class="btn btn-second">Prosseguir</button>
                     </div>
-
                 </form>
                 <!-- forms end -->
             </div>

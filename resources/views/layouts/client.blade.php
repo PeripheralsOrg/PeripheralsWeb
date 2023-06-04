@@ -31,17 +31,17 @@
 <body>
     <header>
         <div class="box-logo">
-            <a href="#">
+            <a href="{{route('client-homepage')}}">
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
 
         <nav id="navLinks">
             <ul>
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Ofertas</a></li>
-                <li><a href="">Produtos</a></li>
-                <li><a href="">Contato</a></li>
+                <li><a href="{{route('client-homepage')}}">Inicio</a></li>
+                <li><a href="{{route('client-categorias')}}">Ofertas</a></li>
+                <li><a href="{{route('client-categorias')}}">Produtos</a></li>
+                <li><a href="{{route('client-contato')}}">Contato</a></li>
             </ul>
         </nav>
 

@@ -20,10 +20,12 @@
     --worksans: 'Work Sans', sans-serif;
     --adm-button-nav: 1.25rem;
     --navbar-transition: ease .5s;
-    --height-navbar: 6rem;
+    --height-navbar: 8rem;
     --cor-twitter: #1DA1F2;
     --cor-google: #DB4437;
     --cor-linkedin: #0e76a8;
+    --cor-estrelas: rgb(243, 181, 25);
+    --gradient-padrao: linear-gradient(-55deg, #ff7675 29%, #d63031 29.1%, #d63031 68%, #ff7675 68.1%);
 }
 
 /* Estilo de fontes nos titulos e textos */

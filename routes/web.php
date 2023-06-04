@@ -141,7 +141,21 @@ Route::prefix('adm')->group(function () {
 
 Route::get('/', function () {
     return view('client.index');
-});
+})->name('client-homepage');
+
+Route::get('/contato', function () {
+    return view('client.contato');
+})->name('client-contato');
+
+Route::get('/categorias', function () {
+    return view('client.categorias');
+})->name('client-categorias');
+
+
+// TODO: #47 Adicionar middleware
+Route::get('/favoritos', function () {
+    return view('client.favoritos');
+})->name('client-favoritos');
 
 Route::get('/login', function () {
     return view('client.login');
@@ -151,11 +165,9 @@ Route::get('/cadastro', function () {
     return view('client.cadastro');
 })->name('client-cadastro');
 
-
-// TODO: #47 Adicionar middleware
-Route::get('/favoritos', function () {
-    return view('client.favoritos');
-})->name('client-favoritos');
+Route::get('/confirmar/cadastro', function () {
+    return view('client.confirm-cadastro');
+})->name('client-confirmarCadastro');
 
 Route::get('/novo', function () {
     return view('admin.forms.InsertProduto');

@@ -1,0 +1,103 @@
+@import '../import.css';
+
+#product1 {
+    text-align: center;
+}
+
+#product1 .pro-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#product1 .pro {
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid var(--preto);
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    margin: 15px 0;
+    transition: 0.2s ease;
+    position: relative;
+}
+
+
+#product1 .pro:hover {
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+
+#product1 .pro img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+#product1 .pro .des {
+    text-align: start;
+    padding: 10px 0;
+}
+
+#product1 .pro .des span {
+    color: var(--cinza-fundo);
+}
+
+#product1 .pro .des h5 {
+    padding-top: 7px;
+    color: var(--preto);
+}
+
+#product1 .pro .des i {
+    font-size: 12px;
+    color: var(--cor-estrelas);
+}
+
+#product1 .pro .des h4 {
+    padding-top: 7px;
+    color: var(--preto);
+    font-weight: 700;
+}
+
+#product1 .pro .fa-shopping-bag {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: var(--preto);
+    font-weight: 600;
+    color: var(--branco);
+    border: 1px solid var(--preto);
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+
+#product1 .pro .fa-heart {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: var(--preto);
+    font-weight: 600;
+    color: var(--branco);
+    border: 1px solid var(--preto);
+    position: absolute;
+    bottom: 20px;
+    right: 60px;
+    transition: 0.2s ease;
+}
+
+#product1 .pro .fa-heart:hover {
+    color: var(--vermelho);
+}
+
+.section-p1 {
+    padding: 40px 120px;
+}
+
+.titulo {
+    text-align: initial;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    text-align: initial;
+}
