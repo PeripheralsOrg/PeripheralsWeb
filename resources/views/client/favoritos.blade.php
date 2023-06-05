@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>categoria</title>
-</head>
-<body>
-    
-<!-- cards start -->
+@extends('layouts.client')
+@section('css', 'home/favoritos')
+@section('title')@parent Favoritos @stop
 
-<section id="product1" class="section-p1">
-           
-    <h2 class="titulo">Mouse</h2>
-    <p class="subtitulo">multiasers</p>
-    <a class="link" href="#">Veja todos&nbsp;></a>
+@section('content')
+
+    <!-- cards start -->
+
+    <section id="product1" class="section-p1">
+
+        <h2 class="titulo">MINHA LISTA DE DESEJOS</h2>
+        <p class="subtitulo">4 itens</p>
         <div class="pro-container">
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -42,11 +33,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -63,11 +54,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -84,11 +75,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -104,24 +95,23 @@
                 </div>
             </div>
         </div>
-</section>
+    </section>
 
-<!-- cards end -->
+    <!-- cards end -->
 
-<!-- cards start -->
 
-<section id="product1" class="section-p1">
-           
-    <h2 class="titulo">Mouse</h2>
-    <p class="subtitulo">multiasers</p>
-    <a class="link" href="#">Veja todos&nbsp;></a>
+    <!-- cards start -->
+
+    <section id="product1" class="section-p1">
+
+        <h2 class="titulo">Produtos Semelhantes</h2>
         <div class="pro-container">
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -138,11 +128,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -159,11 +149,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -180,11 +170,11 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{asset('images/mou_4.jpg')}}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
-                    <h5>Mouse Gamer</h5>
+                    <h4>Mouse Gamer</h4>
                     <div class="star">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -200,8 +190,8 @@
                 </div>
             </div>
         </div>
-</section>
-<!-- cards end -->
+    </section>
 
-</body>
-</html>
+    <!-- cards end -->
+
+@endsection

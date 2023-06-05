@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>categoria</title>
-</head>
-<body>
-    
-<!-- cards start -->
+@extends('layouts.client')
+@section('css', 'home/categorias')
+@section('title')@parent Categorias @stop
 
-<section id="product1" class="section-p1">
-           
-    <h2 class="titulo">Mouse</h2>
-    <p class="subtitulo">multiasers</p>
-    <a class="link" href="#">Veja todos&nbsp;></a>
+@section('content')
+
+    <!-- cards start -->
+
+    <section id="product1" class="section-p1">
+
+        <div class="container-info">
+            <span class="same-line">
+                <h2 class="titulo">Mouse</h2>
+                <p class="subtitulo">MULTILASER</p>
+            </span>
+            <a class="link" href="#">Veja todos > </a>
+        </div>
         <div class="pro-container">
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -42,7 +38,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -63,7 +59,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -84,7 +80,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -104,20 +100,24 @@
                 </div>
             </div>
         </div>
-</section>
+    </section>
 
-<!-- cards end -->
+    <!-- cards end -->
 
-<!-- cards start -->
+    <!-- cards start -->
 
-<section id="product1" class="section-p1">
-           
-    <h2 class="titulo">Mouse</h2>
-    <p class="subtitulo">multiasers</p>
-    <a class="link" href="#">Veja todos&nbsp;></a>
+    <section id="product1" class="section-p1">
+
+        <div class="container-info">
+            <span class="same-line">
+                <h2 class="titulo">Mouse</h2>
+                <p class="subtitulo">MULTILASER</p>
+            </span>
+            <a class="link" href="#">Veja todos > </a>
+        </div>
         <div class="pro-container">
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -138,7 +138,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -159,7 +159,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -180,7 +180,7 @@
             </div>
 
             <div class="pro item">
-                <img src="img/mou_4.jpg" alt="">
+                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
                 <hr>
                 <div class="des">
                     <span>MULTILASER</span>
@@ -200,8 +200,8 @@
                 </div>
             </div>
         </div>
-</section>
-<!-- cards end -->
+    </section>
 
-</body>
-</html>
+    <!-- cards end -->
+
+@endsection

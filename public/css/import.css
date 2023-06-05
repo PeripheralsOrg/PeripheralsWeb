@@ -13,13 +13,19 @@
     --cinza-fundo: #222222;
     --vermelho: #C83C3C;
     --branco: #FFFF;
-    --preto: #0000;
+    --cinza-claro: #ecf0f1;
+    --preto: #000;
     --border-radius: 10px;
     --quicksand: 'Quicksand', sans-serif;
     --worksans: 'Work Sans', sans-serif;
     --adm-button-nav: 1.25rem;
     --navbar-transition: ease .5s;
-    --height-navbar: 6rem;
+    --height-navbar: 8rem;
+    --cor-twitter: #1DA1F2;
+    --cor-google: #DB4437;
+    --cor-linkedin: #0e76a8;
+    --cor-estrelas: rgb(243, 181, 25);
+    --gradient-padrao: linear-gradient(-55deg, #ff7675 29%, #d63031 29.1%, #d63031 68%, #ff7675 68.1%);
 }
 
 /* Estilo de fontes nos titulos e textos */
@@ -47,7 +53,6 @@ a,
 span,
 li {
     font-family: var(--worksans);
-    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -93,7 +98,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-main{
+main {
     width: 60vw;
 }
 
@@ -205,23 +210,23 @@ main{
 
 /* ICONES */
 
-#box-options{
+#box-options {
     display: flex;
     justify-content: space-around !important;
     gap: 1rem;
 }
 
-#box-options button{
+#box-options button {
     background-color: transparent;
     border: none;
 }
 
-#box-options .fa-trash{
+#box-options .fa-trash {
     color: var(--vermelho);
     cursor: pointer;
 }
 
-#box-options .fa-pen-to-square{
+#box-options .fa-pen-to-square {
     color: #25b808;
     cursor: pointer;
 }
