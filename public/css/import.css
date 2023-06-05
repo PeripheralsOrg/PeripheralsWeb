@@ -98,7 +98,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-main{
+main {
     width: 60vw;
 }
 
@@ -210,23 +210,23 @@ main{
 
 /* ICONES */
 
-#box-options{
+#box-options {
     display: flex;
     justify-content: space-around !important;
     gap: 1rem;
 }
 
-#box-options button{
+#box-options button {
     background-color: transparent;
     border: none;
 }
 
-#box-options .fa-trash{
+#box-options .fa-trash {
     color: var(--vermelho);
     cursor: pointer;
 }
 
-#box-options .fa-pen-to-square{
+#box-options .fa-pen-to-square {
     color: #25b808;
     cursor: pointer;
 }

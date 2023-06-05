@@ -1,15 +1,25 @@
 @extends('layouts.client')
 @section('css', 'home/homepage')
+@section('js', 'home/homepage')
 @section('title')@parent Homepage @stop
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 
 @section('content')
 
     <!-- carousel starts  -->
 
-    <section class="home" id="home">
+    {{-- Carrossel de Imagens --}}
+    <section class="box-carrossel embla">
+        <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
 
-
-
+        <div class="embla__viewport">
+            <div class="embla__container">
+                @for ($i = 0; $i < 4; $i++)
+                    <img style="width:100% !important" src="{{ asset('images/test-carousel.jpg') }}" alt="">
+                @endfor
+            </div>
+        </div>
+        <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
     </section>
 
     <!-- carousel ends -->
@@ -26,7 +36,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/service-icon-1.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/service-icon-1.svg') }}" alt="Service icon">
 
                         </div>
 
@@ -39,7 +49,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/service-icon-2.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/service-icon-2.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -51,7 +61,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/service-icon-3.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/service-icon-3.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -63,7 +73,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/service-icon-4.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/service-icon-4.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -88,7 +98,6 @@
             <div class="pro-container">
                 <div class="pro item">
                     <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-
                     <hr>
                     <div class="des">
                         <span>MULTILASER</span>

@@ -1,17 +1,56 @@
 /* importação de icones */
 @import '../import.css';
+/* CARROSSEL */
 
-.home {
+
+.embla {
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: url(../../images/mulher-feliz-com-o-laptop-apontando-para-espaço-de-cópia-sobre-fundo-amarelo-belo-protesto-negra-no-colo-sentado-chão-panorama-174438374.jpg) no-repeat;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 40px;
-  margin: 80px 0px;
+  overflow: hidden;
+  position: relative;
+  max-height: 60rem;
 }
+
+.embla__viewport {
+  display: block;
+  width: 100vw;
+}
+
+.embla button {
+  position: absolute;
+  z-index: 1000;
+  background-color: rgba(255, 223, 223, 0.5);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  border: transparent;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--vermelho);
+}
+
+.embla button i {
+  color: var(--vermelho);
+}
+
+.embla__prev {
+  left: 10px;
+}
+
+.embla__next {
+  right: 10px;
+}
+
+.embla__container{
+  display: flex;
+  position: relative;
+}
+
+.embla__container img{
+  width: 2000px !important;
+}
+
+/* END CARROSSEL */
 
 main {
   display: flex;
