@@ -15,7 +15,7 @@
         <div class="embla__viewport">
             <div class="embla__container">
                 @for ($i = 0; $i < 4; $i++)
-                    <img style="width:100% !important" src="{{ asset('images/test-carousel.jpg') }}" alt="">
+                    <img style="width:100% !important" src="{{ asset('images/img1.jpg') }}" alt="">
                 @endfor
             </div>
         </div>
@@ -96,89 +96,37 @@
 
             <h2 class="titulo">Lançamentos</h2>
             <div class="pro-container">
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <section class="produto-carrossel embla">
+                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
+            
+                    <div class="embla__viewport">
+                        <div class="embla__container">
+                            @for ($i = 0; $i < 5; $i++)
+                            <div class="pro item">
+                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
+                                <hr>
+                                <div class="des">
+                                    <span>MULTILASER</span>
+                                    <h5>Mouse Gamer</h5>
+                                    <div class="star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h4>R$ 120,00</h4>
+                                </div>
+                                <div>
+                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                    <a href=""><i class="fa fa-heart"></i></a>
+                                </div>
+                            </div>
+                            @endfor
                         </div>
-                        <h4>R$ 120,00</h4>
                     </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
+                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
+                </section>
             </div>
         </section>
 
@@ -223,89 +171,37 @@
 
             <h2 class="titulo">Lançamentos</h2>
             <div class="pro-container">
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <section class="produto-carrossel embla">
+                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
+            
+                    <div class="embla__viewport">
+                        <div class="embla__container">
+                            @for ($i = 0; $i < 5; $i++)
+                            <div class="pro item">
+                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
+                                <hr>
+                                <div class="des">
+                                    <span>MULTILASER</span>
+                                    <h5>Mouse Gamer</h5>
+                                    <div class="star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h4>R$ 120,00</h4>
+                                </div>
+                                <div>
+                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                    <a href=""><i class="fa fa-heart"></i></a>
+                                </div>
+                            </div>
+                            @endfor
                         </div>
-                        <h4>R$ 120,00</h4>
                     </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
+                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
+                </section>
             </div>
         </section>
 
@@ -345,89 +241,37 @@
 
             <h2 class="titulo">Lançamentos</h2>
             <div class="pro-container">
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <section class="produto-carrossel embla">
+                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
+            
+                    <div class="embla__viewport">
+                        <div class="embla__container">
+                            @for ($i = 0; $i < 5; $i++)
+                            <div class="pro item">
+                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
+                                <hr>
+                                <div class="des">
+                                    <span>MULTILASER</span>
+                                    <h5>Mouse Gamer</h5>
+                                    <div class="star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h4>R$ 120,00</h4>
+                                </div>
+                                <div>
+                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                    <a href=""><i class="fa fa-heart"></i></a>
+                                </div>
+                            </div>
+                            @endfor
                         </div>
-                        <h4>R$ 120,00</h4>
                     </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-
-                <div class="pro item">
-                    <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                    <hr>
-                    <div class="des">
-                        <span>MULTILASER</span>
-                        <h5>Mouse Gamer</h5>
-                        <div class="star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h4>R$ 120,00</h4>
-                    </div>
-                    <div>
-                        <a href=""><i class="fa fa-shopping-bag"></i></a>
-                        <a href=""><i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
+                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
+                </section>
             </div>
         </section>
 
@@ -443,14 +287,14 @@
 
                 <a href="#" class="effects">
                     <div class="box">
-                        <img src="{{ asset('images/3474360.png') }}" alt="">
+                        <img src="{{ asset('images/icons/monitor.svg') }}" alt="">
                         <h2 class="itens">Monitor</h2>
                     </div>
                 </a>
 
                 <a href="#" class="effects">
                     <div class="box">
-                        <img src="{{ asset('images/3355050.png') }}" alt="">
+                        <img src="{{ asset('images/icons/mouse.svg') }}" alt="">
                         <h2 class="itens">Mouse</h2>
                     </div>
                 </a>
@@ -464,8 +308,7 @@
 
                 <a href="#" class="effects">
                     <div class="box">
-                        <img src="img/114683.png" alt="">
-                        <img src="{{ asset('images/114683.png') }}" alt="">
+                        <img style="color: #000;" src="{{ asset('images/icons/teclado.svg') }}" alt="">
                         <h2 class="itens">Teclado</h2>
                     </div>
                 </a>
@@ -473,7 +316,6 @@
 
         </div>
     </main>
-
 
     <!-- categories end -->
 
