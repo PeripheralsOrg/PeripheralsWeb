@@ -5,10 +5,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 
 @section('content')
+{{-- <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
+<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="{{asset('bootstrap/bootstrap.min.js')}}"></script> --}}
+
 
     <!-- carousel starts  -->
 
     {{-- Carrossel de Imagens --}}
+
     <section class="box-carrossel embla">
         <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
 
@@ -93,7 +99,6 @@
         <!-- cards start -->
 
         <section id="product1" class="section-p1">
-
             <h2 class="titulo">Lançamentos</h2>
             <div class="pro-container">
                 <div class="pro item">
@@ -326,7 +331,7 @@
                     <span>corra</span>
                     <h3>50% 0ff</h3>
                     <p>oferta imperdivel</p>
-                    <a href="#" class="btn-ad">visualizar oferta</a>
+                    <a href="#" class="btn-ad">Visualizar oferta</a>
                 </div>
                 <div class="women">
                     <img src="{{ asset('images/women.png') }}" alt="">
@@ -464,7 +469,6 @@
 
                 <a href="#" class="effects">
                     <div class="box">
-                        <img src="img/114683.png" alt="">
                         <img src="{{ asset('images/114683.png') }}" alt="">
                         <h2 class="itens">Teclado</h2>
                     </div>

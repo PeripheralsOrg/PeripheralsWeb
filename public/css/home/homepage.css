@@ -296,6 +296,7 @@ img {
   margin-top: 10px;
   width: 91%;
   align-self: center;
+  margin: 0 auto;
 }
 
 .ad-container .ad {
@@ -366,6 +367,7 @@ img {
   background-color: none;
   width: 91%;
   align-self: center;
+  margin: 0 auto;
   margin-bottom: 5rem;
 }
 
