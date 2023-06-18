@@ -1,4 +1,5 @@
 var emblaNode = document.querySelector('.embla')
+
 var options = {
     loop: true,
     skipSnaps: true,
@@ -17,17 +18,38 @@ const embla = EmblaCarousel(viewportNode, options, plugins)
 
 // Opacidade
 
+prevButtonNode.addEventListener('click', embla.scrollPrev, false)
+nextButtonNode.addEventListener('click', embla.scrollNext, false)
+
+
+
+// CARROSSEL PRODUTO
+
+var emblaNodeProduto = document.querySelector('.produto-carrossel')
+
+var options = {
+    loop: true,
+    speed: 5,
+}
+var plugins = [EmblaCarouselAutoplay()] // Plugins
+
+const rootNodeProduto = emblaNodeProduto;
+const viewportNodeProduto = rootNodeProduto.querySelector('.embla__viewport')
+
+const emblaProduto = EmblaCarousel(viewportNodeProduto, options, plugins)
+
+
 const TWEEN_FACTOR = 4.2
 
 const numberWithinRange = (number, min, max) =>
     Math.min(Math.max(number, min), max)
 
-const calculateTweenValuesOpacity = (embla) => {
-    const engine = embla.internalEngine()
-    const scrollProgress = embla.scrollProgress()
+const calculateTweenValuesOpacity = (emblaProduto) => {
+    const engine = emblaProduto.internalEngine()
+    const scrollProgress = emblaProduto.scrollProgress()
 
-    return embla.scrollSnapList().map((scrollSnap, index) => {
-        if (!embla.slidesInView().includes(index)) return 0
+    return emblaProduto.scrollSnapList().map((scrollSnap, index) => {
+        if (!emblaProduto.slidesInView().includes(index)) return 0
         let diffToTarget = scrollSnap - scrollProgress
 
         if (engine.options.loop) {
@@ -45,11 +67,11 @@ const calculateTweenValuesOpacity = (embla) => {
     })
 }
 
-const setupTweenOpacity = (embla) => {
-    const tweenNodes = embla.slideNodes()
+const setupTweenOpacity = (emblaProduto) => {
+    const tweenNodes = emblaProduto.slideNodes()
 
     const applyTweenOpacity = () => {
-        const tweenValues = calculateTweenValuesOpacity(embla)
+        const tweenValues = calculateTweenValuesOpacity(emblaProduto)
         tweenValues.forEach((tweenValue, index) => {
             tweenNodes[index].style.opacity = tweenValue.toString()
         })
@@ -65,15 +87,15 @@ const setupTweenOpacity = (embla) => {
     }
 }
 
+const prevButtonNodeProduto = rootNodeProduto.querySelector('.embla__prev')
+const nextButtonNodeProduto = rootNodeProduto.querySelector('.embla__next')
 
+prevButtonNode.addEventListener('click', emblaProduto.scrollPrev, false)
+nextButtonNode.addEventListener('click', emblaProduto.scrollNext, false)
 
-const { applyTweenOpacity, removeTweenOpacity } = setupTweenOpacity(embla)
+const { applyTweenOpacityProduto, removeTweenOpacityProduto } = setupTweenOpacity(emblaProduto)
 embla
     .on('init', applyTweenOpacity)
-    .on('scroll', applyTweenOpacity)
-    .on('reInit', applyTweenOpacity)
+    .on('scroll', applyTweenOpacityProduto)
+    .on('reInit', removeTweenOpacityProduto)
     .on('destroy', removeTweenOpacity)
-
-prevButtonNode.addEventListener('click', embla.scrollPrev, false)
-nextButtonNode.addEventListener('click', embla.scrollNext, false)
-
