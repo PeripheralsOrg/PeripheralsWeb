@@ -8,8 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Image;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
+
 
 class BannerController extends Controller
 {
@@ -45,8 +45,10 @@ class BannerController extends Controller
             }
 
             $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '.webp';
-            //TODO #18 Converter a imagem em WEBP
-            $pathImage = $image->storeAs('public/storage', $imageName);
+            $imageConvert = Image::make($image)->encode('webp')->save(public_path('storage/' . $imageName), 90, 'webp');
+            // $pathImage = $image->storeAs('public/storage', $imageName);
+            $pathImage = 'storage/' .  $imageName;
+
 
             $bannerC = $banner->create([
                 'nome_banner' => $request->nome_banner,

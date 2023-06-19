@@ -45,4 +45,5 @@ header nav ul{
 
 header nav ul li a{
     color: var(--branco);
+    font-size: 1.1rem;
 }

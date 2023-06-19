@@ -20,7 +20,7 @@
         @endif
 
         <!-- Barra_de_busca -->
-        <form id="divBusca" action="{{route('search-produto')}}" method="GET">
+        <form id="divBusca" action="{{ route('search-produto') }}" method="GET">
             <input type="text" id="txtBusca" name="search" placeholder="Buscar..." />
             <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
@@ -87,12 +87,12 @@
                     @foreach ($produtos as $item)
                         <tr>
                             <!-- Conteúdo_da_tabela -->
-                            <td>{{$item['id_produtos']}}</td>
-                            <td>{{$item['nome']}}</td>
-                            <td>{{$item['categoria']}}</td>
-                            <td>{{$item['marca']}}</td>
-                            <td>{{$item['preco']}}</td>
-                            <td>{{ $item['status'] === 1 ? 'Ativo' : 'Inativo'}}</td>
+                            <td>{{ $item['id_produtos'] }}</td>
+                            <td>{{ $item['nome'] }}</td>
+                            <td>{{ $item['categoria'] }}</td>
+                            <td>{{ $item['marca'] }}</td>
+                            <td>{{ $item['preco'] }}</td>
+                            <td>{{ $item['status'] === 1 ? 'Ativo' : 'Inativo' }}</td>
                             <td id="box-options">
                                 <form action="{{ route('delete-produto', $item['id_produtos']) }}" method="POST">
                                     @csrf
@@ -111,14 +111,16 @@
                             </td>
                         </tr>
                     @endforeach
-                    @else
-                        <td colspan="10">Nenhum Produto encontrado!</td>
+                @else
+                    <td colspan="10">Nenhum Produto encontrado!</td>
                 @endif
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>
-
+        <div class="mt-4 p-4 box has-text-centered">
+            {{ $produtos->links('pagination::default') }}
+        </div>
         </section>
 
     </main>

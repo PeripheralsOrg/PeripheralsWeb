@@ -2,24 +2,30 @@
 @section('css', 'home/homepage')
 @section('js', 'home/homepage')
 @section('title')@parent Homepage @stop
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 
 @section('content')
+{{-- <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
+<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="{{asset('bootstrap/bootstrap.min.js')}}"></script> --}}
+
 
     <!-- carousel starts  -->
 
     {{-- Carrossel de Imagens --}}
-    <section class="box-carrossel embla">
-        <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
 
-        <div class="embla__viewport">
+    <section class="box-carrossel embla">
+        <button class="embla__prev banner_prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
+
+        <div class="embla__viewport banner_viewport">
             <div class="embla__container">
                 @for ($i = 0; $i < 4; $i++)
                     <img style="width:100% !important" src="{{ asset('images/img1.jpg') }}" alt="">
                 @endfor
             </div>
         </div>
-        <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
+        <button class="embla__next banner_next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
     </section>
 
     <!-- carousel ends -->
@@ -36,7 +42,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/icons/service-icon-1.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/Entrega.svg') }}" alt="Service icon">
 
                         </div>
 
@@ -49,7 +55,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/icons/service-icon-2.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/devolucao.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -61,7 +67,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/icons/service-icon-3.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/Cartao-protegido.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -73,7 +79,7 @@
 
                     <li class="service-item">
                         <div class="service-item-icon">
-                            <img src="{{ asset('images/icons/service-icon-4.svg') }}" alt="Service icon">
+                            <img src="{{ asset('images/icons/suporte.svg') }}" alt="Service icon">
                         </div>
 
                         <div class="service-content">
@@ -93,14 +99,13 @@
         <!-- cards start -->
 
         <section id="product1" class="section-p1">
-
             <h2 class="titulo">Lançamentos</h2>
             <div class="pro-container">
                 <section class="produto-carrossel embla">
-                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
+                    <button class="embla__prev produto_prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
             
-                    <div class="embla__viewport">
-                        <div class="embla__container">
+                    <div class="embla__viewport produto_viewport">
+                        <div class="embla__container produto_embla_container">
                             @for ($i = 0; $i < 5; $i++)
                             <div class="pro item">
                                 <img src="{{ asset('images/mou_4.jpg') }}" alt="">
@@ -125,7 +130,27 @@
                             @endfor
                         </div>
                     </div>
-                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
+
+                    <!-- Slide Template -->
+                    <script type="text/template" id="embla-slide-template">
+                        <div class="embla__slide">
+                        <div class="embla__slide__inner">
+                            <img class="embla__slide__img" src="media/media-__img-nr__.jpeg" />
+                            <div class="embla__slide__number">__slide-nr__</div>
+                        </div>
+                        </div>
+                    </script>
+
+                    <!-- Loading Template -->
+                    <script type="text/template" id="embla-loading-template">
+                        <div class="embla__slide embla__slide--loading">
+                        <div class="embla__slide__inner embla__slide__inner--loading">
+                            <div class="embla__slide__loading"></div>
+                        </div>
+                        </div>
+                    </script>
+                    
+                    <button class="embla__next produto_next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
                 </section>
             </div>
         </section>
@@ -222,7 +247,7 @@
                     <span>corra</span>
                     <h3>50% 0ff</h3>
                     <p>oferta imperdivel</p>
-                    <a href="#" class="btn-ad">visualizar oferta</a>
+                    <a href="#" class="btn-ad">Visualizar oferta</a>
                 </div>
                 <div class="women">
                     <img src="{{ asset('images/women.png') }}" alt="">
