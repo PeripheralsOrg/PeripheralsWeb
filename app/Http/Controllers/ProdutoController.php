@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Categoria;
 use App\Models\Marcas;
+use Intervention\Image\Facades\Image;
 
 class ProdutoController extends Controller
 {
@@ -26,7 +27,7 @@ class ProdutoController extends Controller
     public function all()
     {
         // $produtos = Produto::all()->where('status', 1)->toArray();
-        $produtos = ProdutoView::all()->where('status', 1)->toArray();
+        $produtos = ProdutoView::all()->where('status', 1)->toQuery()->paginate(10);
         if ($produtos) {
             return view('admin.list.listProdutos')->with('produtos', $produtos);
         }
@@ -149,23 +150,27 @@ class ProdutoController extends Controller
             return redirect()->back()->withErrors('Faça o upload da imagem principal!');
         }
 
-        $pathImageP = $this->storeImages($imagemPrincipal, $request->input('nome'));
+        $pathImageP = $this->storeImages($imagemPrincipal, $request->input('categoria'), $request->input('nome'));
         if (!$pathImageP) {
             return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
         }
         $pathNames = [];
+        $sizeList = [];
         if (is_countable($request->file('link_img'))) {
             for ($i = 0; $i < count($request->file('link_img')); $i++) {
                 $imagemStore = $request->file('link_img')[$i];
-                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('nome'), true, $i);
+                $sizeList[$i] = $request->file('link_img')[$i]->getSize();
+                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, $i);
                 if (!$pathNames[$i]) {
                     return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
                 }
             }
         }
-        $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $produtoC);
+
+        $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $produtoC, 
+        $request->file('imagem_principal')->getSize());
         if (!empty($pathNames)) {
-            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $produtoC);
+            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $produtoC, $sizeList);
         }
 
         if ($produtoImagemP && $produtoImagens && $produtoC && $inventarioProduto && $detalhesProduto) {
@@ -175,10 +180,9 @@ class ProdutoController extends Controller
     }
 
 
-    public function storeImages(HttpUploadedFile $file, $name, $array = false, $number = 0)
+    public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0)
     {
         // TODO: #35 Criar campo principal na tabela de imagens de produtos
-        //TODO: #36 Modificar a variável de nomeação
         if (!$array) {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
                 if (!$file->isValid()) {
@@ -187,8 +191,11 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '.webp';
-                return $file->storeAs('files/produtos-images', $imageName, 's3');
+                // $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '.webp';
+                $imageName = $categoria . '-' . $name . '-'. date('d-m-Y') . '.webp';
+                $imageConvert = Image::make($file)->encode('webp')->save(public_path('storage/'. $imageName), 90, 'webp');
+                return 'storage/' . $imageName;
+                // return $file->storeAs('files/produtos-images', $imageName, 's3');
             }
         } else {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
@@ -199,8 +206,10 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '-' . $number . '.webp';
-                return $file->storeAs('files/produtos-images', $imageName, 's3');
+                // $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '-' . $number . '.webp';
+                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.webp';
+                $imageConvert = Image::make($file)->encode('webp')->save(public_path('storage/' . $imageName), 90, 'webp');
+                return 'storage/' . $imageName;
             }
         }
     }
@@ -312,25 +321,29 @@ class ProdutoController extends Controller
         }
 
         if (!empty($imagemPrincipal)) {
-            $pathImageP = $this->storeImages($imagemPrincipal, $request->input('nome'));
+            $pathImageP = $this->storeImages($imagemPrincipal, $request->input('categoria'), $request->input('nome'));
             if (!$pathImageP) {
                 return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
             }
-            $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $id);
+            $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $id,
+            $request->file('imagem_principal')->getSize());
         }
 
         $pathNames = [];
+        $sizeList = [];
         if (is_countable($request->file('link_img'))) {
             for ($i = 0; $i < count($request->file('link_img')); $i++) {
                 $imagemStore = $request->file('link_img')[$i];
-                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('nome'), true, $i);
+                $sizeList[$i] = $request->file('link_img')->getSize();
+                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, $i);
                 if (!$pathNames[$i]) {
                     return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
                 }
             }
         }
+
         if (!empty($pathNames)) {
-            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $id);
+            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $id, $sizeList);
         }
 
 

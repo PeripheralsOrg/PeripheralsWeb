@@ -26,7 +26,8 @@
             <h2 class="title">Inclusão de Produtos</h2>
 
             <label class="label-field">Código de Produto</label>
-            <input type="text" data-js="number" name="codigo" maxlength="20" class="input-field" placeholder="Código">
+            <input type="text" data-js="number" name="codigo" 
+            value="{{rand(111111111111111, 999999999999999)}}" maxlength="20" class="input-field" placeholder="Código">
 
             <label class="label-field">Nome do Produto</label>
             <input type="text" data-js="text" name="nome" class="input-field" placeholder="Nome do produto">
