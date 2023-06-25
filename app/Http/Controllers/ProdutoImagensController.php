@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdutoImagensController extends Controller
 {
-    public function insertImage($path, $name, $id, $size)
+    public function insertImage($path, $name, $id, $size, $boolean = 0)
     {
         $prodImagens = new ProdutoImagens();
 
         if (is_array($path)) {
             for ($i = 0; $i < count($path); $i++) {
+
                 $imagemC = $prodImagens->create([
                     'nome_img' => $name,
                     'link_img' => $path[$i],
+                    'peso' => $size[$i],
+                    'img_principal' => $boolean,
                     'id_produto' => $id,
                 ]);
 
@@ -31,6 +34,7 @@ class ProdutoImagensController extends Controller
                 'nome_img' => $name,
                 'link_img' => $path,
                 'peso' => $size,
+                'img_principal' => $boolean,
                 'id_produto' => $id,
             ]);
 

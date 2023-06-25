@@ -17,6 +17,8 @@ class ProdutoImagens extends Model
     protected $fillable = [
         'nome_img',
         'link_img',
+        'peso',
+        'img_principal',
         'id_produto'
     ];
 

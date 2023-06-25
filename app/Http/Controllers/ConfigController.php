@@ -152,4 +152,12 @@ class ConfigController extends Controller
         }
         return back()->withErrors('Houve um erro ao atualizar a marca');
     }
+
+    public function getMarca($id){
+        $getMarca = Marcas::all()->where('id_marca', $id)->toQuery();
+        if ($getMarca) {
+            return $getMarca;
+        }
+        return false;
+    }
 }

@@ -51,7 +51,7 @@
                 <label class="label-field">Marca</label>
                 <select class="select-field" name="marca">
                     @foreach ($marcas as $item)
-                        <option>{{$item['nome']}}</option>
+                        <option value="{{$item['id_marca']}}">{{$item['nome']}}</option>
                     @endforeach
                 </select>
 

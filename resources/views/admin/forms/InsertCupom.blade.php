@@ -42,6 +42,15 @@
                 </label>
             </div>
 
+            @if (!empty($categorias))
+                <label class="label-field">Categoria</label>
+                <select class="select-field" name="id_categoria" id="selectCategoria">
+                    @foreach ($categorias as $item)
+                        <option value="{{$item['id_categoria']}}">{{$item['categoria']}}</option>
+                    @endforeach
+                </select>
+            @endif
+            
             <label class="label-field">Status</label>
             <select class="select-field" name="status">
                 <option value="1">1 - Ativo</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Cupom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,16 +34,15 @@ class CupomController extends Controller
         return redirect()->route('falha-listCupons');
     }
 
-    // TODO: #23 Criar coluna para linkar categoria
     public function register(Request $request, Cupom $cupom)
     {
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
-            'categoria' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
+            'id_categoria' => ['required'],
         ]);
         $request->merge([
             'porcentagem' => floatval($request->input('porcentagem'))
@@ -77,12 +77,17 @@ class CupomController extends Controller
     public function getUpdate($id)
     {
         $getCupom = Cupom::all()->where('id', $id)->toArray();
-        if ($getCupom) {
-            return view('admin.forms.UpdateCupom')->with('getCupom', $getCupom);
-        }
-        return redirect('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
-    }
+        $categorias = Categoria::all()->toArray();
 
+        if ($getCupom || $categorias) {
+            return view('admin.forms.UpdateCupom')->with([
+                'getCupom' => $getCupom,
+                'categorias' => $categorias
+            ]);
+        }
+        return redirect()->route('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
+    }
+    
     public function update(Request $request, $id)
     {
         $validator = $request->validate([
@@ -91,6 +96,7 @@ class CupomController extends Controller
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
+            'id_categoria' => ['required'],
         ]);
 
         $request->merge([
@@ -105,5 +111,13 @@ class CupomController extends Controller
             return redirect()->route('page-listCupons')->withErrors('Cupom atualizado com sucesso!');
         }
         return back()->withErrors('Houve um erro ao atualizar o cupom');
+    }
+
+    public function retrieveInfo(){
+        $categorias = Categoria::all()->toArray();
+        if ($categorias) {
+            return view('admin.forms.insertCupom')->with('categorias', $categorias);
+        }
+        return redirect()->route('falha-listCupons');
     }
 }

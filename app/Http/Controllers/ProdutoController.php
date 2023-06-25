@@ -24,18 +24,16 @@ class ProdutoController extends Controller
 
     public const MAXIMUM_SIZE = 5000000;
 
-    public function all()
-    {
-        // $produtos = Produto::all()->where('status', 1)->toArray();
-        $produtos = ProdutoView::all()->where('status', 1)->toQuery()->paginate(10);
-        if ($produtos) {
+    public function all(){
+        $produtosTest = Produto::all()->where('status', 1)->toArray();
+        if ($produtosTest) {
+            $produtos = ProdutoView::all()->where('status', 1)->toQuery()->paginate(10);
             return view('admin.list.listProdutos')->with('produtos', $produtos);
         }
         return redirect()->route('falha-listProdutos');
     }
 
-    public function fallback()
-    {
+    public function fallback(){
         $erro = 'Produtos não encontrados!';
         return view('admin.list.listProdutos')->with('erro', $erro);
     }
@@ -58,8 +56,7 @@ class ProdutoController extends Controller
         return redirect()->route('falha-listProdutos');
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
         $produto = Produto::all()->where('id_produtos', $id)->toArray();
 
         $deleteDetalhes = (DetalhesProduto::all()->where('id_detalhes', $produto[$id]['id_detalhes'])->toQuery())->update([
@@ -86,8 +83,7 @@ class ProdutoController extends Controller
         return redirect()->back()->withErrors('Ocorreu um erro ao deletar o produto!');
     }
 
-    public function register(Request $request)
-    {
+    public function register(Request $request){
 
         // TODO: #34 Mudar mensagens de erro
         $validate = $request->validate([
@@ -111,6 +107,7 @@ class ProdutoController extends Controller
         $imagemPrincipal = $request->file('imagem_principal');
         $produtoModel = new Produto();
 
+        // Detalhes do Produto
         $detalhesProduto = (new DetalhesProdutoController())->insertDetalhes(
             $request->except(
                 'nome',
@@ -127,19 +124,24 @@ class ProdutoController extends Controller
             )
         );
 
+        // Inventário do Produto
         $inventarioProduto = (new ProdutoinventarioController())->insertInventario($request->input('quantidade'), $request->input('status'));
+
+        // Marca do Produto
+        $getMarcaInfo = (new ConfigController())->getMarca($request->input('marca'));
 
         $produtoC = $produtoModel->create([
             'nome' => $request->input('nome'),
             'preco' => str_replace(',', '.', $request->input('preco')),
             'modelo' => $request->input('modelo'),
-            'marca' => $request->input('marca'),
+            'marca' => $getMarcaInfo->getModel()->nome,
             'descricao' => $request->input('descricao'),
             'status' => $request->input('status'),
             'is_promocao' => $request->input('is_promocao'),
             'id_detalhes' => intval($detalhesProduto),
             'id_inventario' => intval($inventarioProduto),
-            'id_categoria' => $request->input('categoria')
+            'id_categoria' => $request->input('categoria'),
+            'id_marca' => $request->input('marca')
         ])->id_produtos;
 
         if (!$produtoC) {
@@ -167,10 +169,13 @@ class ProdutoController extends Controller
             }
         }
 
+        //! Imagem Principal
         $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $produtoC, 
-        $request->file('imagem_principal')->getSize());
+        $request->file('imagem_principal')->getSize(), 1);
+
+        //! Array de imagens
         if (!empty($pathNames)) {
-            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $produtoC, $sizeList);
+            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $produtoC, $sizeList, 0);
         }
 
         if ($produtoImagemP && $produtoImagens && $produtoC && $inventarioProduto && $detalhesProduto) {
@@ -180,9 +185,7 @@ class ProdutoController extends Controller
     }
 
 
-    public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0)
-    {
-        // TODO: #35 Criar campo principal na tabela de imagens de produtos
+    public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0){
         if (!$array) {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
                 if (!$file->isValid()) {
@@ -218,7 +221,7 @@ class ProdutoController extends Controller
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->where('status', 1)->toArray();
 
-        if (!$categorias && !$marcas) {
+        if (!$categorias || !$marcas) {
             return redirect()->route('falha-listConfig');
         }
 
@@ -325,8 +328,9 @@ class ProdutoController extends Controller
             if (!$pathImageP) {
                 return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
             }
+            //! Imagem Principal
             $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $id,
-            $request->file('imagem_principal')->getSize());
+            $request->file('imagem_principal')->getSize(), 1);
         }
 
         $pathNames = [];
@@ -342,8 +346,9 @@ class ProdutoController extends Controller
             }
         }
 
+        //! Array de Imagens
         if (!empty($pathNames)) {
-            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $id, $sizeList);
+            $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $id, $sizeList, 0);
         }
 
 
