@@ -16,6 +16,7 @@ class Cupom extends Model
         'codigo',
         'data_expiracao',
         'porcentagem',
+        'id_categoria',
         'status'
     ];
 

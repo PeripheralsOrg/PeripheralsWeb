@@ -44,9 +44,7 @@ return new class extends Migration
                     users_detalhes_produto.garantia,
                     users_detalhes_produto.info_adicional,
                     users_detalhes_produto.status 
-                    AS detalhes_status,
-                    users_produto_imgs.nome_img,
-                    users_produto_imgs.link_img
+                    AS detalhes_status
 
                 FROM users_produtos
                 LEFT JOIN users_produto_categoria
@@ -56,10 +54,7 @@ return new class extends Migration
                 ON users_produtos.id_inventario = users_produto_inventario.id_inventario
 
                 LEFT JOIN users_detalhes_produto
-                ON users_produtos.id_detalhes = users_detalhes_produto.id_detalhes
-                
-                LEFT JOIN users_produto_imgs
-                ON users_produto_imgs.id_produtos = users_produtos.id_produtos'
+                ON users_produtos.id_detalhes = users_detalhes_produto.id_detalhes'
                 
         );
     }

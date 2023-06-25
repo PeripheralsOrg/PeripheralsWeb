@@ -118,9 +118,11 @@
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->
         </table>
-        <div class="mt-4 p-4 box has-text-centered">
-            {{ $produtos->links('pagination::default') }}
-        </div>
+        @if (!empty($produtos))
+            <div class="mt-4 p-4 box has-text-centered">
+                {{ $produtos->links('pagination::default') }}
+            </div>
+        @endif
         </section>
 
     </main>

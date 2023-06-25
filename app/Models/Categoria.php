@@ -22,4 +22,9 @@ class Categoria extends Model
     {
         return $this->belongsTo(Produto::class);
     }
+
+    public function cupom(): BelongsTo
+    {
+        return $this->belongsTo(Cupom::class);
+    }
 }
