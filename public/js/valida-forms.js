@@ -1,3 +1,20 @@
+// let getFormConfirm = document.getElementById('formCadastroConfirm');
+
+
+// getFormConfirm.addEventListener('submit', () => {
+//     let exibError = document.getElementById('exibError');
+//     let getCheckBox = document.getElementById('termoCheck');
+
+//     if (!getCheckBox.checked) {
+//         getFormConfirm.preventDefault();
+//         exibError.innerHTML = 'Concorde com os termos e condições para continuar!';
+//     } else {
+//         getFormConfirm.submit();
+//     }
+
+// })
+
+
 const masks = {
     cpf(value) {
         return value
@@ -40,3 +57,5 @@ document.querySelectorAll("input").forEach(($input) => {
         false
     );
 });
+
+

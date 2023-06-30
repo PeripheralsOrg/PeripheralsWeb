@@ -12,8 +12,10 @@ use App\Http\Controllers\CupomController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SubmenuController;
+use App\Http\Controllers\UsersController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
+use App\Http\Middleware\CheckNotAuthUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,13 +93,12 @@ Route::prefix('adm')->group(function () {
         Route::get('lista', 'all')->name('page-listMenus');
         Route::get('falha', 'fallback')->name('falha-listMenus');
 
-        Route::prefix('menu')->controller(MenuController::class)->middleware('guest:9')->group(function (){
+        Route::prefix('menu')->controller(MenuController::class)->middleware('guest:9')->group(function () {
             Route::view('inserir', 'admin.forms.InsertMenu')->name('page-inserirMenu');
             Route::post('register', 'register')->name('post-menu');
             Route::get('get/{id}', 'getUpdate')->name('get-menu');
             Route::delete('delete/{id}', 'delete')->name('delete-menu');
             Route::patch('update/{id}', 'update')->name('update-menu');
-
         });
 
         Route::prefix('submenu')->controller(SubmenuController::class)->middleware('guest:9')->group(function () {
@@ -107,7 +108,6 @@ Route::prefix('adm')->group(function () {
             Route::delete('delete/{id}', 'delete')->name('delete-submenu');
             Route::patch('update/{id}', 'update')->name('update-submenu');
         });
-
     });
 
     Route::prefix('pedidos')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
@@ -139,6 +139,19 @@ Route::prefix('adm')->group(function () {
 });
 
 
+Route::prefix('usuario')->controller(UsersController::class)->group(function () {
+
+    Route::view('/login', 'client.login')->name('client-login');
+
+    Route::view('/cadastro', 'client.cadastro')->name('client-cadastro');
+
+    Route::view('/confirmar/cadastro', 'client.confirm-cadastro')->name('client-confirmarCadastro');
+
+    Route::post('/registro', 'registerUser')->middleware(CheckNotAuthUser::class)->name('register-user');
+});
+
+
+
 Route::get('/', function () {
     return view('client.index');
 })->name('client-homepage');
@@ -151,23 +164,11 @@ Route::get('/categorias', function () {
     return view('client.categorias');
 })->name('client-categorias');
 
-
 // TODO: #47 Adicionar middleware
 Route::get('/favoritos', function () {
     return view('client.favoritos');
 })->name('client-favoritos');
 
-Route::get('/login', function () {
-    return view('client.login');
-})->name('client-login');
-
-Route::get('/cadastro', function () {
-    return view('client.cadastro');
-})->name('client-cadastro');
-
-Route::get('/confirmar/cadastro', function () {
-    return view('client.confirm-cadastro');
-})->name('client-confirmarCadastro');
 
 Route::get('/novo', function () {
     return view('admin.forms.InsertProduto');
@@ -181,4 +182,3 @@ Route::get('/factory', function () {
 Route::get('/session', function () {
     return session()->all();
 });
-
