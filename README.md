@@ -11,3 +11,12 @@ Nosso objetivo é oferecer um atendimento ao cliente excepcional. Nossa equipe e
 No Peripherals, estamos constantemente atualizando nosso catálogo de produtos com as últimas novidades do mercado, para que você possa sempre encontrar o que há de mais moderno e atualizado. Com nossa vasta seleção de periféricos de computador, estamos confiantes de que você encontrará exatamente o que precisa para melhorar sua experiência de uso.
 
 Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos de computador. Estamos ansiosos para ajudá-lo a encontrar o produto perfeito para suas necessidades.
+
+
+# Script criação de usuários
+
+Usuário: Davi <br>
+Email: Davi@adm.com <br>
+Senha: Sardinha@123 <br>
+
+INSERT INTO ADM_USERS(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
