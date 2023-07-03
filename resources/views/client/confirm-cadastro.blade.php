@@ -1,5 +1,6 @@
 @extends('layouts.client')
 @section('css', 'home/cadastro')
+@section('js', 'valida-forms')
 @section('title')@parent Confirmar Cadastro @stop
 
 @section('content')
@@ -12,23 +13,46 @@
             <div class="second-column">
 
                 <h2 class="title title-second">Conclua seu cadastro!</h2>
+
+                @if ($errors->any())
+                    <div class="container-error">
+                        <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
+                        @foreach ($errors->all() as $error)
+                            <p id="txt-error">
+                                {{ $error }}
+                            </p>
+                        @endforeach
+                    </div>
+                @endif
+
+
                 <!-- forms start -->
-                <form action="#">
+                <form action="{{ route('register-user') }}" method="POST" 
+                class="form-confirm" id="formCadastroConfirm">
+                    <p id="exibError"></p>
+
+                    @csrf
+                    @method('POST')
+
+                    @foreach (Request::all() as $item => $key)
+                        <input type="hidden" name="{{ $item }}" value="{{ $key }}">
+                    @endforeach
 
                     <div class="input-group">
-                        <input type="email" id="email" placeholder="Confirme o seu email" required>
+                        <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
                     </div>
 
-                    <div class="input-group w50 container-row">
-                        <input type="password" id="password" placeholder="Digite sua senha" required>
-                        <input type="password" id="confirmpassword" placeholder="Confirme sua senha" required>
+                    <div class="input-group container-row">
+                        <input type="password" name="senhaConfirm" id="senhaConfirm" placeholder="Confirme sua senha"
+                            required>
                     </div>
-
 
                     <div class="checks-conditions">
-                        <span class="condicoes"><input type="checkbox">Receber novidades?</span>
+                        <span class="condicoes"><input type="checkbox" name="feedback">Deseja receber novidades?</span>
                         <span class="condicoes">
-                            <input type="checkbox">Aceite nossos <a id="termosAgree" href="#">termos</a></span>
+                            <input id="termoCheck" type="checkbox">Aceite nossos <a id="termosAgree"
+                                href="#">termos</a>
+                        </span>
                     </div>
 
                     <div class="input-group">
@@ -44,7 +68,8 @@
                 <h2 class="title title-primary">Já possui login?</h2>
                 <p class="description description-primary">se ja possuir um cadastro</p>
                 <p class="description description-primary">faça seu login abaixo!</p>
-                <button id="signin" class="btn btn-primary" onclick="window.location.href='{{route('client-login')}}'">Logue-se</button>
+                <button id="signin" class="btn btn-primary"
+                    onclick="window.location.href='{{ route('client-login') }}'">Logue-se</button>
             </div>
 
         </div>

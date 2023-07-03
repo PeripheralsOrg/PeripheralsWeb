@@ -28,6 +28,13 @@ header .box-logo img{
 
 header .box-icons a {
     padding: .6rem;
+    border: none;
+}
+
+header .box-icons button {
+    padding: .6rem;
+    border: none;
+    background-color: transparent;
 }
 
 header .box-icons a img {
@@ -46,4 +53,65 @@ header nav ul{
 header nav ul li a{
     color: var(--branco);
     font-size: 1.1rem;
+}
+
+
+/* Dropdown menu */
+.box-icons{
+    display: flex;
+    align-items: center;
+}
+
+header .box-icons button img {
+    width: 30px;
+}
+
+header .dropdown-content {
+    display: none;
+    flex-direction: column;
+    gap: .5rem;
+    position: absolute;
+    right: 3%;
+}
+
+header .dropdown-content a {
+    display: block;
+    padding: .5rem;
+    z-index: 10000;
+}
+
+
+header .dropdown-link {
+    display: block;
+    color: #ffff;
+    font-family: var(--worksans);
+    font-size: var(--adm-button-nav);
+    z-index: 10000;
+}
+
+header .btn-config {
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+/* animações_de_botões*/
+header .dropdown-link:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .btn-config:hover {
+    /* text-decoration: underline; */
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .dropdown-link:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1rem;
+    gap: .5rem;
+    border-radius: 10px;
 }

@@ -234,3 +234,8 @@ main {
 .fa-solid {
     color: #000;
 }
+
+.container-error{
+    margin-bottom: 2rem;
+    color: var(--vermelho);
+}

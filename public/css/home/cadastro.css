@@ -130,6 +130,13 @@ form .input-group input {
     padding: 1rem;
 }
 
+.form-confirm .input-group input {
+    width: 20rem;
+    outline: none;
+    border: 1px solid;
+    padding: 1rem;
+}
+
 form .input-group button {
     display: block;
     width: 80%;
@@ -148,5 +155,13 @@ form .input-group button {
 
 .checks-conditions{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+form .alert-danger{
+    color: var(--vermelho);
+    border: 1px solid var(--branco);
+    background-color: transparent;
+    font-family: var(--worksans);
 }
