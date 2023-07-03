@@ -16,6 +16,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\CheckNotAuthUser;
+use App\Http\Middleware\CheckAuthUser;
+use App\Http\Controllers\SocialLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,14 +143,37 @@ Route::prefix('adm')->group(function () {
 
 Route::prefix('usuario')->controller(UsersController::class)->group(function () {
 
-    Route::view('/login', 'client.login')->name('client-login');
+    Route::view('/entrar', 'client.login')->name('client-login');
 
     Route::view('/cadastro', 'client.cadastro')->name('client-cadastro');
 
     Route::view('/confirmar/cadastro', 'client.confirm-cadastro')->name('client-confirmarCadastro');
 
+    // Rotas Actions
     Route::post('/registro', 'registerUser')->middleware(CheckNotAuthUser::class)->name('register-user');
+    Route::post('/login', 'LoginUser')->middleware(CheckNotAuthUser::class)->name('login-user');
+    Route::get('/sair', 'logoutUser')->middleware(CheckAuthUser::class)->name('logout-user');
+
+    //! LOGINS SOCIAIS
+
+    // Twitter
+    Route::controller(SocialLoginController::class)->group(function () {
+        // Twitter
+        Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
+        Route::get('auth/twitter/callback', 'handleTwitterCallback');
+
+        // Google
+        Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+        Route::get('auth/google/callback', 'handleGoogleCallback');
+
+        // Linkedin
+        Route::get('auth/linkedin/{provider}', 'redirectToLinkedin')->name('auth.linkedin');
+        Route::get('auth/linkedin/callback', 'handleLinkedinCallback');
+    });
+
 });
+
+
 
 
 
@@ -164,10 +189,9 @@ Route::get('/categorias', function () {
     return view('client.categorias');
 })->name('client-categorias');
 
-// TODO: #47 Adicionar middleware
 Route::get('/favoritos', function () {
     return view('client.favoritos');
-})->name('client-favoritos');
+})->middleware(CheckAuthUser::class)->name('client-favoritos');
 
 
 Route::get('/novo', function () {
@@ -181,4 +205,14 @@ Route::get('/factory', function () {
 
 Route::get('/session', function () {
     return session()->all();
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

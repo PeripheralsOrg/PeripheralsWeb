@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/home/footer.css') }}">
 
     {{-- Font Aweasome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
     {{-- Carrossel --}}
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
@@ -31,32 +31,45 @@
 <body>
     <header>
         <div class="box-logo">
-            <a href="{{route('client-homepage')}}">
+            <a href="{{ route('client-homepage') }}">
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
 
         <nav id="navLinks">
             <ul>
-                <li><a href="{{route('client-homepage')}}">Inicio</a></li>
-                <li><a href="{{route('client-categorias')}}">Ofertas</a></li>
-                <li><a href="{{route('client-categorias')}}">Produtos</a></li>
-                <li><a href="{{route('client-contato')}}">Contato</a></li>
+                <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
+                <li><a href="{{ route('client-categorias') }}">Ofertas</a></li>
+                <li><a href="{{ route('client-categorias') }}">Produtos</a></li>
+                <li><a href="{{ route('client-contato') }}">Contato</a></li>
             </ul>
         </nav>
 
         <div class="box-icons">
-            <a href=""><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></a>
-            <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}" alt="Ícone de Usuário"></a>
-            <a href="{{ route('client-favoritos') }}"><img src="{{ asset('images/icons-branco/coracao.svg') }}" alt="Ícone de Favoritos"></a>
-            <a href=""><img src="{{ asset('images/icons-branco/sacola.svg') }}" alt="Ícone do Carrinho de Compras"></a>
+            <button><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
-            {{-- <button><img src="{{ asset('images/icons/lupa.png') }}" alt="Ícone de Pesquisa"></button>
-            <button onclick="window.location.href=`{{ route('client-login') }}"><img src="{{ asset('images/icons/avatar.png') }}" alt="Ícone de Usuário"></button>
-            <button onclick="window.location.href=`{{ route('client-favoritos') }}"><img src="{{ asset('images/icons/heart.png') }}" alt="Ícone de Favoritos"></button>
-            <button>
-                <img src="{{ asset('images/icons/shopping-bag.png') }}" alt="Ícone do Carrinho de Compras">
-            </button> --}}
+
+
+            @if (empty(Request::session()->get('user')))
+                <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                        alt="Ícone de Usuário"></a>
+            @else
+                <div class="dropdown-link">
+                    <button class="btn-config"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                            alt="Ícone de Usuário"></button>
+                    <!-- <i class="fa-solid fa-angle-down"></i> -->
+                    <li class="dropdown-content">
+                        <a href="">Minha Conta</a>
+                        <a href="">Meu Pedidos</a>
+                        <a href="{{ route('logout-user') }}">Sair</a>
+                    </li>
+                </div>
+            @endif
+
+            <a href="{{ route('client-favoritos') }}"><img src="{{ asset('images/icons-branco/coracao.svg') }}"
+                    alt="Ícone de Favoritos"></a>
+            <a href=""><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+                    alt="Ícone do Carrinho de Compras"></a>
         </div>
     </header>
 

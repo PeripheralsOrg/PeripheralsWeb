@@ -15,13 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
-            $table->string('telefone_celular', 15);
-            $table->string('cpf', 15); 
+            $table->string('telefone_celular', 15)->nullable();
+            $table->string('cpf', 15)->unique()->nullable(); 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('feedback');
+            $table->tinyInteger('feedback')->nullable();
             $table->rememberToken();
+            $table->foreignId('current_team_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('twitter_id')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('linkedin_id')->nullable();
             $table->timestamps();
         });
     }

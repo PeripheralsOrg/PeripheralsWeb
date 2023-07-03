@@ -26,7 +26,6 @@
                 @endif
 
 
-
                 <!-- forms start -->
                 <form action="{{ route('register-user') }}" method="POST" 
                 class="form-confirm" id="formCadastroConfirm">
