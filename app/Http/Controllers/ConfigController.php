@@ -160,4 +160,13 @@ class ConfigController extends Controller
         }
         return false;
     }
+
+    public function getCategoria($id)
+    {
+        $getCategoria = Categoria::all()->where('id_categoria', $id)->toQuery();
+        if ($getCategoria) {
+            return $getCategoria;
+        }
+        return false;
+    }
 }
