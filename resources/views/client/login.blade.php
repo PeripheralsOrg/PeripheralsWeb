@@ -65,11 +65,6 @@
 
                 <div class="social-media">
                     <ul class="list-social-media">
-                        <a class="link-social-media" href="{{route('auth.twitter', 'twitter-oauth-2')}}">
-                            <li class="item-social-media1">
-                                <i class="fab fa-twitter"></i>
-                            </li>
-                        </a>
                         <a class="link-social-media" href="{{route('auth.google', 'google')}}">
                             <li class="item-social-media2">
                                 <i class="fab fa-google-plus-g"></i>

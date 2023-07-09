@@ -31,9 +31,9 @@ class User extends Authenticatable
         'cpf',
         'telefone_celular',
         'feedback',
-        'twitter_id',
         'google_id',
-        'linkedin_id'
+        'linkedin_id',
+        'profile_photo_path'
     ];
 
     /**

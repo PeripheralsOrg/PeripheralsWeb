@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Categoria;
 use App\Models\Marcas;
+use Exception;
 use Intervention\Image\Facades\Image;
 
 class ProdutoController extends Controller
@@ -24,31 +25,34 @@ class ProdutoController extends Controller
 
     public const MAXIMUM_SIZE = 5000000;
 
-    public function all(){
+    public function all()
+    {
         $produtosTest = Produto::all()->where('status', 1)->toArray();
-        if ($produtosTest) {
+        if (count($produtosTest) > 0) {
             $produtos = ProdutoView::all()->where('status', 1)->toQuery()->paginate(10);
             return view('admin.list.listProdutos')->with('produtos', $produtos);
         }
         return redirect()->route('falha-listProdutos');
     }
 
-    public function fallback(){
+    public function fallback()
+    {
         $erro = 'Produtos não encontrados!';
         return view('admin.list.listProdutos')->with('erro', $erro);
     }
 
-    public function search(Request $request){
-        if(empty($request->input('search'))){
+    public function search(Request $request)
+    {
+        if (empty($request->input('search'))) {
             return redirect()->route('page-listProdutos')->withErrors('Por favor, preencha o campo de pesquisa!');
         }
-        
+
         $search = $request->input('search');
         $produtos = json_decode(json_encode(DB::table('view_produto')->where('nome', 'LIKE', '%' . $search . '%')
-        ->Orwhere('marca', 'LIKE', '%'.$search . '%')
-        ->Orwhere('modelo', 'LIKE', '%' . $search . '%')
-        ->Orwhere('categoria', 'LIKE', '%' . $search . '%')
-        ->Orwhere('codigo', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+            ->Orwhere('marca', 'LIKE', '%' . $search . '%')
+            ->Orwhere('modelo', 'LIKE', '%' . $search . '%')
+            ->Orwhere('categoria', 'LIKE', '%' . $search . '%')
+            ->Orwhere('codigo', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
 
         if ($produtos) {
             return view('admin.list.listProdutos')->with('produtos', $produtos);
@@ -56,14 +60,15 @@ class ProdutoController extends Controller
         return redirect()->route('falha-listProdutos');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $produto = Produto::all()->where('id_produtos', $id)->toArray();
 
-        $deleteDetalhes = (DetalhesProduto::all()->where('id_detalhes', $produto[$id]['id_detalhes'])->toQuery())->update([
+        $deleteDetalhes = (DetalhesProduto::all()->where('id_detalhes', $produto[array_keys($produto)[0]]['id_detalhes'])->toQuery())->update([
             'status' => 0
         ]);
 
-        $deleteInventario = (ProdutoInventario::all()->where('id_inventario', $produto[$id]['id_inventario'])->toQuery())->update([
+        $deleteInventario = (ProdutoInventario::all()->where('id_inventario', $produto[array_keys($produto)[0]]['id_inventario'])->toQuery())->update([
             'status' => 0
         ]);
 
@@ -74,7 +79,7 @@ class ProdutoController extends Controller
 
             if (!$deleteProduto) {
                 return redirect()->back()->withErrors('
-                2706Ocorreu um erro ao deletar o produto!');
+                Ocorreu um erro ao deletar o produto!');
             }
 
             return redirect()->back()->withErrors('Produto deletado com sucesso!');
@@ -83,9 +88,11 @@ class ProdutoController extends Controller
         return redirect()->back()->withErrors('Ocorreu um erro ao deletar o produto!');
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
         // TODO: #34 Mudar mensagens de erro
+        
         $validate = $request->validate([
             'codigo' => ['required', Rule::unique('users_detalhes_produto', 'codigo')],
             'nome' => ['required'],
@@ -102,6 +109,7 @@ class ProdutoController extends Controller
             'garantia' => ['required'],
             'is_promocao' => ['required'],
             'status' => ['required'],
+            'imagem_principal' => ['required', 'mimes:jpeg,png,jpg,gif,webp']
         ]);
 
         $imagemPrincipal = $request->file('imagem_principal');
@@ -129,6 +137,8 @@ class ProdutoController extends Controller
 
         // Marca do Produto
         $getMarcaInfo = (new ConfigController())->getMarca($request->input('marca'));
+        $getCategoria = (new ConfigController())->getCategoria($request->input('categoria'));
+
 
         $produtoC = $produtoModel->create([
             'nome' => $request->input('nome'),
@@ -144,7 +154,10 @@ class ProdutoController extends Controller
             'id_marca' => $request->input('marca')
         ])->id_produtos;
 
+
+        // Pronlema ao inserir produto
         if (!$produtoC) {
+            ProdutoController::errorProdutoDelete(intval($detalhesProduto), intval($inventarioProduto));
             return redirect()->back()->withErrors('Ocorreu um erro ao inserir o produto!');
         }
 
@@ -152,40 +165,76 @@ class ProdutoController extends Controller
             return redirect()->back()->withErrors('Faça o upload da imagem principal!');
         }
 
-        $pathImageP = $this->storeImages($imagemPrincipal, $request->input('categoria'), $request->input('nome'));
+        $pathImageP = $this->storeImages($imagemPrincipal, $request->input('nome'), $getCategoria->getModel()->categoria);
+
+
+        // Problema ao armazenar imagem
         if (!$pathImageP) {
-            return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
+            ProdutoController::errorImageDelete(intval($detalhesProduto), intval($inventarioProduto), intval($produtoC));
+            return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem principal!');
         }
+
+
         $pathNames = [];
         $sizeList = [];
         if (is_countable($request->file('link_img'))) {
             for ($i = 0; $i < count($request->file('link_img')); $i++) {
                 $imagemStore = $request->file('link_img')[$i];
                 $sizeList[$i] = $request->file('link_img')[$i]->getSize();
-                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, $i);
-                if (!$pathNames[$i]) {
-                    return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
+                $pathNames[$i] = $this->storeImages($imagemStore, $getCategoria->getModel()->categoria, $request->input('nome'), true, $i);
+                if (!$pathNames[$i] && count($request->file('link_img')) > 0) {
+                    return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload das imagens!');
                 }
             }
         }
 
         //! Imagem Principal
-        $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $produtoC, 
-        $request->file('imagem_principal')->getSize(), 1);
+        $produtoImagemP = (new ProdutoImagensController())->insertImage(
+            $pathImageP,
+            $request->input('nome'),
+            $produtoC,
+            $request->file('imagem_principal')->getSize(),
+            1
+        );
 
         //! Array de imagens
         if (!empty($pathNames)) {
             $produtoImagens = (new ProdutoImagensController())->insertImage($pathNames, $request->input('nome'), $produtoC, $sizeList, 0);
+        } else {
+            $produtoImagens = true;
         }
 
         if ($produtoImagemP && $produtoImagens && $produtoC && $inventarioProduto && $detalhesProduto) {
             return redirect()->route('page-listProdutos');
+        }else{
+            ProdutoController::errorImageDelete(intval($detalhesProduto), intval($inventarioProduto), intval($produtoC));
+            return redirect()->back()->withErrors('Ocorreu um erro ao inserir as informações do produto!');
         }
-        return redirect()->back()->withErrors('Ocorreu um erro ao inserir as informações do produto!');
+    }
+
+    public static function errorProdutoDelete($idDetalhes, $idInventario)
+    {
+        $deleteDetail = DetalhesProduto::findOrFail($idDetalhes);
+        $deleteDetail->delete();
+
+        $deleteInvent = ProdutoInventario::findOrFail($idInventario);
+        $deleteInvent->delete();
+    }
+
+    public static function errorImageDelete($idDetalhes, $idInventario, $idProduto){
+        $deleteProduto = Produto::findOrFail($idProduto);
+        $deleteProduto->delete();
+
+        $deleteDetail = DetalhesProduto::findOrFail($idDetalhes);
+        $deleteDetail->delete();
+
+        $deleteInvent = ProdutoInventario::findOrFail($idInventario);
+        $deleteInvent->delete();
     }
 
 
-    public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0){
+    public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0)
+    {
         if (!$array) {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
                 if (!$file->isValid()) {
@@ -194,11 +243,22 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                // $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '.webp';
-                $imageName = $categoria . '-' . $name . '-'. date('d-m-Y') . '.webp';
-                $imageConvert = Image::make($file)->encode('webp')->save(public_path('storage/'. $imageName), 90, 'webp');
-                return 'storage/' . $imageName;
-                // return $file->storeAs('files/produtos-images', $imageName, 's3');
+
+
+                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '.' . 'webp';
+
+                $imageConvert = Image::make($file)->encode('webp')->getEncoded();
+
+
+                $uploadFile = Storage::disk('s3')->put(
+                    'files/' . $imageName,
+                    $imageConvert
+                );
+
+                // Método funcionando perfeitamente
+                $pathUploadedFile = Storage::disk('s3')->url('files/' . $imageName);
+
+                return $pathUploadedFile;
             }
         } else {
             if ($file->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
@@ -209,15 +269,25 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                // $imageName = str_replace('/', '-', $file->getMimeType()) . '-' . date('Y-m-d') . '-' . $name . '-' . $number . '.webp';
-                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.webp';
-                $imageConvert = Image::make($file)->encode('webp')->save(public_path('storage/' . $imageName), 90, 'webp');
-                return 'storage/' . $imageName;
+                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.' . $file->getClientOriginalExtension();
+
+                $imageConvert = Image::make($file)->encode('webp')->getEncoded();
+
+                // Método funcionando perfeitamente
+                $uploadFile = Storage::disk('s3')->put(
+                    'files/' . $imageName,
+                    $imageConvert
+                );
+
+                $pathUploadedFile = Storage::disk('s3')->url('files/' . $imageName);
+
+                return $pathUploadedFile;
             }
         }
     }
 
-    public function getInsert(){
+    public function getInsert()
+    {
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->where('status', 1)->toArray();
 
@@ -229,13 +299,12 @@ class ProdutoController extends Controller
             'categorias' => $categorias,
             'marcas' => $marcas
         ]);
-        
     }
 
 
-    // TODO: #42 Corrigir problemas com a Amazon AWS
 
-    public function getUpdate($id){
+    public function getUpdate($id)
+    {
         $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();
         $imgs = ProdutoImagens::all()->where('id_produto', $id)->toArray();
         $categorias = Categoria::all()->toArray();
@@ -246,7 +315,7 @@ class ProdutoController extends Controller
         }
 
         if ($produto) {
-            if($imgs){
+            if ($imgs) {
                 return view('admin.forms.UpdateProduto')->with([
                     'categorias' => $categorias,
                     'marcas' => $marcas,
@@ -264,7 +333,8 @@ class ProdutoController extends Controller
         return redirect()->back()->withErrors('Não foi possível encontrar o produto!');
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $validate = $request->validate([
             'codigo' => ['required'],
             'nome' => ['required'],
@@ -300,11 +370,15 @@ class ProdutoController extends Controller
                 'delete_image',
                 'imagem_principal',
                 'link_img'
-            ), $produtoModel->getModel()->getAttribute('id_detalhes')
+            ),
+            $produtoModel->getModel()->getAttribute('id_detalhes')
         );
 
-        $inventarioProduto = (new ProdutoinventarioController())->updateInventario($request->input('quantidade'), 
-        $request->input('status'), $produtoModel->getModel()->getAttribute('id_inventario'));
+        $inventarioProduto = (new ProdutoinventarioController())->updateInventario(
+            $request->input('quantidade'),
+            $request->input('status'),
+            $produtoModel->getModel()->getAttribute('id_inventario')
+        );
 
         $produtoC = $produtoModel->update([
             'nome' => $request->input('nome'),
@@ -329,8 +403,13 @@ class ProdutoController extends Controller
                 return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
             }
             //! Imagem Principal
-            $produtoImagemP = (new ProdutoImagensController())->insertImage($pathImageP, $request->input('nome'), $id,
-            $request->file('imagem_principal')->getSize(), 1);
+            $produtoImagemP = (new ProdutoImagensController())->insertImage(
+                $pathImageP,
+                $request->input('nome'),
+                $id,
+                $request->file('imagem_principal')->getSize(),
+                1
+            );
         }
 
         $pathNames = [];
@@ -338,7 +417,7 @@ class ProdutoController extends Controller
         if (is_countable($request->file('link_img'))) {
             for ($i = 0; $i < count($request->file('link_img')); $i++) {
                 $imagemStore = $request->file('link_img')[$i];
-                $sizeList[$i] = $request->file('link_img')->getSize();
+                $sizeList[$i] = $request->file('link_img')[$i]->getSize();
                 $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, $i);
                 if (!$pathNames[$i]) {
                     return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');

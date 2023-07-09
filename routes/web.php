@@ -156,18 +156,13 @@ Route::prefix('usuario')->controller(UsersController::class)->group(function () 
 
     //! LOGINS SOCIAIS
 
-    // Twitter
     Route::controller(SocialLoginController::class)->group(function () {
-        // Twitter
-        Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
-        Route::get('auth/twitter/callback', 'handleTwitterCallback');
-
         // Google
         Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
         Route::get('auth/google/callback', 'handleGoogleCallback');
 
         // Linkedin
-        Route::get('auth/linkedin/{provider}', 'redirectToLinkedin')->name('auth.linkedin');
+        Route::get('auth/linkedin', 'redirectToLinkedin')->name('auth.linkedin');
         Route::get('auth/linkedin/callback', 'handleLinkedinCallback');
     });
 
