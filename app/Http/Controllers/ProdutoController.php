@@ -233,6 +233,7 @@ class ProdutoController extends Controller
     }
 
 
+    // Armazenamento de Imagens
     public function storeImages(HttpUploadedFile $file, $name, $categoria, $array = false, $number = 0)
     {
         if (!$array) {
