@@ -184,9 +184,14 @@ Route::get('/categorias', function () {
     return view('client.categorias');
 })->name('client-categorias');
 
+Route::get('/pesquisa', function () {
+    return view('client.pesquisa');
+})->name('client-pesquisa');
+
 Route::get('/favoritos', function () {
     return view('client.favoritos');
 })->middleware(CheckAuthUser::class)->name('client-favoritos');
+
 
 
 Route::get('/novo', function () {
