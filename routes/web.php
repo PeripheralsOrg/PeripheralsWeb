@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CupomController;
+use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SubmenuController;
@@ -141,6 +143,15 @@ Route::prefix('adm')->group(function () {
 });
 
 
+// CLIENTE
+
+Route::prefix('filtro')->controller(CategoriaController::class)->group(function () {
+    Route::get('admin/filtrar', 'produtoFilterAdmin')->name('produto-filter');
+    Route::get('admin/filtro/reset', 'resetFilters')->name('produto-resetFilter');
+});
+
+
+
 Route::prefix('usuario')->controller(UsersController::class)->group(function () {
 
     Route::view('/entrar', 'client.login')->name('client-login');
@@ -168,7 +179,12 @@ Route::prefix('usuario')->controller(UsersController::class)->group(function () 
 
 });
 
-
+Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('lista', 'all')->name('client-favoritos');
+    Route::post('favoritar/{idProduto}', 'register')->name('favoritar-produto');
+    Route::delete('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    Route::get('falha', 'fallback')->name('falha-listFavoritos');
+});
 
 
 

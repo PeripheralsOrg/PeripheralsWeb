@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('css', 'admin/listProdutos')
+@section('js', 'admin/listProdutos')
 @section('title')@parent Lista de Produtos @stop
 
 
@@ -35,7 +36,7 @@
 
             <div class="box-status box-filter">
                 <label for="selectStatus">Status</label>
-                <select id="selectStatus" name="select-status">
+                <select id="selectStatus" onchange="submitFilter(this)" name="select-status">
                     <option>Todos</option>
                     <option value="1">Disponivel</option>
                     <option value="0">Indisponivel</option>
@@ -44,23 +45,30 @@
 
             <div class="box-faixa-preco box-filter">
                 <label for="boxSelectCategoria">Categorias</label>
-                <select id="boxSelectCategoria" name="select-faixa-preco">
+                <select id="boxSelectCategoria" onchange="submitFilter(this)" name="select-categoria">
                     <option>Todos</option>
+                    <option value="Monitor">Monitor</option>
+                    <option value="Teclado">Teclado</option>
                 </select>
             </div>
 
             <div class="box-ordem box-filter">
                 <label for="selectOrdem">Ordenar Por</label>
-                <select id="selectOrdem" name="select-ordem">
+                <select id="selectOrdem" onchange="submitFilter(this)" name="select-ordem">
                     <option>Todos</option>
-                    <option value="1">Maior Preço</option>
-                    <option value="2">Menor Preço</option>
-                    <option value="3">Mais Relevante</option>
+                    <option value="DESC">Maior Preço</option>
+                    <option value="ASC">Menor Preço</option>
+                    <option value="quant">Mais Relevante</option>
                 </select>
             </div>
 
+            <form style="display: none" id="formFilter" action="{{ route('produto-filter') }}" method="GET">
+                <input type="hidden" id="selectName" name="selectName">
+                <input type="hidden" id="selectValue" name="selectValue">
+            </form>
+
             <div class="container-clean-filters box-filter">
-                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listProdutos') }}`">
+                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('produto-resetFilter') }}`">
                     Limpar Filtros
                 </button>
             </div>
@@ -120,7 +128,9 @@
         </table>
         @if (!empty($produtos))
             <div class="mt-4 p-4 box has-text-centered">
-                {{ $produtos->links('pagination::default') }}
+                @if (!is_array($produtos))
+                    {{ $produtos->links('pagination::default') }}
+                @endif
             </div>
         @endif
         </section>
