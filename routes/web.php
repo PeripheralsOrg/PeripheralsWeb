@@ -8,11 +8,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClientProdutoController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CupomController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoOfertasController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\UsersController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -186,6 +188,23 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
     Route::get('falha', 'fallback')->name('falha-listFavoritos');
 });
 
+
+Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
+    Route::get('lista', 'allProdutos')->name('produto-pesquisaAll');
+    Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
+    Route::get('preco/max', 'maximumValue')->name('produto-maxValue');
+    Route::get('categoria/{categoria}', 'filterCategoria')->name('produtoCategoria-maxValue');
+    Route::get('falha/produto', 'fallback')->name('falha-produtoClient');
+    Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
+});
+
+Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->group(function () {
+    Route::get('lista', 'allOfertas')->name('produtoOfertas-pesquisaAll');
+    Route::get('filtrar/produto', 'produtoFilterClient')->name('produtoOfertas-filterClient');
+    Route::get('preco/max', 'maximumValue')->name('produtoOfertas-maxValue');
+    Route::get('falha/produto', 'fallback')->name('falhaOfertas-produtoClient');
+    Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClientOfertas-resetFilter');
+});
 
 
 Route::get('/', function () {

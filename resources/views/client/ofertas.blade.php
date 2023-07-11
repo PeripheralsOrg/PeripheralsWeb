@@ -1,7 +1,7 @@
 @extends('layouts.client')
 @section('css', 'home/pesquisa')
 @section('js', 'home/pesquisa')
-@section('title')@parent Item Pesquisado @stop
+@section('title')@parent Ofertas @stop
 
 @section('content')
 
@@ -20,7 +20,7 @@
                         </select>
                     </div>
 
-                    <form class="box-filter" method="GET" action="{{ route('produto-maxValue') }}">
+                    <form class="box-filter" method="GET" action="{{ route('produtoOfertas-maxValue') }}">
                         <label for="maxValue">Valor Máximo</label>
                         <input type="range" name="max-value" id="valueInput" value="1000" min="10" max="10000"
                             step="90">
@@ -58,11 +58,11 @@
                     </select>
                 </div>
 
-                <form style="display: none" id="formFilter" action="{{ route('produto-filterClient') }}" method="GET">
+                <form style="display: none" id="formFilter" action="{{ route('produtoOfertas-filterClient') }}" method="GET">
                     <input type="hidden" id="selectName" name="selectName">
                     <input type="hidden" id="selectValue" name="selectValue">
                 </form>
-                <button onclick="window.location.href='{{ route('produtoClient-resetFilter') }}'" id="cleanFilters">Limpar
+                <button onclick="window.location.href='{{ route('produtoClientOfertas-resetFilter') }}'" id="cleanFilters">Limpar
                     Filtros</button>
             </section>
 

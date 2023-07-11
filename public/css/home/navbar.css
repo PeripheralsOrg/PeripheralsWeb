@@ -45,7 +45,13 @@ header nav ul {
 
 header nav ul li a {
     color: var(--branco);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    transition: var(--navbar-transition);
+}
+
+header nav ul li a:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
 }
 
 
@@ -113,6 +119,68 @@ header .dropdown-link:hover .dropdown-content {
     display: none;
 }
 
+
+/* Menu Produtos Dropdown */
+
+
+header .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    gap: .5rem;
+    position: absolute;
+    margin-top: .2rem;
+}
+
+header .dropdown-menu a {
+    display: block;
+    z-index: 10000;
+    width: 100%;
+}
+
+header .dropdown-linkMenu {
+    display: block;
+    color: #000;
+    font-size: 1.2rem;
+    z-index: 10000;
+}
+
+header .link-menu {
+    color: #fff;
+}
+
+/* animações_de_botões*/
+header .dropdown-linkMenu:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .link-menu:hover {
+    /* text-decoration: underline; */
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .dropdown-linkMenu:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1rem;
+    gap: .5rem;
+    border-radius: 10px;
+}
+
+.dropdown-menu a{
+    color: var(--preto);
+    transition: ease .3s;
+}
+
+.dropdown-menu a:hover{
+    color: var(--vermelho);
+}
+
+
+
+/* Media Queries */
 
 @media(max-width: 750px) {
     header {

@@ -166,3 +166,17 @@ main h1 {
 .produto-item .fa-heart:hover {
     color: var(--vermelho);
 }
+
+.container-error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.container-error h1{
+    color: var(--branco);
+    font-family: var(--quicksand);
+    font-size: 2rem;
+}

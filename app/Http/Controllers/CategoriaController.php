@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use App\Models\ProdutoView;
 
@@ -27,6 +26,10 @@ class CategoriaController extends Controller
 
     public static function sendData($produtos)
     {
+
+        if(!Session::has('user')){
+            return redirect()->route('auth-sair');
+        }
 
         if (!empty($produtos)) {
             return view('admin.list.listProdutos')->with('produtos', $produtos);

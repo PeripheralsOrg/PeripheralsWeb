@@ -37,18 +37,29 @@
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
-
         <nav id="navLinks">
             <ul>
                 <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
-                <li><a href="{{ route('client-categorias') }}">Ofertas</a></li>
-                <li><a href="{{ route('client-categorias') }}">Produtos</a></li>
+                <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
+                {{-- <li><a href="{{ route('client-categorias') }}">Produtos</a></li> --}}
+                <div class="dropdown-linkMenu">
+                    <a class="link-menu" href="{{ route('produto-pesquisaAll') }}">Produtos</a>
+                    <!-- <i class="fa-solid fa-angle-down"></i> -->
+                    <li class="dropdown-menu">
+                        @foreach ($categoriasProviderAll as $item)
+                            <a href="{{ route('produtoCategoria-maxValue', $item['categoria']) }}">
+                                {{ $item['categoria'] }}
+                            </a>
+                        @endforeach
+                    </li>
+                </div>
                 <li><a href="{{ route('client-contato') }}">Contato</a></li>
             </ul>
         </nav>
 
         <div class="box-icons">
-            <button onclick="window.location.href='{{route('client-pesquisa')}}'"><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'"><img
+                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
             @if (empty(Request::session()->get('user')))
                 <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
@@ -83,14 +94,16 @@
         </div>
 
         <div class="box-logo-responsive">
-            <a href="#">
+            <a href="">
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
 
         <!-- Tá sem a função da caixa de pesquisa -->
         <div class="mobile-menu">
-            <button><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'">
+                <img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa">
+            </button>
         </div>
 
         <div class="boxAbertaNav">
@@ -114,8 +127,8 @@
                 <nav id="navList-responsive">
                     <ul>
                         <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
-                        <li><a href="{{ route('client-categorias') }}">Ofertas</a></li>
-                        <li><a href="{{ route('client-categorias') }}">Produtos</a></li>
+                        <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
+                        <li><a href="{{ route('produto-pesquisaAll') }}">Produtos</a></li>
                         <li><a href="{{ route('client-contato') }}">Contato</a></li>
                     </ul>
                 </nav>
