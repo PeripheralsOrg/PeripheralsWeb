@@ -189,6 +189,7 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
 });
 
 
+// Página Geral
 Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
     Route::get('lista', 'allProdutos')->name('produto-pesquisaAll');
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
@@ -198,6 +199,7 @@ Route::prefix('produtos')->controller(ClientProdutoController::class)->group(fun
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
 });
 
+// Página de Ofertas
 Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->group(function () {
     Route::get('lista', 'allOfertas')->name('produtoOfertas-pesquisaAll');
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produtoOfertas-filterClient');
