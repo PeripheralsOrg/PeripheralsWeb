@@ -1,40 +1,33 @@
 @extends('layouts.client')
 @section('css', 'home/homepage')
 @section('js', 'home/homepage')
-@section('title')@parent Homepage @stop
-<script defer src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+@section('title')@parent Página Inicial @stop
+
+{{-- Carrossel CDN --}}
 
 @section('content')
-{{-- <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
-<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script src="{{asset('bootstrap/bootstrap.min.js')}}"></script> --}}
 
-
-    <!-- carousel starts  -->
-
-    {{-- Carrossel de Imagens --}}
-
-    <section class="box-carrossel embla">
-        <button class="embla__prev banner_prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
-
-        <div class="embla__viewport banner_viewport">
-            <div class="embla__container">
-                @for ($i = 0; $i < 4; $i++)
-                    <img style="width:100% !important" src="{{ asset('images/img1.jpg') }}" alt="">
-                @endfor
-            </div>
+    <!-- Swiper_start -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @for ($i = 0; $i < 4; $i++)
+                <div class="swiper-slide">
+                    <div class="project-img">
+                        <img src="{{ asset('images/banner.png') }}" alt="">
+                    </div>
+                </div>
+            @endfor
         </div>
-        <button class="embla__next banner_next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
-    </section>
-
-    <!-- carousel ends -->
+        <!-- Swiper-wrapper_end -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Swiper_end -->
 
     <!-- services starts -->
 
     <main>
-
-
         <section class="service">
             <div class="container-services">
 
@@ -100,59 +93,46 @@
 
         <section id="product1" class="section-p1">
             <h2 class="titulo">Lançamentos</h2>
+
+            <!-- pro-container_swiper_start -->
             <div class="pro-container">
-                <section class="produto-carrossel embla">
-                    <button class="embla__prev produto_prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
-            
-                    <div class="embla__viewport produto_viewport">
-                        <div class="embla__container produto_embla_container">
-                            @for ($i = 0; $i < 5; $i++)
-                            <div class="pro item">
-                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                                <hr>
-                                <div class="des">
-                                    <span>MULTILASER</span>
-                                    <h5>Mouse Gamer</h5>
-                                    <div class="star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <h4>R$ 120,00</h4>
+
+                <!-- slider_swiper-wrapper_start -->
+                <div class="swiper-button-next-produto swiper-navBtn"><i class="fa-solid fa-angle-left"></i></div>
+
+                <div class=" slider swiper-wrapper">
+
+
+                    @for ($i = 0; $i < 6; $i++)
+                        <div class="pro item swiper-slide">
+                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                            <hr>
+                            <div class="des">
+                                <span>MULTILASER</span>
+                                <h5>Mouse Gamer</h5>
+                                <div class="star">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
-                                <div>
-                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                    <a href=""><i class="fa fa-heart"></i></a>
-                                </div>
+                                <h4>R$ 120,00</h4>
                             </div>
-                            @endfor
+                            <div class="actions-container">
+                                <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                <a href=""><i class="fa fa-heart"></i></a>
+                            </div>
                         </div>
-                    </div>
+                    @endfor
 
-                    <!-- Slide Template -->
-                    <script type="text/template" id="embla-slide-template">
-                        <div class="embla__slide">
-                        <div class="embla__slide__inner">
-                            <img class="embla__slide__img" src="media/media-__img-nr__.jpeg" />
-                            <div class="embla__slide__number">__slide-nr__</div>
-                        </div>
-                        </div>
-                    </script>
+                </div>
+                <!-- slider_swiper-wrapper_end -->
 
-                    <!-- Loading Template -->
-                    <script type="text/template" id="embla-loading-template">
-                        <div class="embla__slide embla__slide--loading">
-                        <div class="embla__slide__inner embla__slide__inner--loading">
-                            <div class="embla__slide__loading"></div>
-                        </div>
-                        </div>
-                    </script>
-                    
-                    <button class="embla__next produto_next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
-                </section>
+                <div class="swiper-button-prev-produto swiper-navBtn"><i class="fa-solid fa-angle-right"></i></div>
+
             </div>
+            <!-- pro-container_swiper_end -->
         </section>
 
         <!-- cards end -->
@@ -193,42 +173,49 @@
         <!-- cards start -->
 
         <section id="product1" class="section-p1">
-
             <h2 class="titulo">Lançamentos</h2>
+
+            <!-- pro-container_swiper_start -->
             <div class="pro-container">
-                <section class="produto-carrossel embla">
-                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
-            
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            @for ($i = 0; $i < 5; $i++)
-                            <div class="pro item">
-                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                                <hr>
-                                <div class="des">
-                                    <span>MULTILASER</span>
-                                    <h5>Mouse Gamer</h5>
-                                    <div class="star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <h4>R$ 120,00</h4>
+
+                <!-- slider_swiper-wrapper_start -->
+                <div class="swiper-button-next-produto swiper-navBtn"><i class="fa-solid fa-angle-left"></i></div>
+
+                <div class=" slider swiper-wrapper">
+
+
+                    @for ($i = 0; $i < 6; $i++)
+                        <div class="pro item swiper-slide">
+                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                            <hr>
+                            <div class="des">
+                                <span>MULTILASER</span>
+                                <h5>Mouse Gamer</h5>
+                                <div class="star">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
-                                <div>
-                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                    <a href=""><i class="fa fa-heart"></i></a>
-                                </div>
+                                <h4>R$ 120,00</h4>
                             </div>
-                            @endfor
+                            <div class="actions-container">
+                                <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                <a href=""><i class="fa fa-heart"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
-                </section>
+                    @endfor
+
+                </div>
+                <!-- slider_swiper-wrapper_end -->
+
+                <div class="swiper-button-prev-produto swiper-navBtn"><i class="fa-solid fa-angle-right"></i></div>
+
             </div>
+            <!-- pro-container_swiper_end -->
         </section>
+
 
         <!-- cards end -->
 
@@ -263,41 +250,47 @@
         <!-- cards start -->
 
         <section id="product1" class="section-p1">
-
             <h2 class="titulo">Lançamentos</h2>
+
+            <!-- pro-container_swiper_start -->
             <div class="pro-container">
-                <section class="produto-carrossel embla">
-                    <button class="embla__prev"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
-            
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            @for ($i = 0; $i < 5; $i++)
-                            <div class="pro item">
-                                <img src="{{ asset('images/mou_4.jpg') }}" alt="">
-                                <hr>
-                                <div class="des">
-                                    <span>MULTILASER</span>
-                                    <h5>Mouse Gamer</h5>
-                                    <div class="star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <h4>R$ 120,00</h4>
+
+                <!-- slider_swiper-wrapper_start -->
+                <div class="swiper-button-next-produto swiper-navBtn"><i class="fa-solid fa-angle-left"></i></div>
+
+                <div class=" slider swiper-wrapper">
+
+
+                    @for ($i = 0; $i < 6; $i++)
+                        <div class="pro item swiper-slide">
+                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                            <hr>
+                            <div class="des">
+                                <span>MULTILASER</span>
+                                <h5>Mouse Gamer</h5>
+                                <div class="star">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
-                                <div>
-                                    <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                    <a href=""><i class="fa fa-heart"></i></a>
-                                </div>
+                                <h4>R$ 120,00</h4>
                             </div>
-                            @endfor
+                            <div class="actions-container">
+                                <a href=""><i class="fa fa-shopping-bag"></i></a>
+                                <a href=""><i class="fa fa-heart"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <button class="embla__next"><i class="fa-solid fa-arrow-right fa-2x"></i></button>
-                </section>
+                    @endfor
+
+                </div>
+                <!-- slider_swiper-wrapper_end -->
+
+                <div class="swiper-button-prev-produto swiper-navBtn"><i class="fa-solid fa-angle-right"></i></div>
+
             </div>
+            <!-- pro-container_swiper_end -->
         </section>
 
         <!-- cards end -->

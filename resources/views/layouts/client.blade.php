@@ -17,8 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
     {{-- Carrossel --}}
-    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
-    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/home/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script defer src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <title>
         @section('title')
@@ -35,20 +37,29 @@
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
-
         <nav id="navLinks">
             <ul>
                 <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
-                <li><a href="{{ route('client-categorias') }}">Ofertas</a></li>
-                <li><a href="{{ route('client-categorias') }}">Produtos</a></li>
+                <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
+                {{-- <li><a href="{{ route('client-categorias') }}">Produtos</a></li> --}}
+                <div class="dropdown-linkMenu">
+                    <a class="link-menu" href="{{ route('produto-pesquisaAll') }}">Produtos</a>
+                    <!-- <i class="fa-solid fa-angle-down"></i> -->
+                    <li class="dropdown-menu">
+                        @foreach ($categoriasProviderAll as $item)
+                            <a href="{{ route('produtoCategoria-maxValue', $item['categoria']) }}">
+                                {{ $item['categoria'] }}
+                            </a>
+                        @endforeach
+                    </li>
+                </div>
                 <li><a href="{{ route('client-contato') }}">Contato</a></li>
             </ul>
         </nav>
 
         <div class="box-icons">
-            <button><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
-
-
+            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'"><img
+                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
             @if (empty(Request::session()->get('user')))
                 <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
@@ -72,6 +83,60 @@
                     alt="Ícone do Carrinho de Compras"></a>
         </div>
     </header>
+
+    <nav id="navResponsive">
+
+        <div class="mobile-menu">
+            <button class="btnAbrirMenu" onclick="openMenu()"><img src="{{ asset('images/menu-aberto.png') }}"
+                    alt="Ícone de Menu"></button>
+            <button class="btnFecharMenu" onclick="closeMenu()"><img src="{{ asset('images/letra-x.png') }}"
+                    alt="Ícone de Fechar"></button>
+        </div>
+
+        <div class="box-logo-responsive">
+            <a href="">
+                <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
+            </a>
+        </div>
+
+        <!-- Tá sem a função da caixa de pesquisa -->
+        <div class="mobile-menu">
+            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'">
+                <img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa">
+            </button>
+        </div>
+
+        <div class="boxAbertaNav">
+
+            <section class="nav-content">
+                <div class="box-icons-responsive">
+                    @if (empty(Request::session()->get('user')))
+                        <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                                alt="Ícone de Usuário">Cadastro/Login</a>
+                    @else
+                        <div class="dropdown-link">
+                            <a class="btn-config"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                                    alt="Ícone de Usuário">Conta</a>
+                    @endif
+                    <a href="{{ route('client-favoritos') }}"><img
+                            src="{{ asset('images/icons-branco/coracao.svg') }}" alt="Ícone de Favoritos">Favoritos</a>
+                    <a href=""><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+                            alt="Ícone do Carrinho de Compras">Sacola</a>
+                </div>
+
+                <nav id="navList-responsive">
+                    <ul>
+                        <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
+                        <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
+                        <li><a href="{{ route('produto-pesquisaAll') }}">Produtos</a></li>
+                        <li><a href="{{ route('client-contato') }}">Contato</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+    </nav>
+
+    {{-- FIM RESPONSIVE NAVBAR --}}
 
     <section class="container-content">
         @yield('content')
@@ -123,6 +188,7 @@
         </div>
     </footer>
 </body>
-<script src="{{ asset('js/admin/admin.js') }}"></script>
+<script src="{{ asset('js/home/client.js') }}"></script>
+<script src="{{ asset('js/home/swiper-bundle.min.js') }}"></script>
 
 </html>

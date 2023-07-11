@@ -18,7 +18,6 @@ class RedirectIfNotAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         // $guards = empty($guards) ? [null] : $guards;
-
         // foreach ($guards as $guard) {
         if (!Auth::guard('adm_users')->check()) {
             return $next($request);

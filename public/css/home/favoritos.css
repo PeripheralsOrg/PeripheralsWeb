@@ -1,5 +1,56 @@
 @import '../import.css';
 
+
+
+/* CARROSSEL PRODUTO */
+
+#product1 {
+    overflow: hidden;
+}
+
+#product1 .pro-container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+
+div.swiper-button-prev-produto,
+.swiper-rtl .swiper-button-next-produto {
+    position: absolute;
+    right: 3rem;
+    color: var(--branco);
+    display: block;
+    padding: 1rem;
+    margin-top: 15rem;
+}
+
+.swiper-button-next-produto i,
+.swiper-button-prev-produto i {
+    font-size: 40px;
+}
+
+
+div.swiper-button-next-produto,
+.swiper-rtl .swiper-button-prev-produto {
+    position: absolute;
+    left: 3rem;
+    color: var(--branco);
+    display: block;
+    padding: 1rem;
+    margin-top: 15rem;
+}
+
+.swiper-pagination-produto {
+    margin: 0 auto;
+}
+
+/* END CARROSSEL PRODUTO */
+
+
+
+
+
 #product1 {
     text-align: center;
 }
@@ -57,37 +108,48 @@
 }
 
 #product1 .pro .fa-shopping-bag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
-    line-height: 40px;
     border-radius: 50px;
     background-color: var(--preto);
     font-weight: 600;
     color: var(--branco);
     border: 1px solid var(--preto);
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
 }
 
 #product1 .pro .fa-heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
-    line-height: 40px;
     border-radius: 50px;
     background-color: var(--preto);
     font-weight: 600;
     color: var(--branco);
     border: 1px solid var(--preto);
-    position: absolute;
-    bottom: 20px;
-    right: 60px;
     transition: 0.2s ease;
 }
 
 #product1 .pro .fa-heart:hover {
     color: var(--vermelho);
 }
+
+.actions-container{
+    display: flex;
+    flex-direction: row;
+    float: right;
+    gap: 1rem;
+    margin-top: -5rem;
+}
+
+.pro .des{
+    width: fit-content;
+}
+
 
 .section-p1 {
     padding: 40px 120px;

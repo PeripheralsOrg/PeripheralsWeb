@@ -1,37 +1,10 @@
-var swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    centerSlide: "true",
-    fade: "true",
-
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    autoplay: {
-        delay: 8000,
-        disableOnInteraction: false,
-    },
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-        },
-    },
-});
-
-
 var swiperProduto = new Swiper(".pro-container", {
     slidesPerView: 3,
     spaceBetween: 30,
-    loop: true,
+    loop: false,
     centerSlide: "true",
     fade: "true",
-    grabCursor: "true",
+    grabCursor: "",
     pagination: {
         el: ".swiper-pagination-produto",
         clickable: true,
@@ -56,4 +29,3 @@ var swiperProduto = new Swiper(".pro-container", {
         },
     },
 });
-

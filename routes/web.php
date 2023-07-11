@@ -7,10 +7,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClientProdutoController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CupomController;
+use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoOfertasController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\UsersController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -141,6 +145,15 @@ Route::prefix('adm')->group(function () {
 });
 
 
+// CLIENTE
+
+Route::prefix('filtro')->controller(CategoriaController::class)->group(function () {
+    Route::get('admin/filtrar', 'produtoFilterAdmin')->name('produto-filter');
+    Route::get('admin/filtro/reset', 'resetFilters')->name('produto-resetFilter');
+});
+
+
+
 Route::prefix('usuario')->controller(UsersController::class)->group(function () {
 
     Route::view('/entrar', 'client.login')->name('client-login');
@@ -168,8 +181,30 @@ Route::prefix('usuario')->controller(UsersController::class)->group(function () 
 
 });
 
+Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('lista', 'all')->name('client-favoritos');
+    Route::post('favoritar/{idProduto}', 'register')->name('favoritar-produto');
+    Route::delete('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    Route::get('falha', 'fallback')->name('falha-listFavoritos');
+});
 
 
+Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
+    Route::get('lista', 'allProdutos')->name('produto-pesquisaAll');
+    Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
+    Route::get('preco/max', 'maximumValue')->name('produto-maxValue');
+    Route::get('categoria/{categoria}', 'filterCategoria')->name('produtoCategoria-maxValue');
+    Route::get('falha/produto', 'fallback')->name('falha-produtoClient');
+    Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
+});
+
+Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->group(function () {
+    Route::get('lista', 'allOfertas')->name('produtoOfertas-pesquisaAll');
+    Route::get('filtrar/produto', 'produtoFilterClient')->name('produtoOfertas-filterClient');
+    Route::get('preco/max', 'maximumValue')->name('produtoOfertas-maxValue');
+    Route::get('falha/produto', 'fallback')->name('falhaOfertas-produtoClient');
+    Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClientOfertas-resetFilter');
+});
 
 
 Route::get('/', function () {
@@ -184,9 +219,14 @@ Route::get('/categorias', function () {
     return view('client.categorias');
 })->name('client-categorias');
 
+Route::get('/pesquisa', function () {
+    return view('client.pesquisa');
+})->name('client-pesquisa');
+
 Route::get('/favoritos', function () {
     return view('client.favoritos');
 })->middleware(CheckAuthUser::class)->name('client-favoritos');
+
 
 
 Route::get('/novo', function () {
