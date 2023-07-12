@@ -189,6 +189,7 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
 });
 
 
+// Página Geral
 Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
     Route::get('lista', 'allProdutos')->name('produto-pesquisaAll');
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
@@ -198,6 +199,7 @@ Route::prefix('produtos')->controller(ClientProdutoController::class)->group(fun
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
 });
 
+// Página de Ofertas
 Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->group(function () {
     Route::get('lista', 'allOfertas')->name('produtoOfertas-pesquisaAll');
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produtoOfertas-filterClient');
@@ -206,6 +208,29 @@ Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClientOfertas-resetFilter');
 });
 
+
+
+// RESET SENHA
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('user.not.auth')->name('password.request');
+
+Route::post('/forgot-password', [UsersController::class, 'resetPasswordEmail'])->middleware('user.not.auth')->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('user.not.auth')->name('password.reset');
+
+
+Route::post('/reset-password', [UsersController::class, 'resetPassword'])->middleware('user.not.auth')->name('password.update');
+
+
+
+
+
+
+
+// CONFIG & TESTE
 
 Route::get('/', function () {
     return view('client.index');
@@ -242,12 +267,12 @@ Route::get('/session', function () {
     return session()->all();
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
