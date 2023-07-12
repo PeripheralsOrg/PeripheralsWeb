@@ -12,16 +12,32 @@
             <div class="second-column">
 
                 <h2 class="title title-second">Contate-nos!</h2>
+
+                @if ($errors->any())
+                    <div class="container-error">
+                        <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
+                        @foreach ($errors->all() as $error)
+                            <p id="txt-error">
+                                {{ $error }}
+                            </p>
+                        @endforeach
+                    </div>
+                @endif
+
                 <!-- forms start -->
-                <form action="#">
+                <form action="{{route('contato-message')}}" method="GET">
 
                     <div class="input-group w50 container-row">
-                        <input type="text" id="name" placeholder="Digite seu nome" required>
-                        <input type="text" id="lastname" placeholder="Digite seu sobrenome" required class="nome">
+                        <input type="text" name="name" id="name" placeholder="Digite seu nome" required>
+                        <input type="text" name="lastname" id="lastName" placeholder="Digite seu sobrenome" required class="nome">
                     </div>
 
                     <div class="input-group">
-                        <input type="email" id="email" placeholder="Digite o seu email" required>
+                        <input type="email" name="email" id="email" placeholder="Digite o seu email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" name="assunto" id="assunto" placeholder="Assunto" required>
                     </div>
 
                     <div class="input-group">
