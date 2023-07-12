@@ -136,6 +136,7 @@ class UsersController extends Controller
         return redirect()->route('client-login')->withErrors('Sessão encerrada com sucesso');
     }
 
+    // RESET de Senha
     public function resetPasswordEmail (Request $request){
         $request->validate(['email' => 'required|email']);
 
