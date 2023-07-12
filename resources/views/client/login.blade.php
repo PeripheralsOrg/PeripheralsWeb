@@ -51,7 +51,7 @@
 
                     <div class="checks-conditions">
                         <span class="condicoes"><input type="checkbox" name="rememberMe">Mantenha-me logado</span>
-                        <span class="forgotten-password"><a href="#">Esqueceu sua senha?</a></span>
+                        <span class="forgotten-password"><a href="{{route('password.request')}}">Esqueceu sua senha?</a></span>
                     </div>
 
 

@@ -209,6 +209,29 @@ Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->
 });
 
 
+
+// RESET SENHA
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('user.not.auth')->name('password.request');
+
+Route::post('/forgot-password', [UsersController::class, 'resetPasswordEmail'])->middleware('user.not.auth')->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('user.not.auth')->name('password.reset');
+
+
+Route::post('/reset-password', [UsersController::class, 'resetPassword'])->middleware('user.not.auth')->name('password.update');
+
+
+
+
+
+
+
+// CONFIG & TESTE
+
 Route::get('/', function () {
     return view('client.index');
 })->name('client-homepage');
@@ -244,12 +267,12 @@ Route::get('/session', function () {
     return session()->all();
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
