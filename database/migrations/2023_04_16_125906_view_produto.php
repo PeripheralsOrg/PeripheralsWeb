@@ -12,8 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement(
-            'CREATE VIEW `view_produto` AS
+        DB::statement('CREATE VIEW `view_produto` AS
                 SELECT 
                     users_produtos.id_produtos,
                     users_produtos.nome,
@@ -43,20 +42,30 @@ return new class extends Migration
                     users_detalhes_produto.peso,
                     users_detalhes_produto.garantia,
                     users_detalhes_produto.info_adicional,
-                    users_detalhes_produto.status 
-                    AS detalhes_status
+                    `users_detalhes_produto`.`status` AS `detalhes_status`,
+                    `users_produto_imgs`.`link_img` AS `link_img`,
+                    `users_produto_imgs`.`img_principal` AS `img_principal`
 
-                FROM users_produtos
-                LEFT JOIN users_produto_categoria
-                ON users_produtos.id_categoria = users_produto_categoria.id_categoria
-
-                LEFT JOIN users_produto_inventario
-                ON users_produtos.id_inventario = users_produto_inventario.id_inventario
-
-                LEFT JOIN users_detalhes_produto
-                ON users_produtos.id_detalhes = users_detalhes_produto.id_detalhes'
-                
-        );
+                from ( ( ( (
+                    `users_produtos`
+                    left join `users_produto_categoria` on(
+                        `users_produtos`.`id_categoria` = `users_produto_categoria`.`id_categoria`
+                    )
+                )
+                left join `users_produto_inventario` on(
+                    `users_produtos`.`id_inventario` = `users_produto_inventario`.`id_inventario`
+                )
+            )
+            left join `users_detalhes_produto` on(
+                `users_produtos`.`id_detalhes` = `users_detalhes_produto`.`id_detalhes`
+            )
+        )
+        left join `users_produto_imgs` on(
+            `users_produtos`.`id_produtos` = `users_produto_imgs`.`id_produto`
+        )
+    )
+where
+    `users_produto_imgs`.`img_principal` = 1');
     }
 
     /**
