@@ -73,12 +73,14 @@
                 @if (!empty($produtos))
 
                     @foreach ($produtos as $item)
-                        <div class="produto-item">
-                            <img src="{{$item['link_img']}}" alt="">
+                        <div style="cursor: pointer;" class="produto-item"
+                            onclick="window.location.href=`{{ route('produto-get', $item['id_produtos']) }}`">
+                            
+                            <img src="{{ $item['link_img'] }}" alt="">
                             <hr>
                             <div class="des">
-                                <span>{{$item['marca']}}</span>
-                                <h5>{{$item['nome']}}</h5>
+                                <span>{{ $item['marca'] }}</span>
+                                <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -86,7 +88,7 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <h4>R$ {{$item['preco']}}</h4>
+                                <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
                             <div>
                                 <a href=""><i class="fa fa-shopping-bag"></i></a>
