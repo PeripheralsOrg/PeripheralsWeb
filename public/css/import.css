@@ -46,6 +46,10 @@ h3 {
     /* font-size: 1.75rem; */
 }
 
+span{
+    font-size: 12px;
+}
+
 h4,
 p,
 button,

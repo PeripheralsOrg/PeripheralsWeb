@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\DetalhesProduto;
 use App\Models\Marcas;
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use App\Models\ProdutoImagens;
+use App\Models\ProdutoInventario;
 use App\Models\ProdutoView;
 use Illuminate\Support\Facades\Session;
 
@@ -25,6 +28,31 @@ class ClientProdutoController extends Controller
             ]);
         }
         return redirect()->route('falha-produtoClient');
+    }
+
+    public function getProduto($idProduto){
+        $produtosTest = Produto::all()->where('status', 1)->where('id_produtos', $idProduto)->toArray();
+        $produtosTest = reset($produtosTest);
+
+        $categorias = Categoria::all()->where('id_categoria', $produtosTest['id_categoria'])->toArray();
+        $marcas = Marcas::all()->where('id_marca', $produtosTest['id_marca'])->toArray();
+        $imgProdutos = ProdutoImagens::all()->where('id_produto', $idProduto)->toArray();
+        $quantProduto = ProdutoInventario::all()->where('id_inventario', $produtosTest['id_inventario'])->toArray();
+        $detalhesProduto = DetalhesProduto::all()->where('id_detalhes', $produtosTest['id_detalhes'])->toArray();
+        // Comentarios
+
+        if (count($produtosTest) > 0) {
+            $produtos = ProdutoView::all()->where('status', 1)->where('id_produtos', $idProduto)->toQuery()->paginate(10);
+            return view('client.produto')->with([
+                'produtos' => $produtos,
+                'categorias' => $categorias,
+                'marcas' => $marcas,
+                'imgProdutos' => $imgProdutos,
+                'quantProduto' => $quantProduto,
+                'detalhesProduto' => $detalhesProduto,
+            ]);
+        }
+        return redirect()->back()->withErrors('Ocorreu um erro ao carregar o item!');
     }
 
     public function fallback()
