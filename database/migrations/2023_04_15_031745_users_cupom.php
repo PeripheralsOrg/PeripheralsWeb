@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 120)->charset('utf8');
             $table->string('codigo', 30)->charset('utf8');
-            $table->foreignId('id_categoria');
+            $table->string('tipo', 30)->charset('utf8');
+            $table->string('visibilidade', 30)->charset('utf8');
+            $table->foreignId('id_categoria')->nullable();
+            $table->foreignId('id_marca')->nullable();
             $table->dateTime('data_expiracao');
             $table->decimal('porcentagem', 10, 2);
             $table->tinyInteger('status')->default(1);

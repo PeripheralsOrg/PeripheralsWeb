@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CarrinhoSystemController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClientProdutoController;
 use App\Http\Controllers\ConfigController;
@@ -210,6 +211,21 @@ Route::prefix('produtos/ofertas')->controller(ProdutoOfertasController::class)->
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClientOfertas-resetFilter');
 });
 
+
+// Carrinho de Compras
+Route::prefix('carrinho')->controller(CarrinhoSystemController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('/', 'getCarrinhoItens')->name('carrinho-all');
+    Route::get('adicionar/{idProduto}', 'addProduto')->name('carrinho-insert');
+    Route::get('comprar/{idProduto}', 'instaCompra')->name('carrinho-comprarAgora');
+    // CARRINHO
+    Route::get('remover/{idProduto}/{idCarrinho}', 'removeItem')->name('carrinho-delete');
+    Route::get('atualizar/{idProduto}/{idCarrinho}', 'updateProduto')->name('carrinho-update');
+    // Cupom
+    Route::get('cupom/{idCarrinho}', 'cupomProduto')->name('carrinho-cupom');
+
+    // Route::delete('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    Route::get('vazio', 'fallback')->name('falha-carrinho');
+});
 
 
 // RESET SENHA

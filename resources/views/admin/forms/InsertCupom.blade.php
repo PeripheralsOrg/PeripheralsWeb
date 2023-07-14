@@ -42,20 +42,42 @@
                 </label>
             </div>
 
-            @if (!empty($categorias))
-                <label class="label-field">Categoria</label>
-                <select class="select-field" name="id_categoria" id="selectCategoria">
-                    @foreach ($categorias as $item)
-                        <option value="{{$item['id_categoria']}}">{{$item['categoria']}}</option>
-                    @endforeach
-                </select>
-            @endif
-            
+            <label class="label-field">Tipo</label>
+            <select class="select-field" name="tipo">
+                <option value="categoria">Categoria</option>
+                <option value="marca">Marca</option>
+            </select>
+
+            <label class="label-field">Visiblidade</label>
+            <select class="select-field" name="visibilidade">
+                <option value="publico">Publico</option>
+                <option value="privado">Privado</option>
+            </select>
+
             <label class="label-field">Status</label>
             <select class="select-field" name="status">
                 <option value="1">1 - Ativo</option>
                 <option value="0">0 - Inativo</option>
             </select>
+
+            @if (!empty($categorias))
+                <label class="label-field">Categoria</label>
+                <select class="select-field" name="id_categoria" id="selectCategoria">
+                    @foreach ($categorias as $item)
+                        <option value="{{ $item['id_categoria'] }}">{{ $item['categoria'] }}</option>
+                    @endforeach
+                </select>
+            @endif
+
+            @if (!empty($marcas))
+                <label class="label-field">Marca</label>
+                <select class="select-field" name="id_marca" id="selectMarca">
+                    @foreach ($marcas as $item)
+                        <option value="{{ $item['id_marca'] }}">{{ $item['nome'] }}</option>
+                    @endforeach
+                </select>
+            @endif
+
 
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>

@@ -25,13 +25,12 @@ class ConfigController extends Controller
                 'categorias' => $categorias,
                 'marcas' => $marcas
             ]);
-        }else if(!empty($marcas) && empty($categorias)){
+        } else if (!empty($marcas) && empty($categorias)) {
             $erroCategorias = 'Categorias não encontrados';
             return view('admin.list.listConfig')->with([
                 'categorias' => $erroCategorias,
                 'marcas' => $marcas
             ]);
-
         } else {
             return redirect()->route('falha-listConfig');
         }
@@ -45,7 +44,8 @@ class ConfigController extends Controller
 
     //! Categoria
 
-    public function registerCategoria(Request $request, Categoria $categoria){
+    public function registerCategoria(Request $request, Categoria $categoria)
+    {
         $validator = $request->validate([
             'categoria' => ['required'],
         ]);
@@ -153,7 +153,8 @@ class ConfigController extends Controller
         return back()->withErrors('Houve um erro ao atualizar a marca');
     }
 
-    public function getMarca($id){
+    public function getMarca($id)
+    {
         $getMarca = Marcas::all()->where('id_marca', $id)->toQuery();
         if ($getMarca) {
             return $getMarca;

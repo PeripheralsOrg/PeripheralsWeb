@@ -6,6 +6,7 @@
 @section('content')
 
     <div class="card-wrapper">
+
         @foreach ($produtos as $item)
             <div class="card">
                 <!-- card left -->
@@ -18,6 +19,7 @@
                         </div>
                     </div>
 
+                    {{-- NÃO APAGUE --}}
                     @php
                         $i = 0;
                     @endphp
@@ -41,7 +43,7 @@
                 <div class="product-content">
                     <div class="row-favorito">
                         <h2 class="product-title">{{ $item['nome'] }}</h2>
-                        <a href="{{route('favoritar-produto', $item['id_produtos'])}}">
+                        <a href="{{ route('favoritar-produto', $item['id_produtos']) }}">
                             <i class="fa-regular fa-heart"></i>
                         </a>
                     </div>
@@ -71,7 +73,7 @@
                         </div>
                     </div>
 
-                    <div class="product-detail">
+                    <form class="product-detail" action="{{route('carrinho-insert', $item['id_produtos'])}}" method="GET">
                         <h2>Detalhes: </h2>
                         <p>{{ $item['descricao'] }}</p>
                         <div class="row-specialInfo">
@@ -91,13 +93,18 @@
                                 <li>Shipping : <span>Gratuita</span></li>
                             </ul>
                         @endforeach
-
-                    </div>
-
-                    <div class="purchase-info">
-                        <button type="button" class="btn-check" id="btnCarrinho"> Adicionar ao carrinho </button>
-                        <button type="button" class="btn-check" id="btnCompra"> Compre agora </button>
-                    </div>
+                        <select name="quantidade" id="selectQuant">
+                            @for ($j = 1; $j < array_values($quantProduto)[0]['quantidade']; $j++)
+                                @if ($j <= 30)
+                                    <option value="{{ $j }}">{{ $j }}</option>
+                                @endif
+                            @endfor
+                        </select>
+                        <div class="purchase-info">
+                            <button type="submit" type="button" class="btn-check" id="btnCarrinho"> Adicionar ao carrinho </button>
+                            <button type="button" onclick="console.log('asdasda')" class="btn-check" id="btnCompra"> Compre agora </button>
+                        </div>
+                    </form>
 
                 </div>
             </div>

@@ -41,10 +41,36 @@
                         </label>
 
                         <label class="label-field">Porcentagem
-                            <input type="text" name="porcentagem" value="" data-js="money"
-                                required class="input-field" placeholder="Porcentagem de Desconto">
+                            <input type="text" name="porcentagem" value="" data-js="money" required
+                                class="input-field" placeholder="Porcentagem de Desconto">
                         </label>
                     </div>
+
+                    <label class="label-field">Tipo</label>
+                    <select class="select-field" name="tipo">
+                        @if ($item['tipo'] == 'categoria')
+                            <option selected value="categoria">Categoria</option>
+                            <option value="marca">Marca</option>
+                        @endif
+
+                        @if ($item['tipo'] == 'marca')
+                            <option value="marca">Marca</option>
+                            <option selected value="categoria">Categoria</option>
+                        @endif
+                    </select>
+
+                    <label class="label-field">Visibilidade</label>
+                    <select class="select-field" name="visibilidade">
+                        @if ($item['visibilidade'] == 'privado')
+                            <option selected value="privado">Privado</option>
+                            <option value="publico">Publico</option>
+                        @endif
+
+                        @if ($item['tipo'] == 'publico')
+                            <option value="publico">Publico</option>
+                            <option selected value="privado">Privado</option>
+                        @endif
+                    </select>
 
                     <label class="label-field">Status</label>
                     <select class="select-field" name="status">
@@ -68,7 +94,15 @@
                         </select>
                     @endif
 
-                    
+                    @if (!empty($marcas))
+                        <label class="label-field">Marca</label>
+                        <select class="select-field" name="id_marca" id="selectMarca">
+                            @foreach ($marcas as $item)
+                                <option value="{{ $item['id_marca'] }}">{{ $item['nome'] }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+
 
                     <div class="box-buttons">
                         <button type="submit" class="btn-submit">Atualizar</button>
