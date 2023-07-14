@@ -87,6 +87,10 @@ img {
     color: #ff00008b;
 }
 
+#selectQuant{
+    padding: 1rem;
+}
+
 .product-title {
     font-size: 2.5rem;
     text-transform: capitalize;

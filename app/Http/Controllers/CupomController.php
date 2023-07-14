@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Cupom;
+use App\Models\Marcas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,11 +40,26 @@ class CupomController extends Controller
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
+            'tipo' => ['required'],
+            'visibilidade' => ['required'],
+            'id_marca' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
             'id_categoria' => ['required'],
         ]);
+
+        if ($request->input('tipo') == 'marca') {
+            $request->merge([
+                'id_categoria' => null
+            ]);
+        } else {
+            $request->merge([
+                'id_marca' => null
+            ]);
+        }
+
+
         $request->merge([
             'porcentagem' => floatval($request->input('porcentagem'))
         ]);
@@ -78,26 +94,42 @@ class CupomController extends Controller
     {
         $getCupom = Cupom::all()->where('id', $id)->toArray();
         $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->toArray();
 
-        if ($getCupom || $categorias) {
+        if ($getCupom || $categorias || $marcas) {
             return view('admin.forms.UpdateCupom')->with([
                 'getCupom' => $getCupom,
-                'categorias' => $categorias
+                'categorias' => $categorias,
+                'marcas' => $marcas
             ]);
         }
         return redirect()->route('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
     }
-    
+
     public function update(Request $request, $id)
     {
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
+            'tipo' => ['required'],
+            'visibilidade' => ['required'],
+            'id_marca' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
             'id_categoria' => ['required'],
         ]);
+
+        if ($request->input('tipo') == 'marca') {
+            $request->merge([
+                'id_categoria' => null
+            ]);
+        } else {
+            $request->merge([
+                'id_marca' => null
+            ]);
+        }
+
 
         $request->merge([
             'porcentagem' => floatval($request->input('porcentagem'))
@@ -113,10 +145,16 @@ class CupomController extends Controller
         return back()->withErrors('Houve um erro ao atualizar o cupom');
     }
 
-    public function retrieveInfo(){
+    public function retrieveInfo()
+    {
         $categorias = Categoria::all()->toArray();
-        if ($categorias) {
-            return view('admin.forms.insertCupom')->with('categorias', $categorias);
+        $marcas = Marcas::all()->toArray();
+
+        if ($categorias && $marcas) {
+            return view('admin.forms.insertCupom')->with([
+                'categorias' => $categorias,
+                'marcas' => $marcas
+            ]);
         }
         return redirect()->route('falha-listCupons');
     }

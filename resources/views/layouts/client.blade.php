@@ -79,7 +79,7 @@
 
             <a href="{{ route('client-favoritos') }}"><img src="{{ asset('images/icons-branco/coracao.svg') }}"
                     alt="Ícone de Favoritos"></a>
-            <a href=""><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+            <a href="{{route('carrinho-all')}}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                     alt="Ícone do Carrinho de Compras"></a>
         </div>
     </header>
@@ -120,7 +120,7 @@
                     @endif
                     <a href="{{ route('client-favoritos') }}"><img
                             src="{{ asset('images/icons-branco/coracao.svg') }}" alt="Ícone de Favoritos">Favoritos</a>
-                    <a href=""><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+                    <a href="{{route('carrinho-all')}}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                             alt="Ícone do Carrinho de Compras">Sacola</a>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Produto extends Model
 {
@@ -51,5 +52,10 @@ class Produto extends Model
     public function marcas(): HasOne
     {
         return $this->hasOne(Marcas::class);
+    }
+
+    public function produto_carrinho(): BelongsTo
+    {
+        return $this->belongsTo(ProdutoCarrinho::class);
     }
 }

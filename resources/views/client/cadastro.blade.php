@@ -14,7 +14,7 @@
 
                 <h2 class="title title-second">Faça seu cadastro!</h2>
 
-                {{-- @if ($errors->any())
+                @if ($errors->any())
                     <div class="container-error">
                         <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
                         @foreach ($errors->all() as $error)
@@ -23,7 +23,7 @@
                             </p>
                         @endforeach
                     </div>
-                @endif --}}
+                @endif
 
                 <!-- forms start -->
                 <form action="{{ route('client-confirmarCadastro') }}" method="GET">
