@@ -19,6 +19,7 @@ class AdmBanner extends \Illuminate\Foundation\Auth\User
         'nome_banner',
         'link_carrossel',
         'link_route',
-        'status'
+        'status',
+        'peso'
     ];
 }

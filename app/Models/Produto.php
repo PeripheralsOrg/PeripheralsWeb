@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model
 {
@@ -44,9 +45,9 @@ class Produto extends Model
         return $this->hasOne(DetalhesProduto::class);
     }
 
-    public function categoria(): HasOne
+    public function categoria(): HasMany
     {
-        return $this->hasOne(Categoria::class);
+        return $this->hasMany(Categoria::class);
     }
 
     public function marcas(): HasOne
@@ -57,5 +58,10 @@ class Produto extends Model
     public function produto_carrinho(): BelongsTo
     {
         return $this->belongsTo(ProdutoCarrinho::class);
+    }
+
+    public function favoritos(): BelongsTo
+    {
+        return $this->belongsTo(Favoritos::class);
     }
 }

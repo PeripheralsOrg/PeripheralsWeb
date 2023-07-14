@@ -45,9 +45,16 @@ class BannerController extends Controller
             }
 
             $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '.webp';
-            $imageConvert = Image::make($image)->encode('webp')->save(public_path('storage/' . $imageName), 90, 'webp');
-            // $pathImage = $image->storeAs('public/storage', $imageName);
-            $pathImage = 'storage/' .  $imageName;
+            $imageConvert = Image::make($image)->encode('webp')->getEncoded();
+
+
+            $uploadFile = Storage::disk('s3')->put(
+                'files/' . $imageName,
+                $imageConvert
+            );
+
+            // Método funcionando perfeitamente
+            $pathUploadedFile = Storage::disk('s3')->url('files/' . $imageName);
 
 
             $bannerC = $banner->create([
@@ -55,7 +62,7 @@ class BannerController extends Controller
                 'link_route' => $request->link_route,
                 'peso' => $image->getSize(),
                 'status' => $request->status,
-                'link_carrossel' => $pathImage
+                'link_carrossel' => $pathUploadedFile
 
             ]);
 
