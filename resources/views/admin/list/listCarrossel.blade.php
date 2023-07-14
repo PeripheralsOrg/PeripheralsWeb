@@ -50,7 +50,7 @@
                         <div class="info-items">
                             <h2>{{ $item['nome_banner'] }}</h2>
                             <span>{{ $item['link_carrossel'] }}</span>
-                            <p>Peso</p>
+                            <p>{{ $item['peso'] / 1000 }} KB</p>
                         </div>
 
                         <div class="box-options">

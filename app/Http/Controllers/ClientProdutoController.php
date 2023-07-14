@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmBanner;
 use App\Models\Categoria;
 use App\Models\DetalhesProduto;
 use App\Models\Marcas;
@@ -30,7 +31,8 @@ class ClientProdutoController extends Controller
         return redirect()->route('falha-produtoClient');
     }
 
-    public function getProduto($idProduto){
+    public function getProduto($idProduto)
+    {
         $produtosTest = Produto::all()->where('status', 1)->where('id_produtos', $idProduto)->toArray();
         $produtosTest = reset($produtosTest);
 
@@ -93,14 +95,15 @@ class ClientProdutoController extends Controller
         return redirect()->route('produto-pesquisaAll');
     }
 
-    public function maximumValue(Request $request){
+    public function maximumValue(Request $request)
+    {
         $produtosTest = Produto::all()->where('status', 1)
-        ->where('preco', '<=', $request->input('max-value'))->toArray();
+            ->where('preco', '<=', $request->input('max-value'))->toArray();
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->toArray();
         if (count($produtosTest) > 0) {
             $produtos = ProdutoView::all()->where('status', 1)
-            ->where('preco', '<=', $request->input('max-value'))->toQuery()->paginate(10);
+                ->where('preco', '<=', $request->input('max-value'))->toQuery()->paginate(10);
             return view('client.pesquisa')->with([
                 'produtos' => $produtos,
                 'categorias' => $categorias,
@@ -109,7 +112,7 @@ class ClientProdutoController extends Controller
         }
         return redirect()->route('falha-produtoClient');
     }
-    
+
 
     public function produtoFilterClient(Request $request)
     {
@@ -165,7 +168,6 @@ class ClientProdutoController extends Controller
             }
             //! VERIFICAR SE ESTÁ RETORNANDO ALGO
             return ClientProdutoController::sendData($produtos);
-
         } else if (count(Session::get('filtro-produto')) === 2) {
             $produtos = ProdutoView::all()->where('status', 1)->where($campoSearch[0], $valueSearch[0])
                 ->where($campoSearch[1], $valueSearch[1])->toArray();
@@ -175,7 +177,6 @@ class ClientProdutoController extends Controller
             }
 
             return ClientProdutoController::sendData($produtos);
-
         } else if (count(Session::get('filtro-produto')) === 3) {
             $produtos = ProdutoView::all()->where('status', 1)->where($campoSearch[0], $valueSearch[0])
                 ->where($campoSearch[1], $valueSearch[1])
@@ -187,13 +188,13 @@ class ClientProdutoController extends Controller
                     ->where($campoSearch[2], $valueSearch[2])->toQuery()->paginate(10);
             }
             return ClientProdutoController::sendData($produtos);
-
         } else {
             return redirect()->route('produto-pesquisaAll');
         }
     }
 
-    public function filterCategoria(Request $request, $categoria){
+    public function filterCategoria(Request $request, $categoria)
+    {
         $campoBd = ClientProdutoController::changeName($request->get('selectName'));
         if ($request->session()->has('filtro-produto')) {
             $request->session()->forget('filtro-produto');
@@ -356,5 +357,49 @@ class ClientProdutoController extends Controller
                 return redirect()->route('produto-pesquisaAll');
             }
         }
+    }
+
+    public function getProdutoCategoria()
+    {
+
+        $getCategorias = (Categoria::with('produto')->get()->pluck('categoria', 'id_categoria')->toArray());
+        $arrayProdutos = [];
+
+        foreach ($getCategorias as $categoria => $key) {
+            $produtosTest = ProdutoView::all()->where('status', 1)->where('categoria', $key)->take(5)->toArray();
+            array_push($arrayProdutos, $produtosTest);
+        }
+
+        $getCategoriasValues = array_values($getCategorias);
+        if (count($arrayProdutos[0]) > 0) {
+            // $produtos = ProdutoView::all()->where('status', 1)->toQuery()->paginate(10);
+            return view('client.categorias')->with([
+                'arrayProdutos' => $arrayProdutos,
+                'getCategoriasValues' => $getCategoriasValues
+            ]);
+        }
+        return redirect()->route('falha-produtoClient');
+    }
+
+
+    public function getInfoHomepage()
+    {
+
+        $getBanners = AdmBanner::all()->where('status', 1)->toArray();
+        $getProdutos1 = ProdutoView::inRandomOrder()->latest()->where('status', 1)->take(5)->get()->toArray();
+        $getProdutos2 = ProdutoView::inRandomOrder()->latest()->where('status', 1)->take(5)->get()->toArray();
+        $getProdutosCategoria = array_values(ProdutoView::all()->where('status', 1)->where('categoria', 'Teclado')->take(5)->toArray());
+
+
+        if (count($getProdutos1) > 0) {
+            return view('client.index')->with([
+                'getProdutos1' => $getProdutos1,
+                'getProdutos2' => $getProdutos2,
+                'getProdutosCategoria' => $getProdutosCategoria,
+                'getBanners' => $getBanners
+            ]);
+        }
+        
+        return abort(404);
     }
 }

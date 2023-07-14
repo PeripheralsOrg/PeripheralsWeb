@@ -6,7 +6,7 @@
 
 #product1 .pro-container {
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -29,6 +29,7 @@
 #product1 .pro img {
     width: 100%;
     border-radius: 20px;
+    max-height: 200px;
 }
 
 #product1 .pro .des {
@@ -91,12 +92,13 @@
 }
 
 .section-p1 {
-    padding: 40px 120px;
+    display: block;
+    padding: 5rem;
+    margin: 0 auto;
 }
 
 .titulo {
     text-align: initial;
-    margin-bottom: 5px;
 }
 
 .subtitulo {
@@ -105,8 +107,6 @@
 
 .link {
     display: flex;
-    justify-content: end;
-    width: fit-content;
     color: var(--preto);
 }
 
@@ -116,8 +116,14 @@
     text-decoration-color: var(--vermelho);
 }
 
-.container-info{
+.container-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 640px) {
+    .pro-container {
+        justify-content: center;
+    }
 }

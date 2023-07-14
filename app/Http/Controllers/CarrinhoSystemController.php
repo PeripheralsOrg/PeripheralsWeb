@@ -15,16 +15,13 @@ class CarrinhoSystemController extends Controller
 {
     public function addProduto(Request $request, $idProduto)
     {
-        $request->validate([
-            'quantidade' => ['required']
-        ]);
 
         $idUser = $request->session()->get('user')['id'];
         $checkCarrinho = CarrinhoCompras::all()->where('id_users', $idUser)->where('status', 1)->toArray();
 
         if (count($checkCarrinho) > 0) {
             $idCarrinho = array_values(CarrinhoCompras::all()->where('id_users', $idUser)->where('status', 1)->toArray())[0]['id_carrinho'];
-            $atualizarCarrinho = (new CarrinhoComprasController())->updateCarrinhoSoma($idCarrinho, $idProduto, $request->quantidade);
+            $atualizarCarrinho = (new CarrinhoComprasController())->updateCarrinhoSoma($idCarrinho, $idProduto, $request->input('quantidade', 1));
             if (!$atualizarCarrinho) {
                 return redirect()->back()->withErrors('Ocorreu um erro ao adicionar o produto no carrinho de compras!');
             } else {
@@ -32,13 +29,13 @@ class CarrinhoSystemController extends Controller
             }
         } else {
             // Criar carrinho
-            $createCarrinho = (new CarrinhoComprasController())->createCarrinho($idProduto, $request->quantidade, $idUser);
+            $createCarrinho = (new CarrinhoComprasController())->createCarrinho($idProduto, $request->input('quantidade', 1), $idUser);
             if (!$createCarrinho) {
                 return redirect()->back()->withErrors('Ocorreu um erro ao adicionar o produto no carrinho de compras!');
             }
 
             // Adicionando produto
-            $createProdutoCarrinho = (new ProdutoCarrinhoController())->insertProduto($idProduto, $request->quantidade, $createCarrinho);
+            $createProdutoCarrinho = (new ProdutoCarrinhoController())->insertProduto($idProduto, $request->input('quantidade', 1), $createCarrinho);
             if (!$createProdutoCarrinho) {
                 $deleteCarrinho = (new CarrinhoComprasController())->deleteCarrinho($createCarrinho);
                 return redirect()->back()->withErrors('Ocorreu um erro ao adicionar o produto no carrinho de compras!');

@@ -243,3 +243,14 @@ main {
     margin-bottom: 2rem;
     color: var(--vermelho);
 }
+
+.pro.item{
+    cursor: pointer !important;
+}
+
+#product1 .pro img {
+    width: 100%;
+    border-radius: var(--border-radius) !important;
+    height: 100%;
+    max-height: 200px;
+}

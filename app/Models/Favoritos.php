@@ -11,21 +11,24 @@ class Favoritos extends Model
     use HasFactory;
 
     protected $table = 'users_favoritos';
+    protected $primaryKey = 'id_favoritos';
+
 
     protected $fillable = [
+        'id_favoritos',
         'id_produto',
         'id_users'
     ];
 
     use HasFactory;
 
-    public function produto(): HasMany
-    {
-        return $this->hasMany(Produto::class);
-    }
+    // public function produto(): HasMany
+    // {
+    //     return $this->hasMany(Produto::class);
+    // }
 
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class);
-    }
+    // public function users(): HasMany
+    // {
+    //     return $this->hasMany(User::class);
+    // }
 }

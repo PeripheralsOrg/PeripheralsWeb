@@ -184,9 +184,9 @@ Route::prefix('usuario')->controller(UsersController::class)->group(function () 
 });
 
 Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
-    Route::get('lista', 'all')->name('client-favoritos');
+    Route::get('lista', 'allFavoritos')->name('client-favoritos');
     Route::get('favoritar/{idProduto}', 'register')->name('favoritar-produto');
-    Route::delete('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    Route::get('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
     Route::get('falha', 'fallback')->name('falha-listFavoritos');
 });
 
@@ -194,6 +194,7 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
 // Página Geral
 Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
     Route::get('produto/{idProduto}', 'getProduto')->name('produto-get');
+    Route::get('lista/categorias', 'getProdutoCategoria')->name('produto-getCategoria');
     Route::get('lista', 'allProdutos')->name('produto-pesquisaAll');
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
     Route::get('preco/max', 'maximumValue')->name('produto-maxValue');
@@ -223,9 +224,14 @@ Route::prefix('carrinho')->controller(CarrinhoSystemController::class)->middlewa
     // Cupom
     Route::get('cupom/{idCarrinho}', 'cupomProduto')->name('carrinho-cupom');
 
-    // Route::delete('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
     Route::get('vazio', 'fallback')->name('falha-carrinho');
 });
+
+// Homepage
+
+Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
+
+
 
 
 // RESET SENHA
@@ -258,27 +264,15 @@ Route::prefix('contato')->controller(ContatoController::class)->group(function (
 
 // CONFIG & TESTE
 
-Route::get('/', function () {
-    return view('client.index');
-})->name('client-homepage');
+
 
 Route::get('/produto', function () {
     return view('client.produto');
 });
 
-
-Route::get('/categorias', function () {
-    return view('client.categorias');
-})->name('client-categorias');
-
 Route::get('/pesquisa', function () {
     return view('client.pesquisa');
 })->name('client-pesquisa');
-
-Route::get('/favoritos', function () {
-    return view('client.favoritos');
-})->middleware(CheckAuthUser::class)->name('client-favoritos');
-
 
 
 Route::get('/novo', function () {

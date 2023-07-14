@@ -43,7 +43,7 @@
                 <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
                 {{-- <li><a href="{{ route('client-categorias') }}">Produtos</a></li> --}}
                 <div class="dropdown-linkMenu">
-                    <a class="link-menu" href="{{ route('produto-pesquisaAll') }}">Produtos</a>
+                    <a class="link-menu" href="{{ route('produto-getCategoria') }}">Produtos</a>
                     <!-- <i class="fa-solid fa-angle-down"></i> -->
                     <li class="dropdown-menu">
                         @foreach ($categoriasProviderAll as $item)
@@ -128,7 +128,7 @@
                     <ul>
                         <li><a href="{{ route('client-homepage') }}">Inicio</a></li>
                         <li><a href="{{ route('produtoOfertas-pesquisaAll') }}">Ofertas</a></li>
-                        <li><a href="{{ route('produto-pesquisaAll') }}">Produtos</a></li>
+                        <li><a href="{{ route('produto-getCategoria') }}">Produtos</a></li>
                         <li><a href="{{ route('client-contato') }}">Contato</a></li>
                     </ul>
                 </nav>

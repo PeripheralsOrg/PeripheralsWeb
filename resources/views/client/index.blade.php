@@ -10,13 +10,13 @@
     <!-- Swiper_start -->
     <div class="swiper">
         <div class="swiper-wrapper">
-            @for ($i = 0; $i < 4; $i++)
+            @foreach ($getBanners as $item)
                 <div class="swiper-slide">
                     <div class="project-img">
-                        <img src="{{ asset('images/banner.png') }}" alt="">
+                        <img src="{{ $item['link_carrossel'] }}" alt="">
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
         <!-- Swiper-wrapper_end -->
         <div class="swiper-button-next"></div>
@@ -103,13 +103,14 @@
                 <div class=" slider swiper-wrapper">
 
 
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="pro item swiper-slide">
-                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                    @foreach ($getProdutos1 as $item)
+                        <div class="pro item swiper-slide"
+                            onclick="window.location.href=`{{ route('produto-get', $item['id_produtos']) }}`">
+                            <img src="{{ $item['link_img'] }}" alt="{{ $item['nome'] }}">
                             <hr>
                             <div class="des">
-                                <span>MULTILASER</span>
-                                <h5>Mouse Gamer</h5>
+                                <span>{{ $item['marca'] }}</span>
+                                <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -117,14 +118,17 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <h4>R$ 120,00</h4>
+                                <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
                             <div class="actions-container">
-                                <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                <a href=""><i class="fa fa-heart"></i></a>
+                                <a href="{{ route('carrinho-insert', $item['id_produtos']) }}"><i
+                                        class="fa fa-shopping-bag"></i></a>
+
+                                <a href="{{ route('favoritar-produto', $item['id_produtos']) }}"><i
+                                        class="fa fa-heart"></i></a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                 </div>
                 <!-- slider_swiper-wrapper_end -->
@@ -184,13 +188,14 @@
                 <div class=" slider swiper-wrapper">
 
 
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="pro item swiper-slide">
-                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                    @foreach ($getProdutos2 as $item)
+                        <div class="pro item swiper-slide"
+                            onclick="window.location.href=`{{ route('produto-get', $item['id_produtos']) }}`">
+                            <img src="{{ $item['link_img'] }}" alt="{{ $item['nome'] }}">
                             <hr>
                             <div class="des">
-                                <span>MULTILASER</span>
-                                <h5>Mouse Gamer</h5>
+                                <span>{{ $item['marca'] }}</span>
+                                <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -198,14 +203,17 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <h4>R$ 120,00</h4>
+                                <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
                             <div class="actions-container">
-                                <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                <a href=""><i class="fa fa-heart"></i></a>
+                                <a href="{{ route('carrinho-insert', $item['id_produtos']) }}"><i
+                                        class="fa fa-shopping-bag"></i></a>
+
+                                <a href="{{ route('favoritar-produto', $item['id_produtos']) }}"><i
+                                        class="fa fa-heart"></i></a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                 </div>
                 <!-- slider_swiper-wrapper_end -->
@@ -250,7 +258,7 @@
         <!-- cards start -->
 
         <section id="product1" class="section-p1">
-            <h2 class="titulo">Lançamentos</h2>
+            <h2 class="titulo">Teclados</h2>
 
             <!-- pro-container_swiper_start -->
             <div class="pro-container">
@@ -261,13 +269,14 @@
                 <div class=" slider swiper-wrapper">
 
 
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="pro item swiper-slide">
-                            <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                    @foreach ($getProdutosCategoria as $item)
+                        <div class="pro item swiper-slide"
+                            onclick="window.location.href=`{{ route('produto-get', $item['id_produtos']) }}`">
+                            <img src="{{ $item['link_img'] }}" alt="{{ $item['nome'] }}">
                             <hr>
                             <div class="des">
-                                <span>MULTILASER</span>
-                                <h5>Mouse Gamer</h5>
+                                <span>{{ $item['marca'] }}</span>
+                                <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -275,14 +284,17 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <h4>R$ 120,00</h4>
+                                <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
                             <div class="actions-container">
-                                <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                <a href=""><i class="fa fa-heart"></i></a>
+                                <a href="{{ route('carrinho-insert', $item['id_produtos']) }}"><i
+                                        class="fa fa-shopping-bag"></i></a>
+
+                                <a href="{{ route('favoritar-produto', $item['id_produtos']) }}"><i
+                                        class="fa fa-heart"></i></a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                 </div>
                 <!-- slider_swiper-wrapper_end -->
