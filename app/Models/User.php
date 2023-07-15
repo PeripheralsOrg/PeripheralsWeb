@@ -33,7 +33,8 @@ class User extends Authenticatable
         'feedback',
         'google_id',
         'linkedin_id',
-        'profile_photo_path'
+        'profile_photo_path',
+        'status'
     ];
 
     /**
