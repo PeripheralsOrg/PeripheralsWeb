@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -80,9 +82,9 @@ class UsersController extends Controller
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
         $user = User::all()->where('email', $request->input('email-cpf'))->toArray();
         $type = 'email';
-        
+
         // Login com CPF
-        if(empty($user)){
+        if (empty($user)) {
             $type = 'cpf';
             $request->merge([
                 'email-cpf' => str_replace(['.', '-'], '', $request->input('email-cpf'))
@@ -108,13 +110,12 @@ class UsersController extends Controller
         }
 
 
-        if($type === 'cpf'){
+        if ($type === 'cpf') {
             $validator = [
                 'cpf' => $request->input('email-cpf'),
                 'password' => $request->input('senha')
             ];
-
-        }else{
+        } else {
             $validator = [
                 'email' => $request->input('email-cpf'),
                 'password' => $request->input('senha')
@@ -130,17 +131,19 @@ class UsersController extends Controller
         return back()->withErrors('Ocorreu um erro ao se logar, por favor, contate o SAC!');
     }
 
-    public function logoutUser(Request $request){
+    public function logoutUser(Request $request)
+    {
         Auth::logout();
         $request->session()->flush();
         return redirect()->route('client-login')->withErrors('Sessão encerrada com sucesso');
     }
 
     // RESET de Senha
-    public function resetPasswordEmail (Request $request){
+    public function resetPasswordEmail(Request $request)
+    {
         $request->validate(['email' => 'required|email']);
 
-        if(count(User::all()->where('email', $request->input('email'))->toArray()) <= 0){
+        if (count(User::all()->where('email', $request->input('email'))->toArray()) <= 0) {
             session()->forget('status');
             return redirect()->back()->withErrors('Não existe nenhum usuário com o e-mail indicado!');
         }
@@ -154,7 +157,8 @@ class UsersController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
-    public function resetPassword(Request $request){
+    public function resetPassword(Request $request)
+    {
 
         $request->validate([
             'token' => 'required',
@@ -176,7 +180,78 @@ class UsersController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-        ? redirect()->route('client-login')->withErrors( __($status))
+            ? redirect()->route('client-login')->withErrors(__($status))
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+
+    public function allAdmin()
+    {
+        $users = User::all()->toArray();
+        $nowDate = (new Carbon())->now('America/Sao_Paulo')->toDateString();
+        $todayDate = (new Carbon())->now('America/Sao_Paulo')->subHours(24)->toDateString();
+        $weekDateSub = (new Carbon())->now('America/Sao_Paulo')->subWeek()->toDateString();
+        $monthDateSub = (new Carbon())->now('America/Sao_Paulo')->subMonth()->toDateString();
+
+        $countUsersToday = User::all()->whereBetween('created_at', [$todayDate, $nowDate])->count();
+        $countUsersWeek = User::all()->whereBetween('created_at', [$weekDateSub, $nowDate])->count();
+        $countUsersMonth = User::all()->whereBetween('created_at', [$monthDateSub, $nowDate])->count();
+
+
+        if ($users) {
+            return view('admin.list.listClientes')->with([
+                'users' => $users,
+                'countUsersToday' => $countUsersToday,
+                'countUsersWeek' => $countUsersWeek,
+                'countUsersMonth' => $countUsersMonth
+            ]);
+        }
+        return redirect()->route('falha-listClient');
+    }
+
+    public function adminFallback(){
+        $erro = 'Nenhum usuário cadastrado!';
+        return view('admin.list.listClientes')->with('erro', $erro);
+    }
+
+    public function getClienteAdmin($idCliente){
+        $user = User::all()->where('id', $idCliente)->toArray();
+        $getEndereco = Endereco::all()->where('id_users', $idCliente)->toArray();
+
+        if ($user) {
+            return view('admin.details.detailsCliente')->with([
+                'user' => $user,
+                'getEndereco' => $getEndereco
+            ]);
+        }
+        return redirect()->back()->withErrors('Não foi possível obter as informações desse usuário');
+    }
+
+    public function clientDeleteAdmin($idCliente){
+        $user = User::all()->where('id', $idCliente)->toQuery();
+        $desativarUser = $user->update([
+            'status' => 0
+        ]);
+
+        if($desativarUser){
+            return redirect()->back()->withErrors('Usuário desativado com sucesso');
+
+        }else{
+            return redirect()->back()->withErrors('Não foi possivel desativar o usuário');
+        }
+    }
+
+    public function clientActiveAdmin($idCliente)
+    {
+        $user = User::all()->where('id', $idCliente)->toQuery();
+        $desativarUser = $user->update([
+            'status' => 1
+        ]);
+
+        if ($desativarUser) {
+            return redirect()->back()->withErrors('Usuário ativado com sucesso');
+        } else {
+            return redirect()->back()->withErrors('Não foi possivel ativar o usuário');
+        }
     }
 }

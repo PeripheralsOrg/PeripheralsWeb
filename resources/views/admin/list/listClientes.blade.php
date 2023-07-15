@@ -31,15 +31,15 @@
                 <div class="content">
                     <div class="contador">
                         <div class="box">
-                            <h3>0</h3>
+                            <h3>{{ $countUsersToday }}</h3>
                             <span>Usuários nas últimas 24 horas</span>
                         </div>
                         <div class="box">
-                            <h3>0</h3>
+                            <h3>{{ $countUsersWeek }}</h3>
                             <span>Usuários na última semana</span>
                         </div>
                         <div class="box">
-                            <h3>0</h3>
+                            <h3>{{ $countUsersMonth }}</h3>
                             <span>Usuários no último mês</span>
                         </div>
                     </div>
@@ -55,25 +55,29 @@
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
+                        <th>Último nome</th>
                         <th>Email</th>
                         <th>CPF</th>
-                        <th>DataNasc</th>
+                        <th>Telefone Celular</th>
                         <th>Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <!-- Corpo_da_tabela -->
                 <tbody>
-                    <tr>
-                        <!-- Conteúdo_da_tabela -->
-                        <td>1</td>
-                        <td>Salém</td>
-                        <td>salém@gmail.com</td>
-                        <td>520.052.230</td>
-                        <td>19/05/1990</td>
-                        <td>Ativo</td>
-                        <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-                    </tr>
+                    @foreach ($users as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['name']}}</td>
+                            <td>{{$item['last_name']}}</td>
+                            <td>{{$item['email']}}</td>
+                            <td>{{$item['cpf'] ? $item['cpf'] : "-"}}</td>
+                            <td>{{$item['telefone_celular'] ? $item['email'] : "-"}}</td>
+                            <td>{{$item['status'] ? 'Ativo' : "Desativado"}}</td>
+                            <td><a href="{{route('page-getCliente', $item['id'])}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                        </tr>
+                    @endforeach
 
                 <tbody>
                     <!-- Final_do_corpo_da_tabela -->

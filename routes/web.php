@@ -79,8 +79,12 @@ Route::prefix('adm')->group(function () {
         Route::patch('update/{id}', 'update')->name('update-banner')->middleware('guest:9');
     });
 
-    Route::prefix('clientes')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
-        Route::view('lista', 'admin.list.listClientes')->name('page-listClientes');
+    Route::prefix('clientes')->controller(UsersController::class)->middleware('guest:7,8,9')->group(function () {
+        Route::get('lista', 'allAdmin')->name('page-listClientes');
+        Route::get('/{idCliente}', 'getClienteAdmin')->name('page-getCliente');
+        Route::get('falha', 'adminFallback')->name('page-falhaClientes');
+        Route::get('/delete/{idCliente}', 'clientDeleteAdmin')->name('client-delete');
+        Route::get('/active/{idCliente}', 'clientActiveAdmin')->name('client-active');
     });
 
     Route::prefix('comentarios')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
@@ -256,6 +260,10 @@ Route::prefix('contato')->controller(ContatoController::class)->group(function (
     Route::get('enviar/mensagem', 'sendMessage')->name('contato-message');
 });
 
+Route::prefix('endereco')->controller(ContatoController::class)->group(function () {
+    Route::view('/get', 'client.endereco');
+});
+
 
 // Route::get('/mailable', function () {
 //     return new App\Mail\Contato('asdasd', 'asdasd', 'asdasd', 'Lorem', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum');
@@ -263,21 +271,6 @@ Route::prefix('contato')->controller(ContatoController::class)->group(function (
 
 
 // CONFIG & TESTE
-
-
-
-Route::get('/produto', function () {
-    return view('client.produto');
-});
-
-Route::get('/pesquisa', function () {
-    return view('client.pesquisa');
-})->name('client-pesquisa');
-
-
-Route::get('/novo', function () {
-    return view('admin.forms.InsertProduto');
-});
 
 Route::get('/factory', function () {
     AdmUsers::factory()->create();
@@ -287,13 +280,3 @@ Route::get('/factory', function () {
 Route::get('/session', function () {
     return session()->all();
 });
-
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });

@@ -241,7 +241,7 @@ main {
 
 .container-error{
     margin-bottom: 2rem;
-    color: var(--vermelho);
+    color: var(--branco);
 }
 
 .pro.item{
