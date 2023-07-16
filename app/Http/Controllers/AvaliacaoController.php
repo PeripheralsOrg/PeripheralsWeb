@@ -7,33 +7,35 @@ use Illuminate\Http\Request;
 
 class AvaliacaoController extends Controller
 {
-    public function getComentariosClient(Request $request){
+    public function getComentariosClient(Request $request)
+    {
         $avaliacao = Avaliacao::all()->where('id_users', $request->session()->get('user')['id'])->toArray();
         if ($avaliacao) {
             return view('client.minhas-avaliacoes')->with('avaliacao', $avaliacao);
         }
-        return redirect()->route('falha-listAvaliacoes'); 
+        return redirect()->route('falha-listAvaliacoes');
     }
 
 
     public function getComentariosClientProduto(Request $request, $idProduto)
     {
         $avaliacao = Avaliacao::all()->where('id_users', $request->session()->get('user')['id'])
-        ->where('id_produto', $idProduto)->toArray();
+            ->where('id_produto', $idProduto)->toArray();
         if ($avaliacao) {
             return view('client.meus-pedidos')->with('avaliacao', $avaliacao);
         }
         return redirect()->route('falha-listAvaliacoes');
     }
 
-    public function register(Request $request, Avaliacao $avaliacao, $idProduto){
+    public function register(Request $request, Avaliacao $avaliacao, $idProduto)
+    {
         $request->validate([
             'titulo' => ['required'],
             'comentario' => ['required'],
             'avaliacao' => ['required'],
         ]);
 
-        if(empty($idProduto)){
+        if (empty($idProduto)) {
             return redirect()->back()->withErrors('Não foi possível avaliar o produto. Tente novamente em instantes!');
         }
 

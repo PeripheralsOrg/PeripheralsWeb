@@ -168,9 +168,10 @@ class CarrinhoSystemController extends Controller
     {
         $idUser = $request->session()->get('user')['id'];
         $carrinho = CarrinhoCompras::all()->where('id_users', $idUser)->where('status', 1)->toArray();
-        $carrinhoProduto = ProdutoCarrinho::all()->where('id_carrinho', array_values($carrinho)[0]['id_carrinho'])->toArray();
 
         if (count($carrinho) > 0) {
+            $carrinhoProduto = ProdutoCarrinho::all()->where('id_carrinho', array_values($carrinho)[0]['id_carrinho'])->toArray();
+
             $idCarrinho = array_values(CarrinhoCompras::all()->where('id_users', $idUser)->where('status', 1)->toArray())[0]['id_carrinho'];
             $carrinhoItens = ProdutoCarrinho::all()->where('id_carrinho', $idCarrinho)->toArray();
 
@@ -180,12 +181,12 @@ class CarrinhoSystemController extends Controller
             } else {
                 return redirect()->route('falha-carrinho');
             }
-            // dd($carrinhoItens);
 
-            $produto = Produto::all()->where('id_produtos', $carrinhoItens[0]['id_produto'])->toArray();
+            $produto = Produto::all()->where('id_produtos', array_values($carrinhoItens)[0]['id_produto'])->toArray();
 
 
-            $cart = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+            // ! Last modification
+            $cart = ProdutoCarrinho::with('produto')->where('id_carrinho', $idCarrinho)->whereHas('produto')->get()->pluck('produto')->toArray();
             function array_flatten($array)
             {
                 return array_reduce($array, function ($carry, $item) {

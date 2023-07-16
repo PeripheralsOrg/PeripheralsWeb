@@ -6,22 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Venda extends Model
+class VendaTemporary extends Model
 {
     use HasFactory;
 
-    protected $table = 'users_venda';
-    protected $primaryKey = 'id_venda';
+    protected $table = 'temporary_venda';
+    protected $primaryKey = 'id_temporary_venda';
 
     protected $fillable = [
         'valor_total',
         'frete',
-        'valor_desconto_total',
+        'prazo',
         'quantidade_items',
         'id_users',
         'id_carrinho',
-        'id_endereco',
-        'id_venda_status'
+        'id_endereco'
     ];
 
     use HasFactory;

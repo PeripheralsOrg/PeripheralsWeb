@@ -30,19 +30,19 @@
                         <div class="box">
                             <img src="{{ $arrayImages[$i - 1] }}">
                             <div class="content">
-                                    <div class="info-prod box-info">
-                                        <!-- Nome do Produto -->
-                                        <h3 id="nomeProd">{{ $listProdutos[$i - 1]['nome'] }}</h3>
-                                        <!-- Marca -->
-                                        @foreach ($marca as $itemMarca)
-                                            <h4 id="marcaProd">{{ $itemMarca['nome'] }}</h4>
-                                        @endforeach
-                                        <!-- Valor -->
-                                        <h4 class="valor">R$ {{ $listProdutos[$i - 1]['preco'] }}</h4>
-                                        <!-- Subtotal -->
-                                        <p class="sub">Subtotal: R$ {{ $item['valor_total'] }}</p>
-                                    </div>
-                                    
+                                <div class="info-prod box-info">
+                                    <!-- Nome do Produto -->
+                                    <h3 id="nomeProd">{{ $listProdutos[$i - 1]['nome'] }}</h3>
+                                    <!-- Marca -->
+                                    @foreach ($marca as $itemMarca)
+                                        <h4 id="marcaProd">{{ $itemMarca['nome'] }}</h4>
+                                    @endforeach
+                                    <!-- Valor -->
+                                    <h4 class="valor">R$ {{ $listProdutos[$i - 1]['preco'] }}</h4>
+                                    <!-- Subtotal -->
+                                    <p class="sub">Subtotal: R$ {{ $item['valor_total'] }}</p>
+                                </div>
+
 
                                 <div class="quant-remove box-info">
                                     <!-- Quantidade -->
@@ -101,7 +101,7 @@
                     <p><span>Subtotal</span> <span>R$ {{ $item['valor_total'] }}</span></p>
                     <hr>
                     <p><span>Total</span> <span>R$ {{ $item['valor_total'] }}</span></p>
-                    <a href="#">Finalizar</a>
+                    <a href="{{ route('get-endereco') }}">Finalizar</a>
                 @endforeach
 
             </div>
