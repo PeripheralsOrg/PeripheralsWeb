@@ -13,6 +13,7 @@ use App\Http\Controllers\ClientProdutoController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\CupomController;
+use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProdutoController;
@@ -24,6 +25,7 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\CheckNotAuthUser;
 use App\Http\Middleware\CheckAuthUser;
 use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\VendaController;
 use App\Mail\Contato;
 
 /*
@@ -231,8 +233,29 @@ Route::prefix('carrinho')->controller(CarrinhoSystemController::class)->middlewa
     Route::get('vazio', 'fallback')->name('falha-carrinho');
 });
 
-// Homepage
+// CONTATO
 
+Route::prefix('contato')->controller(ContatoController::class)->group(function () {
+    Route::view('/formulario', 'client.contato')->name('client-contato');
+    Route::get('enviar/mensagem', 'sendMessage')->name('contato-message');
+});
+
+// Entrega
+Route::prefix('entrega')->controller(EnderecoController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('/enderecos', 'getEnderecos')->name('get-endereco');
+    Route::post('/registrar', 'register')->name('insert-endereco');
+    Route::get('/endereco/vazio', 'fallback')->name('falha-endereco');
+    Route::get('/endereco/selecionar', 'selectEndereco')->name('select-endereco');
+});
+
+Route::prefix('venda')->controller(VendaController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('/processa', 'processVenda')->name('processa-venda');
+    Route::get('/sucesso', 'vendaSucess')->name('venda-sucess');
+    Route::get('/falha', 'vendaSucess')->name('venda-falha');
+});
+
+
+// Homepage
 Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
 
 
@@ -253,16 +276,6 @@ Route::get('/reset-password/{token}', function (string $token) {
 Route::post('/reset-password', [UsersController::class, 'resetPassword'])->middleware('user.not.auth')->name('password.update');
 
 
-// CONTATO
-
-Route::prefix('contato')->controller(ContatoController::class)->group(function () {
-    Route::view('/formulario', 'client.contato')->name('client-contato');
-    Route::get('enviar/mensagem', 'sendMessage')->name('contato-message');
-});
-
-Route::prefix('endereco')->controller(ContatoController::class)->group(function () {
-    Route::view('/get', 'client.endereco');
-});
 
 
 // Route::get('/mailable', function () {

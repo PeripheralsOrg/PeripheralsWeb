@@ -98,6 +98,21 @@ class UsersController extends Controller
             return back()->withErrors(['Usuário não encontrado']);
         }
 
+        function array_flatten($array)
+        {
+            return array_reduce($array, function ($carry, $item) {
+                if (is_array($item)) {
+                    return array_merge_recursive($carry, ($item));
+                } else {
+                    $carry[] = $item;
+                    return $carry;
+                }
+            }, []);
+        }
+
+
+        $user = array_flatten($user);
+
         if (Auth::check()) {
             if ($request->session()->has('user') && !empty($request->session()->get('user'))) {
                 return redirect()->route('client-homepage');
@@ -123,6 +138,7 @@ class UsersController extends Controller
         }
 
         if (Auth::guard('web')->attempt($validator, $rememberMe)) {
+
             $request->session()->regenerate();
             $request->session()->put('user', $user);
             return redirect()->route('client-homepage');

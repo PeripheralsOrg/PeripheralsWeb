@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_venda', function(Blueprint $table){
-            $table->id('id_venda');
+        Schema::create('temporary_venda', function (Blueprint $table) {
+            $table->id('id_temporary_venda');
             $table->decimal('valor_total', 10, 2);
             $table->decimal('frete', 10, 2);
+            $table->integer('prazo');
             $table->integer('quantidade_items');
-            $table->decimal('valor_desconto_total', 10, 2)->nullable();
-            $table->timestamps();
-            $table->foreignId('id_venda_status');
+            $table->foreignId('id_users');
             $table->foreignId('id_carrinho');
             $table->foreignId('id_endereco');
-            $table->foreignId('id_users');
-
+            $table->timestamps();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_venda');
+        Schema::dropIfExists('temporary_venda');
     }
 };

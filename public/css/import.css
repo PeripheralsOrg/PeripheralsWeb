@@ -240,8 +240,12 @@ main {
 }
 
 .container-error{
+    display: flex;
+    padding: 1rem;
     margin-bottom: 2rem;
     color: var(--branco);
+    background-color: var(--vermelho);
+    gap: 1rem;
 }
 
 .pro.item{
