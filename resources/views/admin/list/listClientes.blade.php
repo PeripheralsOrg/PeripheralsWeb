@@ -19,7 +19,7 @@
             </div>
         @endif
         <!-- Barra_de_busca -->
-        <form id="divBusca" action="{{ route('search-adm') }}" method="GET">
+        <form id="divBusca" action="{{ route('search-users') }}" method="GET">
             <input type="text" id="txtBusca" name="search" placeholder="Buscar..." />
             <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
@@ -46,6 +46,11 @@
                 </div>
             </div>
 
+            <div class="container-clean-filters box-filter">
+                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listClientes') }}`">
+                    Limpar Filtros
+                </button>
+            </div>
 
             <!--Começo_da_tabela_de_pedidos-->
             <table class="table">

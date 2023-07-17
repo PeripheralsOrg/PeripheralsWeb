@@ -246,6 +246,7 @@ main {
     color: var(--branco);
     background-color: var(--vermelho);
     gap: 1rem;
+    text-transform: none !important;
 }
 
 .pro.item{

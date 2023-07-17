@@ -42,13 +42,14 @@
     gap: 1rem;
 }
 
+
 #btnNewProduto {
-    display: flex;
-    align-items: center;
     gap: 1rem;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    background-color: var(--vermelho);
+    color: var(--branco);
 }
 
 #btnNewProduto .icon-container {
@@ -94,7 +95,7 @@
 .box-filter select,
 .box-filter input[type="date"],
 .box-filter button {
-    padding: 1rem;
+    padding: 1rem;padding: 1rem;
     border-radius: var(--border-radius);
     min-width: 10rem;
     border: 1px solid #000;

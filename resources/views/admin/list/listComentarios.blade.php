@@ -24,13 +24,6 @@
         </form>
 
         <section class="container-filters">
-            <button id="btnNewProduto">
-                <div class="icon-container">
-                    <i class="fa-regular fa-plus"></i>
-                </div>
-                Novo Produto
-            </button>
-
             <section class="box-input-date">
                 <div class="box-ordem box-filter">
                     <label for="inputDateFrom">De:</label>

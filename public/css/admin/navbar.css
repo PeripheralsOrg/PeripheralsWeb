@@ -101,6 +101,7 @@ header .btn-config {
     background: none;
     border: none;
     color: #fff;
+    font-size: 1rem;
 }
 
 /* animações_de_botões*/
@@ -123,6 +124,10 @@ header #navLinks li a:hover {
     /* text-decoration: underline; */
     transition: var(--navbar-transition);
     color: var(--vermelho);
+}
+
+header .dropdown-content a{
+    font-size: 1rem;
 }
 
 header #userSession:hover {

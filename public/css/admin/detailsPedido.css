@@ -10,7 +10,7 @@
     gap: 5rem;
 }
 
-span{
+span {
     font-size: 1rem !important;
 }
 
@@ -53,21 +53,22 @@ span{
 
 /* Container_Wrapper_css*/
 
-.wrapper {
-    max-width: 1000px;
+.wrapper, .updateInfo {
+    width: 1000px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-content: center;
 }
 
-.wrapper h1 {
+.wrapper, .updateInfo h1 {
     padding: 20px 0;
     text-align: center;
     text-transform: uppercase;
 }
 
-#titleCarrinho{
+#titleCarrinho {
     margin-top: 2rem;
     font-size: 1.5rem;
 }
@@ -112,15 +113,15 @@ span{
 .content {
     display: flex;
     padding: 1rem;
-    justify-content: space-between;
     width: 100%;
-    align-items: center;
 }
 
 .content .box-info {
     display: flex;
     flex-direction: column;
+    align-items: start  ;
     gap: .6rem;
+    text-transform: none;
 }
 
 #nomeProd {
@@ -185,6 +186,38 @@ span{
     background-color: var(--cinza-fundo);
 }
 
+
+/* Status Pedido */
+
+.updateInfo form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3rem;
+    background-color: var(--cinza-claro);
+    border-radius: var(--border-radius);
+    margin-bottom: 5rem;
+}
+
+
+.updateInfo form select {
+    padding: 1rem;
+
+}
+
+.updateInfo form button{
+    padding: 1rem;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    text-transform: uppercase;
+    border: transparent;
+}
+
+.updateInfo form button:hover {
+    background-color: var(--cinza-fundo);
+    color: var(--branco);
+}
+
 /*Inputs_Buttons_css*/
 
 
@@ -203,17 +236,6 @@ span{
     outline: none;
 }
 
-
-#feedbackLink{
-    text-decoration: underline;
-    color: var(--vermelho);
-    transition: ease .2s;
-    cursor: pointer;
-}
-
-#feedbackLink:hover {
-    color: var(--preto);
-}
 
 
 @media screen and (max-width: 700px) {
@@ -249,7 +271,7 @@ span{
 }
 
 @media screen and (max-width: 1250px) {
-    .wrapper {
+    .wrapper, .updateInfo {
         max-width: 95%;
     }
 
@@ -257,7 +279,7 @@ span{
         max-width: 95%;
     }
 
-    .box-endereco{
+    .box-endereco {
         width: 100%;
     }
 }

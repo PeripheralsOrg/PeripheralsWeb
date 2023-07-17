@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cupom;
 use App\Models\Endereco;
 use App\Models\User;
+use App\Models\Venda;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -222,15 +225,17 @@ class UsersController extends Controller
                 'countUsersMonth' => $countUsersMonth
             ]);
         }
-        return redirect()->route('falha-listClient');
+        return redirect()->route('page-falhaClientes');
     }
 
-    public function adminFallback(){
+    public function adminFallback()
+    {
         $erro = 'Nenhum usuário cadastrado!';
         return view('admin.list.listClientes')->with('erro', $erro);
     }
 
-    public function getClienteAdmin($idCliente){
+    public function getClienteAdmin($idCliente)
+    {
         $user = User::all()->where('id', $idCliente)->toArray();
         $getEndereco = Endereco::all()->where('id_users', $idCliente)->toArray();
 
@@ -243,16 +248,16 @@ class UsersController extends Controller
         return redirect()->back()->withErrors('Não foi possível obter as informações desse usuário');
     }
 
-    public function clientDeleteAdmin($idCliente){
+    public function clientDeleteAdmin($idCliente)
+    {
         $user = User::all()->where('id', $idCliente)->toQuery();
         $desativarUser = $user->update([
             'status' => 0
         ]);
 
-        if($desativarUser){
+        if ($desativarUser) {
             return redirect()->back()->withErrors('Usuário desativado com sucesso');
-
-        }else{
+        } else {
             return redirect()->back()->withErrors('Não foi possivel desativar o usuário');
         }
     }
@@ -269,5 +274,116 @@ class UsersController extends Controller
         } else {
             return redirect()->back()->withErrors('Não foi possivel ativar o usuário');
         }
+    }
+
+    public function getAllInfoConta(Request $request)
+    {
+        $getCupom = Cupom::all()->where('visibilidade', 'publico')->where('status', 1)->toArray();
+        $getUserInfo = $request->session()->get('user');
+        $getPedidos = Venda::all()->where('id_users', $getUserInfo['id'])->toArray();
+
+        return view('client.my-info', [
+            'getCupom' => $getCupom,
+            'getUserInfo' => $getUserInfo,
+            'getPedidos' => $getPedidos
+        ]);
+    }
+
+    public function getAllEnderecos(Request $request)
+    {
+        $idUser = $request->session()->get('user')['id'];
+        $endereco = Endereco::all()->where('id_users', $idUser)->where('status', 1)->toArray();
+
+        if (count($endereco) > 0) {
+            return view('client.info-endereco')->with('endereco', $endereco);
+        } else {
+            $changeRedirect = true;
+            return redirect()->route('falha-endereco')->with('changeRedirect', $changeRedirect);
+        }
+    }
+
+    private static function flattenArray($array)
+    {
+        return array_reduce($array, function ($carry, $item) {
+            if (is_array($item)) {
+                return array_merge_recursive($carry, ($item));
+            } else {
+                $carry[] = $item;
+                return $carry;
+            }
+        }, []);
+    }
+
+    public function editCommonInfo(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'last_name' => ['required'],
+            'telefone_celular' => ['required'],
+            'feedback' => ['required']
+        ]);
+
+        $getUser = User::all()->where('id', $request->session()->get('user')['id'])->toQuery();
+        $updateUser = $getUser->update($request->all());
+
+        if ($updateUser) {
+            $getUserArray = User::all()->where('id', $request->session()->get('user')['id'])->toArray();
+            $request->session()->regenerate();
+            $request->session()->put('user', UsersController::flattenArray($getUserArray));
+            return redirect()->back()->withErrors('Usuário atualizado com sucesso');
+        } else {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do usuário');
+        }
+    }
+
+    public function editEmailInfo(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'same:confirmEmail'],
+            'confirmEmail' => ['required']
+        ]);
+
+        $getUser = User::all()->where('id', $request->session()->get('user')['id'])->toQuery();
+        $updateUser = $getUser->update($request->except('confirmEmail'));
+
+        if ($updateUser) {
+            $getUserArray = User::all()->where('id', $request->session()->get('user')['id'])->toArray();
+            $request->session()->regenerate();
+            $request->session()->put('user', UsersController::flattenArray($getUserArray));
+            return redirect()->back()->withErrors('Usuário atualizado com sucesso! Reinicie a sessão para as informações serem atualizadas');
+        } else {
+            return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do usuário');
+        }
+    }
+
+    public function searchUser(Request $request)
+    {
+        if (empty($request->input('search'))) {
+            return redirect()->route('page-listClientes')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+
+        $search = $request->input('search');
+        $users = json_decode(json_encode(DB::table('users')->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->get()->toArray()), true);
+
+        if ($users) {
+            $nowDate = (new Carbon())->now('America/Sao_Paulo')->toDateString();
+            $todayDate = (new Carbon())->now('America/Sao_Paulo')->subHours(24)->toDateString();
+            $weekDateSub = (new Carbon())->now('America/Sao_Paulo')->subWeek()->toDateString();
+            $monthDateSub = (new Carbon())->now('America/Sao_Paulo')->subMonth()->toDateString();
+
+            $countUsersToday = User::all()->whereBetween('created_at', [$todayDate, $nowDate])->count();
+            $countUsersWeek = User::all()->whereBetween('created_at', [$weekDateSub, $nowDate])->count();
+            $countUsersMonth = User::all()->whereBetween('created_at', [$monthDateSub, $nowDate])->count();
+
+            return view('admin.list.listClientes')->with([
+                'users' => $users,
+                'countUsersToday' => $countUsersToday,
+                'countUsersWeek' => $countUsersWeek,
+                'countUsersMonth' => $countUsersMonth
+            ]);
+        }
+        return redirect()->route('page-falhaClientes');
     }
 }

@@ -5,11 +5,11 @@ function submitFilter(select) {
     // console.log(value);
 
     let formSubmit = document.getElementById('formFilter');
-    let inputName = document.getElementById('selectName');
-    let inputValue = document.getElementById('selectValue');
+    // let inputName = document.getElementById('selectName');
+    // let inputValue = document.getElementById('selectValue');
 
-    inputName.value = select.name;
-    inputValue.value = value;
+    // inputName.value = select.name;
+    // inputValue.value = value;
 
     formSubmit.submit();
 }

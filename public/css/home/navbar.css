@@ -205,6 +205,14 @@ header .dropdown-linkMenu:hover .dropdown-menu {
         display: block;
     }
 
+    .dropdown-link{
+        display: flex;
+        flex-direction: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
     #navResponsive {
         display: flex;
         justify-content: space-between;
@@ -254,8 +262,9 @@ header .dropdown-linkMenu:hover .dropdown-menu {
     .boxAbertaNav .box-icons-responsive {
         width: 100%;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        gap: 2rem;
         margin-top: 5rem;
     }
 
