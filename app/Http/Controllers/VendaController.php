@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class VendaController extends Controller
 {
-    public static function registerTemporary($valorTotal, $frete, $prazo, $quantItems, $idusers, $idCarrinho, $idEndereco)
+    public static function registerTemporary($valorTotal, $frete, $prazo, $quantItems, $idusers, $idCarrinho, $idEndereco, $descontoTotal)
     {
         $vendaT = new VendaTemporary();
 
@@ -26,15 +26,15 @@ class VendaController extends Controller
             'valor_total' => $valorTotal,
             'frete' => floatval($frete),
             'prazo' => $prazo,
+            'desconto_total' => $descontoTotal,
             'quantidade_items' => $quantItems,
             'id_users' => $idusers,
             'id_carrinho' => $idCarrinho,
             'id_endereco' => $idEndereco,
-
-        ]);
+        ])->id_temporary_venda;
 
         if ($vendaCreate) {
-            return true;
+            return $vendaCreate;
         } else {
             return false;
         }
@@ -52,7 +52,7 @@ class VendaController extends Controller
         $vendaCreate = $vendaT->create([
             'valor_total' => $getVenda[0]['valor_total'],
             'frete' => $getVenda[0]['frete'],
-            'valor_desconto_total' => 0.00,
+            'valor_desconto_total' => $getCarinho->getModel()->getAttribute('valor_desconto'),
             "quantidade_items" => $getVenda[0]['quantidade_items'],
             "id_users" => $request->session()->get('user')['id'],
             "id_carrinho" => $request->input('idCarrinho'),
@@ -125,8 +125,8 @@ class VendaController extends Controller
     public function getPedidoDetailClient(Request $request, $idVenda)
     {
         // FRETE
-        $getVenda = Venda::all()->where('id_venda', $idVenda)->toArray();
-        $getEndereco = Endereco::all()->where('id_endereco', $getVenda[0]['id_endereco'])->toArray();
+        $getVenda = array_values(Venda::all()->where('id_venda', $idVenda)->toArray());
+        $getEndereco = Endereco::all()->where('id_endereco', array_values($getVenda)[0]['id_endereco'])->toArray();
 
         $idUser = $request->session()->get('user')['id'];
 
@@ -292,7 +292,6 @@ class VendaController extends Controller
         return redirect()->route('fallback-pedidoAdmin');
     }
 
-    // TODO: #74 Testar filtros
     public function orderFilterAdmin(Request $request)
     {
         if($request->input('select-ordem') == 'quant'){

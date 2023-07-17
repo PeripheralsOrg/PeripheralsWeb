@@ -20,7 +20,8 @@ class VendaTemporary extends Model
         'quantidade_items',
         'id_users',
         'id_carrinho',
-        'id_endereco'
+        'id_endereco',
+        'desconto_total'
     ];
 
     use HasFactory;

@@ -11,10 +11,14 @@ class Avaliacao extends Model
     use HasFactory;
 
     protected $table = 'users_comentario';
+    protected $primaryKey = 'id_comentario';
 
     protected $fillable = [
         'id_produto',
-        'id_users'
+        'id_users',
+        'titulo',
+        'comentario',
+        'avaliacao'
     ];
 
     use HasFactory;

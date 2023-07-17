@@ -18,6 +18,7 @@ class CarrinhoCompras extends Model
     protected $fillable = [
         'valor_total',
         'quant_items',
+        'valor_desconto',
         'status',
         'id_users'
     ];

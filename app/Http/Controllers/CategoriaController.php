@@ -21,6 +21,9 @@ class CategoriaController extends Controller
             case 'select-categoria':
                 return 'categoria';
                 break;
+            case 'select-avaliacao':
+                return 'avaliacao_media';
+                break;
         }
     }
 

@@ -133,6 +133,7 @@ class EnderecoController extends Controller
 
         $valorTotal = floatval(array_values($carrinho)[0]['valor_total']);
         $quantidade = array_values($carrinho)[0]['quant_items'];
+        $descontoTotal = array_values($carrinho)[0]['valor_desconto'];
         $idEndereco = array_values($getEndereco)[0]['id_endereco'];
 
         $cartProdutos = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
@@ -169,7 +170,8 @@ class EnderecoController extends Controller
                 $quantidade,
                 $request->session()->get('user')['id'],
                 $idCarrinho,
-                $idEndereco
+                $idEndereco,
+                $descontoTotal
             );
 
             $payLink = Auth::user()->charge($valorTotal, $this->finalMessage, [
@@ -178,7 +180,7 @@ class EnderecoController extends Controller
                 'quantity_variable' => 0,
                 'passthrough' => [
                     "idCarrinho" => $idCarrinho,
-                    "idVendaT" => array_values($checkVendaT)[0]['id_temporary_venda']
+                    "idVendaT" => $createTemporary
                 ],
                 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
@@ -197,7 +199,8 @@ class EnderecoController extends Controller
                 'inventario' => $inventario,
                 'payLink' => $payLink,
                 'idCarrinho' => $idCarrinho,
-                'idEndereco' => $idEndereco
+                'idEndereco' => $idEndereco,
+                'descontoTotal' => $descontoTotal
             ]);
         } else {
             return redirect()->back()->withErrors('Frete indisponível para o endereço. Por favor selecione outro!');

@@ -21,6 +21,16 @@
     width: 100%;
 }
 
+.container-error{
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.shop-cupom{
+    padding: 1rem;
+}
+
 .top-infos-user {
     padding: 2rem;
     background-color: var(--cinza-fundo);

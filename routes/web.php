@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdmUsersController;
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CarrinhoSystemController;
 use App\Http\Controllers\CategoriaController;
@@ -214,11 +215,10 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
 });
 
 
-Route::prefix('avaliacao')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
-    Route::get('avaliar/{idProduto}', 'allFavoritos')->name('feedback-produto');
-    Route::get('favoritar/{idProduto}', 'register')->name('favoritar-produto');
+Route::prefix('avaliacao')->controller(AvaliacaoController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('avaliar/{idProduto}', 'getProdutoAvaliar')->name('feedback-produto');
+    Route::get('registrar', 'register')->name('avaliar-produto');
     Route::get('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
-    Route::get('falha', 'fallback')->name('falha-listFavoritos');
 });
 
 // Página Geral
@@ -284,7 +284,7 @@ Route::prefix('venda')->controller(VendaController::class)->middleware(CheckAuth
 
 // Homepage
 Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
-Route::view('/edit', 'client.edit-info');
+// Route::view('/edit', 'client.avaliar-produto');
 
 
 

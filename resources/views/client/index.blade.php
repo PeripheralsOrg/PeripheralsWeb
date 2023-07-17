@@ -112,11 +112,9 @@
                                 <span>{{ $item['marca'] }}</span>
                                 <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($item['id_produtos']); $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
                                 </div>
                                 <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
@@ -197,11 +195,9 @@
                                 <span>{{ $item['marca'] }}</span>
                                 <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($item['id_produtos']); $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
                                 </div>
                                 <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
@@ -278,11 +274,9 @@
                                 <span>{{ $item['marca'] }}</span>
                                 <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($item['id_produtos']); $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
                                 </div>
                                 <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
