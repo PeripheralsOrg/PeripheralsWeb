@@ -79,7 +79,11 @@ class EnderecoController extends Controller
     public function fallback()
     {
         $erro = 'Nenhum endereço cadastrado';
-        return view('client.endereco')->with('erro', $erro);
+        if (!empty($changeRedirect)) {
+            return view('client.info-endereco')->with('erro', $erro);
+        } else {
+            return view('client.endereco')->with('erro', $erro);
+        }
     }
 
 
@@ -127,7 +131,7 @@ class EnderecoController extends Controller
             array_push($arrayImages, $getImages);
         }
 
-        $valorTotal = (floatval(array_values($carrinho)[0]['valor_total']) + floatval($getFrete['valor']));
+        $valorTotal = floatval(array_values($carrinho)[0]['valor_total']);
         $quantidade = array_values($carrinho)[0]['quant_items'];
         $idEndereco = array_values($getEndereco)[0]['id_endereco'];
 
@@ -157,7 +161,6 @@ class EnderecoController extends Controller
                 ],
                 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
-
         } else {
             $createTemporary = VendaController::registerTemporary(
                 $valorTotal,
@@ -199,5 +202,61 @@ class EnderecoController extends Controller
         } else {
             return redirect()->back()->withErrors('Frete indisponível para o endereço. Por favor selecione outro!');
         }
+    }
+
+
+    public function registerInfoEndereco(Request $request)
+    {
+        $request->validate([
+            'tipo_logradouro' => ['required'],
+            'logradouro' => ['required'],
+            'bairro' => ['required'],
+            'numero' => ['required'],
+            'estado' => ['required'],
+            'cidade' => ['required'],
+            'ponto_ref' => ['required'],
+            'cep' => ['required'],
+            'complemento',
+
+        ]);
+
+        if ($request->input('tipo_logradouro') == '0') {
+            return redirect()->back()->withErrors('Por favor, preencha o tipo do seu logradouro!');
+        }
+
+
+        $idUser = $request->session()->get('user')['id'];
+
+        $enderecoC = (new Endereco())->create([
+            'tipo_logradouro' => $request->input('tipo_logradouro'),
+            'logradouro' => $request->input('logradouro'),
+            'bairro' => $request->input('bairro'),
+            'numero' => $request->input('numero'),
+            'estado' => $request->input('estado'),
+            'cidade' => $request->input('cidade'),
+            'ponto_ref' => $request->input('ponto_ref'),
+            'cep' => str_replace(['-', '.'], '', $request->input('cep')),
+            'complemento' => $request->input('complemento'),
+            'id_users' => $idUser,
+            'status' => 1
+        ]);
+
+        if ($enderecoC) {
+            return redirect()->route('list-meusEnderecos')->withErrors('Endereço registrado com sucesso!');
+        } else {
+            return redirect()->route('list-meusEnderecos')->withErrors('Ocorreu um erro ao inserir seu novo endereço! Por favor, contate o SAC.');
+        }
+    }
+
+    public function deleteEnderecoInfo(Request $request){
+        $deleteAll = Endereco::all()->where('id_endereco', $request->input('id_endereco'))->toQuery();
+        $deleteAll->update([
+            'status' => 0
+        ]);
+
+        if ($deleteAll) {
+            return redirect()->route('list-meusEnderecos')->withErrors('Endereço deletado com sucesso');
+        }
+        return redirect('list-meusEnderecos')->withErrors('Não foi possível deletar o endereço!');
     }
 }

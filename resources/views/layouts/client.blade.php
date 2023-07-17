@@ -71,8 +71,7 @@
                             alt="Ícone de Usuário"></button>
                     <!-- <i class="fa-solid fa-angle-down"></i> -->
                     <li class="dropdown-content">
-                        <a href="">Minha Conta</a>
-                        <a href="">Meu Pedidos</a>
+                        <a href="{{route('client-info')}}">Minha Conta</a>
                         <a href="{{ route('logout-user') }}">Sair</a>
                     </li>
                 </div>
@@ -116,7 +115,7 @@
                                 alt="Ícone de Usuário">Cadastro/Login</a>
                     @else
                         <div class="dropdown-link">
-                            <a class="btn-config"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                            <a class="btn-config" href="{{route('client-info')}}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
                                     alt="Ícone de Usuário">Conta</a>
                     @endif
                     <a href="{{ route('client-favoritos') }}"><img

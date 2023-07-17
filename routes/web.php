@@ -83,6 +83,7 @@ Route::prefix('adm')->group(function () {
 
     Route::prefix('clientes')->controller(UsersController::class)->middleware('guest:7,8,9')->group(function () {
         Route::get('lista', 'allAdmin')->name('page-listClientes');
+        Route::get('lista/pesquisa', 'searchUser')->name('search-users');
         Route::get('/{idCliente}', 'getClienteAdmin')->name('page-getCliente');
         Route::get('falha', 'adminFallback')->name('page-falhaClientes');
         Route::get('/delete/{idCliente}', 'clientDeleteAdmin')->name('client-delete');
@@ -125,8 +126,14 @@ Route::prefix('adm')->group(function () {
         });
     });
 
-    Route::prefix('pedidos')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
-        Route::view('lista', 'admin.list.listPedidos')->name('page-listPedidos');
+    Route::prefix('pedidos')->controller(VendaController::class)->middleware('guest:7,8,9')->group(function () {
+        Route::get('lista', 'getPedidoAdmin')->name('page-listPedidos');
+        Route::get('falha', 'fallback')->name('fallback-pedidoAdmin');
+        Route::get('pedido/{idVenda}', 'detailsPedidoAdmin')->name('get-detailsPedidos');
+        Route::get('pedido/status/update', 'updateStatusPedido')->name('update-statusPedido');
+        Route::post('pedido/pesquisa-pedido', 'searchPedidosAdmin')->name('search-pedidos');
+        Route::get('pedido/filter/date', 'dateFilterAdmin')->name('filter-pedidosDate');
+        Route::get('pedido/filter/ordem', 'orderFilterAdmin')->name('filter-pedidosOrdem');
     });
 
     Route::prefix('relatorios')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
@@ -187,6 +194,16 @@ Route::prefix('usuario')->controller(UsersController::class)->group(function () 
         Route::get('auth/linkedin', 'redirectToLinkedin')->name('auth.linkedin');
         Route::get('auth/linkedin/callback', 'handleLinkedinCallback');
     });
+
+    //! MINHA CONTA
+
+    Route::prefix('minha-conta')->middleware(CheckAuthUser::class)->group(function () {
+        Route::get('/', 'getAllInfoConta')->name('client-info');
+        Route::view('edit/info/form/{type}', 'client.edit-info')->name('page-infoEdit');
+        Route::get('editar/informacoes', 'editCommonInfo')->name('client-infoEdit');
+        Route::get('editar/email', 'editEmailInfo')->name('client-emailEdit');
+        Route::get('meus/enderecos', 'getAllEnderecos')->name('list-meusEnderecos');
+    });
 });
 
 Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
@@ -196,6 +213,13 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
     Route::get('falha', 'fallback')->name('falha-listFavoritos');
 });
 
+
+Route::prefix('avaliacao')->controller(FavoritoController::class)->middleware(CheckAuthUser::class)->group(function () {
+    Route::get('avaliar/{idProduto}', 'allFavoritos')->name('feedback-produto');
+    Route::get('favoritar/{idProduto}', 'register')->name('favoritar-produto');
+    Route::get('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    Route::get('falha', 'fallback')->name('falha-listFavoritos');
+});
 
 // Página Geral
 Route::prefix('produtos')->controller(ClientProdutoController::class)->group(function () {
@@ -246,17 +270,21 @@ Route::prefix('entrega')->controller(EnderecoController::class)->middleware(Chec
     Route::post('/registrar', 'register')->name('insert-endereco');
     Route::get('/endereco/vazio', 'fallback')->name('falha-endereco');
     Route::get('/endereco/selecionar', 'selectEndereco')->name('select-endereco');
+    Route::get('/apagar/conta/endereco', 'deleteEnderecoInfo')->name('delete-enderecoInfo');
+    Route::post('/registrar/conta/endereco', 'registerInfoEndereco')->name('register-infoEndereco');
 });
 
 Route::prefix('venda')->controller(VendaController::class)->middleware(CheckAuthUser::class)->group(function () {
     Route::get('/processa', 'processVenda')->name('processa-venda');
     Route::get('/sucesso', 'vendaSucess')->name('venda-sucess');
     Route::get('/falha', 'vendaSucess')->name('venda-falha');
+    Route::get('pedido/detalhes/{idVenda}', 'getPedidoDetailClient')->name('pedido-detailsCliente');
 });
 
 
 // Homepage
 Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
+Route::view('/edit', 'client.edit-info');
 
 
 
@@ -291,5 +319,5 @@ Route::get('/factory', function () {
 });
 
 Route::get('/session', function () {
-    return session()->all();
+    return dd(session()->all());
 });
