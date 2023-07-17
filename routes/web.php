@@ -44,6 +44,9 @@ use App\Mail\Contato;
 // TODO: #37 Checar todos os tratamentos de erro
 
 Route::prefix('adm')->group(function () {
+
+    Route::view('homepage', 'admin.list.homepage')->name('page-homepageAdmin');
+
     Route::prefix('auth')->controller(LoginController::class)->group(function () {
         Route::view('entrar', 'admin.index')->name('page-login');
         Route::get('logout', 'logout')->name('auth-sair')->middleware('guest:6,7,8,9');
@@ -91,8 +94,12 @@ Route::prefix('adm')->group(function () {
         Route::get('/active/{idCliente}', 'clientActiveAdmin')->name('client-active');
     });
 
-    Route::prefix('comentarios')->controller(LoginController::class)->middleware('guest:7,8,9')->group(function () {
-        Route::view('lista', 'admin.list.listComentarios')->name('page-listComentarios');
+    Route::prefix('comentarios')->controller(AvaliacaoController::class)->middleware('guest:7,8,9')->group(function () {
+        Route::get('lista', 'getFeedbacks')->name('page-listComentarios');
+        Route::get('get/comentario/{idComentario}', 'getComentarioAdmin')->name('get-comentario');
+        Route::get('falha', 'fallbackAdmin')->name('fallback-listComentario');
+        Route::get('filter/date', 'dateFilterAdmin')->name('filter-feedbackDate');
+        Route::get('filter/ordem', 'orderFilterAdmin')->name('filter-feedbackOrdem');
     });
 
     Route::prefix('cupons')->controller(CupomController::class)->middleware('guest:8,9')->group(function () {
@@ -134,7 +141,6 @@ Route::prefix('adm')->group(function () {
         Route::get('pedido/status/update', 'updateStatusPedido')->name('update-statusPedido');
         Route::post('pedido/pesquisa-pedido', 'searchPedidosAdmin')->name('search-pedidos');
         Route::get('pedido/filter/date', 'dateFilterAdmin')->name('filter-pedidosDate');
-        Route::get('pedido/filter/ordem', 'orderFilterAdmin')->name('filter-pedidosOrdem');
     });
 
     Route::prefix('relatorios')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {

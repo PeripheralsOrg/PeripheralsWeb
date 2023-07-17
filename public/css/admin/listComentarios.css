@@ -43,19 +43,23 @@
 }
 
 #btnNewProduto {
-    display: flex;
-    align-items: center;
     gap: 1rem;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    background-color: var(--vermelho);
+    color: var(--branco);
 }
 
 #btnNewProduto .icon-container {
     background-color: var(--vermelho);
     padding: 1rem;
     cursor: pointer;
-    color: #FFF;
+    color: var(--branco);
+}
+
+#btnCleanFilters {
+    background-color: var(--vermelho);
 }
 
 #btnCleanFilters {

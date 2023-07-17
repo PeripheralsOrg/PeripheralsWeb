@@ -21,6 +21,17 @@ class AvaliacaoController extends Controller
         return redirect()->back()->withErrors('Ocorreu um erro ao avaliar o produto!');
     }
 
+    public function getFeedbacks()
+    {
+        $avaliacoes = Avaliacao::all()->toArray();
+        if (count($avaliacoes) > 0) {
+            return view('admin.list.listComentarios')->with([
+                'avaliacoes' => $avaliacoes,
+            ]);
+        }
+        return redirect()->back()->withErrors('Ocorreu um erro ao avaliar o produto!');
+    }
+
 
     public function register(Request $request)
     {
@@ -54,6 +65,18 @@ class AvaliacaoController extends Controller
         return redirect()->route('client-info')->withErrors('Produto avaliado com sucesso!');
     }
 
+    public function getComentarioAdmin($idComentario){
+        $getComment = array_values(Avaliacao::all()->where('id_comentario', $idComentario)->toArray());
+        $produto = ProdutoView::all()->where('id_produtos', $getComment[0]['id_produto'])->toArray();
+        if ($getComment) {
+            return view('admin.details.detailsComentario')->with([
+                'produto' => $produto,
+                'getComment' => $getComment
+            ]);
+        }
+        return redirect()->back()->withErrors('Ocorreu um erro ao avaliar o produto!');
+    }
+
     public function likeAvaliacao($idComentario)
     {
         $avaliacao = Avaliacao::all()->where('id_comentario', $idComentario)->toQuery();
@@ -85,9 +108,9 @@ class AvaliacaoController extends Controller
     public function getMediaAvaliacaoProduto($idProduto)
     {
         $avaliacaoCount = Avaliacao::all()->where('id_produto', $idProduto)->count();
-        if($avaliacaoCount !== 0){
+        if ($avaliacaoCount !== 0) {
             return round(Avaliacao::all()->where('id_produto', $idProduto)->sum('avaliacao') / $avaliacaoCount, 1);
-        }else{
+        } else {
             return 0;
         }
     }
@@ -101,12 +124,28 @@ class AvaliacaoController extends Controller
     {
         $star = (Avaliacao::all()->where('id_produto', $idProduto)->whereIn('avaliacao', $valorStar)->count());
         $total = (new AvaliacaoController())->getCountAvaliacaoProduto($idProduto);
-        if($total !== 0){
+        if ($total !== 0) {
             $percent = $star / $total * 100;
             return round($percent);
-        }else{
+        } else {
             return 0;
         }
-        
+    }
+
+
+    public function dateFilterAdmin(Request $request)
+    {
+        $avaliacoes = Avaliacao::all()->whereBetween('created_at', [$request->input('dateFrom'), $request->input('dateTo')])->toArray();
+
+        if ($avaliacoes) {
+            return view('admin.list.listComentarios')->with('avaliacoes', $avaliacoes);
+        }
+        return redirect()->route('fallback-listComentario');
+    }
+
+    public function fallbackAdmin(){
+        $erro = 'Nenhum comentário encontrado!';
+        return view('admin.list.listComentarios')->with('erro', $erro);
+
     }
 }
