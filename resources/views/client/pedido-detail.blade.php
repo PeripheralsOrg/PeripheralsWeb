@@ -110,7 +110,8 @@
                                     <!-- Subtotal -->
                                     <p class="sub">Subtotal: R$ {{ $item['valor_total'] }}</p>
                                 </div>
-                                <a id="feedbackLink" href="{{route('feedback-produto', $item['id_produto'])}}">Avaliar Produto</a>
+                                <a id="feedbackLink" href="{{ route('feedback-produto', $item['id_produto']) }}">Avaliar
+                                    Produto</a>
 
                             </div>
                         </div>
@@ -130,11 +131,11 @@
             <div class="right-bar">
                 @foreach ($carrinho as $item)
                     <p><span>Frete</span> <span>R$ {{ $getVenda[0]['frete'] }}</span></p>
-                    <p><span>Cupom</span> <span>R$ 00,00</span></p>
+                    <p><span>Cupom</span> <span>R$ {{ $getVenda[0]['valor_desconto_total'] }}</span></p>
                     <p><span>Subtotal</span> <span>R$ {{ $item['valor_total'] }}</span></p>
                     <hr>
                     <p><span>Total</span> <span>R$
-                            {{ floatval($item['valor_total']) + floatval($getVenda[0]['frete']) }}</span></p>
+                            {{ $getVenda[0]['valor_total'] }}</span></p>
                     <button id="endCompra" onclick="window.location.href='{{ route('client-info') }}'">Voltar</button>
                 @endforeach
 

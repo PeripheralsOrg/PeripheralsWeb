@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id('id_carrinho');
             $table->decimal('valor_total', 10, 2);
             $table->integer('quant_items');
-            // TODO: #71 Arrumar cupom da tabela carrinho
-            $table->integer('cupom_desconto');
+            $table->decimal('valor_desconto', 10, 2);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->foreignId('id_users');

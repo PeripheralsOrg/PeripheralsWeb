@@ -97,7 +97,7 @@
                     </form>
 
                     <p><span>Frete</span> <span>R$ 00,00</span></p>
-                    <p><span>Cupom</span> <span>R$ 00,00</span></p>
+                    <p><span>Cupom</span> <span>R$ {{$item['valor_desconto']}}</span></p>
                     <p><span>Subtotal</span> <span>R$ {{ $item['valor_total'] }}</span></p>
                     <hr>
                     <p><span>Total</span> <span>R$ {{ $item['valor_total'] }}</span></p>

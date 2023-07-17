@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdmBanner;
+use App\Models\Avaliacao;
 use App\Models\Categoria;
 use App\Models\DetalhesProduto;
 use App\Models\Marcas;
@@ -11,6 +12,7 @@ use App\Models\Produto;
 use App\Models\ProdutoImagens;
 use App\Models\ProdutoInventario;
 use App\Models\ProdutoView;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 class ClientProdutoController extends Controller
@@ -36,11 +38,29 @@ class ClientProdutoController extends Controller
         $produtosTest = Produto::all()->where('status', 1)->where('id_produtos', $idProduto)->toArray();
         $produtosTest = reset($produtosTest);
 
+        // AVALIACAO INFO
+        $getAvaliacao = new AvaliacaoController();
+        $avaliacaoPercent = [
+            '5' => $getAvaliacao->getPercentStar($idProduto, 5),
+            '4' => $getAvaliacao->getPercentStar($idProduto, 4),
+            '3' => $getAvaliacao->getPercentStar($idProduto, 3),
+            '2' => $getAvaliacao->getPercentStar($idProduto, 2),
+            '1' => $getAvaliacao->getPercentStar($idProduto, 1),
+        ];
+
+        $avaliacaoCount = $getAvaliacao->getCountAvaliacaoProduto($idProduto);
+        $avaliacaoMedia = $getAvaliacao->getMediaAvaliacaoProduto($idProduto);
+        $avaliacaoAll = $getAvaliacao->getAllAvaliacaoProduto($idProduto);
+
+        // dd(($avaliacaoPercent));
+
         $categorias = Categoria::all()->where('id_categoria', $produtosTest['id_categoria'])->toArray();
         $marcas = Marcas::all()->where('id_marca', $produtosTest['id_marca'])->toArray();
         $imgProdutos = ProdutoImagens::all()->where('id_produto', $idProduto)->toArray();
         $quantProduto = ProdutoInventario::all()->where('id_inventario', $produtosTest['id_inventario'])->toArray();
         $detalhesProduto = DetalhesProduto::all()->where('id_detalhes', $produtosTest['id_detalhes'])->toArray();
+        $getProdutos1 = ProdutoView::inRandomOrder()->latest()->where('status', 1)->take(5)->get()->toArray();
+        $getProdutos2 = ProdutoView::inRandomOrder()->latest()->where('status', 1)->take(5)->get()->toArray();
         // Comentarios
 
         if (count($produtosTest) > 0) {
@@ -52,9 +72,24 @@ class ClientProdutoController extends Controller
                 'imgProdutos' => $imgProdutos,
                 'quantProduto' => $quantProduto,
                 'detalhesProduto' => $detalhesProduto,
+                'avaliacaoPercent' => $avaliacaoPercent,
+                'avaliacaoCount' => $avaliacaoCount,
+                'avaliacaoMedia' => $avaliacaoMedia,
+                'avaliacaoAll' => $avaliacaoAll,
+                'getProdutos1' => $getProdutos1,
+                'getProdutos2' => $getProdutos2
             ]);
         }
         return redirect()->back()->withErrors('Ocorreu um erro ao carregar o item!');
+    }
+
+    public static function getUserAvaliacao($idUser){
+        return array_values(User::all()->where('id', $idUser)->toArray())[0]['email'];
+    }
+
+    public static function getAvaliacaoCarrossel($idProduto)
+    {
+        return (new AvaliacaoController())->getMediaAvaliacaoProduto($idProduto);
     }
 
     public function fallback()
@@ -79,7 +114,7 @@ class ClientProdutoController extends Controller
                 return 'categoria';
                 break;
             case 'select-avaliacao':
-                return 'avaliacao';
+                return 'avaliacao_media';
                 break;
             case 'select-marca':
                 return 'marca';

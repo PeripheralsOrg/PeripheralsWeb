@@ -18,7 +18,8 @@ class CarrinhoComprasController extends Controller
             'quant_items' => $quantidade,
             'status' => 1,
             'id_users' => $iduser,
-            'valor_total' => $valorTotal
+            'valor_total' => $valorTotal,
+            'valor_desconto' => 0.00
         ])->id_carrinho;
     }
 
@@ -62,18 +63,24 @@ class CarrinhoComprasController extends Controller
         $newCheckProdutos = ProdutoCarrinho::all()->where('id_carrinho', $idCarrinho)->toArray();
         $valoresProdutos = [];
         $quantidadeProdutos = [];
+        $descontoCarrinho = [];
+
         foreach($newCheckProdutos as $produto){
             array_push($valoresProdutos, $produto['valor_total']);
             array_push($quantidadeProdutos, $produto['quantidade']);
+            array_push($descontoCarrinho, $produto['valor_desconto']);
         }
 
         $somaProdutoCarrinho = array_sum($valoresProdutos);
         $quantidadeProdutoCarrinho = array_sum($quantidadeProdutos);
+        $somaDescontoCarrinho = array_sum($descontoCarrinho);
+
         $modelCarrinho = CarrinhoCompras::find($idCarrinho);
 
         return $modelCarrinho->update([
             'valor_total' => $somaProdutoCarrinho,
-            'quant_items' => $quantidadeProdutoCarrinho
+            'quant_items' => $quantidadeProdutoCarrinho,
+            'valor_desconto' => $somaDescontoCarrinho
         ]);
     }
 }

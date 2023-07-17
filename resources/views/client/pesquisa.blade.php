@@ -50,6 +50,7 @@
                 <div class="box-filter">
                     <label for="selectAvaliacao">Avaliação</label>
                     <select onchange="submitFilter(this)" name="select-avaliacao" id="selectAvaliacao">
+                        <option value="0">Todos</option>
                         <option value="5">5 Estrelas</option>
                         <option value="4">4 Estrelas</option>
                         <option value="3">3 Estrelas</option>
@@ -75,24 +76,25 @@
                     @foreach ($produtos as $item)
                         <div style="cursor: pointer;" class="produto-item"
                             onclick="window.location.href=`{{ route('produto-get', $item['id_produtos']) }}`">
-                            
+
                             <img src="{{ $item['link_img'] }}" alt="">
                             <hr>
                             <div class="des">
                                 <span>{{ $item['marca'] }}</span>
                                 <h5>{{ $item['nome'] }}</h5>
                                 <div class="star">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($item['id_produtos']); $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
                                 </div>
                                 <h4>R$ {{ $item['preco'] }}</h4>
                             </div>
-                            <div>
-                                <a href=""><i class="fa fa-shopping-bag"></i></a>
-                                <a href=""><i class="fa fa-heart"></i></a>
+                            <div class="actions-container">
+                                <a href="{{ route('carrinho-insert', $item['id_produtos']) }}"><i
+                                        class="fa fa-shopping-bag"></i></a>
+
+                                <a href="{{ route('favoritar-produto', $item['id_produtos']) }}"><i
+                                        class="fa fa-heart"></i></a>
                             </div>
                         </div>
                     @endforeach

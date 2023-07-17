@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('id_users');
             $table->foreignId('id_carrinho');
             $table->foreignId('id_endereco');
+            $table->decimal('desconto_total', 10, 2);
             $table->timestamps();
         });
     }

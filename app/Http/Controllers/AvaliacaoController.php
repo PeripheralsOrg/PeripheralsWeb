@@ -3,31 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avaliacao;
+use App\Models\ProdutoView;
 use Illuminate\Http\Request;
+use Controller\ClientProdutoController;
 
 class AvaliacaoController extends Controller
 {
-    public function getComentariosClient(Request $request)
+    public function getProdutoAvaliar($idProduto)
     {
-        $avaliacao = Avaliacao::all()->where('id_users', $request->session()->get('user')['id'])->toArray();
-        if ($avaliacao) {
-            return view('client.minhas-avaliacoes')->with('avaliacao', $avaliacao);
+        $produto = ProdutoView::all()->where('id_produtos', $idProduto)->toArray();
+        if ($produto) {
+            return view('client.avaliar-produto')->with([
+                'produto' => $produto,
+                'idProduto' => $idProduto
+            ]);
         }
-        return redirect()->route('falha-listAvaliacoes');
+        return redirect()->back()->withErrors('Ocorreu um erro ao avaliar o produto!');
     }
 
 
-    public function getComentariosClientProduto(Request $request, $idProduto)
-    {
-        $avaliacao = Avaliacao::all()->where('id_users', $request->session()->get('user')['id'])
-            ->where('id_produto', $idProduto)->toArray();
-        if ($avaliacao) {
-            return view('client.meus-pedidos')->with('avaliacao', $avaliacao);
-        }
-        return redirect()->route('falha-listAvaliacoes');
-    }
-
-    public function register(Request $request, Avaliacao $avaliacao, $idProduto)
+    public function register(Request $request)
     {
         $request->validate([
             'titulo' => ['required'],
@@ -35,9 +30,14 @@ class AvaliacaoController extends Controller
             'avaliacao' => ['required'],
         ]);
 
-        if (empty($idProduto)) {
+        $avaliacao = new Avaliacao();
+
+        $idProduto = $request->input('idProduto');
+        if (empty($request->input('idProduto'))) {
             return redirect()->back()->withErrors('Não foi possível avaliar o produto. Tente novamente em instantes!');
         }
+
+        $idProduto = $request->input('idProduto');
 
         $avaliacaoC = $avaliacao->create([
             'id_produto' => $idProduto,
@@ -51,8 +51,18 @@ class AvaliacaoController extends Controller
             return back()->withErrors(['Ocorreu um erro ao avaliar o produto!']);
         }
 
-        // return redirect()->route();
+        return redirect()->route('client-info')->withErrors('Produto avaliado com sucesso!');
+    }
 
+    public function likeAvaliacao($idComentario)
+    {
+        $avaliacao = Avaliacao::all()->where('id_comentario', $idComentario)->toQuery();
+
+        $avaliacaoC = $avaliacao->update([
+            'like' => intval($avaliacao->getModel()->getAttribute('like')) + 1
+        ]);
+
+        return $avaliacaoC;
     }
 
 
@@ -65,5 +75,38 @@ class AvaliacaoController extends Controller
             // return redirect()->route();
         }
         return redirect('falha-listAvaliacoes')->withErrors('Não foi possível apagar a avaliação o produto!');
+    }
+
+    public function getCountAvaliacaoProduto($idProduto)
+    {
+        return Avaliacao::all()->where('id_produto', $idProduto)->count();
+    }
+
+    public function getMediaAvaliacaoProduto($idProduto)
+    {
+        $avaliacaoCount = Avaliacao::all()->where('id_produto', $idProduto)->count();
+        if($avaliacaoCount !== 0){
+            return round(Avaliacao::all()->where('id_produto', $idProduto)->sum('avaliacao') / $avaliacaoCount, 1);
+        }else{
+            return 0;
+        }
+    }
+
+    public function getAllAvaliacaoProduto($idProduto)
+    {
+        return array_values(Avaliacao::all()->where('id_produto', $idProduto)->toArray());
+    }
+
+    public function getPercentStar($idProduto, $valorStar)
+    {
+        $star = (Avaliacao::all()->where('id_produto', $idProduto)->whereIn('avaliacao', $valorStar)->count());
+        $total = (new AvaliacaoController())->getCountAvaliacaoProduto($idProduto);
+        if($total !== 0){
+            $percent = $star / $total * 100;
+            return round($percent);
+        }else{
+            return 0;
+        }
+        
     }
 }

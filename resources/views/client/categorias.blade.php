@@ -25,18 +25,18 @@
                 </div>
                 <div class="pro-container">
                     @foreach ($getProduto as $itemProd)
-                        <div class="pro item">
+                        <div class="pro item"
+                            onclick="window.location.href=`{{ route('produto-get', $itemProd['id_produtos']) }}`">
                             <img src="{{ $itemProd['link_img'] }}" alt="">
                             <hr>
                             <div class="des">
                                 <span>{{ $itemProd['marca'] }}</span>
                                 <h5>{{ $itemProd['nome'] }}</h5>
                                 <div class="star">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($itemProd['id_produtos']); 
+                                    $i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
                                 </div>
                                 <h4>R$ {{ $itemProd['preco'] }}</h4>
                             </div>

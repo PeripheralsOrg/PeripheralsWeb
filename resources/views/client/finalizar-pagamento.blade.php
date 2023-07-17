@@ -131,7 +131,7 @@
                 @foreach ($carrinho as $item)
                     <p><span>Frete</span> <span>R$ {{ $getFrete['valor'] }}</span></p>
                     <p><span>Prazo de Entrega</span> <span>{{ $getFrete['prazo'] }} Dia(s)</span></p>
-                    <p><span>Cupom</span> <span>R$ 00,00</span></p>
+                    <p><span>Cupom</span> <span>R$ {{$descontoTotal}}</span></p>
                     <p><span>Subtotal</span> <span>R$ {{ $item['valor_total'] }}</span></p>
                     <hr>
                     <p><span>Total</span> <span>R$ {{ $item['valor_total'] }}</span></p>

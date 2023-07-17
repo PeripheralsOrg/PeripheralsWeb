@@ -18,6 +18,17 @@
                 <button class="button-conta" id="button-conta">Conta</button>
             </div>
 
+            @if ($errors->any())
+                <div class="container-error">
+                    <i class="fa-sharp fa-solid fa-circle-exclamation" style="color: #FFFF;"></i>
+                    @foreach ($errors->all() as $error)
+                        <p id="txt-error">
+                            {{ $error }}
+                        </p>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="container-buttons">
                 <!-- CUPONS -->
                 <div class="infos-perfil" id="box-infos-perfil">
@@ -67,7 +78,9 @@
                                             <p class="product-title">{{ $item['quantidade_items'] }} Itens Comprados</p>
                                             <p class="valor">R$ {{ $item['valor_total'] }}</p>
                                             <p class="valor">R$ {{ $item['frete'] }}</p>
-                                            <p class="unit"><a href="{{route('pedido-detailsCliente', $item['id_venda'])}}">Ver detalhes</a></p>
+                                            <p class="unit"><a
+                                                    href="{{ route('pedido-detailsCliente', $item['id_venda']) }}">Ver
+                                                    detalhes</a></p>
                                         </div>
                                     </div>
                                 @endforeach

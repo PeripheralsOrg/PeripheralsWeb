@@ -48,12 +48,13 @@
                         </a>
                     </div>
                     <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span>4.7(21)</span>
+                        @for ($i = 0; $i < round($avaliacaoMedia); $i++)
+                            <i class="fas fa-star"></i>
+                        @endfor
+                        @if (is_float($avaliacaoMedia) && round($avaliacaoMedia) < $avaliacaoMedia)
+                            <i class="fas fa-star-half-alt"></i>
+                        @endif
+                        <span>{{ $avaliacaoMedia }} ({{ $avaliacaoCount }})</span>
                     </div>
 
                     <div class="product-price">
@@ -73,7 +74,8 @@
                         </div>
                     </div>
 
-                    <form class="product-detail" action="{{route('carrinho-insert', $item['id_produtos'])}}" method="GET">
+                    <form class="product-detail" action="{{ route('carrinho-insert', $item['id_produtos']) }}"
+                        method="GET">
                         <h2>Detalhes: </h2>
                         <p>{{ $item['descricao'] }}</p>
                         <div class="row-specialInfo">
@@ -101,8 +103,10 @@
                             @endfor
                         </select>
                         <div class="purchase-info">
-                            <button type="submit" type="button" class="btn-check" id="btnCarrinho"> Adicionar ao carrinho </button>
-                            <button type="button" onclick="console.log('asdasda')" class="btn-check" id="btnCompra"> Compre agora </button>
+                            <button type="submit" class="btn-check" id="btnCarrinho"> Adicionar ao carrinho
+                            </button>
+                            <button type="submit" class="btn-check" id="btnCompra"> Compre
+                                agora </button>
                         </div>
                     </form>
 
@@ -122,28 +126,29 @@
             <!-- slider_swiper-wrapper_start -->
             <div class=" slider swiper-wrapper">
                 <!-- pro_item_swiper-slide_start -->
-                @for ($i = 0; $i < 6; $i++)
-                    <div class="pro item swiper-slide">
-                        <img src="{{ asset('images/mou_4.jpg') }}" alt="">
+                @foreach ($getProdutos1 as $produto)
+                    <div class="pro item swiper-slide" onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
+                        <img src="{{ $produto['link_img'] }}" alt="{{$produto['nome']}}">
                         <hr>
                         <div class="des">
-                            <span>MULTILASER</span>
-                            <h5>Mouse Gamer</h5>
+                            <span>{{ $produto['marca'] }}</span>
+                            <h5>{{ $produto['nome'] }}</h5>
                             <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($produto['id_produtos']); $i++)
+                                    <i class="fa fa-star"></i>
+                                @endfor
                             </div>
-                            <h4>R$ 120,00</h4>
+                            <h4>R$ {{ $produto['preco'] }}</h4>
                         </div>
-                        <div>
-                            <a href=""><i class="fa fa-shopping-bag"></i></a>
-                            <a href=""><i class="fa fa-heart"></i></a>
+                        <div class="actions-container">
+                            <a href="{{ route('carrinho-insert', $produto['id_produtos']) }}"><i
+                                    class="fa fa-shopping-bag"></i></a>
+
+                            <a href="{{ route('favoritar-produto', $produto['id_produtos']) }}"><i
+                                    class="fa fa-heart"></i></a>
                         </div>
                     </div>
-                @endfor
+                @endforeach
 
                 <!-- pro_item_swiper-slide_end -->
 
@@ -173,28 +178,29 @@
             <!-- slider_swiper-wrapper_start -->
             <div class=" slider swiper-wrapper">
                 <!-- pro_item_swiper-slide_start -->
-                @for ($i = 0; $i < 6; $i++)
-                    <div class="pro item swiper-slide">
-                        <img src="{{ asset('images/mou_4.jpg') }}" alt="">
+                @foreach ($getProdutos2 as $produto)
+                    <div class="pro item swiper-slide" onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
+                        <img src="{{ $produto['link_img'] }}" alt="{{$produto['nome']}}">
                         <hr>
                         <div class="des">
-                            <span>MULTILASER</span>
-                            <h5>Mouse Gamer</h5>
+                            <span>{{ $produto['marca'] }}</span>
+                            <h5>{{ $produto['nome'] }}</h5>
                             <div class="star-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                @for ($i = 0; $i < App\Http\Controllers\ClientProdutoController::getAvaliacaoCarrossel($produto['id_produtos']); $i++)
+                                    <i class="fa fa-star"></i>
+                                @endfor
                             </div>
-                            <h4>R$ 120,00</h4>
+                            <h4>R$ {{ $produto['preco'] }}</h4>
                         </div>
-                        <div>
-                            <a href=""><i class="fa fa-shopping-bag"></i></a>
-                            <a href=""><i class="fa fa-heart"></i></a>
+                        <div class="actions-container">
+                            <a href="{{ route('carrinho-insert', $produto['id_produtos']) }}"><i
+                                    class="fa fa-shopping-bag"></i></a>
+
+                            <a href="{{ route('favoritar-produto', $produto['id_produtos']) }}"><i
+                                    class="fa fa-heart"></i></a>
                         </div>
                     </div>
-                @endfor
+                @endforeach
 
                 <!-- pro_item_swiper-slide_end -->
 
@@ -322,24 +328,25 @@
 
                 <div class="panel">
                     <div class="nota">
-                        <p class="avaliantion">4.7</p>
+                        <p class="avaliantion">{{ $avaliacaoMedia }}</p>
                     </div>
                     <div class="box">
                         <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                            @for ($i = 0; $i < round($avaliacaoMedia); $i++)
+                                <i class="fas fa-star"></i>
+                            @endfor
+                            @if (is_float($avaliacaoMedia) && round($avaliacaoMedia) < $avaliacaoMedia)
+                                <i class="fas fa-star-half-alt"></i>
+                            @endif
                         </div>
                         <div>
-                            <p class="avaliating">950 avaliações</p>
+                            <p class="avaliating">{{ $avaliacaoCount }} avaliações</p>
                         </div>
                     </div>
                 </div>
                 <div class="panel_progress">
                     <div class="progress-bar">
-                        <div class="progress" style="width: 75%"></div>
+                        <div class="progress" style="width: {{$avaliacaoPercent[5]}}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -347,7 +354,7 @@
                     </div>
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: 55%"></div>
+                        <div class="progress" style="width: {{$avaliacaoPercent[4]}}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -356,7 +363,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: 75%"></div>
+                        <div class="progress" style="width: {{$avaliacaoPercent[3]}}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -365,7 +372,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: 25%"></div>
+                        <div class="progress" style="width: {{$avaliacaoPercent[2]}}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -374,7 +381,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: 5%"></div>
+                        <div class="progress" style="width: {{$avaliacaoPercent[1]}}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -386,7 +393,7 @@
 
             <div class="comment-content">
                 <section id="testimonials">
-                    @for ($i = 0; $i < 6; $i++)
+                    @foreach ($avaliacaoAll as $item)
                         <!-- testimonials-box-container -->
                         <div class="testimonial-box-container">
                             <!-- BOX-1 -->
@@ -398,50 +405,51 @@
 
                                         <!-- name-and-data -->
                                         <div class="name-data">
-                                            <p id="emailUserComent">Samuca@gmail.com</p>
-                                            <span>10/07/2023</span>
+                                            <p id="emailUserComent">
+                                                {{ App\Http\Controllers\ClientProdutoController::getUserAvaliacao($item['id_users']) }}
+                                            </p>
+                                            <span>{{ Carbon\Carbon::parse($item['created_at'])->format('d/m/Y') }}</span>
                                         </div>
                                     </div>
                                     <!-- review  -->
                                     <div class="reviews">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        @for ($i = 0; $i < $item['avaliacao']; $i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+                                        @if ($item['avaliacao'] < 5)
+                                            @for ($i = 0; $i < 5 - $item['avaliacao']; $i++)
+                                                <i class="fa-regular fa-star"></i>
+                                            @endfor
+                                        @endif
                                     </div>
                                 </div>
 
                                 <!-- comments -->
                                 <div class="client-comment">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa distinctio nobis
-                                        facilis
-                                        accusamus maiores assumenda, corrupti nostrum dignissimos neque iste aperiam
-                                        obcaecati
-                                        est ut corporis odio quaerat laborum consequuntur culpa!</p>
+                                    <p>{{ $item['comentario'] }}</p>
                                 </div>
 
                                 <div class="btn-container">
                                     <div class="btn-box">
-                                        <button class="like">
+                                        <button class="like" onclick="">
                                             <span class="span-box">
                                                 <span class="util">É útil</span>
                                                 <span class="like-icon"><i class="fa fa-thumbs-up"
                                                         aria-hidden="true"></i></span>
-                                                <span class="qtd-likes">200</span>
+                                                <span class="qtd-likes">{{ $item['likes'] }}</span>
                                             </span>
                                         </button>
-                                        <button class="deslike">
+                                        {{-- <button class="deslike">
                                             <span class="span-box">
                                                 <span class="like-icon"><i class="fa fa-thumbs-down"
                                                         aria-hidden="true"></i></span>
                                             </span>
-                                        </button>
+                                        </button> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
 
 
