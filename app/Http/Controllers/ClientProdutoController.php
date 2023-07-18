@@ -14,6 +14,7 @@ use App\Models\ProdutoInventario;
 use App\Models\ProdutoView;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class ClientProdutoController extends Controller
 {
@@ -83,7 +84,34 @@ class ClientProdutoController extends Controller
         return redirect()->back()->withErrors('Ocorreu um erro ao carregar o item!');
     }
 
-    public static function getUserAvaliacao($idUser){
+    public function searchProdutoClient(Request $request)
+    {
+        //! Trocar para o request
+        $search = 'Teclado';
+
+        $produtos = json_decode(json_encode(DB::table('view_produto')
+            ->where('nome', 'LIKE', '%' . $search . '%')
+            ->Orwhere('marca', 'LIKE', '%' . $search . '%')
+            ->Orwhere('modelo', 'LIKE', '%' . $search . '%')
+            ->Orwhere('categoria', 'LIKE', '%' . $search . '%')->paginate(10)), true);
+
+        $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->toArray();
+        // ! Retirar o exit
+        exit();
+        if (count($produtos) > 0) {
+            return view('client.pesquisa')->with([
+                'produtos' => $produtos,
+                'categorias' => $categorias,
+                'marcas' => $marcas
+            ]);
+        }
+        return redirect()->route('falha-produtoClient');
+
+    }
+
+    public static function getUserAvaliacao($idUser)
+    {
         return array_values(User::all()->where('id', $idUser)->toArray())[0]['email'];
     }
 
@@ -434,7 +462,7 @@ class ClientProdutoController extends Controller
                 'getBanners' => $getBanners
             ]);
         }
-        
+
         return abort(404);
     }
 }

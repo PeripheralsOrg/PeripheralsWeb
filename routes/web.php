@@ -99,7 +99,6 @@ Route::prefix('adm')->group(function () {
         Route::get('get/comentario/{idComentario}', 'getComentarioAdmin')->name('get-comentario');
         Route::get('falha', 'fallbackAdmin')->name('fallback-listComentario');
         Route::get('filter/date', 'dateFilterAdmin')->name('filter-feedbackDate');
-        Route::get('filter/ordem', 'orderFilterAdmin')->name('filter-feedbackOrdem');
     });
 
     Route::prefix('cupons')->controller(CupomController::class)->middleware('guest:8,9')->group(function () {
@@ -141,6 +140,8 @@ Route::prefix('adm')->group(function () {
         Route::get('pedido/status/update', 'updateStatusPedido')->name('update-statusPedido');
         Route::post('pedido/pesquisa-pedido', 'searchPedidosAdmin')->name('search-pedidos');
         Route::get('pedido/filter/date', 'dateFilterAdmin')->name('filter-pedidosDate');
+        Route::get('pedido/filter/ordem', 'orderFilterAdmin')->name('filter-pedidosOrdem');
+
     });
 
     Route::prefix('relatorios')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
@@ -235,6 +236,7 @@ Route::prefix('produtos')->controller(ClientProdutoController::class)->group(fun
     Route::get('filtrar/produto', 'produtoFilterClient')->name('produto-filterClient');
     Route::get('preco/max', 'maximumValue')->name('produto-maxValue');
     Route::get('categoria/{categoria}', 'filterCategoria')->name('produtoCategoria-maxValue');
+    Route::get('pesquisar', 'searchProdutoClient')->name('produtoSearch-client');
     Route::get('falha/produto', 'fallback')->name('falha-produtoClient');
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
 });

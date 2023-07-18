@@ -21,6 +21,9 @@ class LoginController extends Controller
             'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/']
         ]);
 
+        $request->session()->regenerate(true);
+        $request->session()->flush(true);
+
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
         $user = AdmUsers::all()->where('name', $request->input('name'))->toArray();
         if (empty($user)) {
@@ -29,19 +32,19 @@ class LoginController extends Controller
 
         if (Auth::check()) {
             if ($request->session()->has('user')) {
-                return to_route('page-relatorios');
+                return to_route('page-homepageAdmin');
             }
 
             $request->session()->regenerate();
             $request->session()->put('user', $user);
 
-            return to_route('page-relatorios');
+            return to_route('page-homepageAdmin');
         }
 
         if (Auth::guard('adm_users')->attempt($validator, $rememberMe)) {
             $request->session()->regenerate();
             $request->session()->put('user', $user);
-            return to_route('page-relatorios');
+            return to_route('page-homepageAdmin');
         }
 
         return back()->withErrors('Ocorreu um erro ao se logar, por favor, contate o administrador!');
@@ -49,6 +52,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $request->session()->regenerate(true);
         Auth::logout();
         $request->session()->flush();
         return redirect('/adm/auth/entrar')->withErrors('Sessão encerrada com sucesso');
