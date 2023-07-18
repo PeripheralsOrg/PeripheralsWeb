@@ -24,6 +24,6 @@ class RedirectIfNotAuthenticated
         }
         // }
 
-        return redirect('adm/relatorios');
+        return redirect()->route('page-homepageAdmin');
     }
 }

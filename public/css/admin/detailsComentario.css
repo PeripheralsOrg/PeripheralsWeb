@@ -1,0 +1,149 @@
+@import '../import.css';
+
+.main-avaliar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-top: 6rem;
+    margin-bottom: 16rem;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.container-produto {
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.box-produto {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    align-items: center;
+}
+
+#nomeProd {
+    color: var(--vermelho);
+}
+
+.box-produto img {
+    width: 200px;
+    max-width: 100%;
+}
+
+.info-prod {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.form-avaliar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 600px;
+    width: 100%;
+}
+
+.box-input {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.box-input input {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--preto);
+}
+
+.form-avaliar textarea {
+    padding: 1rem;
+}
+
+.form-avaliar button {
+    padding: 1rem;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    border: transparent;
+    text-transform: uppercase;
+    transition: ease .3s;
+}
+
+.form-avaliar button:hover {
+    background-color: var(--cinza-fundo);
+    color: var(--branco);
+}
+
+
+/* Avaliação estrelas */
+
+
+.rate .input-rateBox:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate .input-rateBox {
+    float: left;
+}
+
+.rate .input-rateBox:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate .input-rateBox:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate .input-rateBox>input:checked~label {
+    color: #ffc700;
+}
+
+.rate .input-rateBox:not(:checked)>label:hover,
+.rate .input-rateBox:not(:checked)>label:hover~label {
+    color: #ffc800;
+}
+
+.rate .input-rateBox>input:checked+label:hover,
+.rate .input-rateBox>input:checked+label:hover~label,
+.rate .input-rateBox>input:checked~label:hover,
+.rate .input-rateBox>input:checked~label:hover~label,
+.rate .input-rateBox>label:hover~input:checked~label {
+    color: #c59b08;
+}
+
+#feedbacKBtn{
+    padding: 1rem;
+    background-color: var(--vermelho);
+    border: transparent;
+    color: var(--branco);
+    text-transform: uppercase;
+}
+
+
+@media (max-width: 520px) {
+    .box-produto {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .info-prod {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}

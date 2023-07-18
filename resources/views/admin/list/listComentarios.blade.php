@@ -18,41 +18,35 @@
         @endif
 
         <!-- Barra_de_busca -->
-        <form id="divBusca" action="{{ route('search-adm') }}" method="GET">
-            <input type="text" id="txtBusca" name="search" placeholder="Buscar..." />
-            <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-
         <section class="container-filters">
-            <section class="box-input-date">
+            <form class="box-input-date" action="{{ route('filter-feedbackDate') }}">
                 <div class="box-ordem box-filter">
                     <label for="inputDateFrom">De:</label>
-                    <input type="date" name="date" id="inputDateFrom">
+                    <input required type="date" name="dateFrom" id="inputDateFrom">
                 </div>
 
                 <div class="box-ordem box-filter">
                     <label for="inputDateTo">Até:</label>
-                    <input type="date" name="date" id="inputDateTo">
+                    <input required type="date" name="dateTo" id="inputDateTo">
                 </div>
-            </section>
 
-            <div class="box-ordem box-filter">
-                <label for="selectOrdem">Ordenar Por</label>
-                <select id="selectOrdem" name="select-ordem">
-                    <option>Todos</option>
-                    <option value="1">Maior Preço</option>
-                    <option value="2">Menor Preço</option>
-                    <option value="3">Mais Relevante</option>
-                </select>
-            </div>
+                <div class="box-ordem box-filter">
+                    {{-- ! CARACTEREZE INVISIVISIVEL, NÃO MEXER --}}
+                    <label for="inputDateTo">⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
 
-            {{-- TODO: TENTAR TIRAR O LIMPAR FILTROS DE TODAS AS PÁGINAS --}}
+                    <button id="btnNewProduto">
+                        Pesquisar
+                    </button>
+                </div>
+                </div>
+            </form>
 
-            {{-- <div class="container-clean-filters box-filter">
-                <button id="btnCleanFilters">
+
+            <div class="container-clean-filters box-filter">
+                <button id="btnCleanFilters" onclick="window.location.href='{{ route('page-listComentarios') }}'">
                     Limpar Filtros
                 </button>
-            </div> --}}
+            </div>
         </section>
 
         <!--Começo_da_tabela_de_pedidos-->
@@ -62,8 +56,8 @@
                 <tr>
                     <th>#</th>
                     <th>Avaliação</th>
-                    <th>Nome</th>
-                    <th>Produto</th>
+                    <th>ID Usuário</th>
+                    <th>ID Produto</th>
                     <th>Data</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -71,16 +65,23 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>5 Estrelas</td>
-                    <td>Stich</td>
-                    <td>Mouse</td>
-                    <td>23/02/2023</td>
-                    <td>1</td>
-                    <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-                </tr>
+                @if (!empty($avaliacoes))
+
+                    @foreach ($avaliacoes as $item)
+                        <tr>
+                            <td>{{ $item['id_comentario'] }}</td>
+                            <td>{{ $item['avaliacao'] }} Estrelas</td>
+                            <td>{{ $item['id_users'] }}</td>
+                            <td>{{ $item['id_produto'] }}</td>
+                            <td>{{ Carbon\Carbon::parse($item['created_at'])->format('d/m/Y h:i:s') }}</td>
+                            <td>1</td>
+                            <td><a href="{{ route('get-comentario', $item['id_comentario']) }}"><i
+                                        class="fa-solid fa-magnifying-glass"></i></a></td>
+                        </tr>
+                    @endforeach
+                @else
+                    <h1>{{ $erro }}</h1>
+                @endif
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->

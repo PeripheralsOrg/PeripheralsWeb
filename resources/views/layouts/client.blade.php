@@ -59,8 +59,7 @@
         </nav>
 
         <div class="box-icons">
-            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'"><img
-                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+            <button><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
             @if (empty(Request::session()->get('user')))
                 <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
@@ -71,7 +70,7 @@
                             alt="Ícone de Usuário"></button>
                     <!-- <i class="fa-solid fa-angle-down"></i> -->
                     <li class="dropdown-content">
-                        <a href="{{route('client-info')}}">Minha Conta</a>
+                        <a href="{{ route('client-info') }}">Minha Conta</a>
                         <a href="{{ route('logout-user') }}">Sair</a>
                     </li>
                 </div>
@@ -79,7 +78,7 @@
 
             <a href="{{ route('client-favoritos') }}"><img src="{{ asset('images/icons-branco/coracao.svg') }}"
                     alt="Ícone de Favoritos"></a>
-            <a href="{{route('carrinho-all')}}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+            <a href="{{ route('carrinho-all') }}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                     alt="Ícone do Carrinho de Compras"></a>
         </div>
     </header>
@@ -115,12 +114,13 @@
                                 alt="Ícone de Usuário">Cadastro/Login</a>
                     @else
                         <div class="dropdown-link">
-                            <a class="btn-config" href="{{route('client-info')}}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                            <a class="btn-config" href="{{ route('client-info') }}"><img
+                                    src="{{ asset('images/icons-branco/avatar.svg') }}"
                                     alt="Ícone de Usuário">Conta</a>
                     @endif
                     <a href="{{ route('client-favoritos') }}"><img
                             src="{{ asset('images/icons-branco/coracao.svg') }}" alt="Ícone de Favoritos">Favoritos</a>
-                    <a href="{{route('carrinho-all')}}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
+                    <a href="{{ route('carrinho-all') }}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                             alt="Ícone do Carrinho de Compras">Sacola</a>
                 </div>
 

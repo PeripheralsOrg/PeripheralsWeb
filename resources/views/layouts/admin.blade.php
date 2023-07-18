@@ -10,7 +10,7 @@
     {{-- Scripts e Stylesheet nativos --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css') }}/@yield('css').css">
     <script defer src="{{ asset('js') }}/@yield('js').js"></script>
-    <script src="{{asset('js/valida-forms.js')}}"></script>
+    <script src="{{ asset('js/valida-forms.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/navbar.css') }}">
 
     {{-- Font Aweasome --}}
@@ -19,7 +19,7 @@
     {{-- Carrossel --}}
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
     <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
-    
+
     <title>
         @section('title')
             Peripherals -
@@ -39,22 +39,24 @@
                 <!-- Barra_de_menu_lateral -->
                 <nav id="navLinks">
                     <ul>
-                        <li><a href="{{route('page-relatorios')}}">Relatórios</a></li>
-                        <li><a href="{{route('page-listPedidos')}}">Pedidos</a></li>
-                        <li><a href="{{route('page-listProdutos')}}">Produtos</a></li>
-                        <li><a href="{{route('page-listClientes')}}">Clientes</a></li>
-                        <li><a href="{{route('page-listComentarios')}}">Feedback</a></li>
-                        <li><a href="{{route('page-listAdm')}}">Administração</a></li>
-                        <div class="dropdown-link">
-                            <button class="btn-config">Configurações▾</button>
-                            <!-- <i class="fa-solid fa-angle-down"></i> -->
-                            <li class="dropdown-content">
-                                <a href="{{route('page-listMenus')}}">Menus</a>
-                                <a href="{{route('page-listCarrossel')}}">Carrossel</a>
-                                <a href="{{route('page-listCupons')}}">Cupons</a>
-                                <a href="{{route('page-listConfig')}}">Configurações</a>
-                            </li>
-                        </div>
+                        <li><a href="{{ route('page-relatorios') }}">Relatórios</a></li>
+                        <li><a href="{{ route('page-listPedidos') }}">Pedidos</a></li>
+                        <li><a href="{{ route('page-listProdutos') }}">Produtos</a></li>
+                        <li><a href="{{ route('page-listClientes') }}">Clientes</a></li>
+                        <li><a href="{{ route('page-listComentarios') }}">Feedback</a></li>
+                        <li><a href="{{ route('page-listAdm') }}">Administração</a></li>
+                        @if (array_values(Session::get('user'))[0]['poder'] == 9)
+                            <div class="dropdown-link">
+                                <button class="btn-config">Configurações▾</button>
+                                <!-- <i class="fa-solid fa-angle-down"></i> -->
+                                <li class="dropdown-content">
+                                    <a href="{{ route('page-listMenus') }}">Menus</a>
+                                    <a href="{{ route('page-listCarrossel') }}">Carrossel</a>
+                                    <a href="{{ route('page-listCupons') }}">Cupons</a>
+                                    <a href="{{ route('page-listConfig') }}">Configurações</a>
+                                </li>
+                            </div>
+                        @endif
                     </ul>
                 </nav>
                 <!-- Fim_Barra_de_menu_lateral -->
@@ -63,7 +65,8 @@
                 <button class="button-nav" id="userSession">Sysadmin: <br> abc@adm.com</button>
 
                 <!-- Encerrar_sessão -->
-                <button class="button-nav" id="logoutSession" onclick="window.location.href=`http://127.0.0.1:8000/adm/auth/logout`">Logout</button>
+                <button class="button-nav" id="logoutSession"
+                    onclick="window.location.href='{{ route('auth-sair') }}'">Logout</button>
 
             </header>
             <!-- Fim_da_sessão_header -->

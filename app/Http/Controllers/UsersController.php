@@ -45,6 +45,9 @@ class UsersController extends Controller
                 ->withInput();
         }
 
+        $request->session()->regenerate(true);
+        $request->session()->flush(true);
+
 
         if ($request->input('feedback') == 'on') {
             $request->merge([
@@ -81,6 +84,8 @@ class UsersController extends Controller
             'email-cpf' => ['required', 'max:255'],
             'senha' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/']
         ]);
+
+        $request->session()->regenerate(true);
 
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
         $user = User::all()->where('email', $request->input('email-cpf'))->toArray();

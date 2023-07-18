@@ -17,6 +17,8 @@ html, body{
     width: 85%;
     margin-top: 5rem;
     margin-bottom: 5rem;
+    position: absolute;
+    right: 0;
 }
 
 .global-wrapper .container-login {
@@ -143,6 +145,8 @@ header #logoutSession:hover {
     border: 1px solid var(--vermelho);
     transition: var(--navbar-transition);
 }
+
+
 
 @media (min-width: 2000px) {
     .global-wrapper .container-content {
