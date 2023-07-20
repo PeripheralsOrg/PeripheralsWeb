@@ -46,7 +46,7 @@ h3 {
     /* font-size: 1.75rem; */
 }
 
-span{
+span {
     font-size: 12px;
 }
 
@@ -239,7 +239,7 @@ main {
     color: #000;
 }
 
-.container-error{
+.container-error {
     display: flex;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -249,7 +249,7 @@ main {
     text-transform: none !important;
 }
 
-.pro.item{
+.pro.item {
     cursor: pointer !important;
 }
 
@@ -267,3 +267,18 @@ main {
     gap: 1rem;
     margin-top: -5rem;
 }
+
+@media (max-width: 1200px) {
+    .des {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .pro {
+        height: fit-content;
+    }
+}
+
+
+@media (max-width: 1000px) {}

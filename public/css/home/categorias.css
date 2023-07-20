@@ -124,6 +124,14 @@
 
 @media (max-width: 640px) {
     .pro-container {
-        justify-content: center;
+        width: fit-content;
+    }
+
+    .section-p1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2rem;
+        width: fit-content;
     }
 }

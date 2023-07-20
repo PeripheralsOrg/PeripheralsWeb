@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use App\Models\ProdutoCarrinho;
+use App\Models\VendaTemporary;
 use Illuminate\Http\Request;
 
 class ProdutoCarrinhoController extends Controller
@@ -43,6 +44,12 @@ class ProdutoCarrinhoController extends Controller
     {
         $updateProd = ProdutoCarrinho::all()->where('id_produto', $idProduto)->where('id_carrinho', $idCarrinho)->toQuery();
         $getValueProduto = array_values(Produto::all()->where('id_produtos', $idProduto)->toArray())[0]['preco'];
+        $checkTemporaryVenda = array_values(VendaTemporary::all()->where('id_carrinho', $idCarrinho)->toArray());
+
+        if($quantidade == 0 && count($checkTemporaryVenda) > 0){
+            return (new CarrinhoComprasController())->deleteCarrinho($idCarrinho);
+        }
+
 
         return $updateProd->update([
             'quantidade' => $quantidade,
@@ -53,6 +60,13 @@ class ProdutoCarrinhoController extends Controller
     public function deleteItem($idProduto, $idCarrinho)
     {
         $deleteProd = ProdutoCarrinho::all()->where('id_produto', $idProduto)->where('id_carrinho', $idCarrinho)->toQuery();
+        $checkTemporaryVenda = array_values(VendaTemporary::all()->where('id_carrinho', $idCarrinho)->toArray());
+
+        if(count($checkTemporaryVenda) > 0){
+            return (new CarrinhoComprasController())->deleteCarrinho($idCarrinho);
+        }
+
+
         $execDelete = $deleteProd->delete();
         if ($execDelete) {
             return $execDelete;

@@ -10,7 +10,7 @@
     gap: 5rem;
 }
 
-span{
+span {
     font-size: 1rem !important;
 }
 
@@ -67,7 +67,7 @@ span{
     text-transform: uppercase;
 }
 
-#titleCarrinho{
+#titleCarrinho {
     margin-top: 2rem;
     font-size: 1.5rem;
 }
@@ -204,7 +204,7 @@ span{
 }
 
 
-#feedbackLink{
+#feedbackLink {
     text-decoration: underline;
     color: var(--vermelho);
     transition: ease .2s;
@@ -257,7 +257,7 @@ span{
         max-width: 95%;
     }
 
-    .box-endereco{
+    .box-endereco {
         width: 100%;
     }
 }
@@ -267,5 +267,38 @@ span{
         width: 100px;
         max-width: 100%;
         object-fit: fill;
+    }
+}
+
+@media (max-width: 400px) {
+    .row-value {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        height: fit-content;
+    }
+
+    .box img {
+        width: 100%;
+        object-fit: fill;
+    }
+}
+
+@media (max-width: 300px) {
+    .right-bar p {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        text-align: center;
+    }
+
+    .right-bar p span:first-child {
+        color: var(--vermelho);
     }
 }

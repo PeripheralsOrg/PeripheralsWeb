@@ -95,6 +95,10 @@ class EnderecoController extends Controller
         $idUser = $request->session()->get('user')['id'];
 
 
+        if(!$getFrete){
+            return redirect()->back()->withErrors('Por favor, selecione outro endereço!');
+        }
+
         // Informações Pedido
         $carrinho = CarrinhoCompras::all()->where('id_users', $idUser)->where('status', 1)->toArray();
 
@@ -149,7 +153,7 @@ class EnderecoController extends Controller
         }
 
 
-        $checkVendaT = VendaTemporary::all()->where('id_carrinho', $idCarrinho)->toArray();
+        $checkVendaT = VendaTemporary::all()->where('id_carrinho', $idCarrinho)->where('id_endereco', $idEndereco)->toArray();
 
         if (count($checkVendaT) > 0) {
             $payLink = Auth::user()->charge($valorTotal, $this->finalMessage, [
@@ -162,6 +166,8 @@ class EnderecoController extends Controller
                 ],
                 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
+
+            $idVendaTemporary = array_values($checkVendaT)[0]['id_temporary_venda'];
         } else {
             $createTemporary = VendaController::registerTemporary(
                 $valorTotal,
@@ -184,6 +190,8 @@ class EnderecoController extends Controller
                 ],
                 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
+
+            $idVendaTemporary = $createTemporary;
         }
 
 
@@ -200,7 +208,8 @@ class EnderecoController extends Controller
                 'payLink' => $payLink,
                 'idCarrinho' => $idCarrinho,
                 'idEndereco' => $idEndereco,
-                'descontoTotal' => $descontoTotal
+                'descontoTotal' => $descontoTotal,
+                'idVendaTemporary' => $idVendaTemporary
             ]);
         } else {
             return redirect()->back()->withErrors('Frete indisponível para o endereço. Por favor selecione outro!');

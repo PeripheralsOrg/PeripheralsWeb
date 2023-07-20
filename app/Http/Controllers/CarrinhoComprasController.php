@@ -60,6 +60,13 @@ class CarrinhoComprasController extends Controller
     }
 
     public function atualizarCarrinhoCompras($idCarrinho){
+        $checkCarrinho = CarrinhoCompras::all()->where('id_carrinho', $idCarrinho)->toArray();
+        if(count($checkCarrinho) <= 0){
+            // Carrinho já apagado
+            return $checkCarrinho;
+        }
+
+
         $newCheckProdutos = ProdutoCarrinho::all()->where('id_carrinho', $idCarrinho)->toArray();
         $valoresProdutos = [];
         $quantidadeProdutos = [];

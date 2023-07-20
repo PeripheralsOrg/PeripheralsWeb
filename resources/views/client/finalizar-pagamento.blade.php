@@ -138,6 +138,7 @@
                     <input type="hidden" name="idCarrinho" value="{{$idCarrinho}}">
                     <input type="hidden" name="checkoutLink" value="{{$payLink}}">
                     <input type="hidden" name="idEndereco" value="{{$idEndereco}}">
+                    <input type="hidden" name="idVendaT" value="{{$idVendaTemporary}}">
                     <button id="endCompra">Finalizar Compra</button>
                 @endforeach
 
