@@ -54,9 +54,8 @@
 
             <div class="row-cep">
                 <div class="box-inputCep">
-                    {{-- TODO: #69 Criar a validação por CEP --}}
-                    <input required type="text" name="cep" data-js="cep" required class="input-field"
-                        placeholder="CEP" id="inputCep">
+                    <input type="text" data-js="cep" required name="cep" required class="input-field"
+                        placeholder="CEP" maxlength="10" id="inputCep">
                 </div>
                 <button type="button" id="btnCep">Localizar</button>
             </div>
@@ -133,8 +132,8 @@
                 <button type="submit" class="btn-delete">Cadastrar</button>
             </div>
         </form>
+        <button id="getBackBtn" onclick="window.location.href='{{ route('client-info') }}'">Voltar</button>
 
     </main>
 
 @endsection
-

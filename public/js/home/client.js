@@ -33,3 +33,36 @@ function openbar() {
         busca.classList.toggle('active')
     }
 }
+
+function openSearchMob() {
+    document.getElementById("inputPesquisa").style.display = "block";
+    document.getElementById("btnFecharPesquisa").style.display = "block";
+    document.getElementById("btnPesquisaMB").style.display = "none";
+
+}
+
+function closeSearchMob() {
+    document.getElementById("inputPesquisa").style.display = "none";
+    document.getElementById("btnFecharPesquisa").style.display = "none";
+    document.getElementById("btnPesquisaMB").style.display = "block";
+}
+
+function openSearchNav() {
+    document.getElementById("inputPesquisaNav").style.display = "block";
+    document.getElementById("btnFecharPesquisaNav").style.display = "block";
+    document.getElementById("btnNavPesquisa").style.display = "none";
+    document.getElementById("btnNavUser").style.display = "none";
+    document.getElementById("btnNavFavoritos").style.display = "none";
+    document.getElementById("btnNavCarrinho").style.display = "none";
+
+}
+
+function closeSearchNav() {
+    document.getElementById("inputPesquisaNav").style.display = "none";
+    document.getElementById("btnFecharPesquisaNav").style.display = "none";
+    document.getElementById("btnNavPesquisa").style.display = "block";
+    document.getElementById("btnNavUser").style.display = "block";
+    document.getElementById("btnNavFavoritos").style.display = "block";
+    document.getElementById("btnNavCarrinho").style.display = "block";
+
+}

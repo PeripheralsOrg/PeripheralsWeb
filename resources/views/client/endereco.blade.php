@@ -54,9 +54,8 @@
 
             <div class="row-cep">
                 <div class="box-inputCep">
-                    {{-- TODO: #69 Criar a validação por CEP --}}
                     <input required type="text" name="cep" data-js="cep" required class="input-field"
-                        placeholder="CEP" id="inputCep">
+                        placeholder="CEP" maxlength="10" id="inputCep">
                 </div>
                 <button type="button" id="btnCep">Localizar</button>
             </div>

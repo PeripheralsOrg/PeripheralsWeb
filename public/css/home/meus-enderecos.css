@@ -53,6 +53,21 @@ form {
     padding: 1rem;
 }
 
+.form-edit button,
+#getBackBtn {
+    padding: 1rem;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    text-transform: uppercase;
+    transition: ease .3s;
+    border: transparent;
+}
+
+.form-edit button:hover,
+#getBackBtn:hover {
+    background-color: var(--cinza-fundo);
+}
+
 .box-buttons button:hover {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, .1);
 }

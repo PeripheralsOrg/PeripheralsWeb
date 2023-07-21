@@ -18,8 +18,6 @@ function slideImage() {
 
 window.addEventListener('resize', slideImage);
 
-
-
 let swiper = new Swiper(".pro-container", {
     slidesPerView: 3,
     spaceBetween: 22,
@@ -37,14 +35,17 @@ let swiper = new Swiper(".pro-container", {
       prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-      0: {
-        slidesPerView: 1,
+      450: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        centerSlide: false
       },
       520: {
         slidesPerView: 2,
       },
       768: {
         slidesPerView: 3,
+        loop: true
       },
       1000: {
         slidesPerView: 4,

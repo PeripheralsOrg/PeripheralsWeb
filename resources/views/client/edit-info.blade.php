@@ -31,7 +31,7 @@
 
                 <div class="box-input">
                     <label for="">Telefone Celular</label>
-                    <input required type="number" name="telefone_celular" placeholder="Celular"
+                    <input required data-js="phone" type="text" name="telefone_celular" placeholder="Celular"
                         value="{{ Session::get('user')['telefone_celular'] }}">
                 </div>
 
