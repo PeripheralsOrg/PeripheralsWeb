@@ -10,7 +10,6 @@ body {
     flex-direction: column;
     gap: 3rem;
     margin: 0 auto;
-    /* background-color: aqua; */
     width: 80vw;
     margin-top: 10rem;
     margin-bottom: 10rem;
@@ -32,7 +31,6 @@ main h1 {
 #titleProd {
     position: absolute;
     top: 15rem;
-    /* left: 42.5rem; */
 }
 
 
@@ -75,7 +73,7 @@ main h1 {
     transition: ease .2s;
 }
 
-#cleanFilters:hover{
+#cleanFilters:hover {
     background-color: var(--branco);
     color: var(--vermelho);
     border: 1px solid var(--vermelho);
@@ -88,8 +86,6 @@ main h1 {
     flex-direction: row;
     gap: 1rem;
     width: 80%;
-    /* padding: 1rem; */
-    /* background-color: bisque; */
     flex-wrap: wrap;
 }
 
@@ -167,7 +163,7 @@ main h1 {
     color: var(--vermelho);
 }
 
-.container-error{
+.container-error {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,8 +171,90 @@ main h1 {
     height: 100%;
 }
 
-.container-error h1{
+.container-error h1 {
     color: var(--branco);
     font-family: var(--quicksand);
     font-size: 2rem;
+}
+
+
+@media (max-width: 1250px) {
+    .pesquisa-container {
+        width: 100vw;
+        padding: 2rem;
+    }
+
+    .wrapper {
+        width: 100%;
+    }
+
+    /* #titleProd {
+        position: absolute;
+        top: 15rem;
+    } */
+
+
+    /* FILTRO STYLE */
+
+    .filters-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 35%;
+        background-color: var(--branco);
+        padding: 1rem;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .pesquisa-container{
+        height: fit-content;
+    }
+
+    #titleProd{
+        position: unset;
+        margin-top: 5rem;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .filters-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        background-color: var(--branco);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .produto-container{
+        width: 100% !important;
+    }
+
+    .produto-item{
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .pesquisa-container{
+        padding: 0;
+    }
+
+    .wrapper{
+        width: 100vw;
+    }
+
+    .filters-container{
+        width: 100vw;
+        padding: 1rem;
+    }
 }

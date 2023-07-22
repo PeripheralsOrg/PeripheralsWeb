@@ -169,15 +169,19 @@ header .dropdown-linkMenu:hover .dropdown-menu {
     border-radius: 10px;
 }
 
-.dropdown-menu a{
+.dropdown-menu a {
     color: var(--preto);
     transition: ease .3s;
 }
 
-.dropdown-menu a:hover{
+.dropdown-menu a:hover {
     color: var(--vermelho);
 }
 
+
+/* #btnFecharPesquisaNav{
+    display: none;
+} */
 
 
 /* Media Queries */
@@ -205,7 +209,7 @@ header .dropdown-linkMenu:hover .dropdown-menu {
         display: block;
     }
 
-    .dropdown-link{
+    .dropdown-link {
         display: flex;
         flex-direction: flex;
         align-items: center;
@@ -322,4 +326,34 @@ header .dropdown-linkMenu:hover .dropdown-menu {
         background-color: var(--vermelho);
     }
 
+
+    .mobile-menu .btnFecharMenu,
+    #boxAbertaNav .btnPesquisa-r {
+        display: none;
+    }
+
+    .mobile-menu .btnPesquisaMB {
+        display: block;
+    }
+
+    #inputPesquisa,
+    #btnFecharPesquisa {
+        display: none;
+    }
+
+    .mobile-menu #btnFecharPesquisa img{
+        position: absolute;
+        top: 3rem;
+        right: 2.5rem;
+        width: 15px !important;
+    }
+
+    .mobile-menu input[type="text"] {
+        background-color: transparent;
+        border-radius: var(--border-radius);
+        border: var(--branco) solid 1px;
+        color: var(--branco);
+        width: 100%;
+        padding: 1rem;
+    }
 }

@@ -59,7 +59,11 @@
         </nav>
 
         <div class="box-icons">
-            <button><img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+            <button id="btnNavPesquisa" onclick="openSearchNav()"><img
+                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+
+            <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
+                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
 
             @if (empty(Request::session()->get('user')))
                 <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
@@ -100,9 +104,14 @@
 
         <!-- Tá sem a função da caixa de pesquisa -->
         <div class="mobile-menu">
-            <button onclick="window.location.href='{{ route('produto-pesquisaAll') }}'">
+            <button id="btnPesquisaMB" class="btnPesquisaMB" onclick="openSearchMob()">
                 <img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa">
             </button>
+
+            <input type="text" id="inputPesquisa" class="inputPesquisa" placeholder="Pesquisar">
+
+            <button id="btnFecharPesquisa" class="btnFecharPesquisa" onclick="closeSearchMob()"><img
+                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
         </div>
 
         <div class="boxAbertaNav">
@@ -110,7 +119,8 @@
             <section class="nav-content">
                 <div class="box-icons-responsive">
                     @if (empty(Request::session()->get('user')))
-                        <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
+                        <a href="{{ route('client-login') }}"><img
+                                src="{{ asset('images/icons-branco/avatar.svg') }}"
                                 alt="Ícone de Usuário">Cadastro/Login</a>
                     @else
                         <div class="dropdown-link">
@@ -119,7 +129,8 @@
                                     alt="Ícone de Usuário">Conta</a>
                     @endif
                     <a href="{{ route('client-favoritos') }}"><img
-                            src="{{ asset('images/icons-branco/coracao.svg') }}" alt="Ícone de Favoritos">Favoritos</a>
+                            src="{{ asset('images/icons-branco/coracao.svg') }}"
+                            alt="Ícone de Favoritos">Favoritos</a>
                     <a href="{{ route('carrinho-all') }}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                             alt="Ícone do Carrinho de Compras">Sacola</a>
                 </div>

@@ -60,8 +60,8 @@
                     </div>
 
                     <div class="input-group w50 container-row">
-                        <input type="number" id="telefone_celular" value="{{ old('telefone_celular') }}"
-                            name="telefone_celular" data-js="number" placeholder="Digite seu número" required
+                        <input type="text" data-js="phone" id="telefone_celular" value="{{ old('telefone_celular') }}"
+                            name="telefone_celular" placeholder="Digite seu número" required
                             class="@error('telefone_celular') is-invalid @enderror">
                             
                         @error('telefone_celular')
