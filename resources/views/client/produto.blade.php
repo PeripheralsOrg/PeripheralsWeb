@@ -68,11 +68,12 @@
                             <p>Calcular frete de entrega</p>
                             <div class="box-cepEntrega">
                                 <i class="fas fa-truck-moving"></i>
-                                <input class="cep" type="text" placeholder="Digite seu CEP">
-                                <button type="button" class="btn-consultar"> Consultar </button>
+                                <input maxlength="10" class="cep" id="inputCalculaCep" data-js="cep" type="text" placeholder="Digite seu CEP">
+                                <input type="hidden" name="valueFrete" id="valueFreteInput" value="{{ csrf_token() }}">
+                                <button type="button" class="btn-consultar button-cep-calc"> Consultar </button>
                             </div>
                         </div>
-                    </div>
+                    </div>  
 
                     <form class="product-detail" action="{{ route('carrinho-insert', $item['id_produtos']) }}"
                         method="GET">
@@ -105,8 +106,21 @@
                         <div class="purchase-info">
                             <button type="submit" class="btn-check" id="btnCarrinho"> Adicionar ao carrinho
                             </button>
-                            <button type="submit" class="btn-check" id="btnCompra"> Compre
-                                agora </button>
+                            <button type="submit" class="btn-check" id="btnCompra">
+                                Compre agora
+                            </button>
+                        </div>
+                        <!--Exibir informações de prazo e valor-->
+                        <div id="cep-info-sedex">
+                            <p id="valueSedex"></p>
+                            <p id="prazoSedex"></p>
+                        </div>
+
+                        <div id="cep-info-pac">
+                            <p id="valuePac"></p>
+                            <p id="prazoPac"></p>
+                            <br>
+                            <p id="textObs"></p>
                         </div>
                     </form>
 
@@ -127,8 +141,9 @@
             <div class=" slider swiper-wrapper">
                 <!-- pro_item_swiper-slide_start -->
                 @foreach ($getProdutos1 as $produto)
-                    <div class="pro item swiper-slide" onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
-                        <img src="{{ $produto['link_img'] }}" alt="{{$produto['nome']}}">
+                    <div class="pro item swiper-slide"
+                        onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
+                        <img src="{{ $produto['link_img'] }}" alt="{{ $produto['nome'] }}">
                         <hr>
                         <div class="des">
                             <span>{{ $produto['marca'] }}</span>
@@ -179,8 +194,9 @@
             <div class=" slider swiper-wrapper">
                 <!-- pro_item_swiper-slide_start -->
                 @foreach ($getProdutos2 as $produto)
-                    <div class="pro item swiper-slide" onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
-                        <img src="{{ $produto['link_img'] }}" alt="{{$produto['nome']}}">
+                    <div class="pro item swiper-slide"
+                        onclick="window.location.href=`{{ route('produto-get', $produto['id_produtos']) }}`">
+                        <img src="{{ $produto['link_img'] }}" alt="{{ $produto['nome'] }}">
                         <hr>
                         <div class="des">
                             <span>{{ $produto['marca'] }}</span>
@@ -346,7 +362,7 @@
                 </div>
                 <div class="panel_progress">
                     <div class="progress-bar">
-                        <div class="progress" style="width: {{$avaliacaoPercent[5]}}%"></div>
+                        <div class="progress" style="width: {{ $avaliacaoPercent[5] }}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -354,7 +370,7 @@
                     </div>
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: {{$avaliacaoPercent[4]}}%"></div>
+                        <div class="progress" style="width: {{ $avaliacaoPercent[4] }}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -363,7 +379,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: {{$avaliacaoPercent[3]}}%"></div>
+                        <div class="progress" style="width: {{ $avaliacaoPercent[3] }}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -372,7 +388,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: {{$avaliacaoPercent[2]}}%"></div>
+                        <div class="progress" style="width: {{ $avaliacaoPercent[2] }}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>
@@ -381,7 +397,7 @@
 
 
                     <div class="progress-bar">
-                        <div class="progress" style="width: {{$avaliacaoPercent[1]}}%"></div>
+                        <div class="progress" style="width: {{ $avaliacaoPercent[1] }}%"></div>
                     </div>
                     <div class="rating_pequena">
                         <div class="star"><i class="fas fa-star"></i></div>

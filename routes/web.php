@@ -10,6 +10,7 @@ use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CarrinhoSystemController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CEPController;
 use App\Http\Controllers\ClientProdutoController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContatoController;
@@ -28,6 +29,7 @@ use App\Http\Middleware\CheckAuthUser;
 use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\VendaController;
 use App\Mail\Contato;
+use App\Http\Controllers\getProdutoFreteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -239,6 +241,8 @@ Route::prefix('produtos')->controller(ClientProdutoController::class)->group(fun
     Route::get('pesquisar', 'searchProdutoClient')->name('produtoSearch-client');
     Route::get('falha/produto', 'fallback')->name('falha-produtoClient');
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
+    Route::post('/get/produto/{cep}', [getProdutoFreteController::class, 'getProdutoFrete'])->name('produto-cep');
+
 });
 
 // Página de Ofertas
@@ -293,7 +297,6 @@ Route::prefix('venda')->controller(VendaController::class)->middleware(CheckAuth
 // Homepage
 Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
 Route::view('/termos', 'client.termos&condicoes');
-
 
 
 

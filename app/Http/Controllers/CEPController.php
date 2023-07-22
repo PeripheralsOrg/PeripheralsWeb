@@ -67,4 +67,16 @@ class CEPController extends Controller
             return false;
         }
     }
+
 }
+
+// $getFrete[] = (new CEPController('40010', $_GET['cep'], 5))->getInfo();
+// $getFrete[] = (new CEPController('40010', $_GET['cep'], 5))->getInfo();
+
+
+
+// try {
+//     echo json_encode($getFrete, JSON_THROW_ON_ERROR);
+// } catch (\JsonException $e) {
+//     echo $e->getMessage();
+// }
