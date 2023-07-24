@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titulo', 160)->charset('utf8');
             $table->integer('avaliacao');
             $table->mediumText('comentario')->charset('utf8');
+            $table->integer('likes')->default(0);
             $table->foreignId('id_users');
             $table->foreignId('id_produto');
             $table->timestamps();

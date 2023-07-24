@@ -23,5 +23,5 @@ Usuário: Davi <br>
 Email: Davi@adm.com <br>
 Senha: Sardinha@123 <br>
 
-INSERT INTO ADM_USERS(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
+INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
 
