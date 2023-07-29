@@ -43,7 +43,7 @@ class VendaController extends Controller
     public function processVenda(Request $request)
     {
         $vendaT = new Venda();
-        $getVenda = array_values(VendaTemporary::all()->where('id)venda_temporary', $request->idVendaT)->toArray());
+        $getVenda = array_values(VendaTemporary::all()->where('id_temporary_venda', $request->idVendaT)->toArray());
         $getCarinho = (CarrinhoCompras::all()->where('id_carrinho', $request->idCarrinho)->toQuery());
 
 

@@ -25,3 +25,64 @@ Senha: Sardinha@123 <br>
 
 INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
 
+# Inserir ao passar para a nova hospedagem
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pendente', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Processamento', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Confirmada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Preparação', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Enviada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Entregue', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Cancelada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Devolvida', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Reembolsada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Aguardando Pagamento', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pagamento Pendente', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pagamento Recusada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pagamento incompleto', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pagamento Confirmado', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Espera', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Problema Identificado', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Aguardando Retirada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Entrega Atrasada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Trânsito', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Concluído', NOW(), NOW());
