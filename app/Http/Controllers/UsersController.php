@@ -6,6 +6,7 @@ use App\Models\Cupom;
 use App\Models\Endereco;
 use App\Models\User;
 use App\Models\Venda;
+use App\Models\VendaStatus;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -285,12 +286,14 @@ class UsersController extends Controller
     {
         $getCupom = Cupom::all()->where('visibilidade', 'publico')->where('status', 1)->toArray();
         $getUserInfo = $request->session()->get('user');
-        $getPedidos = Venda::all()->where('id_users', $getUserInfo['id'])->toArray();
+        $getPedidos = array_values(Venda::all()->where('id_users', $getUserInfo['id'])->toArray());
+        $getStatusVenda = VendaStatus::all()->toArray();
 
         return view('client.my-info', [
             'getCupom' => $getCupom,
             'getUserInfo' => $getUserInfo,
-            'getPedidos' => $getPedidos
+            'getPedidos' => $getPedidos,
+            'getStatusVenda' => $getStatusVenda
         ]);
     }
 

@@ -227,7 +227,7 @@ Route::prefix('favoritos')->controller(FavoritoController::class)->middleware(Ch
 Route::prefix('avaliacao')->controller(AvaliacaoController::class)->middleware(CheckAuthUser::class)->group(function () {
     Route::get('avaliar/{idProduto}', 'getProdutoAvaliar')->name('feedback-produto');
     Route::get('registrar', 'register')->name('avaliar-produto');
-    Route::get('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
+    // Route::get('apagar/{idProduto}', 'delete')->name('desfavoritar-produto');
 });
 
 // Página Geral

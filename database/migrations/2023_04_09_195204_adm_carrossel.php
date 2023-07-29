@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('link_carrossel', 160)->charset('utf8');
             $table->decimal('peso', 10, 2);
             $table->string('link_route', 160)->charset('utf8')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

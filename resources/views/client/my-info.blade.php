@@ -69,8 +69,8 @@
                     <div class="wrapper">
                         <div class="project">
                             <div class="shop">
-                                <h2 class="definition-product">A Caminho</h2>
                                 @foreach ($getPedidos as $item)
+                                <h2 class="definition-product">{{$getStatusVenda[$item['id_venda_status']]['status_venda']}}</h2>
                                     <div class="box-order">
                                         <div class="content">
                                             <p class="marca">
