@@ -16,6 +16,42 @@
                 </ul>
             </div>
         @endif
+
+        <div class="box-chart">
+            <h2>{{ $chartVenda->options['chart_title'] }}</h2>
+            {!! $chartVenda->renderHtml() !!}
+        </div>
+        <div class="box-chart">
+            <h2>{{ $chartVenda2->options['chart_title'] }}</h2>
+            {!! $chartVenda2->renderHtml() !!}
+        </div>
+
+        <div class="box-chart">
+            <h2>{{ $chartUsers->options['chart_title'] }}</h2>
+            {!! $chartUsers->renderHtml() !!}
+        </div>
+
+        <div class="box-chart">
+            <h2>{{ $chartProduto->options['chart_title'] }}</h2>
+            {!! $chartProduto->renderHtml() !!}
+        </div>
+
+        <div class="box-chart">
+            <h2>{{ $chartProdutoQuant->options['chart_title'] }}</h2>
+            {!! $chartProdutoQuant->renderHtml() !!}
+        </div>
+
+
+
+        {!! $chartVenda->renderChartJsLibrary() !!}
+        {!! $chartVenda->renderJs() !!}
+        {!! $chartVenda2->renderJs() !!}
+        {!! $chartUsers->renderJs() !!}
+        {!! $chartProduto->renderJs() !!}
+        {!! $chartProdutoQuant->renderJs() !!}
+
+
+
     </main>
 
 @endsection

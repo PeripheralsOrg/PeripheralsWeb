@@ -30,6 +30,7 @@ use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\VendaController;
 use App\Mail\Contato;
 use App\Http\Controllers\getProdutoFreteController;
+use App\Http\Controllers\RelatoriosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,8 +147,8 @@ Route::prefix('adm')->group(function () {
 
     });
 
-    Route::prefix('relatorios')->controller(LoginController::class)->middleware('guest:8,9')->group(function () {
-        Route::view('/', 'admin.list.listRelatorios')->name('page-relatorios');
+    Route::prefix('relatorios')->controller(RelatoriosController::class)->middleware('guest:8,9')->group(function () {
+        Route::get('/', 'getRelatorios')->name('page-relatorios');
     });
 
     Route::prefix('config')->controller(ConfigController::class)->middleware('guest:8,9')->group(function () {
