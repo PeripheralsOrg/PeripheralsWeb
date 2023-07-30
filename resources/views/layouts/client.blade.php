@@ -97,7 +97,7 @@
         </div>
 
         <div class="box-logo-responsive">
-            <a href="">
+            <a href="{{ route('client-homepage') }}">
                 <img src="{{ asset('images/logo-peripherals.jpeg') }}" alt="Logo Peripherals">
             </a>
         </div>
@@ -157,7 +157,7 @@
         <div class="row-elements">
             <div class="column-info payment-methods">
                 <div class="footer-logo">
-                    <a href="#"><img src="{{ asset('images/Logo-nome.jpeg') }}" alt="Logo Peripherals"></a>
+                    <a href="{{ route('client-homepage') }}"><img src="{{ asset('images/logo-nome.jpeg') }}" alt="Logo Peripherals"></a>
                 </div>
                 <p>Metodos de pagamentos aceitos</p>
                 <a><img src="{{ asset('images/card-img.png') }}" alt="Métodos de pagamento aceitos"></a>
@@ -166,30 +166,29 @@
             <div class="column-info sitemap">
                 <h3>Submenu</h3>
                 <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Produtos</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Termos</a></li>
+                    <li><a href="{{ route('client-homepage') }}">Início</a></li>
+                    <li><a href="{{ route('produto-pesquisaAll') }}">Produtos</a></li>
+                    <li><a href="{{ route('client-contato') }}">Sobre</a></li>
+                    <li><a href="{{ route('route-termos') }}">Termos</a></li>
                 </ul>
             </div>
 
             <div class="column-info sitemap">
                 <h3>Fale Conosco</h3>
                 <ul>
-                    <li><a href="#">Contate-nos</a></li>
-                    <li><a href="#">feedback</a></li>
-                    <li><a href="#">Dúvidas</a></li>
-                    <li><a href="#">Localização</a></li>
+                    <li><a href="{{ route('client-contato') }}">Contate-nos</a></li>
+                    <li><a href="{{ route('client-contato') }}">feedback</a></li>
+                    <li><a href="{{ route('client-contato') }}">Dúvidas</a></li>
+                    <li><a href="{{ route('client-contato') }}">Localização</a></li>
                 </ul>
             </div>
 
             <div class="column-info sitemap">
                 <h3>Redes Sociais</h3>
                 <div class="footer-newsletter">
-                    <a href="#" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/peripherals-ecommerce-616a9a275/" class="linkedin"><i class="fa-brands fa-linkedin" target='__blank'></i></a>
+                    <a href="https://www.instagram.com/peri.pherals/" class="instagram" target='__blank'><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="facebook"><i class="fa-brands fa-facebook"></i></a>
                 </div>
             </div>
         </div>

@@ -98,8 +98,8 @@ class AdmUsersController extends Controller
         ]);
 
 
-        $getAdm = AdmUsers::all()->where('id', $id)->toArray();
-        $searchEmail = AdmUsers::all()->where('email', $getAdm[1]['email'])->toArray();
+        $getAdm = array_values(AdmUsers::all()->where('id', $id)->toArray());
+        $searchEmail = AdmUsers::all()->where('email', $getAdm[0]['email'])->toArray();
 
         if (empty($getAdm)) {
             return redirect('falha-listAdm');

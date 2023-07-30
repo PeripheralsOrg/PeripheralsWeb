@@ -93,14 +93,14 @@ class ClientProdutoController extends Controller
             ->where('nome', 'LIKE', '%' . $search . '%')
             ->Orwhere('marca', 'LIKE', '%' . $search . '%')
             ->Orwhere('modelo', 'LIKE', '%' . $search . '%')
-            ->Orwhere('categoria', 'LIKE', '%' . $search . '%')->paginate(10)), true);
+            ->Orwhere('categoria', 'LIKE', '%' . $search . '%')->get()), true);
 
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->toArray();
         // ! Retirar o exit
         exit();
         if (count($produtos) > 0) {
-            return view('client.pesquisa')->with([
+            return view('client.search')->with([
                 'produtos' => $produtos,
                 'categorias' => $categorias,
                 'marcas' => $marcas
@@ -422,6 +422,18 @@ class ClientProdutoController extends Controller
         }
     }
 
+    private static function flattenArray($array)
+    {
+        return array_reduce($array, function ($carry, $item) {
+            if (is_array($item)) {
+                return array_merge_recursive($carry, ($item));
+            } else {
+                $carry[] = $item;
+                return $carry;
+            }
+        }, []);
+    }
+
     public function getProdutoCategoria()
     {
 
@@ -432,6 +444,8 @@ class ClientProdutoController extends Controller
             $produtosTest = ProdutoView::all()->where('status', 1)->where('categoria', $key)->take(5)->toArray();
             array_push($arrayProdutos, $produtosTest);
         }
+
+        $arrayProdutos = ClientProdutoController::flattenArray($arrayProdutos);
 
         $getCategoriasValues = array_values($getCategorias);
         if (count($arrayProdutos[0]) > 0) {

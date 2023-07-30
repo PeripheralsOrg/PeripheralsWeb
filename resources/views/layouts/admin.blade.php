@@ -33,7 +33,7 @@
 
         @if (!Request::is('adm/auth/*'))
             <header id="getMenu">
-                <img class="img-logo" src="{{ asset('images/logo-nome.jpeg') }}" alt="Peripherals - Logo Branca"
+                <img class="img-logo" src="{{ asset('images/logo_escrita.png') }}" alt="Peripherals - Logo Branca"
                     id="logo">
 
                 <!-- Barra_de_menu_lateral -->
@@ -62,7 +62,15 @@
                 <!-- Fim_Barra_de_menu_lateral -->
 
                 <!-- ADM_logado -->
-                <button class="button-nav" id="userSession">Sysadmin: <br> abc@adm.com</button>
+                @if (array_values(Session::get('user'))[0]['poder'] == "9")
+                    <button class="button-nav" id="userSession">Sysadmin: <br>{{array_values(Session::get('user'))[0]['email']}}</button>
+                @elseif (array_values(Session::get('user'))[0]['poder'] == "8")
+                    <button class="button-nav" id="userSession">Gerente: <br>{{array_values(Session::get('user'))[0]['email']}}</button>
+                @elseif (array_values(Session::get('user'))[0]['poder'] == "7")
+                    <button class="button-nav" id="userSession">SAC: <br>{{array_values(Session::get('user'))[0]['email']}}</button>
+                @elseif (array_values(Session::get('user'))[0]['poder'] == "7")
+                    <button class="button-nav" id="userSession">Repositor: <br>{{array_values(Session::get('user'))[0]['email']}}</button>
+                @endif
 
                 <!-- Encerrar_sessão -->
                 <button class="button-nav" id="logoutSession"

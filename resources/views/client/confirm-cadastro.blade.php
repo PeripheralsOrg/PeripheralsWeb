@@ -50,7 +50,7 @@
                     <div class="checks-conditions">
                         <span class="condicoes"><input type="checkbox" name="feedback">Deseja receber novidades?</span>
                         <span class="condicoes">
-                            <input id="termoCheck" type="checkbox">Aceite nossos <a id="termosAgree"
+                            <input id="termoCheck" required type="checkbox">Aceite nossos <a id="termosAgree"
                                 href="#">termos</a>
                         </span>
                     </div>

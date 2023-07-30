@@ -248,7 +248,7 @@
 }
 
 /* Ícones olho */
-.fa-eye {
+.fa-eye, .fa-eye-slash {
     position: absolute;
     margin-left: calc(30% - 10px);
 }
@@ -269,7 +269,7 @@
         padding: 1rem;
     }
 
-    .fa-eye {
+    .fa-eye, .fa-eye-slash {
         position: absolute;
         right: 0;
         margin-right: calc(2rem);

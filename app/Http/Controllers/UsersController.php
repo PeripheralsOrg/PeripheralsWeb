@@ -213,12 +213,13 @@ class UsersController extends Controller
     public function allAdmin()
     {
         $users = User::all()->toArray();
-        $nowDate = (new Carbon())->now('America/Sao_Paulo')->toDateString();
-        $todayDate = (new Carbon())->now('America/Sao_Paulo')->subHours(24)->toDateString();
-        $weekDateSub = (new Carbon())->now('America/Sao_Paulo')->subWeek()->toDateString();
-        $monthDateSub = (new Carbon())->now('America/Sao_Paulo')->subMonth()->toDateString();
+        $nowDate = (new Carbon())->now('America/Sao_Paulo')->toDateTimeString();
+        $yesterdayDate = (new Carbon())->now('America/Sao_Paulo')->subDay()->toDateTimeString();
+        $todayDate = (new Carbon())->now('America/Sao_Paulo')->toDateTimeString();
+        $weekDateSub = (new Carbon())->now('America/Sao_Paulo')->subWeek()->toDateTimeString();
+        $monthDateSub = (new Carbon())->now('America/Sao_Paulo')->subMonth()->toDateTimeString();
 
-        $countUsersToday = User::all()->whereBetween('created_at', [$todayDate, $nowDate])->count();
+        $countUsersToday = User::all()->whereBetween('created_at', [$yesterdayDate, $todayDate])->count();
         $countUsersWeek = User::all()->whereBetween('created_at', [$weekDateSub, $nowDate])->count();
         $countUsersMonth = User::all()->whereBetween('created_at', [$monthDateSub, $nowDate])->count();
 
