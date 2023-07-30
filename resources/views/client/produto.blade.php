@@ -447,7 +447,7 @@
 
                                 <div class="btn-container">
                                     <div class="btn-box">
-                                        <button class="like" onclick="">
+                                        <button class="like" onclick="window.location.href='{{route('like-avaliacao', $item['id_comentario'])}}'">
                                             <span class="span-box">
                                                 <span class="util">É útil</span>
                                                 <span class="like-icon"><i class="fa fa-thumbs-up"

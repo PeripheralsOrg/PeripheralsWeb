@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('adm_carrossel', function (Blueprint $table) {
             $table->id();
-            $table->string('nome_banner', 120)->charset('utf8');
-            $table->string('link_carrossel', 160)->charset('utf8');
+            $table->string('nome_banner', 120)->charset('utf8mb4');
+            $table->string('link_carrossel', 160)->charset('utf8mb4');
             $table->decimal('peso', 10, 2);
-            $table->string('link_route', 160)->charset('utf8')->nullable();
+            $table->string('link_route', 160)->charset('utf8mb4')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
