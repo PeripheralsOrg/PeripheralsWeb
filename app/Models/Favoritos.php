@@ -22,10 +22,10 @@ class Favoritos extends Model
 
     use HasFactory;
 
-    // public function produto(): HasMany
-    // {
-    //     return $this->hasMany(Produto::class);
-    // }
+    public function produto(): HasMany
+    {
+        return $this->hasMany(Produto::class);
+    }
 
     // public function users(): HasMany
     // {
