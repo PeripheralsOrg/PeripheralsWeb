@@ -1,5 +1,6 @@
 @extends('layouts.client')
 @section('css', 'home/login')
+@section('js', 'home/login-cadastro')
 @section('title')@parent Login @stop
 
 @section('content')
@@ -44,9 +45,10 @@
                     </div>
 
                     <div class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" name="senha" placeholder="Password">
-                        <i class="fas fa-eye icon-eye"></i>
+                        <i class="fas fa-lock icon-modify" onclick="functionEye()"></i>
+                        <input type="password" id='inputSenha' name="senha" placeholder="Password">
+                        <i class="fas fa-eye icon-eye" id="openEye" onclick="functionEye()"></i>
+                        <i class="fa-solid fa-eye-slash" id="closeEye" onclick="functionEye()"></i>
                     </div>
 
                     <div class="checks-conditions">

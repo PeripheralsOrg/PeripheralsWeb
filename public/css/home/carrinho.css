@@ -135,10 +135,11 @@
     text-align: center;
     height: 40px;
     line-height: 40px;
+    transition: ease .3s;
 }
 
 .right-bar a:hover {
-    background-color: var(--cinza-claro);
+    background-color: var(--cinza-fundo);
 }
 
 /*Inputs_Buttons_css*/

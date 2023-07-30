@@ -48,7 +48,7 @@
 
             <div class="container-clean-filters box-filter">
                 <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listClientes') }}`">
-                    Limpar Filtros
+                    Limpar Pesquisa
                 </button>
             </div>
 

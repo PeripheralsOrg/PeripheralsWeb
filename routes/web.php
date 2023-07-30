@@ -296,7 +296,7 @@ Route::prefix('venda')->controller(VendaController::class)->middleware(CheckAuth
 
 // Homepage
 Route::get('/', [ClientProdutoController::class, 'getInfoHomepage'])->name('client-homepage');
-Route::view('/termos', 'client.termos&condicoes');
+Route::view('/termos', 'client.termos&condicoes')->name('route-termos');
 
 
 
