@@ -82,10 +82,10 @@ class AvaliacaoController extends Controller
         $avaliacao = Avaliacao::all()->where('id_comentario', $idComentario)->toQuery();
 
         $avaliacaoC = $avaliacao->update([
-            'like' => intval($avaliacao->getModel()->getAttribute('like')) + 1
+            'likes' => intval($avaliacao->getModel()->getAttribute('likes')) + 1
         ]);
 
-        return $avaliacaoC;
+        return redirect()->back();
     }
 
 

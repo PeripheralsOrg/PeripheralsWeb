@@ -63,7 +63,7 @@ return [
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => 'O campo :attribute deve ser um número.',
     'present'              => 'O campo :attribute deve estar presente.',
-    'regex'                => 'O campo :attribute contém um formato inválido.',
+    'regex'                => 'O campo :attribute contém um formato inválido. A senha deve conter um mínimo de 8 caracteres, sendo 1 maiúsculo e 1 especial.',
     'required'             => 'O campo :attribute é obrigatório.',
     'required_if'          => 'O campo :attribute é obrigatório quando :other é :value.',
     'required_unless'      => 'O campo :attribute é obrigatório a não ser que :other esteja em :values.',

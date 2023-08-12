@@ -34,10 +34,12 @@ function openbar() {
     }
 }
 
+
 function openSearchMob() {
     document.getElementById("inputPesquisa").style.display = "block";
     document.getElementById("btnFecharPesquisa").style.display = "block";
     document.getElementById("btnPesquisaMB").style.display = "none";
+    document.getElementById("box-logo-responsive").style.display = "none";
 
 }
 
@@ -45,24 +47,17 @@ function closeSearchMob() {
     document.getElementById("inputPesquisa").style.display = "none";
     document.getElementById("btnFecharPesquisa").style.display = "none";
     document.getElementById("btnPesquisaMB").style.display = "block";
+    document.getElementById("box-logo-responsive").style.display = "block";
+
 }
 
+document.getElementById("box-search").style.display = "none";
 function openSearchNav() {
-    document.getElementById("inputPesquisaNav").style.display = "block";
-    document.getElementById("btnFecharPesquisaNav").style.display = "block";
-    document.getElementById("btnNavPesquisa").style.display = "none";
-    document.getElementById("btnNavUser").style.display = "none";
-    document.getElementById("btnNavFavoritos").style.display = "none";
-    document.getElementById("btnNavCarrinho").style.display = "none";
-
+    document.getElementById("box-icons").style.display = "none";
+    document.getElementById("box-search").style.display = "flex";
 }
 
 function closeSearchNav() {
-    document.getElementById("inputPesquisaNav").style.display = "none";
-    document.getElementById("btnFecharPesquisaNav").style.display = "none";
-    document.getElementById("btnNavPesquisa").style.display = "block";
-    document.getElementById("btnNavUser").style.display = "block";
-    document.getElementById("btnNavFavoritos").style.display = "block";
-    document.getElementById("btnNavCarrinho").style.display = "block";
-
+    document.getElementById("box-icons").style.display = "block";
+    document.getElementById("box-search").style.display = "none";
 }

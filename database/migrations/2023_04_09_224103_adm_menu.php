@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('adm_menu', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo', 120)->charset('utf8');
-            $table->string('link_menu', 160)->charset('utf8');
+            $table->string('titulo', 120)->charset('utf8mb4');
+            $table->string('link_menu', 160)->charset('utf8mb4');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

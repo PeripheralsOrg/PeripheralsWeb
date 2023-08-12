@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_produto_categoria', function (Blueprint $table) {
             $table->id('id_categoria');
-            $table->string('categoria', 120)->charset('utf8');
+            $table->string('categoria', 120)->charset('utf8mb4');
             $table->timestamps();
         });
     }

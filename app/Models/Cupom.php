@@ -10,7 +10,7 @@ class Cupom extends Model
 {
 
     protected $table = 'users_cupom';
-    protected $primaryKey = 'id_endereco';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nome',

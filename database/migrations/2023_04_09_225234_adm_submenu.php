@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('adm_submenu', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_submenu', 120)->charset('utf8');
-            $table->string('link_submenu', 160)->charset('utf8');
+            $table->string('titulo_submenu', 120)->charset('utf8mb4');
+            $table->string('link_submenu', 160)->charset('utf8mb4');
             $table->foreignId('id_menu', 160);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

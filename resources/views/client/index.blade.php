@@ -309,28 +309,28 @@
 
             <div class="categorie-container">
 
-                <a href="#" class="effects">
+                <a href="{{route('produtoCategoria-maxValue', 'Monitor')}}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/icons/monitor.svg') }}" alt="">
                         <h2 class="itens">Monitor</h2>
                     </div>
                 </a>
 
-                <a href="#" class="effects">
+                <a href="{{route('produtoCategoria-maxValue', 'Mouse')}}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/icons/mouse.svg') }}" alt="">
                         <h2 class="itens">Mouse</h2>
                     </div>
                 </a>
 
-                <a href="#" class="effects">
+                <a href="{{route('produtoCategoria-maxValue', 'Headset')}}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/transferir.png') }}" alt="">
                         <h2 class="itens">Headset</h2>
                     </div>
                 </a>
 
-                <a href="#" class="effects">
+                <a href="{{route('produtoCategoria-maxValue', 'Teclado')}}" class="effects">
                     <div class="box">
                         <img style="color: #000;" src="{{ asset('images/icons/teclado.svg') }}" alt="">
                         <h2 class="itens">Teclado</h2>

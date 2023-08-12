@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('adm_marcas', function (Blueprint $table) {
             $table->id('id_marca');
-            $table->string('nome', 360)->charset('utf8');
-            $table->mediumText('descricao_atividades', 120)->charset('utf8');
+            $table->string('nome', 360)->charset('utf8mb4');
+            $table->mediumText('descricao_atividades', 120)->charset('utf8mb4');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

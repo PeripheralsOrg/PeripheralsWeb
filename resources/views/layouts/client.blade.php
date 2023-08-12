@@ -58,12 +58,13 @@
             </ul>
         </nav>
 
-        <div class="box-icons">
-            <button id="btnNavPesquisa" onclick="openSearchNav()"><img
-                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
+        <div class="box-icons" id="box-icons">
+            <!-- colocar função da caixa de pesquisa -->
+            <button class="btnPesquisa" id="btnNavPesquisa" onclick="openSearchNav()"><img src="{{asset('images/icons-branco/lupa.svg')}}"
+                    alt="Ícone de Pesquisa"></button>
 
-            <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
-                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
+            {{-- <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
+                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button> --}}
 
             @if (empty(Request::session()->get('user')))
                 <a href="{{ route('client-login') }}"><img src="{{ asset('images/icons-branco/avatar.svg') }}"
@@ -85,6 +86,14 @@
             <a href="{{ route('carrinho-all') }}"><img src="{{ asset('images/icons-branco/sacola.svg') }}"
                     alt="Ícone do Carrinho de Compras"></a>
         </div>
+        <div class="box-search" id="box-search">
+            <form action="{{route('produtoSearch-client')}}">
+                <input type="text" id="inputPesquisaNav" name="searchBar" class="inputPesquisa" placeholder="Pesquisar">
+                <input type="submit" value="">
+            </form>
+            <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
+                    src="{{asset('images/letra-x.png')}}" alt="Ícone de Fechar"></button>
+        </div>
     </header>
 
     <nav id="navResponsive">
@@ -104,14 +113,15 @@
 
         <!-- Tá sem a função da caixa de pesquisa -->
         <div class="mobile-menu">
-            <button id="btnPesquisaMB" class="btnPesquisaMB" onclick="openSearchMob()">
-                <img src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa">
-            </button>
+            <button id="btnPesquisaMB" class="btnPesquisaMB" onclick="openSearchMob()"><img src="{{asset('images/icons-branco/lupa.svg')}}"
+                    alt="Ícone de Pesquisa"></button>
 
-            <input type="text" id="inputPesquisa" class="inputPesquisa" placeholder="Pesquisar">
+            <form action="{{route('produtoSearch-client')}}">
+                <input type="text" name="searchBar" id="inputPesquisa" class="inputPesquisa" placeholder="Pesquisar">
+            </form>
 
             <button id="btnFecharPesquisa" class="btnFecharPesquisa" onclick="closeSearchMob()"><img
-                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
+                    src="{{asset('images/letra-x.png')}}" alt="Ícone de Fechar"></button>
         </div>
 
         <div class="boxAbertaNav">
@@ -157,7 +167,8 @@
         <div class="row-elements">
             <div class="column-info payment-methods">
                 <div class="footer-logo">
-                    <a href="{{ route('client-homepage') }}"><img src="{{ asset('images/logo-nome.jpeg') }}" alt="Logo Peripherals"></a>
+                    <a href="{{ route('client-homepage') }}"><img src="{{ asset('images/logo-nome.jpeg') }}"
+                            alt="Logo Peripherals"></a>
                 </div>
                 <p>Metodos de pagamentos aceitos</p>
                 <a><img src="{{ asset('images/card-img.png') }}" alt="Métodos de pagamento aceitos"></a>
@@ -186,8 +197,10 @@
             <div class="column-info sitemap">
                 <h3>Redes Sociais</h3>
                 <div class="footer-newsletter">
-                    <a href="https://www.linkedin.com/in/peripherals-ecommerce-616a9a275/" class="linkedin"><i class="fa-brands fa-linkedin" target='__blank'></i></a>
-                    <a href="https://www.instagram.com/peri.pherals/" class="instagram" target='__blank'><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/peripherals-ecommerce-616a9a275/" class="linkedin"><i
+                            class="fa-brands fa-linkedin" target='__blank'></i></a>
+                    <a href="https://www.instagram.com/peri.pherals/" class="instagram" target='__blank'><i
+                            class="fa-brands fa-instagram"></i></a>
                     <a href="" class="facebook"><i class="fa-brands fa-facebook"></i></a>
                 </div>
             </div>

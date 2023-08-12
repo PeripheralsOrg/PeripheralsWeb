@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('users_comentario', function (Blueprint $table) {
             $table->id('id_comentario');
-            $table->string('titulo', 160)->charset('utf8');
+            $table->string('titulo', 160)->charset('utf8mb4');
             $table->integer('avaliacao');
-            $table->mediumText('comentario')->charset('utf8');
+            $table->mediumText('comentario')->charset('utf8mb4');
             $table->integer('likes')->default(0);
             $table->foreignId('id_users');
             $table->foreignId('id_produto');
