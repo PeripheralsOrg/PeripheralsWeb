@@ -151,7 +151,7 @@ class CupomController extends Controller
         $marcas = Marcas::all()->toArray();
 
         if ($categorias && $marcas) {
-            return view('admin.forms.insertCupom')->with([
+            return view('admin.forms.InsertCupom')->with([
                 'categorias' => $categorias,
                 'marcas' => $marcas
             ]);

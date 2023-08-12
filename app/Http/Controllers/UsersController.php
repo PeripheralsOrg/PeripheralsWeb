@@ -23,6 +23,8 @@ class UsersController extends Controller
     public function registerUser(Request $request, User $user)
     {
 
+        // REGEX Senha: 8 caracteres, um caractere maiúsculo, um caractere especial
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],

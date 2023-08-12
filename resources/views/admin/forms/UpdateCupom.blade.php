@@ -64,9 +64,7 @@
                         @if ($item['visibilidade'] == 'privado')
                             <option selected value="privado">Privado</option>
                             <option value="publico">Publico</option>
-                        @endif
-
-                        @if ($item['tipo'] == 'publico')
+                        @else
                             <option value="publico">Publico</option>
                             <option selected value="privado">Privado</option>
                         @endif

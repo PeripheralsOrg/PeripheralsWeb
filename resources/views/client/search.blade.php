@@ -9,7 +9,7 @@
         {{-- <h1>Pesquisado</h1> --}}
 
         <section class="wrapper">
-            <section class="filters-container">
+            {{-- <section class="filters-container">
                 <div class="box-filter">
                     <div class="box-filter">
                         <label for="selectOrdem">Ordenar Por</label>
@@ -65,7 +65,7 @@
                 </form>
                 <button onclick="window.location.href='{{ route('produtoClient-resetFilter') }}'" id="cleanFilters">Limpar
                     Filtros</button>
-            </section>
+            </section> --}}
 
             <h2 id="titleProd">Produtos Encontrados</h2>
 

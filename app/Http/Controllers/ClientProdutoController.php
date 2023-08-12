@@ -86,8 +86,7 @@ class ClientProdutoController extends Controller
 
     public function searchProdutoClient(Request $request)
     {
-        //! Trocar para o request
-        $search = 'Teclado';
+        $search = $request->input('searchBar');
 
         $produtos = json_decode(json_encode(DB::table('view_produto')
             ->where('nome', 'LIKE', '%' . $search . '%')
@@ -97,8 +96,7 @@ class ClientProdutoController extends Controller
 
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->toArray();
-        // ! Retirar o exit
-        exit();
+        // dd($produtos);
         if (count($produtos) > 0) {
             return view('client.search')->with([
                 'produtos' => $produtos,

@@ -119,6 +119,86 @@ header .dropdown-link:hover .dropdown-content {
     display: none;
 }
 
+.box-search {
+    display: none;
+}
+
+.box-search {
+    height: var(--height-navbar);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    /* justify-content: center; */
+}
+
+.box-search form {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.box-search form input[type="submit"] {
+    border-top: solid 1px var(--branco);
+    border-bottom: solid 1px var(--branco);
+    border-right: solid 1px var(--branco);
+    border-left: none;
+    width: 50px;
+    height: 50px;
+    background: url(../../images/icons/lupa.png) no-repeat center;
+    background-size: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0;
+    margin: 0 !important;
+    vertical-align: middle;
+    color: var(--branco) !important;
+}
+
+.box-search form input[type="submit"]::placeholder {
+    color: var(--branco) !important;
+}
+
+.box-search form input[type="text"] {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 5px 10px;
+    border-top: solid 1px var(--branco);
+    border-bottom: solid 1px var(--branco);
+    border-left: solid 1px var(--branco);
+    border-right: none;
+    width: 100%;
+    height: 50px;
+    margin: 0 !important;
+    background-color: transparent;
+    color: var(--branco);
+}
+
+.box-search button img {
+    width: 35px;
+    height: 35px;
+}
+
+.box-search button {
+    width: 35px;
+    height: 35px;
+    margin: 0 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    vertical-align: middle
+}
+
+header .box-icons input[type="text"] {
+    background-color: transparent;
+    border-radius: 5px;
+    border: var(--branco) solid 1px;
+    height: 35px;
+    width: 100%;
+    padding: 0 15px;
+}
+
 
 /* Menu Produtos Dropdown */
 
