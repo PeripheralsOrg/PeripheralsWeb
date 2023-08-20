@@ -15,6 +15,10 @@ Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos
 
 # Script criação de usuários
 
+Usuário: NaoApague <br>
+Email: admin@admin.com <br>
+Senha: Gizona123@ <br>
+
 Usuário: Administrador <br>
 Email: admin@admin.com <br>
 Senha: Gizona123@ <br>
