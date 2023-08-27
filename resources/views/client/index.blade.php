@@ -12,9 +12,14 @@
         <div class="swiper-wrapper">
             @foreach ($getBanners as $item)
                 <div class="swiper-slide">
-                    <div class="project-img">
+                    {{-- <div class="project-img">
                         <img src="{{ $item['link_carrossel'] }}" alt="">
-                    </div>
+                    </div> --}}
+                    <picture class="project-img">
+                        <source srcset="{{ $item['link_carrosselTiny'] }}" media="(max-width: 450px)" />
+                        <source srcset="{{ $item['link_carrosselMedium'] }}" media="(max-width: 600px)" />
+                        <img src="{{ $item['link_carrossel'] }}" alt="{{ $item['nome_banner'] }}" />
+                    </picture>
                 </div>
             @endforeach
         </div>
@@ -309,28 +314,28 @@
 
             <div class="categorie-container">
 
-                <a href="{{route('produtoCategoria-maxValue', 'Monitor')}}" class="effects">
+                <a href="{{ route('produtoCategoria-maxValue', 'Monitor') }}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/icons/monitor.svg') }}" alt="">
                         <h2 class="itens">Monitor</h2>
                     </div>
                 </a>
 
-                <a href="{{route('produtoCategoria-maxValue', 'Mouse')}}" class="effects">
+                <a href="{{ route('produtoCategoria-maxValue', 'Mouse') }}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/icons/mouse.svg') }}" alt="">
                         <h2 class="itens">Mouse</h2>
                     </div>
                 </a>
 
-                <a href="{{route('produtoCategoria-maxValue', 'Headset')}}" class="effects">
+                <a href="{{ route('produtoCategoria-maxValue', 'Headset') }}" class="effects">
                     <div class="box">
                         <img src="{{ asset('images/transferir.png') }}" alt="">
                         <h2 class="itens">Headset</h2>
                     </div>
                 </a>
 
-                <a href="{{route('produtoCategoria-maxValue', 'Teclado')}}" class="effects">
+                <a href="{{ route('produtoCategoria-maxValue', 'Teclado') }}" class="effects">
                     <div class="box">
                         <img style="color: #000;" src="{{ asset('images/icons/teclado.svg') }}" alt="">
                         <h2 class="itens">Teclado</h2>

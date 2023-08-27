@@ -7,6 +7,8 @@ use App\Models\AdmUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\LogController;
+use Illuminate\Support\Facades\Session;
 
 class AdmUsersController extends Controller
 {
@@ -53,6 +55,10 @@ class AdmUsersController extends Controller
         $userC = $user->create($create);
 
         if (!$userC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou um novo usuário', 'AdmUsers');
+            
             return back()->withErrors(['Ocorreu um erro ao criar o usuário!']);
         }
         
@@ -64,8 +70,13 @@ class AdmUsersController extends Controller
         $deleteAll = AdmUsers::findOrFail($id);
         $deleteAll->delete();
         if($deleteAll){
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Deletou um usuário', 'AdmUsers');
+
             return redirect()->route('page-listAdm');
         }
+
         return redirect('falha-listAdm')->withErrors('Não foi possível deletar o usuário!'); 
     }
 
@@ -117,8 +128,13 @@ class AdmUsersController extends Controller
         $updateAdm = (AdmUsers::all()->where('id', $id)->toQuery())->update($values);
 
         if($updateAdm){
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou um usuário', 'AdmUsers');
+
             return redirect()->route('page-listAdm');
         }
+
 
         return back()->withErrors('Ocorreu um erro ao atualizar o usuário!');
     }

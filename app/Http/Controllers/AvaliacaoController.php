@@ -6,6 +6,7 @@ use App\Models\Avaliacao;
 use App\Models\ProdutoView;
 use Illuminate\Http\Request;
 use Controller\ClientProdutoController;
+use Illuminate\Support\Facades\Session;
 
 class AvaliacaoController extends Controller
 {
@@ -89,15 +90,20 @@ class AvaliacaoController extends Controller
     }
 
 
-    public function delete(Request $request, $idProduto)
+    public function delete(Request $request, $idComentario)
     {
-        $getUser = $request->session()->get('user')['id'];
-        $deleteAll = Avaliacao::all()->where('id_produto', $idProduto)->where('id_users', $getUser)->toQuery();
+        $deleteAll = Avaliacao::all()->where('id_comentario', $idComentario)->toQuery();
         $deleteAll->delete();
         if ($deleteAll) {
-            // return redirect()->route();
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Apagou uma avaliação', 'Avaliacao');
+
+            return redirect()->route('page-listComentarios')->withErrors('Avaliação deletada com sucesso');
         }
-        return redirect('falha-listAvaliacoes')->withErrors('Não foi possível apagar a avaliação o produto!');
+
+
+        return redirect('falha-listAvaliacoes')->withErrors('Não foi possível apagar a avaliação do produto!');
     }
 
     public function getCountAvaliacaoProduto($idProduto)

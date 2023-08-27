@@ -34,3 +34,18 @@
     margin-top: 2rem;
     margin-bottom: 5rem;
 }
+
+.textViewLog{
+    padding: 2rem;
+    background-color: var(--cinza-fundo);
+    color: #00e904;
+    border-radius: 10px;
+    width: 60vw;
+}
+
+#logBtn{
+    padding: 1rem;
+    color: var(--branco);
+    background-color: var(--vermelho);
+    border: none;
+}

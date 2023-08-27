@@ -9,7 +9,6 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // TODO: #43 Rerun as migrations e atualizar o ControllerProduto
     public function up(): void
     {
         Schema::create('users_produtos', function (Blueprint $table) {

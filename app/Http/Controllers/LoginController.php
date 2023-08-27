@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -32,11 +33,19 @@ class LoginController extends Controller
 
         if (Auth::check()) {
             if ($request->session()->has('user')) {
+                // Monitoramento log
+                $userLogEmail = array_values(Session::get('user'))[0]['email'];
+                LogController::writeFile($userLogEmail, 'Realizou o login', 'Login ADM');
+
                 return to_route('page-homepageAdmin');
             }
 
             $request->session()->regenerate();
             $request->session()->put('user', $user);
+
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Realizou o login', 'Login ADM');
 
             return to_route('page-homepageAdmin');
         }
@@ -44,6 +53,10 @@ class LoginController extends Controller
         if (Auth::guard('adm_users')->attempt($validator, $rememberMe)) {
             $request->session()->regenerate();
             $request->session()->put('user', $user);
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Realizou o login', 'Login ADM');
+
             return to_route('page-homepageAdmin');
         }
 
@@ -52,6 +65,11 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+
+        // Monitoramento log
+        $userLogEmail = array_values(Session::get('user'))[0]['email'];
+        LogController::writeFile($userLogEmail, 'Realizou o logout', 'Login ADM');
+
         $request->session()->regenerate(true);
         Auth::logout();
         $request->session()->flush();
