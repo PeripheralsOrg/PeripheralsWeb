@@ -7,6 +7,7 @@ use App\Models\Cupom;
 use App\Models\Marcas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CupomController extends Controller
 {
@@ -68,6 +69,10 @@ class CupomController extends Controller
         $cupomC = $cupom->create($create);
 
         if ($cupomC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou um novo cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom criado com sucesso!');
         }
 
@@ -85,6 +90,10 @@ class CupomController extends Controller
         $deleteAll = Cupom::findOrFail($id);
         $deleteAll->delete();
         if ($deleteAll) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Deletou um cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom deletado com sucesso');
         }
         return redirect('falha-listCupons')->withErrors('Não foi possível deletar o Cupom!');
@@ -140,6 +149,10 @@ class CupomController extends Controller
         $updateCupom = (Cupom::all()->where('id', $id)->toQuery())->update($create);
 
         if ($updateCupom) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou um cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom atualizado com sucesso!');
         }
         return back()->withErrors('Houve um erro ao atualizar o cupom');

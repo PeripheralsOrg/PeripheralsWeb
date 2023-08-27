@@ -29,11 +29,12 @@
                     <h2 class="title">Atualizar Banner</h2>
 
                     <label class="label-field">Nome</label>
-                    <input type="text" name="nome_banner" value="{{$item['nome_banner']}}" data-js="text" required class="input-field"
-                        placeholder="Titulo">
+                    <input type="text" name="nome_banner" value="{{ $item['nome_banner'] }}" data-js="text" required
+                        class="input-field" placeholder="Titulo">
 
                     <label class="label-field">URL</label>
-                    <input type="text" name="link_route" data-js="text" value="{{$item['link_route']}}" required class="input-field" placeholder="Link">
+                    <input type="text" name="link_route" data-js="text" value="{{ $item['link_route'] }}" required
+                        class="input-field" placeholder="Link">
 
                     <label class="label-field">Status</label>
                     <select class="select-field" name="status">
@@ -51,6 +52,14 @@
                     <label class="label-field">Banner</label>
                     <input type="file" name="link_carrossel" accept="image/*" data-js="image" required
                         class="input-field" placeholder="Banner">
+
+                    <label class="label-field">Banner Resolução Média</label>
+                    <input type="file" name="link_carrosselMedium" accept="image/*" data-js="image" required
+                        class="input-field" placeholder="Banner Médio">
+
+                    <label class="label-field">Banner Resolução Pequena</label>
+                    <input type="file" name="link_carrosselTiny" accept="image/*" data-js="image" required
+                        class="input-field" placeholder="Banner Pequeno">
 
                     <div class="box-buttons">
                         <button type="submit" class="btn-submit">Cadastrar</button>

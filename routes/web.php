@@ -30,6 +30,7 @@ use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\VendaController;
 use App\Mail\Contato;
 use App\Http\Controllers\getProdutoFreteController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\RelatoriosController;
 
 /*
@@ -43,8 +44,6 @@ use App\Http\Controllers\RelatoriosController;
 |
 */
 
-// TODO: #27 Fazer uma página inicial com acesso para todos os poderes
-// TODO: #37 Checar todos os tratamentos de erro
 
 Route::prefix('adm')->group(function () {
 
@@ -54,6 +53,10 @@ Route::prefix('adm')->group(function () {
         Route::view('entrar', 'admin.index')->name('page-login');
         Route::get('logout', 'logout')->name('auth-sair')->middleware('guest:6,7,8,9');
         Route::post('login', 'login')->name('auth-entrar')->middleware(RedirectIfNotAuthenticated::class);
+    });
+    Route::prefix('log')->controller(LogController::class)->group(function () {
+        Route::get('lista/registros', 'readFile')->name('lista-log')->middleware('guest:9');
+        Route::get('lista/registros/download', 'downloadLog')->name('baixar-log')->middleware('guest:9');
     });
 
     Route::prefix('user')->controller(AdmUsersController::class)->middleware('guest:8,9')->group(function () {
@@ -99,6 +102,7 @@ Route::prefix('adm')->group(function () {
 
     Route::prefix('comentarios')->controller(AvaliacaoController::class)->middleware('guest:7,8,9')->group(function () {
         Route::get('lista', 'getFeedbacks')->name('page-listComentarios');
+        Route::get('deletar/{idComentario}', 'delete')->name('page-deleteComentario');
         Route::get('get/comentario/{idComentario}', 'getComentarioAdmin')->name('get-comentario');
         Route::get('falha', 'fallbackAdmin')->name('fallback-listComentario');
         Route::get('filter/date', 'dateFilterAdmin')->name('filter-feedbackDate');
@@ -144,7 +148,6 @@ Route::prefix('adm')->group(function () {
         Route::post('pedido/pesquisa-pedido', 'searchPedidosAdmin')->name('search-pedidos');
         Route::get('pedido/filter/date', 'dateFilterAdmin')->name('filter-pedidosDate');
         Route::get('pedido/filter/ordem', 'orderFilterAdmin')->name('filter-pedidosOrdem');
-
     });
 
     Route::prefix('relatorios')->controller(RelatoriosController::class)->middleware('guest:8,9')->group(function () {
@@ -245,7 +248,6 @@ Route::prefix('produtos')->controller(ClientProdutoController::class)->group(fun
     Route::get('falha/produto', 'fallback')->name('falha-produtoClient');
     Route::get('produto/filtro/reset', 'resetFiltersAll')->name('produtoClient-resetFilter');
     Route::post('/get/produto/{cep}', [getProdutoFreteController::class, 'getProdutoFrete'])->name('produto-cep');
-
 });
 
 // Página de Ofertas
@@ -325,7 +327,15 @@ Route::post('/reset-password', [UsersController::class, 'resetPassword'])->middl
 // });
 
 
+
 // CONFIG & TESTE
+
+
+// Route::get('/adm/log', function () {
+    // return dd((new LogController())->writeFile('Davisant6@gmail.com', 'Atualizou Produto', 'Produto'));
+    // return dd((new LogController())->readFile());
+// });
+
 
 Route::get('/factory', function () {
     AdmUsers::factory()->create();

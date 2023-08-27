@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo-peripherals.jpeg') }}">
+    
     {{-- Scripts e Stylesheet nativos --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css') }}/@yield('css').css">
     <script defer src="{{ asset('js') }}/@yield('js').js"></script>

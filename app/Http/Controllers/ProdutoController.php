@@ -19,6 +19,7 @@ use App\Models\Categoria;
 use App\Models\Marcas;
 use Exception;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 
 class ProdutoController extends Controller
 {
@@ -82,6 +83,10 @@ class ProdutoController extends Controller
                 Ocorreu um erro ao deletar o produto!');
             }
 
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Deletou um produto', 'Produto');
+
             return redirect()->back()->withErrors('Produto deletado com sucesso!');
         }
 
@@ -90,8 +95,6 @@ class ProdutoController extends Controller
 
     public function register(Request $request)
     {
-
-        // TODO: #34 Mudar mensagens de erro
         
         $validate = $request->validate([
             'codigo' => ['required', Rule::unique('users_detalhes_produto', 'codigo')],
@@ -205,6 +208,10 @@ class ProdutoController extends Controller
         }
 
         if ($produtoImagemP && $produtoImagens && $produtoC && $inventarioProduto && $detalhesProduto) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou um novo produto', 'Produto');
+            
             return redirect()->route('page-listProdutos');
         }else{
             ProdutoController::errorImageDelete(intval($detalhesProduto), intval($inventarioProduto), intval($produtoC));
@@ -433,6 +440,10 @@ class ProdutoController extends Controller
 
 
         if ($produtoC && $inventarioProduto && $detalhesProduto) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou um produto', 'Produto');
+
             return redirect()->route('page-listProdutos');
         }
         return redirect()->back()->withErrors('Ocorreu um erro ao atualizar as informações do produto!');

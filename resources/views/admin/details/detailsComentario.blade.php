@@ -25,16 +25,20 @@
 
             <div class="box-input">
                 <label for="">Titulo</label>
-                <input disabled type="text" name="titulo" placeholder="Título" value="{{$getComment[0]['titulo']}}">
+                <input disabled type="text" name="titulo" placeholder="Título" value="{{ $getComment[0]['titulo'] }}">
             </div>
 
             <p>{{ $getComment[0]['avaliacao'] }} Estrelas</p>
 
-            <textarea disabled name="comentario" id="textAreaComment" cols="30" 
-            rows="10" placeholder="Comentário">{{ $getComment[0]['comentario'] }}</textarea>
+            <textarea disabled name="comentario" id="textAreaComment" cols="30" rows="10" placeholder="Comentário">{{ $getComment[0]['comentario'] }}</textarea>
 
         </form>
         <button id="feedbacKBtn" onclick="window.location.href='{{ route('page-listComentarios') }}'">Voltar</button>
+        <button id="feedbacKBtn"
+            onclick="window.location.href='{{ route('page-deleteComentario', $getComment[0]['id_comentario']) }}'">
+            Deletar Comentário
+        </button>
+
 
     </main>
 @endsection

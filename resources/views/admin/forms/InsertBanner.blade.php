@@ -40,6 +40,14 @@
             <input type="file" name="link_carrossel" accept="image/*" data-js="image" required 
             class="input-field" placeholder="Banner">
 
+            <label class="label-field">Banner Resolução Média</label>
+            <input type="file" name="link_carrosselMedium" accept="image/*" data-js="image" required 
+            class="input-field" placeholder="Banner Médio">
+
+            <label class="label-field">Banner Resolução Pequena</label>
+            <input type="file" name="link_carrosselTiny" accept="image/*" data-js="image" required 
+            class="input-field" placeholder="Banner Pequeno">
+
             <div class="box-buttons">
                 <button type="submit" class="btn-submit">Cadastrar</button>
                 <button type="button" onclick="window.location.href=`{{ route('page-listCarrossel') }}`"

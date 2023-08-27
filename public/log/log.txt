@@ -1,0 +1,12 @@
+[2023-08-27 16:16:28][Davusabt] - Teste Mensagem
+[2023-08-27 16:16:29][Davusabt] - Teste Mensagem
+[2023-08-27 16:16:29][Davusabt] - Teste Mensagem
+[2023-08-27 16:16:30][Davusabt] - Teste Mensagem
+[2023-08-27 16:16:30][Davusabt] - Teste Mensagem
+[2023-08-27 16:16:31][Davusabt] - Teste Mensagem
+[2023-08-27 16:19:39][Produto][Davisant6@gmail.com] - Atualizou Produto
+[2023-08-27 16:20:05][Produto][Davisant6@gmail.com] - Atualizou Produto
+[2023-08-27 17:10:07][Login ADM][admin@admin.com] - Realizou o logout
+[2023-08-27 17:13:33][Login ADM][Davi@adm.com] - Realizou o login
+[2023-08-27 17:14:34][Avaliacao][Davi@adm.com] - Apagou uma avaliação
+[2023-08-27 17:43:54][Login ADM][Davi@adm.com] - Realizou o logout

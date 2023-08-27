@@ -47,5 +47,9 @@
             <h2>Administração</h2>
         </a>
 
+        <a class="box-icon" href="{{ route('lista-log') }}">
+            <i class="fa-regular fa-file"></i>
+            <h2>Log de Ações</h2>
+        </a>
     </section>
 @endsection

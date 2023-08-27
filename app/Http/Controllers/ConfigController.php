@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Marcas;
+use Illuminate\Support\Facades\Session;
 
 class ConfigController extends Controller
 {
@@ -54,6 +55,10 @@ class ConfigController extends Controller
         $categoriaC = $categoria->create($create);
 
         if ($categoriaC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou uma nova Categoria', 'Configurações');
+            
             return redirect()->route('page-listConfig')->withErrors('Categoria criada com sucesso!');
         }
 
@@ -65,8 +70,14 @@ class ConfigController extends Controller
         $deleteAll = Categoria::findOrFail($id);
         $deleteAll->delete();
         if ($deleteAll) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Apagou uma categoria', 'Configurações');
+
             return redirect()->route('page-listConfig')->withErrors('Categoria deletada com sucesso');
         }
+
+
         return redirect('falha-listConfig')->withErrors('Não foi possível deletar a categoria!');
     }
 
@@ -90,8 +101,13 @@ class ConfigController extends Controller
         $updateCategoria = (Categoria::all()->where('id_categoria', $id)->toQuery())->update($create);
 
         if ($updateCategoria) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou uma categoria', 'Configurações');
+
             return redirect()->route('page-listConfig')->withErrors('Categoria atualizada com sucesso!');
         }
+
         return back()->withErrors('Houve um erro ao atualizar a categoria');
     }
 
@@ -110,6 +126,10 @@ class ConfigController extends Controller
         $marcaC = $categoria->create($create);
 
         if ($marcaC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou uma nova Marca', 'Configurações');
+
             return redirect()->route('page-listConfig')->withErrors('Marca criada com sucesso!');
         }
 
