@@ -1,0 +1,148 @@
+@import '../import.css';
+
+
+html,
+body {
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 3rem;
+    align-items: center;
+    background-color: var(--cinza-fundo);
+    color: var(--branco) !important;
+    bottom: 0;
+    /* MUDE CASO QUEiRA */
+    border-top: 1px solid var(--branco);
+}
+
+footer .row-elements {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+footer .payment-methods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+}
+
+footer .payment-methods .footer-logo img {
+    width: 300px;
+}
+
+footer .column-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+footer .column-info h3 {
+    text-transform: uppercase;
+}
+
+footer .column-info a {
+    color: var(--branco);
+    font-weight: 400 !important;
+    font-family: var(--quicksand);
+}
+
+footer .column-info ul {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+footer .footer-newsletter {
+    display: flex;
+    gap: .6rem;
+}
+
+footer #divisorLine {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--branco);
+}
+
+
+
+@media(max-width: 1000px) {
+    .container.row {
+        width: 60%;
+    }
+
+    .col-lg-3 {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .col-md-3 {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .ablu {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .row-elements {
+        display: flex;
+        gap: 2rem;
+    }
+}
+
+@media(max-width: 770px) {
+    .col-lg-3 {
+        width: 100%;
+    }
+
+    .col-md-3 {
+        width: 100%;
+    }
+
+    .ablu {
+        width: 100%;
+    }
+
+    .row-elements {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-newsletter{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer-copyright-text{
+        text-align: center;
+    }
+}
+
+@media (max-width: 300px){
+    .payment-methods img{
+        max-width: 100%;
+    }
+}

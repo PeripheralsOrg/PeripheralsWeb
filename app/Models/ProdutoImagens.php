@@ -11,10 +11,15 @@ class ProdutoImagens extends Model
     use HasFactory;
 
     protected $table = 'users_produto_imgs';
+    protected $primaryKey = 'id_produto_imgs';
+
 
     protected $fillable = [
         'nome_img',
         'link_img',
+        'peso',
+        'img_principal',
+        'id_produto'
     ];
 
     public function produto(): HasOne

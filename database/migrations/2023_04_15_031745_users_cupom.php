@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('users_cupom', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 120)->charset('utf8');
-            $table->string('codigo', 30)->charset('utf8');
+            $table->string('nome', 120)->charset('utf8mb4');
+            $table->string('codigo', 30)->charset('utf8mb4');
+            $table->string('tipo', 30)->charset('utf8mb4');
+            $table->string('visibilidade', 30)->charset('utf8mb4');
+            $table->foreignId('id_categoria')->nullable();
+            $table->foreignId('id_marca')->nullable();
             $table->dateTime('data_expiracao');
             $table->decimal('porcentagem', 10, 2);
             $table->tinyInteger('status')->default(1);

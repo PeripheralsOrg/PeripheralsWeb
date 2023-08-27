@@ -1,3 +1,20 @@
+// let getFormConfirm = document.getElementById('formCadastroConfirm');
+
+
+// getFormConfirm.addEventListener('submit', () => {
+//     let exibError = document.getElementById('exibError');
+//     let getCheckBox = document.getElementById('termoCheck');
+
+//     if (!getCheckBox.checked) {
+//         getFormConfirm.preventDefault();
+//         exibError.innerHTML = 'Concorde com os termos e condições para continuar!';
+//     } else {
+//         getFormConfirm.submit();
+//     }
+
+// })
+
+
 const masks = {
     cpf(value) {
         return value
@@ -25,7 +42,23 @@ const masks = {
 
     text(value) {
         return value
-            .replace(/[ `!@#$%^&*()_+\=\[\]{};':"\\|.<>\/?~]/, "")
+            .replace(/[`!@#$%^&*()_+\=\[\]{};':"\\|.<>\/?~]/, "")
+    },
+
+    cep(value) {
+        return value
+            .replace(/\D+/g, '')
+            .replace(/(\d{5})(\d)/, '$1-$2')
+            .replace(/(-\d{3})\d+?$/, '$1')
+    },
+
+    phone(value) {
+        return value
+            .replace(/\D+/g, '')
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+            .replace(/(-\d{4})\d+?$/, '$1')
     },
 
 };
@@ -40,3 +73,5 @@ document.querySelectorAll("input").forEach(($input) => {
         false
     );
 });
+
+

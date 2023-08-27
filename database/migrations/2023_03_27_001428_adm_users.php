@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('adm_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 120)->charset('utf8');
-            $table->string('email', 160)->unique()->charset('utf8');
+            $table->string('name', 120)->charset('utf8mb4');
+            $table->string('email', 160)->unique()->charset('utf8mb4');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 256);
             $table->tinyInteger('poder');

@@ -1,0 +1,212 @@
+@import '../import.css';
+
+
+.content-endereco {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding: 5rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+    width: 75vw;
+}
+
+#firstTitle {
+    margin-bottom: 2rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid;
+    outline: none;
+}
+
+.select-field {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid;
+    outline: none;
+}
+
+.box-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+
+.box-buttons button,
+.box-buttons input {
+    background-color: var(--vermelho);
+    color: var(--branco);
+    border: 1px solid var(--vermelho);
+    transition: ease .2s;
+    padding: 1rem;
+}
+
+.form-edit button,
+#getBackBtn {
+    padding: 1rem;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    text-transform: uppercase;
+    transition: ease .3s;
+    border: transparent;
+}
+
+.form-edit button:hover,
+#getBackBtn:hover {
+    background-color: var(--cinza-fundo);
+}
+
+.box-buttons button:hover {
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, .1);
+}
+
+.row-input {
+    display: flex;
+    gap: .8rem;
+    width: 100%;
+}
+
+.row-input .box-input {
+    width: 49.9%;
+}
+
+.box-input {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.row-input label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.container-error {
+    display: flex;
+    padding: 1rem;
+    gap: .5rem;
+    background-color: #f75e5e;
+    color: #FFFF;
+    width: 60vw;
+    margin-bottom: 1rem;
+}
+
+.conteiner-getEndereco {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.box-endereco {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--preto);
+    width: 400px;
+}
+
+.row-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+form select {
+    padding: 1rem;
+}
+
+
+.row-cep {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.row-cep .box-inputCep {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.row-cep #btnCep {
+    width: 6rem;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    border: 1px solid var(--vermelho);
+    transition: ease .2s;
+}
+
+.row-cep #btnCep:hover {
+    background-color: var(--vermelho);
+    color: var(--branco);
+    border: 1px solid var(--vermelho);
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, .1);
+}
+
+
+#selectEndereco {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    accent-color: var(--vermelho);
+}
+
+@media (max-width: 700px) {
+
+    .content-endereco {
+        padding: 1rem;
+    }
+
+    form {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .row-cep {
+        width: 100%;
+        gap: .5rem;
+    }
+
+    .row-cep .box-inputCep {
+        width: 80%;
+    }
+
+    .row-cep button {
+        width: 20%;
+    }
+
+    .row-input {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .row-input .box-input {
+        width: 100%;
+    }
+
+    .box-buttons {
+        width: 100%;
+    }
+
+    .box-buttons button {
+        width: 100%;
+    }
+}

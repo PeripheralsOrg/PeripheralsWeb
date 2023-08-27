@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('css', 'admin/listPedidos')
+@section('js', 'admin/listPedidos')
 @section('title')@parent Lista de Pedidos @stop
 
 @section('content')
@@ -18,45 +19,53 @@
         @endif
 
         <!-- Barra_de_busca -->
-        <div id="divBusca">
-            <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <a id="searchIcon" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-        </div>
+        <form id="divBusca" action="{{ route('search-pedidos') }}" method="post">
+            @method('POST')
+            @csrf
+            <input type="text" id="txtBusca" name="search" placeholder="Busque pelo ID" />
+            <button type="submit" id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
 
         <section class="container-filters">
 
-            <section class="box-input-date">
+            <form class="box-input-date" action="{{ route('filter-pedidosDate') }}">
                 <div class="box-ordem box-filter">
                     <label for="inputDateFrom">De:</label>
-                    <input type="date" name="date" id="inputDateFrom">
+                    <input required type="date" name="dateFrom" id="inputDateFrom">
                 </div>
 
                 <div class="box-ordem box-filter">
                     <label for="inputDateTo">Até:</label>
-                    <input type="date" name="date" id="inputDateTo">
+                    <input required type="date" name="dateTo" id="inputDateTo">
                 </div>
-            </section>
 
-            <div class="box-faixa-preco box-filter">
-                <label for="boxSelectCategoria">Categorias</label>
-                <select id="boxSelectCategoria" name="select-faixa-preco">
-                    <option>Todos</option>
-                </select>
-            </div>
+                <div class="box-ordem box-filter">
+                    {{-- ! CARACTEREZE INVISIVISIVEL, NÃO MEXER --}}
+                    <label for="inputDateTo">⠀⠀⠀⠀⠀⠀⠀⠀⠀</label>
 
-            <div class="box-ordem box-filter">
+                    <button id="btnNewProduto">
+                        Pesquisar
+                    </button>
+                </div>
+                </div>
+            </form>
+
+
+            <form class="box-ordem box-filter" id="formFilter" action="{{ route('filter-pedidosOrdem') }}">
                 <label for="selectOrdem">Ordenar Por</label>
-                <select id="selectOrdem" name="select-ordem">
+                <select id="selectOrdem" onchange="submitFilter(this)" name="select-ordem">
                     <option>Todos</option>
-                    <option value="1">Maior Preço</option>
-                    <option value="2">Menor Preço</option>
+                    <option value="DESC">Maior Preço</option>
+                    <option value="ASC">Menor Preço</option>
+                    <option value="quant">Mais Relevante</option>
                 </select>
-            </div>
+            </form>
 
-            {{-- <div class="container-clean-filters box-filter">
-                <button id="btnCleanFilters">
+            <div class="container-clean-filters box-filter">
+                <button id="btnCleanFilters" onclick="window.location.href=`{{ route('page-listPedidos') }}`">
                     Limpar Filtros
-                </button> --}}
+                </button>
+            </div>
             </div>
         </section>
 
@@ -66,24 +75,32 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nome</th>
-                    <th>Produto</th>
+                    <th>Subtotal</th>
+                    <th>Frete</th>
+                    <th>Itens</th>
                     <th>Data</th>
-                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                <tr>
-                    <!-- Conteúdo_da_tabela -->
-                    <td>1</td>
-                    <td>Stich</td>
-                    <td>Mouse</td>
-                    <td>23/02/2023</td>
-                    <td>1</td>
-                    <td><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-                </tr>
+                @if (count($getVenda) > 0)
+                    @foreach ($getVenda as $item)
+                        <tr>
+                            <!-- Conteúdo_da_tabela -->
+                            <td>{{ $item['id_venda'] }}</td>
+                            <td>{{ $item['valor_total'] }}</td>
+                            <td>{{ $item['frete'] }}</td>
+                            <td>{{ $item['quantidade_items'] }}</td>
+                            <td>{{ Carbon\Carbon::parse($item['created_at'])->format('d/m/Y h:i:s') }}</td>
+                            <td><a href="{{ route('get-detailsPedidos', $item['id_venda']) }}"><i
+                                        class="fa-solid fa-magnifying-glass"></i></a></td>
+                        </tr>
+                    @endforeach
+                @else
+                    <h1>{{ $erro }}</h1>
+                @endif
+
 
             <tbody>
                 <!-- Final_do_corpo_da_tabela -->

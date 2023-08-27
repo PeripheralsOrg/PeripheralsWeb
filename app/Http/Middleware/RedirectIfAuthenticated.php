@@ -18,6 +18,10 @@ class RedirectIfAuthenticated
 
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
+        if(!$request->session()->has('user')){
+            return redirect('adm/auth/entrar')->withErrors('É necessário fazer login para continuar!');
+        }
+
         $roles = empty($roles) ? [null] : $roles;
         if (empty($roles)) {
             return redirect('adm/auth/entrar')->withErrors('É necessário fazer login para continuar!');
@@ -34,6 +38,6 @@ class RedirectIfAuthenticated
             }
         }
 
-        return back()->withErrors('Você não possui autorização para acessar essa a URL: ' .  $request->url());
+        return back()->withErrors('Você não possui autorização para acessar a URL: ' .  $request->url());
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\AdmUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\LogController;
+use Illuminate\Support\Facades\Session;
 
 class AdmUsersController extends Controller
 {
@@ -15,6 +18,22 @@ class AdmUsersController extends Controller
            return view('admin.list.listUserAdm')->with('users', $users); 
         }
         return redirect()->route('falha-listAdm'); 
+    }
+
+    public function search(Request $request)
+    {
+        if (empty($request->input('search'))) {
+            return redirect()->route('page-listAdm')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+
+        $search = $request->input('search');
+        $users = json_decode(json_encode(DB::table('adm_users')->where('name', 'LIKE', '%' . $search . '%')
+            ->Orwhere('email', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+
+        if ($users) {
+            return view('admin.list.listUserAdm')->with('users', $users);
+        }
+        return redirect()->route('falha-listAdm');
     }
 
     public function register(Request $request, AdmUsers $user)
@@ -36,6 +55,10 @@ class AdmUsersController extends Controller
         $userC = $user->create($create);
 
         if (!$userC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou um novo usuário', 'AdmUsers');
+            
             return back()->withErrors(['Ocorreu um erro ao criar o usuário!']);
         }
         
@@ -47,8 +70,13 @@ class AdmUsersController extends Controller
         $deleteAll = AdmUsers::findOrFail($id);
         $deleteAll->delete();
         if($deleteAll){
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Deletou um usuário', 'AdmUsers');
+
             return redirect()->route('page-listAdm');
         }
+
         return redirect('falha-listAdm')->withErrors('Não foi possível deletar o usuário!'); 
     }
 
@@ -81,8 +109,8 @@ class AdmUsersController extends Controller
         ]);
 
 
-        $getAdm = AdmUsers::all()->where('id', $id)->toArray();
-        $searchEmail = AdmUsers::all()->where('email', $getAdm[1]['email'])->toArray();
+        $getAdm = array_values(AdmUsers::all()->where('id', $id)->toArray());
+        $searchEmail = AdmUsers::all()->where('email', $getAdm[0]['email'])->toArray();
 
         if (empty($getAdm)) {
             return redirect('falha-listAdm');
@@ -100,8 +128,13 @@ class AdmUsersController extends Controller
         $updateAdm = (AdmUsers::all()->where('id', $id)->toQuery())->update($values);
 
         if($updateAdm){
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou um usuário', 'AdmUsers');
+
             return redirect()->route('page-listAdm');
         }
+
 
         return back()->withErrors('Ocorreu um erro ao atualizar o usuário!');
     }

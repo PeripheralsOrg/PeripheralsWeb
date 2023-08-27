@@ -17,6 +17,8 @@ html, body{
     width: 85%;
     margin-top: 5rem;
     margin-bottom: 5rem;
+    position: absolute;
+    right: 0;
 }
 
 .global-wrapper .container-login {
@@ -60,7 +62,7 @@ header #navLinks ul a {
 /* tamanho_logo*/
 header .img-logo {
     width: 100%;
-    margin-left: -23px;
+    margin-left: -10px;
 }
 
 header .button-nav {
@@ -101,6 +103,7 @@ header .btn-config {
     background: none;
     border: none;
     color: #fff;
+    font-size: 1rem;
 }
 
 /* animações_de_botões*/
@@ -125,6 +128,10 @@ header #navLinks li a:hover {
     color: var(--vermelho);
 }
 
+header .dropdown-content a{
+    font-size: 1rem;
+}
+
 header #userSession:hover {
     background-color: var(--vermelho);
     color: var(--branco);
@@ -138,6 +145,8 @@ header #logoutSession:hover {
     border: 1px solid var(--vermelho);
     transition: var(--navbar-transition);
 }
+
+
 
 @media (min-width: 2000px) {
     .global-wrapper .container-content {

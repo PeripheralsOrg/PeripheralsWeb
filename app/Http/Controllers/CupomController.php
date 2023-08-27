@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Cupom;
+use App\Models\Marcas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CupomController extends Controller
 {
@@ -13,19 +17,50 @@ class CupomController extends Controller
         if ($cupons) {
             return view('admin.list.listCupons')->with('cupons', $cupons);
         }
-        return redirect('falha-listCupons');
+        return redirect()->route('falha-listCupons');
     }
 
-    // TODO: #23 Criar coluna para linkar categoria
+    public function search(Request $request)
+    {
+        if (empty($request->input('search'))) {
+            return redirect()->route('page-listCupons')->withErrors('Por favor, preencha o campo de pesquisa!');
+        }
+
+        $search = $request->input('search');
+        $cupons = json_decode(json_encode(DB::table('users_cupom')->where('nome', 'LIKE', '%' . $search . '%')
+            ->Orwhere('codigo', 'LIKE', '%' . $search . '%')->get()->toArray()), true);
+
+        if ($cupons) {
+            return view('admin.list.listCupons')->with('cupons', $cupons);
+        }
+        return redirect()->route('falha-listCupons');
+    }
+
     public function register(Request $request, Cupom $cupom)
     {
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
+            'tipo' => ['required'],
+            'visibilidade' => ['required'],
+            'id_marca' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
+            'id_categoria' => ['required'],
         ]);
+
+        if ($request->input('tipo') == 'marca') {
+            $request->merge([
+                'id_categoria' => null
+            ]);
+        } else {
+            $request->merge([
+                'id_marca' => null
+            ]);
+        }
+
+
         $request->merge([
             'porcentagem' => floatval($request->input('porcentagem'))
         ]);
@@ -34,6 +69,10 @@ class CupomController extends Controller
         $cupomC = $cupom->create($create);
 
         if ($cupomC) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Registrou um novo cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom criado com sucesso!');
         }
 
@@ -51,6 +90,10 @@ class CupomController extends Controller
         $deleteAll = Cupom::findOrFail($id);
         $deleteAll->delete();
         if ($deleteAll) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Deletou um cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom deletado com sucesso');
         }
         return redirect('falha-listCupons')->withErrors('Não foi possível deletar o Cupom!');
@@ -59,10 +102,17 @@ class CupomController extends Controller
     public function getUpdate($id)
     {
         $getCupom = Cupom::all()->where('id', $id)->toArray();
-        if ($getCupom) {
-            return view('admin.forms.UpdateCupom')->with('getCupom', $getCupom);
+        $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->toArray();
+
+        if ($getCupom || $categorias || $marcas) {
+            return view('admin.forms.UpdateCupom')->with([
+                'getCupom' => $getCupom,
+                'categorias' => $categorias,
+                'marcas' => $marcas
+            ]);
         }
-        return redirect('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
+        return redirect()->route('falha-listCupons')->withErrors('Não foi possível atualizar o Cupom!');
     }
 
     public function update(Request $request, $id)
@@ -70,10 +120,25 @@ class CupomController extends Controller
         $validator = $request->validate([
             'nome' => ['required'],
             'codigo' => ['required'],
+            'tipo' => ['required'],
+            'visibilidade' => ['required'],
+            'id_marca' => ['required'],
             'data_expiracao' => ['required'],
             'porcentagem' => ['required'],
             'status' => ['required'],
+            'id_categoria' => ['required'],
         ]);
+
+        if ($request->input('tipo') == 'marca') {
+            $request->merge([
+                'id_categoria' => null
+            ]);
+        } else {
+            $request->merge([
+                'id_marca' => null
+            ]);
+        }
+
 
         $request->merge([
             'porcentagem' => floatval($request->input('porcentagem'))
@@ -84,8 +149,26 @@ class CupomController extends Controller
         $updateCupom = (Cupom::all()->where('id', $id)->toQuery())->update($create);
 
         if ($updateCupom) {
+            // Monitoramento log
+            $userLogEmail = array_values(Session::get('user'))[0]['email'];
+            LogController::writeFile($userLogEmail, 'Atualizou um cupom', 'Cupom');
+
             return redirect()->route('page-listCupons')->withErrors('Cupom atualizado com sucesso!');
         }
         return back()->withErrors('Houve um erro ao atualizar o cupom');
+    }
+
+    public function retrieveInfo()
+    {
+        $categorias = Categoria::all()->toArray();
+        $marcas = Marcas::all()->toArray();
+
+        if ($categorias && $marcas) {
+            return view('admin.forms.InsertCupom')->with([
+                'categorias' => $categorias,
+                'marcas' => $marcas
+            ]);
+        }
+        return redirect()->route('falha-listCupons');
     }
 }

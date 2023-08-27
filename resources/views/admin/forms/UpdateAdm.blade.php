@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('css', 'admin/InsertAdm')
-@section('js', 'admin/InsertAdm')
+@section('js', 'admin/insertAdm')
 @section('title')@parent Atualizar Administrador @stop
 
 

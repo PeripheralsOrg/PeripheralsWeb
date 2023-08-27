@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('users_produto_imgs', function (Blueprint $table) {
             $table->id('id_produto_imgs');
-            $table->string('nome_img', 120)->charset('utf8');
-            $table->string('link_img', 320)->charset('utf8');
+            $table->string('nome_img', 120)->charset('utf8mb4');
+            $table->tinyInteger('img_principal');
+            $table->string('link_img', 320)->charset('utf8mb4');
+            $table->decimal('peso', 10, 2);
             $table->foreignId('id_produto');
             $table->timestamps();
         });

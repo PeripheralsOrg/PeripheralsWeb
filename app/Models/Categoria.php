@@ -12,6 +12,8 @@ class Categoria extends Model
 
     protected $table = 'users_produto_categoria';
 
+    protected $primaryKey = 'id_categoria';
+
     protected $fillable = [
         'categoria',
     ];
@@ -19,5 +21,10 @@ class Categoria extends Model
     public function produto(): BelongsTo
     {
         return $this->belongsTo(Produto::class);
+    }
+
+    public function cupom(): BelongsTo
+    {
+        return $this->belongsTo(Cupom::class);
     }
 }

@@ -4,19 +4,28 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\AdmUsers;
+use App\Models\VendaStatus;
 
 class DatabaseSeeder extends Seeder
 {
+
+    private $senhaAdm = 'Gizona123@';
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(vendaStatusSeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        AdmUsers::factory()->create([
+            'name' => 'Administrador',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make($this->senhaAdm),
+            'poder' => 9,
+            'status' => 1,
+        ]);
     }
 }

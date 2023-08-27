@@ -18,7 +18,10 @@ class AdmBanner extends \Illuminate\Foundation\Auth\User
     protected $fillable = [
         'nome_banner',
         'link_carrossel',
+        'link_carrosselMedium',
+        'link_carrosselTiny',
         'link_route',
-        'status'
+        'status',
+        'peso'
     ];
 }

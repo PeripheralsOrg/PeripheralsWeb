@@ -1,0 +1,439 @@
+@import '../import.css';
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    height: var(--height-navbar);
+    width: 100vw;
+    background-color: var(--cinza-fundo);
+    color: var(--branco);
+    /* MUDE CASO QUEiRA */
+    border-bottom: 1px solid var(--branco);
+}
+
+header .box-logo img {
+    width: 100px;
+}
+
+header .box-icons a {
+    padding: .6rem;
+    border: none;
+}
+
+header .box-icons button {
+    padding: .6rem;
+    border: none;
+    background-color: transparent;
+}
+
+header .box-icons a img {
+    width: 30px;
+}
+
+header nav ul {
+    display: flex;
+    gap: 1rem;
+}
+
+header nav ul li a {
+    color: var(--branco);
+    font-size: 1.2rem;
+    transition: var(--navbar-transition);
+}
+
+header nav ul li a:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+
+/* Dropdown menu */
+.box-icons {
+    display: flex;
+    align-items: center;
+}
+
+header .box-icons button img {
+    width: 30px;
+}
+
+header .dropdown-content {
+    display: none;
+    flex-direction: column;
+    gap: .5rem;
+    position: absolute;
+    right: 3%;
+}
+
+header .dropdown-content a {
+    display: block;
+    padding: .5rem;
+    z-index: 10000;
+}
+
+
+header .dropdown-link {
+    display: block;
+    color: #ffff;
+    font-family: var(--worksans);
+    font-size: var(--adm-button-nav);
+    z-index: 10000;
+}
+
+header .btn-config {
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+/* animações_de_botões*/
+header .dropdown-link:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .btn-config:hover {
+    /* text-decoration: underline; */
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .dropdown-link:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1rem;
+    gap: .5rem;
+    border-radius: 10px;
+}
+
+#navResponsive {
+    display: none;
+}
+
+.box-search {
+    display: none;
+}
+
+.box-search {
+    height: var(--height-navbar);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    /* justify-content: center; */
+}
+
+.box-search form {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.box-search form input[type="submit"] {
+    border-top: solid 1px var(--branco);
+    border-bottom: solid 1px var(--branco);
+    border-right: solid 1px var(--branco);
+    border-left: none;
+    width: 50px;
+    height: 50px;
+    background: url(../../images/icons/lupa.png) no-repeat center;
+    background-size: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0;
+    margin: 0 !important;
+    vertical-align: middle;
+    color: var(--branco) !important;
+}
+
+.box-search form input[type="submit"]::placeholder {
+    color: var(--branco) !important;
+}
+
+.box-search form input[type="text"] {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 5px 10px;
+    border-top: solid 1px var(--branco);
+    border-bottom: solid 1px var(--branco);
+    border-left: solid 1px var(--branco);
+    border-right: none;
+    width: 100%;
+    height: 50px;
+    margin: 0 !important;
+    background-color: transparent;
+    color: var(--branco);
+}
+
+.box-search button img {
+    width: 35px;
+    height: 35px;
+}
+
+.box-search button {
+    width: 35px;
+    height: 35px;
+    margin: 0 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    vertical-align: middle
+}
+
+header .box-icons input[type="text"] {
+    background-color: transparent;
+    border-radius: 5px;
+    border: var(--branco) solid 1px;
+    height: 35px;
+    width: 100%;
+    padding: 0 15px;
+}
+
+
+/* Menu Produtos Dropdown */
+
+
+header .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    gap: .5rem;
+    position: absolute;
+    margin-top: .2rem;
+}
+
+header .dropdown-menu a {
+    display: block;
+    z-index: 10000;
+    width: 100%;
+}
+
+header .dropdown-linkMenu {
+    display: block;
+    color: #000;
+    font-size: 1.2rem;
+    z-index: 10000;
+}
+
+header .link-menu {
+    color: #fff;
+}
+
+/* animações_de_botões*/
+header .dropdown-linkMenu:hover {
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .link-menu:hover {
+    /* text-decoration: underline; */
+    transition: var(--navbar-transition);
+    color: var(--vermelho);
+}
+
+header .dropdown-linkMenu:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1rem;
+    gap: .5rem;
+    border-radius: 10px;
+}
+
+.dropdown-menu a {
+    color: var(--preto);
+    transition: ease .3s;
+}
+
+.dropdown-menu a:hover {
+    color: var(--vermelho);
+}
+
+
+/* #btnFecharPesquisaNav{
+    display: none;
+} */
+
+
+/* Media Queries */
+
+@media(max-width: 750px) {
+    header {
+        display: none;
+    }
+
+    .boxAbertaNav {
+        display: none;
+    }
+
+    #navResponsive {
+        display: block;
+        position: fixed;
+    }
+
+    .mobile-menu .btnFecharMenu,
+    #boxAbertaNav .btnPesquisa-r {
+        display: none;
+    }
+
+    .mobile-menu .btnPesquisaMB {
+        display: block;
+    }
+
+    .dropdown-link {
+        display: flex;
+        flex-direction: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    #navResponsive {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+        height: var(--height-navbar);
+        width: 100%;
+        background-color: var(--cinza-fundo);
+        color: var(--branco);
+        border-bottom: 1px solid var(--branco);
+        z-index: 100000;
+    }
+
+    .container-content {
+        margin-top: 8rem;
+    }
+
+    #navResponsive .box-logo-responsive img {
+        width: 100px;
+    }
+
+    .boxAbertaNav .box-icons-responsive button,
+    .mobile-menu button {
+        background-color: transparent;
+        padding: .6rem;
+        border: none;
+    }
+
+    .boxAbertaNav .box-icons-responsive button img {
+        width: 20px;
+    }
+
+    #navResponsive .mobile-menu button img {
+        width: 30px;
+    }
+
+    .boxAbertaNav {
+        position: fixed;
+        top: var(--height-navbar);
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--cinza-fundo);
+        z-index: 10000000;
+    }
+
+    .boxAbertaNav .box-icons-responsive {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+
+
+    .boxAbertaNav #navList-responsive {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-content: space-between;
+    }
+
+    #navList-responsive a {
+        display: block;
+        color: var(--branco);
+        font-size: 1.25rem;
+        padding: .5rem;
+        width: 100%;
+    }
+
+    #navList-responsive li {
+        width: 100%;
+    }
+
+    #navList-responsive ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .box-icons-responsive a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .8rem;
+        color: var(--branco);
+        font-size: 1.25rem;
+    }
+
+    .box-icons-responsive a img {
+        width: 30px;
+    }
+
+    .nav-content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 4rem;
+        padding: 1rem;
+    }
+
+    .boxAbertaNav #navList-responsive a:hover,
+    .boxAbertaNav .box-icons-responsive button:hover {
+        background-color: var(--vermelho);
+    }
+
+
+    .mobile-menu .btnFecharMenu,
+    #boxAbertaNav .btnPesquisa-r {
+        display: none;
+    }
+
+    .mobile-menu .btnPesquisaMB {
+        display: block;
+    }
+
+    #inputPesquisa,
+    #btnFecharPesquisa {
+        display: none;
+    }
+
+    .mobile-menu #btnFecharPesquisa img{
+        position: absolute;
+        top: 3rem;
+        right: 2.5rem;
+        width: 15px !important;
+    }
+
+    .mobile-menu input[type="text"] {
+        background-color: transparent;
+        border-radius: var(--border-radius);
+        border: var(--branco) solid 1px;
+        color: var(--branco);
+        width: 100%;
+        padding: 1rem;
+    }
+}
