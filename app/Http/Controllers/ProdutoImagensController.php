@@ -49,7 +49,7 @@ class ProdutoImagensController extends Controller
     public function deleteImage($imagesDelete){
 
         if (!empty($imagesDelete)) {
-            $arrayDeleteImgs = str_split(str_replace(',', '', $imagesDelete));
+            $arrayDeleteImgs = explode(',', $imagesDelete);
             for ($i = 0; $i < count($arrayDeleteImgs); $i++) {
                 $imgGet = ProdutoImagens::all()->where('id_produto_imgs', $arrayDeleteImgs[$i])->toQuery();
                 $deleteImage = Storage::delete($imgGet->getModel()->getAttributes()['link_img']);

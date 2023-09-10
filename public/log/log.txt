@@ -10,3 +10,32 @@
 [2023-08-27 17:13:33][Login ADM][Davi@adm.com] - Realizou o login
 [2023-08-27 17:14:34][Avaliacao][Davi@adm.com] - Apagou uma avaliação
 [2023-08-27 17:43:54][Login ADM][Davi@adm.com] - Realizou o logout
+[2023-09-07 11:21:17][Login ADM][Davi@adm.com] - Realizou o login
+[2023-09-07 11:24:23][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:30:02][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 11:30:50][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:32:37][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 11:33:06][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:34:36][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 11:36:02][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:38:45][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 11:46:29][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:49:20][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 11:49:52][Produto][Davi@adm.com] - Registrou um novo produto
+[2023-09-07 11:51:00][Produto][Davi@adm.com] - Deletou um produto
+[2023-09-07 12:11:15][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:13:01][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:17:47][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:18:45][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:19:52][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:20:00][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:21:33][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:21:41][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:22:49][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:25:15][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:25:24][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:25:33][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:25:42][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 12:25:54][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 13:14:56][Produto][Davi@adm.com] - Atualizou um produto
+[2023-09-07 13:15:20][Produto][Davi@adm.com] - Atualizou um produto

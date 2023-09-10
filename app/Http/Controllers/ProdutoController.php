@@ -115,6 +115,10 @@ class ProdutoController extends Controller
             'imagem_principal' => ['required', 'mimes:jpeg,png,jpg,gif,webp']
         ]);
 
+        if($request->input('categoria') == 'change'){
+            return redirect()->back()->withErrors('Selecione uma categoria!');
+        }
+
         $imagemPrincipal = $request->file('imagem_principal');
         $produtoModel = new Produto();
 
@@ -255,8 +259,7 @@ class ProdutoController extends Controller
 
                 $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '.' . 'webp';
 
-                $imageConvert = Image::make($file)->encode('webp')->getEncoded();
-
+                $imageConvert = Image::make($file)->resize(1000, 1000)->encode('webp')->getEncoded();
 
                 $uploadFile = Storage::disk('s3')->put(
                     'files/' . $imageName,
@@ -277,9 +280,9 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.' . $file->getClientOriginalExtension();
+                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.' . 'webp';
 
-                $imageConvert = Image::make($file)->encode('webp')->getEncoded();
+                $imageConvert = Image::make($file)->resize(1000, 1000)->encode('webp')->getEncoded();
 
                 // Método funcionando perfeitamente
                 $uploadFile = Storage::disk('s3')->put(
@@ -369,7 +372,6 @@ class ProdutoController extends Controller
                 'preco',
                 'quantidade',
                 'marca',
-                'categoria',
                 'descricao',
                 'is_promocao',
                 'modelo',

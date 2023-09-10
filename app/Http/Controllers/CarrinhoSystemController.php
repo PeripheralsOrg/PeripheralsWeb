@@ -207,7 +207,15 @@ class CarrinhoSystemController extends Controller
 
             foreach ($carrinhoItens as $item) {
                 $getImages = array_values(ProdutoImagens::all()->where('id_produto', $item['id_produto'])
+                ->where('img_principal', 1)->toArray());
+
+                if (empty($getImages)) {
+                    $getImages = array_values(ProdutoImagens::all()->where('id_produto', $item['id_produto'])
+                    ->where('img_principal', 0)->toArray())[0]['link_img'];
+                } else {
+                    $getImages = array_values(ProdutoImagens::all()->where('id_produto', $item['id_produto'])
                     ->where('img_principal', 1)->toArray())[0]['link_img'];
+                }
                 array_push($arrayImages, $getImages);
             }
 

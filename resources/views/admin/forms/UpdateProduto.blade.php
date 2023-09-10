@@ -49,11 +49,12 @@
                     <input type="text" data-js="number" value="{{ $item['quantidade'] }}" name="quantidade"
                         class="input-field" placeholder="Qtd 0.">
 
+                    <p style="color: red">Para mudar a categoria, por favor, crie um novo produto!</p>
                     @if (!empty($categorias))
                         <label class="label-field">Categoria</label>
-                        <select class="select-field" name="categoria" id="selectCategoria">
+                        <select class="select-field" name="categoria" id="selectCategoria" disabled>
                             @foreach ($categorias as $itemC)
-                                <option value="{{ $itemC['id_categoria'] }}">{{ $itemC['categoria'] }}</option>
+                                <option value="{{ $item['categoria'] }}">{{ $item['categoria'] }}</option>
                             @endforeach
                         </select>
                     @endif
@@ -137,19 +138,19 @@
                         @if ($item['categoria'] === 'Monitor')
                             <div class="box-inputs options" id="boxMonitor">
                                 <label class="label-field">Tipo de áudio
-                                    <input type="text" data-js="text" name="tipo_audio[]" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['tipo_audio'] }}" name="tipo_audio" class="input-field"
                                         placeholder="Áudio">
                                 </label>
                                 <label class="label-field">Tipo de Tela
-                                    <input type="text" data-js="text" name="tipo_tela" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['tipo_tela'] }}" name="tipo_tela" class="input-field"
                                         placeholder="Tela">
                                 </label>
                                 <label class="label-field">Resolução
-                                    <input type="text" data-js="text" name="resolucao" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['resolucao'] }}" name="resolucao" class="input-field"
                                         placeholder="Resolução">
                                 </label>
                                 <label class="label-field">Frequência
-                                    <input type="text" data-js="text" name="frequencia" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['frequencia'] }}" name="frequencia" class="input-field"
                                         placeholder="Resolução">
                                 </label>
                             </div>
@@ -159,15 +160,15 @@
                         @if ($item['categoria'] === 'Headset')
                             <div class="box-inputs options" id="boxAudio">
                                 <label class="label-field">Tipo de áudio
-                                    <input type="text" data-js="text" name="tipo_audio[]" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['tipo_audio'] }}" name="tipo_audio" class="input-field"
                                         placeholder="Áudio">
                                 </label>
                                 <label class="label-field">Microfone
-                                    <input type="text" data-js="text" name="microfone" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['microfone'] }}" name="microfone" class="input-field"
                                         placeholder="Microfone">
                                 </label>
                                 <label class="label-field">Tecnologia
-                                    <input type="text" data-js="text" name="tecnologia" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['tecnologia'] }}" name="tecnologia" class="input-field"
                                         placeholder="Tecnologia">
                                 </label>
                             </div>
@@ -176,7 +177,7 @@
                         @if ($item['categoria'] === 'Teclado')
                             <div class="box-inputs options" id="boxTeclado">
                                 <label class="label-field">Tipo de Teclado
-                                    <input type="text" data-js="text" name="tipo_teclado" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['tipo_teclado'] ? $item['tipo_teclado'] : '' }}" name="tipo_teclado" class="input-field"
                                         placeholder="Tipo">
                                 </label>
                             </div>
@@ -186,7 +187,7 @@
                         @if ($item['categoria'] === 'Mouse')
                             <div class="box-inputs options" id="boxMouse">
                                 <label class="label-field">DPI
-                                    <input type="text" data-js="text" name="dpi" class="input-field"
+                                    <input type="text" data-js="text" value="{{ $item['dpi'] }}" name="dpi" class="input-field"
                                         placeholder="DPI">
                                 </label>
                             </div>
