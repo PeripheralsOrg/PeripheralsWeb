@@ -57,6 +57,7 @@
 
                 <label class="label-field">Categoria</label>
                 <select class="select-field" name="categoria" id="selectCategoria">
+                    <option value="change" selected>Selecionar</option>
                     @foreach ($categorias as $item)
                         <option value="{{$item['id_categoria']}}">{{$item['categoria']}}</option>
                     @endforeach

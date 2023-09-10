@@ -39,9 +39,9 @@ class BannerController extends Controller
         $imageMedium = $request->file('link_carrosselMedium');
         $imageTiny = $request->file('link_carrosselTiny');
 
-        $checkBannerBig = (new BannerController())->checkImage($image, 'big');
-        $checkBannerMedium = (new BannerController())->checkImage($imageMedium, 'medium');
-        $checkBannerTiny = (new BannerController())->checkImage($imageTiny, 'tiny');
+        $checkBannerBig = (new BannerController())->checkImage($image, 'big', $request->nome_banner);
+        $checkBannerMedium = (new BannerController())->checkImage($imageMedium, 'medium', $request->nome_banner);
+        $checkBannerTiny = (new BannerController())->checkImage($imageTiny, 'tiny', $request->nome_banner);
 
         $bannerC = $banner->create([
             'nome_banner' => $request->nome_banner,
@@ -58,14 +58,14 @@ class BannerController extends Controller
             // Monitoramento log
             $userLogEmail = array_values(Session::get('user'))[0]['email'];
             LogController::writeFile($userLogEmail, 'Registrou um novo Banner', 'Banners');
-            
+
             return redirect()->route('page-listCarrossel')->withErrors('Banner criado com sucesso!');
         }
 
         return back()->withErrors('Houve um erro ao cadastrar o banner');
     }
 
-    private function checkImage($image, $type)
+    private function checkImage($image, $type, $nome)
     {
         $request = new Request();
         if ($image->getMimeType() == 'image/png' || 'image/jpeg' || 'image/webp' || 'image/jpg') {
@@ -77,14 +77,14 @@ class BannerController extends Controller
                 return back()->withErrors('O arquivo é grande demais');
             }
 
-            if($type == 'big'){
-                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '.webp';
+            if ($type == 'big') {
+                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $nome . rand(0, 99) . '.webp';
                 $imageConvert = Image::make($image)->encode('webp')->getEncoded();
-            }else if($type == 'medium'){
-                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '-'. 'medium' . '.webp';
+            } else if ($type == 'medium') {
+                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $nome . rand(0, 99) . '-' . 'medium' . '.webp';
                 $imageConvert = Image::make($image)->encode('webp')->getEncoded();
-            }else{
-                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $request->input('nome_banner') . '-' . 'tiny' . '.webp';
+            } else {
+                $imageName = str_replace('/', '-', $image->getMimeType()) . '-' . $nome . rand(0, 99) . '-' . 'tiny' . '.webp';
                 $imageConvert = Image::make($image)->encode('webp')->getEncoded();
             }
 
@@ -147,9 +147,9 @@ class BannerController extends Controller
         $imageMedium = $request->file('link_carrosselMedium');
         $imageTiny = $request->file('link_carrosselTiny');
 
-        $checkBannerBig = (new BannerController())->checkImage($image, 'big');
-        $checkBannerMedium = (new BannerController())->checkImage($imageMedium, 'medium');
-        $checkBannerTiny = (new BannerController())->checkImage($imageTiny, 'tiny');
+        $checkBannerBig = (new BannerController())->checkImage($image, 'big', $request->nome_banner);
+        $checkBannerMedium = (new BannerController())->checkImage($imageMedium, 'medium', $request->nome_banner);
+        $checkBannerTiny = (new BannerController())->checkImage($imageTiny, 'tiny', $request->nome_banner);
 
         $bannerValues = [
             'nome_banner' => $request->nome_banner,
