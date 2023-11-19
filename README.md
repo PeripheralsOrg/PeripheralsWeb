@@ -22,12 +22,12 @@ O projeto "Peripherals" é um e-commerce de periféricos para PC desenvolvido co
 
 ## Equipe
 
-Samuel Freitas (Front-end e Designer): https://www.linkedin.com/in/samuel-freitas-02ba27226/ <br>
-Thiago Inácio (Front-end e Designer): https://www.linkedin.com/in/thiago-inacio-473083269/ <br>
-Sophia Vieira (Front-End): https://www.linkedin.com/in/sophia-santos-16a031269/ <br>
-Giovanna Capozzoli (Gerente e Documentadora): https://www.linkedin.com/in/giovanna-capozzoli-martins-a6474721a/ <br>
-Kathleen Gomes (Documentadora): https://www.linkedin.com/in/kathleen-oliveira-55818026a/ <br>
-Davi Moreira (Back-End e DBA): https://www.linkedin.com/in/davimoreiraprogrammer/ <br>
+**Samuel Freitas (Front-end e Designer)**: https://www.linkedin.com/in/samuel-freitas-02ba27226/ <br>
+**Thiago Inácio (Front-end e Designer)**: https://www.linkedin.com/in/thiago-inacio-473083269/ <br>
+**Sophia Vieira (Front-End)**: https://www.linkedin.com/in/sophia-santos-16a031269/ <br>
+**Giovanna Capozzoli (Gerente e Documentadora)**: https://www.linkedin.com/in/giovanna-capozzoli-martins-a6474721a/ <br>
+**Kathleen Gomes (Documentadora)**: https://www.linkedin.com/in/kathleen-oliveira-55818026a/ <br>
+**Davi Moreira (Back-End e DBA)**: https://www.linkedin.com/in/davimoreiraprogrammer/ <br>
 
 
 # Script criação de usuários
