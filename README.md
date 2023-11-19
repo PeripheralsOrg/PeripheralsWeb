@@ -14,10 +14,17 @@ Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos
 
 
 
+<br<
+
+<br<
 ## Info
 
 O projeto "Peripherals" é um e-commerce de periféricos para PC desenvolvido como TCC na ETEC Jornalista Roberto Marinho. Utilizando Laravel como linguagem principal, a aplicação integra MySQL e JavaScript. Os designs foram concebidos com Figma, Photoshop e Adobe XD, proporcionando uma experiência visualmente cativante e funcional.  <br>
 
+
+
+<br<
+<br<
 
 
 ## Equipe
@@ -30,7 +37,10 @@ O projeto "Peripherals" é um e-commerce de periféricos para PC desenvolvido co
 **Davi Moreira (Back-End e DBA)**: https://www.linkedin.com/in/davimoreiraprogrammer/ <br>
 
 
-# Script criação de usuários
+<br<
+<br<
+
+## Script criação de usuários
 
 Usuário: NaoApague <br>
 Email: admin@admin.com <br>
