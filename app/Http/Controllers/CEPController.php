@@ -47,7 +47,11 @@ class CEPController extends Controller
         $data = simplexml_load_string($data);
 
         $json = json_encode($data);
-        $array = json_decode($json, TRUE)['cServico'];
+        if ($json == 'false') {
+            return false;
+        } else {
+            $array = json_decode($json, TRUE)['cServico'];
+        }
 
         if ($array['Erro'] == "0") {
             $this->response['codigo'] = $array['Codigo'];

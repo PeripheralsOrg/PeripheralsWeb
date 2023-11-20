@@ -69,22 +69,32 @@
                     <div class="wrapper">
                         <div class="project">
                             <div class="shop">
-                                @foreach ($getPedidos as $item)
-                                <h2 class="definition-product">{{$getStatusVenda[$item['id_venda_status']]['status_venda']}}</h2>
-                                    <div class="box-order">
-                                        <div class="content">
-                                            <p class="marca">
-                                                {{ Carbon\Carbon::parse($item['created_at'])->format('d/m/Y h:i:s') }}</p>
-                                            <p class="product-title">{{ $item['quantidade_items'] }} Itens Comprados</p>
-                                            <p class="valor">R$ {{ $item['valor_total'] }}</p>
-                                            <p class="valor">R$ {{ $item['frete'] }}</p>
-                                            <p class="unit"><a
-                                                    href="{{ route('pedido-detailsCliente', $item['id_venda']) }}">Ver
-                                                    detalhes</a></p>
+                                @if (empty($getPedidos))
+                                <h1>Nenhum pedido efetuado!</h1>
+                                @else
+                                    @foreach ($getPedidos as $item)
+                                        <h2 class="definition-product">
+                                            {{ $getStatusVenda[$item['id_venda_status']]['status_venda'] }}</h2>
+                                        <div class="box-order">
+                                            <div class="content">
+                                                <p class="marca">
+                                                    {{ Carbon\Carbon::parse($item['created_at'])->format('d/m/Y h:i:s') }}
+                                                </p>
+                                                <p class="product-title">{{ $item['quantidade_items'] }} Itens Comprados
+                                                </p>
+                                                <p class="valor">
+                                                    {{ NumberFormatter::create('pt_BR', NumberFormatter::CURRENCY)->formatCurrency($item['valor_total'], 'BRL') }}
+                                                </p>
+                                                <p class="valor">
+                                                    {{ NumberFormatter::create('pt_BR', NumberFormatter::CURRENCY)->formatCurrency($item['frete'], 'BRL') }}
+                                                </p>
+                                                <p class="unit"><a
+                                                        href="{{ route('pedido-detailsCliente', $item['id_venda']) }}">Ver
+                                                        detalhes</a></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

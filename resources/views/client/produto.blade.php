@@ -59,12 +59,12 @@
 
                     <div class="product-price">
                         @if ($item['is_promocao'] == 1)
-                            <p class="last-price"><span>R$257,00</span></p>
+                            <p class="last-price">Preço antigo: <span>R$ 257,00</span></p>
                         @endif
 
-                        <p class="new-price"><span>R$ {{ $item['preco'] }}</span></p>
-                        <p class="parcellate"><span>em 12x de R$ {{ round($item['preco'] / 12) }}</span></p>
-                        <div class="calculate">
+                        <p class="new-price" style="color: var(--vermelho);">{{ (NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($item['preco'], 'Dolar')}}</p>
+                        <p class="parcellate">Em 12x de R$ {{ round(($item['preco'] / 12), 2) }}</p>
+                        {{-- <div class="calculate">
                             <p>Calcular frete de entrega</p>
                             <div class="box-cepEntrega">
                                 <i class="fas fa-truck-moving"></i>
@@ -72,13 +72,13 @@
                                 <input type="hidden" name="valueFrete" id="valueFreteInput" value="{{ csrf_token() }}">
                                 <button type="button" class="btn-consultar button-cep-calc"> Consultar </button>
                             </div>
-                        </div>
-                    </div>  
+                        </div> --}}
+                    </div> 
 
                     <form class="product-detail" action="{{ route('carrinho-insert', $item['id_produtos']) }}"
                         method="GET">
                         <h2>Detalhes: </h2>
-                        <p>{{ $item['descricao'] }}</p>
+                        <p class="desc-prod">{{ $item['descricao'] }}</p>
                         <div class="row-specialInfo">
                             @foreach ($marcas as $itemMarcas)
                                 <p><span class="special-info">Marca:</span> {{ $itemMarcas['nome'] }}</p>
