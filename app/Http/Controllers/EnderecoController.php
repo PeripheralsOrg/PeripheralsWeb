@@ -15,6 +15,7 @@ use DragonCode\Contracts\Cashier\Config\Payment as ConfigPayment;
 use Faker\Provider\pt_BR\Payment;
 use Illuminate\Support\Facades\Auth;
 use LaravelLang\Lang\Plugins\Spark\Paddle;
+use NumberFormatter;
 
 class EnderecoController extends Controller
 {
@@ -96,7 +97,7 @@ class EnderecoController extends Controller
 
 
         if(!$getFrete){
-            return redirect()->back()->withErrors('Por favor, selecione outro endereço!');
+            return redirect()->back()->withErrors('Devido a políticas dos Correios, por favor, selecione outro endereço!');
         }
 
         // Informações Pedido
@@ -272,3 +273,5 @@ class EnderecoController extends Controller
         return redirect('list-meusEnderecos')->withErrors('Não foi possível deletar o endereço!');
     }
 }
+
+

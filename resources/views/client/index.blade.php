@@ -157,15 +157,15 @@
                     <div class="content">
                         <span>Novo Headset</span>
                         <h3>Gamer</h3>
-                        <a href="#" class="btn">Confira</a>
+                        <a href="{{route('produtoCategoria-maxValue', 'Headset')}}" class="btn">Confira</a>
                     </div>
                 </div>
                 <div class="banner">
-                    <img src="{{ asset('images/JFC172_01.jpg') }}" alt="">
+                    <img src="{{ asset('images/Teclado-homepage.jpg') }}" alt="">
                     <div class="content">
                         <span>Novo Teclado</span>
                         <h3>Gamer</h3>
-                        <a href="#" class="btn">Confira</a>
+                        <a href="{{route('produtoCategoria-maxValue', 'Teclado')}}" class="btn">Confira</a>
                     </div>
                 </div>
             </div>
@@ -240,10 +240,10 @@
                     <img src="{{ asset('images/quartz 02.webp') }}" alt="">
                 </div>
                 <div class="content">
-                    <span>corra</span>
-                    <h3>50% 0ff</h3>
+                    <span>Corra</span>
+                    <h3>Até 50% 0ff</h3>
                     <p>oferta imperdivel</p>
-                    <a href="#" class="btn-ad">Visualizar oferta</a>
+                    <a href="{{ route('produtoOfertas-pesquisaAll') }}" class="btn-ad">Visualizar oferta</a>
                 </div>
                 <div class="women">
                     <img src="{{ asset('images/women.png') }}" alt="">

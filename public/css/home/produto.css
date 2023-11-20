@@ -139,19 +139,19 @@ img {
     font-size: 1rem;
 }
 
-.product-price span {
-    font-weight: 400;
-}
-
 .last-price span {
     color: var(--cinza-fundo);
     text-decoration: line-through;
+    font-size: 1rem;
 }
 
-.new-price span {
-    font-size: 2rem;
-    color: var(--preto);
-    margin: -2px;
+.desc-prod {
+    font-size: 1rem !important;
+}
+
+.list-infoProd li,
+.list-infoProd span {
+    font-size: 14px !important;
 }
 
 .product-detail h2 {

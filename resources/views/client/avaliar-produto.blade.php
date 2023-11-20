@@ -14,7 +14,7 @@
                         <h2 id="nomeProd">{{$item['nome']}}</h2>
                         <h3 id="marcaProd">{{$item['marca']}}</h3>
                         <h3 id="marcaProd">{{$item['modelo']}}</h3>
-                        <h3 class="valor">R$ {{$item['preco']}}</h3>
+                        <h3 class="valor">{{(NumberFormatter::create('pt_BR',  NumberFormatter::CURRENCY))->formatCurrency($item['preco'], 'BRL')}}</h3>
                     </div>
                 </div>
             @endforeach

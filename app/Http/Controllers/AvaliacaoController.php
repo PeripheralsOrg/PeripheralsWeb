@@ -29,8 +29,12 @@ class AvaliacaoController extends Controller
             return view('admin.list.listComentarios')->with([
                 'avaliacoes' => $avaliacoes,
             ]);
+        } else {
+            $erro = 'Nenhuma avaliação encontrada!';
+            return view('admin.list.listComentarios')->with([
+                'erro' => $erro,
+            ]);
         }
-        return redirect()->back()->withErrors('Ocorreu um erro ao avaliar o produto!');
     }
 
 

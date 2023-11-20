@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo-peripherals.jpeg') }}">
-    
+
     {{-- Scripts e Stylesheet nativos --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css') }}/@yield('css').css">
     <script defer src="{{ asset('js') }}/@yield('js').js"></script>
@@ -61,8 +61,8 @@
 
         <div class="box-icons" id="box-icons">
             <!-- colocar função da caixa de pesquisa -->
-            <button class="btnPesquisa" id="btnNavPesquisa" onclick="openSearchNav()"><img src="{{asset('images/icons-branco/lupa.svg')}}"
-                    alt="Ícone de Pesquisa"></button>
+            <button class="btnPesquisa" id="btnNavPesquisa" onclick="openSearchNav()"><img
+                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
             {{-- <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
                     src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button> --}}
@@ -88,12 +88,13 @@
                     alt="Ícone do Carrinho de Compras"></a>
         </div>
         <div class="box-search" id="box-search">
-            <form action="{{route('produtoSearch-client')}}">
-                <input type="text" id="inputPesquisaNav" name="searchBar" class="inputPesquisa" placeholder="Pesquisar">
+            <form action="{{ route('produtoSearch-client') }}">
+                <input type="text" id="inputPesquisaNav" name="searchBar" class="inputPesquisa"
+                    placeholder="Pesquisar">
                 <input type="submit" value="">
             </form>
             <button id="btnFecharPesquisaNav" class="btnFecharPesquisa" onclick="closeSearchNav()"><img
-                    src="{{asset('images/letra-x.png')}}" alt="Ícone de Fechar"></button>
+                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
         </div>
     </header>
 
@@ -114,15 +115,16 @@
 
         <!-- Tá sem a função da caixa de pesquisa -->
         <div class="mobile-menu">
-            <button id="btnPesquisaMB" class="btnPesquisaMB" onclick="openSearchMob()"><img src="{{asset('images/icons-branco/lupa.svg')}}"
-                    alt="Ícone de Pesquisa"></button>
+            <button id="btnPesquisaMB" class="btnPesquisaMB" onclick="openSearchMob()"><img
+                    src="{{ asset('images/icons-branco/lupa.svg') }}" alt="Ícone de Pesquisa"></button>
 
-            <form action="{{route('produtoSearch-client')}}">
-                <input type="text" name="searchBar" id="inputPesquisa" class="inputPesquisa" placeholder="Pesquisar">
+            <form action="{{ route('produtoSearch-client') }}">
+                <input type="text" name="searchBar" id="inputPesquisa" class="inputPesquisa"
+                    placeholder="Pesquisar">
             </form>
 
             <button id="btnFecharPesquisa" class="btnFecharPesquisa" onclick="closeSearchMob()"><img
-                    src="{{asset('images/letra-x.png')}}" alt="Ícone de Fechar"></button>
+                    src="{{ asset('images/letra-x.png') }}" alt="Ícone de Fechar"></button>
         </div>
 
         <div class="boxAbertaNav">
@@ -211,6 +213,17 @@
             <p>Copyright &copy; 2022 All right reserved | This model is made by JRM</p>
         </div>
     </footer>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 <script src="{{ asset('js/home/client.js') }}"></script>
 <script src="{{ asset('js/home/swiper-bundle.min.js') }}"></script>
