@@ -107,9 +107,9 @@
                                         <h4 id="marcaProd">{{ $itemMarca['nome'] }}</h4>
                                     @endforeach
                                     <!-- Valor -->
-                                    <h4 class="valor">R$ {{ $listProdutos[$i - 1]['preco'] }}</h4>
+                                    <h4 class="valor">Valor: {{(NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($listProdutos[$i - 1]['preco'], 'USD')}}</h4>
                                     <!-- Subtotal -->
-                                    <p class="sub">Subtotal: R$ {{ $item['valor_total'] }}</p>
+                                    <p class="sub">Total Produtos: {{(NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($item['valor_total'], 'USD')}}</p>
                                 </div>
 
                             </div>
@@ -129,12 +129,19 @@
             <!-- Right-bar -->
             <form class="right-bar" action="{{route('processa-venda')}}">
                 @foreach ($carrinho as $item)
-                    <p><span>Frete</span> <span>R$ {{ $getFrete['valor'] }}</span></p>
-                    <p><span>Prazo de Entrega</span> <span>{{ $getFrete['prazo'] }} Dia(s)</span></p>
+                    <p><span>Frete</span> <span>{{ (NumberFormatter::create('en', NumberFormatter::CURRENCY))->formatCurrency($getFreteValor, 'USD') }}</span></p>
+                    <p><span>Prazo de Entrega</span> <span>{{ $getFretePrazo }} Dia(s)</span></p>
                     <p><span>Cupom</span> <span>R$ {{$descontoTotal}}</span></p>
                     <p><span>Subtotal</span> <span>R$ {{ $item['valor_total'] }}</span></p>
                     <hr>
                     <p><span>Total</span> <span>R$ {{ $item['valor_total'] }}</span></p>
+                    
+                    <p><span>Frete</span> <span>{{(NumberFormatter::create('en', NumberFormatter::CURRENCY))->formatCurrency($getFreteValor, 'USD')}}</span></p>
+                    <p><span>Prazo de Entrega</span> <span>{{ $getFretePrazo }} Dia(s)</span></p>
+                    <p><span>Cupom</span> <span>{{(NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($descontoTotal, 'USD')}}</span></p>
+                    <p><span>Subtotal</span> <span>{{(NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($item['valor_total'], 'USD')}}</span></p>
+                    <hr>
+                    <p><span>Total</span> <span>{{(NumberFormatter::create('en',  NumberFormatter::CURRENCY))->formatCurrency($valorTotal, 'USD')}}</span></p>
                     <input type="hidden" name="idCarrinho" value="{{$idCarrinho}}">
                     <input type="hidden" name="checkoutLink" value="{{$payLink}}">
                     <input type="hidden" name="idEndereco" value="{{$idEndereco}}">
@@ -142,7 +149,6 @@
                     <button id="endCompra">Finalizar Compra</button>
                 @endforeach
 
-            </form>
         @endif
         <!-- Right_end -->
     </section>

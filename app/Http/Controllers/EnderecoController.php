@@ -96,7 +96,7 @@ class EnderecoController extends Controller
         $idUser = $request->session()->get('user')['id'];
 
 
-        if(!$getFrete){
+        if (!$getFrete) {
             return redirect()->back()->withErrors('Devido a políticas dos Correios, por favor, selecione outro endereço!');
         }
 
@@ -132,33 +132,46 @@ class EnderecoController extends Controller
 
         foreach ($carrinhoItens as $item) {
             $getImages = array_values(ProdutoImagens::all()->where('id_produto', $item['id_produto'])
-                ->where('img_principal', 1)->toArray())[0]['link_img'];
+            ->where('img_principal', 1)->toArray())[0]['link_img'];
             array_push($arrayImages, $getImages);
         }
 
-        $valorTotal = floatval(array_values($carrinho)[0]['valor_total']);
+        $valorTotal = floatval(array_values($carrinho)[0]['valor_total']) + floatval($getFrete['valor']);
+        // dd($valorTotal);
         $quantidade = array_values($carrinho)[0]['quant_items'];
         $descontoTotal = array_values($carrinho)[0]['valor_desconto'];
         $idEndereco = array_values($getEndereco)[0]['id_endereco'];
 
-        $cartProdutos = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+        $cartProdutos = ProdutoCarrinho::with('produto')->where('id_carrinho', $idCarrinho)->whereHas('produto')->get()->pluck('produto')->toArray();
+
         $listProdutos = array_flatten($cartProdutos);
 
 
         foreach ($listProdutos as $produtoFor) {
             if ($this->finalMessage !== '') {
                 $this->finalMessage = $this->finalMessage . '/' . $produtoFor['nome'];
+                if (strlen($this->finalMessage) > 199) {
+                    break;
+                }
             } else {
                 $this->finalMessage = $produtoFor['nome'];
             }
         }
+        $numberToDelete = strlen($this->finalMessage) - 200;
+
+        $this->finalMessage = substr($this->finalMessage, $numberToDelete);
+        // dd($this->finalMessage);
+
+        // dd(strlen($this->finalMessage));
 
 
         $checkVendaT = VendaTemporary::all()->where('id_carrinho', $idCarrinho)->where('id_endereco', $idEndereco)->toArray();
 
+        // dd(Auth::user()->charge());
+
         if (count($checkVendaT) > 0) {
             $payLink = Auth::user()->charge($valorTotal, $this->finalMessage, [
-                'webhook_url' => env('APP_URL') . '/venda/sucesso',
+                // 'webhook_url' => env('APP_URL') . '/venda/sucesso',
                 'custom_message' => $this->finalMessage,
                 'quantity_variable' => 0,
                 'passthrough' => [
@@ -181,25 +194,30 @@ class EnderecoController extends Controller
                 $descontoTotal
             );
 
+            $idVendaTemporary = $createTemporary;
+
             $payLink = Auth::user()->charge($valorTotal, $this->finalMessage, [
-                'webhook_url' => env('APP_URL') . '/venda/sucesso',
+                // 'webhook_url' => env('APP_URL') . '/venda/sucesso',
                 'custom_message' => $this->finalMessage,
                 'quantity_variable' => 0,
                 'passthrough' => [
                     "idCarrinho" => $idCarrinho,
-                    "idVendaT" => $createTemporary
+                    "idVendaT" => $idVendaTemporary
                 ],
                 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
-
-            $idVendaTemporary = $createTemporary;
         }
 
+        $getFreteValor = floatval($getFrete['valor']);
+        $getFretePrazo = $getFrete['prazo'];
+        $valorTotal = floatval($valorTotal);
 
         if ($getFrete) {
             return view('client.finalizar-pagamento')->with([
-                'getFrete' => $getFrete,
+                'getFreteValor' => $getFreteValor,
+                'getFretePrazo' => $getFretePrazo,
                 'getEndereco' => $getEndereco,
+                'valorTotal' => $valorTotal,
                 'carrinho' => $carrinho,
                 'carrinhoItens' => $carrinhoItens,
                 'arrayImages' => $arrayImages,
