@@ -16,7 +16,32 @@ Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos
 
 ## Info
 
+<<<<<<< dev
+Usuário: NaoApague <br>
+Email: admin@admin.com <br>
+Senha: Gizona123@ <br>
 
+INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
+
+# Inserir ao passar para a nova hospedagem
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Pendente', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Processamento', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Confirmada', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Em Preparação', NOW(), NOW());
+
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Enviada', NOW(), NOW());
+=======
+O projeto "Peripherals" é um e-commerce de periféricos para PC desenvolvido como TCC na ETEC Jornalista Roberto Marinho. Utilizando Laravel como linguagem principal, a aplicação integra MySQL e JavaScript. Os designs foram concebidos com Figma, Photoshop e Adobe XD, proporcionando uma experiência visualmente cativante e funcional.  <br>
+>>>>>>> dev
 
 <br>
 
@@ -45,3 +70,6 @@ Usuário: Davi <br>
 Email: Davi@adm.com <br>
 Senha: Sardinha@123 <br>
 
+INSERT INTO users_venda_status (status_venda, created_at, updated_at)
+VALUES ('Concluído', NOW(), NOW());
+INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$9B3KgKtg3YpK4cwBibyKlu6APqkgpu8h/LeCQHvwhLf194Zmw25..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
