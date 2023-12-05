@@ -134,6 +134,11 @@ label textarea {
     gap: 1rem;
 }
 
+.box-img h3 {
+    max-width: 100%;
+    word-break: break-all;
+}
+
 form .box-img img {
     width: 200px;
 }

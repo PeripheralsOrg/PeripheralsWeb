@@ -84,7 +84,7 @@
             </thead>
             <!-- Corpo_da_tabela -->
             <tbody>
-                @if (count($getVenda) > 0)
+                @if (isset($getVenda) && count($getVenda) > 0)
                     @foreach ($getVenda as $item)
                         <tr>
                             <!-- Conteúdo_da_tabela -->

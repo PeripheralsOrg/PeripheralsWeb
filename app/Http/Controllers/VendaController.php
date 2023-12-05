@@ -142,9 +142,9 @@ class VendaController extends Controller
 
         $produto = Produto::all()->where('id_produtos', array_values($carrinhoItens)[0]['id_produto'])->toArray();
 
-        $cart = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+        // $cart = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
 
-        $listProdutos = VendaController::flattenArray($cart);
+        // $listProdutos = VendaController::flattenArray($cart);
 
         $marca = Marcas::all()->where('id_marca', array_values($produto)[0]['id_marca'])->toArray();
         $inventario = array_values(ProdutoInventario::all()->where('id_inventario', array_values($produto)[0]['id_inventario'])->toArray())[0]['quantidade'];
@@ -157,8 +157,9 @@ class VendaController extends Controller
         }
 
 
-        $cartProdutos = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+        $cartProdutos = ProdutoCarrinho::with('produto')->where('id_carrinho', $idCarrinho)->whereHas('produto')->get()->pluck('produto')->toArray();
         $listProdutos = VendaController::flattenArray($cartProdutos);
+        // dd($listProdutos);
 
 
 
@@ -219,9 +220,9 @@ class VendaController extends Controller
 
         $produto = Produto::all()->where('id_produtos', array_values($carrinhoItens)[0]['id_produto'])->toArray();
 
-        $cart = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+        // $cart = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
 
-        $listProdutos = VendaController::flattenArray($cart);
+        // $listProdutos = VendaController::flattenArray($cart);
 
         $marca = Marcas::all()->where('id_marca', array_values($produto)[0]['id_marca'])->toArray();
         $inventario = array_values(ProdutoInventario::all()->where('id_inventario', array_values($produto)[0]['id_inventario'])->toArray())[0]['quantidade'];
@@ -234,8 +235,9 @@ class VendaController extends Controller
         }
 
 
-        $cartProdutos = ProdutoCarrinho::with('produto')->whereHas('produto')->get()->pluck('produto')->toArray();
+        $cartProdutos = ProdutoCarrinho::with('produto')->where('id_carrinho', $idCarrinho)->whereHas('produto')->get()->pluck('produto')->toArray();
         $listProdutos = VendaController::flattenArray($cartProdutos);
+        // dd($listProdutos);
 
 
 

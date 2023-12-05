@@ -11,6 +11,7 @@ class CEPController extends Controller
     private int $length = 20;
     private int $height = 20;
     private int $width = 20; //Min 10
+    private string $token = 'a168fc2b918340642281d1cf5550c18a62bf8472';
 
     public function __construct(
         private string $code, //41106 - PAC , 40010 - SEDEX
@@ -19,44 +20,31 @@ class CEPController extends Controller
         private array $response = [],
 
     ) {
-        $url = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx';
 
-        $params = [
-            'nCdEmpresa' => '',
-            'sDsSenha' => '',
-            'sCepOrigem' => $this->originZipCode,
-            'sCepDestino' => $this->destinationZipCode,
-            'nVlPeso' => $this->weight, //kg
-            'nCdFormato' => '1',  //1 para caixa / pacote e 2 para rolo/prisma.
-            'nVlComprimento' => $this->length,
-            'nVlAltura' => $this->height,
-            'nVlLargura' => $this->width,
-            'nVlDiametro' => '0',
-            'sCdMaoPropria' => 'n',
-            'nVlValorDeclarado' => '0',
-            'sCdAvisoRecebimento' => 'n',
-            'StrRetorno' => 'xml',
-            'nCdServico' =>  $this->code,
-        ];
 
-        $params = http_build_query($params);
+        $cepOrigem = $this->originZipCode;
+        $pesoEnc = $this->weight;
+        $alturaEnc = $this->height;
+        $larguraEnc = $this->length;
+        $compEnc = $this->width;
+        $tokenApp = $this->token;
+        $cepDestino = $this->destinationZipCode;
 
-        $curl = curl_init($url . '?' . $params);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $data = curl_exec($curl);
-        $data = simplexml_load_string($data);
+        $jsonUrl = "https://cepcerto.com/ws/json-frete/$cepOrigem/$cepDestino/$pesoEnc/$alturaEnc/$larguraEnc/$compEnc/$tokenApp";
 
-        $json = json_encode($data);
-        if ($json == 'false') {
-            return false;
+
+        $jsonContent = file_get_contents($jsonUrl);
+
+        if ($jsonContent !== false) {
+            // Parse the JSON content
+            $jsonData = json_decode($jsonContent, true);
+            // dd($jsonData);
+// dd($jsonData);
+            $this->response['value'] = $jsonData['valorsedex'];
+            $this->response['deadline'] = $jsonData['prazosedex'];
+
         } else {
-            $array = json_decode($json, TRUE)['cServico'];
-        }
-
-        if ($array['Erro'] == "0") {
-            $this->response['codigo'] = $array['Codigo'];
-            $this->response['value'] = $array['Valor'];
-            $this->response['deadline'] = $array['PrazoEntrega'];
+            return false;
         }
     }
 
@@ -66,12 +54,11 @@ class CEPController extends Controller
             return [
                 'valor' => $this->response['value'],
                 'prazo' => $this->response['deadline']
-            ];  
-        }else{
+            ];
+        } else {
             return false;
         }
     }
-
 }
 
 // $getFrete[] = (new CEPController('40010', $_GET['cep'], 5))->getInfo();

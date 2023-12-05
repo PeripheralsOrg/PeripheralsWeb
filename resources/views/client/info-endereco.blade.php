@@ -105,7 +105,7 @@
                 </div>
                 <div class="box-input">
                     <label class="label-field">Complemento</label>
-                    <input type="text" name="complemento" data-js="text" required class="input-field"
+                    <input type="text" name="complemento" data-js="text" class="input-field"
                         placeholder="Complemento" value="" id="complemento">
                 </div>
             </div>
@@ -124,7 +124,7 @@
             </div>
 
             <label class="label-field">Ponto de Referência</label>
-            <input required type="text" name="ponto_ref" data-js="text" required class="input-field"
+            <input required type="text" name="ponto_ref" data-js="text" class="input-field"
                 placeholder="Ponto de Referência" value="">
 
 

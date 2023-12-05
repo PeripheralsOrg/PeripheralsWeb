@@ -16,7 +16,7 @@ Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos
 
 ## Info
 
-O projeto "Peripherals" é um e-commerce de periféricos para PC desenvolvido como TCC na ETEC Jornalista Roberto Marinho. Utilizando Laravel como linguagem principal, a aplicação integra MySQL e JavaScript. Os designs foram concebidos com Figma, Photoshop e Adobe XD, proporcionando uma experiência visualmente cativante e funcional.  <br>
+
 
 <br>
 
@@ -45,4 +45,3 @@ Usuário: Davi <br>
 Email: Davi@adm.com <br>
 Senha: Sardinha@123 <br>
 
-INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$9B3KgKtg3YpK4cwBibyKlu6APqkgpu8h/LeCQHvwhLf194Zmw25..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 

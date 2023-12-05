@@ -95,7 +95,7 @@ class ProdutoController extends Controller
 
     public function register(Request $request)
     {
-        
+
         $validate = $request->validate([
             'codigo' => ['required', Rule::unique('users_detalhes_produto', 'codigo')],
             'nome' => ['required'],
@@ -115,7 +115,7 @@ class ProdutoController extends Controller
             'imagem_principal' => ['required', 'mimes:jpeg,png,jpg,gif,webp']
         ]);
 
-        if($request->input('categoria') == 'change'){
+        if ($request->input('categoria') == 'change') {
             return redirect()->back()->withErrors('Selecione uma categoria!');
         }
 
@@ -215,9 +215,9 @@ class ProdutoController extends Controller
             // Monitoramento log
             $userLogEmail = array_values(Session::get('user'))[0]['email'];
             LogController::writeFile($userLogEmail, 'Registrou um novo produto', 'Produto');
-            
+
             return redirect()->route('page-listProdutos');
-        }else{
+        } else {
             ProdutoController::errorImageDelete(intval($detalhesProduto), intval($inventarioProduto), intval($produtoC));
             return redirect()->back()->withErrors('Ocorreu um erro ao inserir as informações do produto!');
         }
@@ -232,7 +232,8 @@ class ProdutoController extends Controller
         $deleteInvent->delete();
     }
 
-    public static function errorImageDelete($idDetalhes, $idInventario, $idProduto){
+    public static function errorImageDelete($idDetalhes, $idInventario, $idProduto)
+    {
         $deleteProduto = Produto::findOrFail($idProduto);
         $deleteProduto->delete();
 
@@ -280,7 +281,7 @@ class ProdutoController extends Controller
                 if ($file->getSize() > ProdutoController::MAXIMUM_SIZE) {
                     return back()->withErrors('O arquivo é grande demais');
                 }
-                $imageName = $categoria . '-' . $name . '-' . date('d-m-Y') . '-' . $number . '.' . 'webp';
+                $imageName = $categoria . '-' . $name . $number . '-' . date('d-m-Y') . 'webp';
 
                 $imageConvert = Image::make($file)->resize(1000, 1000)->encode('webp')->getEncoded();
 
@@ -317,7 +318,8 @@ class ProdutoController extends Controller
     public function getUpdate($id)
     {
         $produto = ProdutoView::all()->where('id_produtos', $id)->toArray();
-        $imgs = ProdutoImagens::all()->where('id_produto', $id)->toArray();
+        $imgs = ProdutoImagens::all()->where('id_produto', $id)->where('img_principal', 0)->toArray();
+        $imgPrincipal = ProdutoImagens::all()->where('id_produto', $id)->where('img_principal', 1)->toArray();
         $categorias = Categoria::all()->toArray();
         $marcas = Marcas::all()->where('status', 1)->toArray();
 
@@ -331,7 +333,9 @@ class ProdutoController extends Controller
                     'categorias' => $categorias,
                     'marcas' => $marcas,
                     'produto' => $produto,
-                    'imgs' => $imgs
+                    'imgs' => $imgs,
+                    'imgPrincipal' => $imgPrincipal
+
                 ]);
             }
 
@@ -361,9 +365,13 @@ class ProdutoController extends Controller
             'is_promocao' => ['required'],
             'status' => ['required'],
         ]);
-        $deleteImages = (new ProdutoImagensController())->deleteImage($request->input('delete_image')[0]);
 
+
+        $deleteImages = (new ProdutoImagensController())->deleteImage($request->input('delete_image')[0]);
         $imagemPrincipal = $request->file('imagem_principal') == false ? null : $request->file('imagem_principal');
+        $getPrincipalImage = (new ProdutoImagensController())->getPrincipalImage($id);
+
+
         $produtoModel = (new Produto())->all()->where('id_produtos', $id)->toQuery();
 
         $detalhesProduto = (new DetalhesProdutoController())->updateDetalhes(
@@ -407,7 +415,9 @@ class ProdutoController extends Controller
             return redirect()->back()->withErrors('Ocorreu um erro ao atualizar o inventário do produto!');
         }
 
-        if (!empty($imagemPrincipal)) {
+
+        if ($getPrincipalImage->isEmpty() && !empty($imagemPrincipal)) {
+
             $pathImageP = $this->storeImages($imagemPrincipal, $request->input('categoria'), $request->input('nome'));
             if (!$pathImageP) {
                 return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
@@ -422,13 +432,18 @@ class ProdutoController extends Controller
             );
         }
 
+        if (!$getPrincipalImage->isEmpty() && !empty($imagemPrincipal)) {
+            return redirect()->back()->withErrors('Delete a imagem principal para adicionar uma nova!');
+        }
+
+
         $pathNames = [];
         $sizeList = [];
         if (is_countable($request->file('link_img'))) {
             for ($i = 0; $i < count($request->file('link_img')); $i++) {
                 $imagemStore = $request->file('link_img')[$i];
                 $sizeList[$i] = $request->file('link_img')[$i]->getSize();
-                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, $i);
+                $pathNames[$i] = $this->storeImages($imagemStore, $request->input('categoria'), $request->input('nome'), true, rand(0, 1000));
                 if (!$pathNames[$i]) {
                     return redirect()->back()->withErrors('Ocorreu um erro ao realizar o upload da imagem!');
                 }
