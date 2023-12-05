@@ -12,73 +12,36 @@ No Peripherals, estamos constantemente atualizando nosso catálogo de produtos c
 
 Agradecemos por escolher o Peripherals como sua fonte confiável de periféricos de computador. Estamos ansiosos para ajudá-lo a encontrar o produto perfeito para suas necessidades.
 
+<br>
 
-# Script criação de usuários
+## Info
+
+
+
+<br>
+
+## Equipe
+
+**Samuel Freitas (Front-end e Designer)**: https://www.linkedin.com/in/samuel-freitas-02ba27226/ <br>
+**Thiago Inácio (Front-end e Designer)**: https://www.linkedin.com/in/thiago-inacio-473083269/ <br>
+**Sophia Vieira (Front-End)**: https://www.linkedin.com/in/sophia-santos-16a031269/ <br>
+**Giovanna Capozzoli (Gerente e Documentadora)**: https://www.linkedin.com/in/giovanna-capozzoli-martins-a6474721a/ <br>
+**Kathleen Gomes (Documentadora)**: https://www.linkedin.com/in/kathleen-oliveira-55818026a/ <br>
+**Davi Moreira (Back-End e DBA)**: https://www.linkedin.com/in/davimoreiraprogrammer/ <br>
+
+<br>
+
+## Script criação de usuários
 
 Usuário: NaoApague <br>
 Email: admin@admin.com <br>
 Senha: Gizona123@ <br>
 
-INSERT INTO adm_users(name, email, email_verified_at, password, poder, status, remember_token, created_at, updated_at) VALUES ('Davi', 'Davi@adm.com', NOW(), '$2a$10$LoHAi/KznFYQaTd3BQh/y.Uo3JLsJYa867V0a/e6COXg1Kxtn2c..', 9, 1, 'QDASDIAHU', NOW(), NOW()); 
+Usuário: Administrador <br>
+Email: admin@admin.com <br>
+Senha: Gizona123@ <br>
 
-# Inserir ao passar para a nova hospedagem
+Usuário: Davi <br>
+Email: Davi@adm.com <br>
+Senha: Sardinha@123 <br>
 
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Pendente', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Em Processamento', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Confirmada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Em Preparação', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Enviada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Entregue', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Cancelada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Devolvida', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Reembolsada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Aguardando Pagamento', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Pagamento Pendente', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Pagamento Recusada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Pagamento incompleto', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Pagamento Confirmado', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Em Espera', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Problema Identificado', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Aguardando Retirada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Entrega Atrasada', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Em Trânsito', NOW(), NOW());
-
-INSERT INTO users_venda_status (status_venda, created_at, updated_at)
-VALUES ('Concluído', NOW(), NOW());
