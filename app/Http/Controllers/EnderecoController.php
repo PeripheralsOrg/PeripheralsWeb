@@ -43,7 +43,7 @@ class EnderecoController extends Controller
             'numero' => ['required'],
             'estado' => ['required'],
             'cidade' => ['required'],
-            'ponto_ref' => ['required'],
+            'ponto_ref',
             'cep' => ['required'],
             'complemento',
 
@@ -130,6 +130,8 @@ class EnderecoController extends Controller
         $inventario = array_values(ProdutoInventario::all()->where('id_inventario', array_values($produto)[0]['id_inventario'])->toArray())[0]['quantidade'];
         $arrayImages = [];
 
+        
+
         foreach ($carrinhoItens as $item) {
             $getImages = array_values(ProdutoImagens::all()->where('id_produto', $item['id_produto'])
             ->where('img_principal', 1)->toArray())[0]['link_img'];
@@ -177,8 +179,8 @@ class EnderecoController extends Controller
                 'passthrough' => [
                     "idCarrinho" => $idCarrinho,
                     "idVendaT" => array_values($checkVendaT)[0]['id_temporary_venda']
-                ],
-                'data-success' => env('APP_URL') . '/venda/sucess'
+                ]
+                // 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
 
             $idVendaTemporary = array_values($checkVendaT)[0]['id_temporary_venda'];
@@ -203,8 +205,8 @@ class EnderecoController extends Controller
                 'passthrough' => [
                     "idCarrinho" => $idCarrinho,
                     "idVendaT" => $idVendaTemporary
-                ],
-                'data-success' => env('APP_URL') . '/venda/sucess'
+                ]
+                // 'data-success' => env('APP_URL') . '/venda/sucess'
             ]);
         }
 
@@ -245,7 +247,7 @@ class EnderecoController extends Controller
             'numero' => ['required'],
             'estado' => ['required'],
             'cidade' => ['required'],
-            'ponto_ref' => ['required'],
+            'ponto_ref',
             'cep' => ['required'],
             'complemento',
 

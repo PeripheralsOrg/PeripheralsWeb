@@ -200,6 +200,27 @@
             @endforeach
 
             <input type="hidden" name="delete_image[]" id="inputDeleteImg">
+
+            <h2 style="color: #C83C3C">Imagem Principal</h2>
+            @if (!empty($imgs))
+                @foreach ($imgPrincipal as $imgPrincipal)
+                    <div class="box-img">
+                        <h3>{{ $imgPrincipal['nome_img'] }} - {{ str_replace('public/storage/', '', $imgPrincipal['link_img']) }}</h3>
+                        <div class="row-img">
+                            <img src="{{ asset(str_replace('public/', '', $imgPrincipal['link_img'])) }}"
+                                alt="{{ $imgPrincipal['nome_img'] }}">
+                            <button type="button" id="deleteImg"
+                                onclick="deletarImg('{{ $imgPrincipal['id_produto_imgs'] }}', '{{ str_replace('public/storage/', '', $imgPrincipal['link_img']) }}')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <p id="msgImg"></p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
+            <h2 style="color: #C83C3C">Imagens Secundárias</h2>
+
             @if (!empty($imgs))
                 @foreach ($imgs as $img)
                     <div class="box-img">

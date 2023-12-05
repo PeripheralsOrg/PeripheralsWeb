@@ -11,7 +11,7 @@ class CEPController extends Controller
     private int $length = 20;
     private int $height = 20;
     private int $width = 20; //Min 10
-    private string $token = '0270a85c4c9fa09fd48531403d44cc1a17db2071';
+    private string $token = 'a168fc2b918340642281d1cf5550c18a62bf8472';
 
     public function __construct(
         private string $code, //41106 - PAC , 40010 - SEDEX
@@ -39,7 +39,7 @@ class CEPController extends Controller
             // Parse the JSON content
             $jsonData = json_decode($jsonContent, true);
             // dd($jsonData);
-
+// dd($jsonData);
             $this->response['value'] = $jsonData['valorsedex'];
             $this->response['deadline'] = $jsonData['prazosedex'];
 

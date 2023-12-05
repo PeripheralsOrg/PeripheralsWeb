@@ -13,6 +13,8 @@ class ProdutoImagensController extends Controller
         $prodImagens = new ProdutoImagens();
 
         if (is_array($path)) {
+
+            // dd($id);
             for ($i = 0; $i < count($path); $i++) {
 
                 $imagemC = $prodImagens->create([
@@ -56,5 +58,10 @@ class ProdutoImagensController extends Controller
                 $imgGet->delete();
             }
         }
+    }
+
+    public function getPrincipalImage($idProduto){
+            $getImage = ProdutoImagens::all()->where('id_produto', $idProduto)->where('img_principal', 1);
+            return $getImage;
     }
 }
